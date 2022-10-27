@@ -30,9 +30,44 @@ PImage getLogo(){
   return  this.imgs[0];
 }
   
-// Getter de la imagen del banner
-PImage getBanner(){
+// Getter de la imagen del fondo (mantón de manila)
+PImage getFondoManton(){
   return  this.imgs[1];
+}
+
+// Getter del icono de la pestaña archivo
+PImage getIconArchivo(){
+  return  this.imgs[2];
+}
+
+// Getter del icono de la pestaña Avisos
+PImage getIconAvisos(){
+  return  this.imgs[3];
+}
+
+// Getter del icono de la pestaña Censo
+PImage getIconCenso(){
+  return  this.imgs[4];
+}
+
+// Getter del icono de la pestaña Contabilidad
+PImage getIconContabilidad(){
+  return  this.imgs[5];
+}
+
+// Getter del icono de la pestaña archivo
+PImage getIconEnlaces(){
+  return  this.imgs[6];
+}
+
+// Getter del icono file
+PImage getIconFile(){
+  return  this.imgs[7];
+}
+
+// Getter del icono user
+PImage getIconUser(){
+  return  this.imgs[8];
 }
   
 
