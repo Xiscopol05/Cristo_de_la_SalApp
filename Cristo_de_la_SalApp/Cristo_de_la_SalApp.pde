@@ -1,6 +1,7 @@
 void setup(){
-  size(1279,800);
-  
+  fullScreen();
+  background(255);
+  textAlign(CENTER);
   setColors();
   setFonts();
   setMedias();
@@ -8,4 +9,8 @@ void setup(){
 
 void draw(){
   background(getColorAt(0));
+  println("X= "+mouseX+"; Y= "+mouseY);
+  menuBar();
+  banner();
+  logo();
 }
