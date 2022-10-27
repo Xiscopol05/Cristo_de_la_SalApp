@@ -3,7 +3,7 @@ void setup(){
   
   setColors();
   setFonts();
-  //setMedias();
+  setMedias();
 }
 
 void draw(){
