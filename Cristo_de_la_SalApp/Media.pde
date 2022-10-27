@@ -8,10 +8,16 @@ PImage[] imgs;
   
 // Establece las imágenes de la App
 void setMedias(){
-    this.imgs = new PImage[3];
+    this.imgs = new PImage[9];
     this.imgs[0] = loadImage(URL_IMGS+"logo.jpg");
-    this.imgs[1] = loadImage(URL_IMGS+"banner.png");
-    this.imgs[2] = loadImage(URL_IMGS+"icona.png");
+    this.imgs[1] = loadImage(URL_IMGS+"mantonmanila.jpeg");
+    this.imgs[2] = loadImage(URL_IMGS+"archivo.png");
+    this.imgs[3] = loadImage(URL_IMGS+"avisos.png");
+    this.imgs[4] = loadImage(URL_IMGS+"censo.png");
+    this.imgs[5] = loadImage(URL_IMGS+"contabilidad.png");
+    this.imgs[6] = loadImage(URL_IMGS+"enlaces.png");
+    this.imgs[7] = loadImage(URL_IMGS+"file.png");
+    this.imgs[8] = loadImage(URL_IMGS+"user.png");
 }
   
 // Getter del número d'imatges
