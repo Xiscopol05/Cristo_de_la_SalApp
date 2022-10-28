@@ -15,17 +15,19 @@ float logoWidth  = 140,
 
 float iconWidth = 200,
   iconHeight = ((menuHeight - (logoHeight+40))/5);
+  
+float primerIconY = 180; segundoIconY =
 
 void menuBar() {
   fill(getColorAt(1));
   rect(0, 0, menuWidth, menuHeight);
   fill(0);
   text("MENU", menuWidth/2, menuHeight/2);
-  icon(0, 180);
-  icon(0, 180+(logoHeight-20));
-  icon(0, 180+2*(logoHeight-20));
-  icon(0, 180+3*(logoHeight-20));
-  icon(0, 180+4*(logoHeight-20));
+  icon(180);
+  icon(primerIconY);
+  icon(iconHeight+primerIconY);
+  icon(iconHeight+3*primerIconY);
+  icon(iconHeight+4*primerIconY);
 }
 
 void banner() {
@@ -42,9 +44,9 @@ void logo() {
   text("logo", 30+logoWidth/2, 20+logoHeight/2);
 }
 
-void icon(float x, float y) {
+void icon(float y) {
   fill(getColorAt(4));
-  rect(x, y, iconWidth, iconHeight);
+  rect(0, y, iconWidth, iconHeight);
   fill(0);
-  text("icon", x+iconWidth/2, y+iconHeight/2);
+  text("icon", iconWidth/2, y+iconHeight/2);
 }
