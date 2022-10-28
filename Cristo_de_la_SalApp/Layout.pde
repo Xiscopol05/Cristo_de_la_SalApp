@@ -13,9 +13,11 @@ float bannerWidth  = 1280,
 float logoWidth  = 140,
   logoHeight = 140;
 
+//dimensiones iconos del menú 
 float iconWidth = 200,
   iconHeight = ((menuHeight - (logoHeight+40))/5);
 
+//posición incial de los iconos del menú
 float primerIconY = 180,
   segundoIconY = iconHeight+primerIconY,
   tercerIconY = iconHeight+segundoIconY,
@@ -27,11 +29,11 @@ float primerIconY = 180,
   rect(0, 0, menuWidth, menuHeight);
   fill(0);
   text("MENU", menuWidth/2, menuHeight/2);
-  icon(180);
   icon(primerIconY);
-  icon(iconHeight+primerIconY);
-  icon(iconHeight+3*primerIconY);
-  icon(iconHeight+4*primerIconY);
+  icon(segundoIconY);
+  icon(tercerIconY);
+  icon(cuartoIconY);
+  icon(quintoIconY);
 }
 
 void banner() {
