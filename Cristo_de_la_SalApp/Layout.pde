@@ -15,10 +15,14 @@ float logoWidth  = 140,
 
 float iconWidth = 200,
   iconHeight = ((menuHeight - (logoHeight+40))/5);
-  
-float primerIconY = 180; segundoIconY =
 
-void menuBar() {
+float primerIconY = 180,
+  segundoIconY = iconHeight+primerIconY,
+  tercerIconY = iconHeight+segundoIconY,
+  cuartoIconY = iconHeight+tercerIconY, 
+  quintoIconY = iconHeight+cuartoIconY;
+
+  void menuBar() {
   fill(getColorAt(1));
   rect(0, 0, menuWidth, menuHeight);
   fill(0);
