@@ -1,16 +1,21 @@
-void setup(){
+void setup() {
   fullScreen();
   background(255);
   textAlign(CENTER);
+  textSize(14);
   setColors();
   setFonts();
   setMedias();
 }
 
-void draw(){
+void draw() {
   background(getColorAt(0));
   //println("X= "+mouseX+"; Y= "+mouseY);
   menuBar();
   banner();
   logo();
+
+  if (mousePressed) {
+    icons();
+  }
 }
