@@ -46,7 +46,7 @@ void logo() {
 }
 
 void icon(float y) {
-  fill(getColorAt(4));
+  fill(getColorAt(0));
   rect(0, y, iconWidth, iconHeight);
   fill(0);
   text("icon", iconWidth/2, y+(iconHeight/2)+10);

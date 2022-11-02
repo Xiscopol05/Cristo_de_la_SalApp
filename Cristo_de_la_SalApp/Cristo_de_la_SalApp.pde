@@ -9,7 +9,7 @@ void setup() {
 }
 
 void draw() {
-  background(getColorAt(0));
+  background(getColorAt(4));
   //println("X= "+mouseX+"; Y= "+mouseY);
   menuBar();
   banner();
