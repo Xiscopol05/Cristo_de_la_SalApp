@@ -9,7 +9,7 @@ PImage[] imgs;
 // Establece las imágenes de la App
 void setMedias(){
     this.imgs = new PImage[9];
-    this.imgs[0] = loadImage(URL_IMGS+"logo.jpg");
+    this.imgs[0] = loadImage(URL_IMGS+"logo.png");
     this.imgs[1] = loadImage(URL_IMGS+"mantonmanila.jpeg");
     this.imgs[2] = loadImage(URL_IMGS+"archivo.png");
     this.imgs[3] = loadImage(URL_IMGS+"avisos.png");

@@ -43,6 +43,7 @@ void logo() {
   rect(30, 20, logoWidth, logoHeight);
   fill(0);
   text("logo", 30+logoWidth/2, 20+logoHeight/2);
+  image(getImgAt(0), 30, 20, logoWidth, logoHeight);
 }
 
 void icon(float y) {
