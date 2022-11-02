@@ -17,14 +17,13 @@ void draw() {
 
   if (mouseX<menuWidth && (mouseY > primerIconY && mouseY<segundoIconY)) {
     icon(primerIconY);
-  } 
-  else if (mouseX<menuWidth && (mouseY > segundoIconY && mouseY<tercerIconY)) {
+  } else if (mouseX<menuWidth && (mouseY > segundoIconY && mouseY<tercerIconY)) {
     icon(segundoIconY);
-  }else if (mouseX<menuWidth && (mouseY > tercerIconY && mouseY<cuartoIconY)) {
+  } else if (mouseX<menuWidth && (mouseY > tercerIconY && mouseY<cuartoIconY)) {
     icon(tercerIconY);
-  }else if (mouseX<menuWidth && (mouseY > cuartoIconY && mouseY<quintoIconY)) {
+  } else if (mouseX<menuWidth && (mouseY > cuartoIconY && mouseY<quintoIconY)) {
     icon(cuartoIconY);
-  }else if (mouseX<menuWidth && mouseY > quintoIconY) {
+  } else if (mouseX<menuWidth && mouseY > quintoIconY) {
     icon(quintoIconY);
   }
 }
