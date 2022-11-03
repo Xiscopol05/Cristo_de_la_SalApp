@@ -2,9 +2,12 @@
 
 // URL de la carpeta donde se encuentran los medias
 String URL_IMGS = "imgs/";
+String URL_VECTORS = "vectors/";
 
 // Array de imágenes
 PImage[] imgs;
+// Array de imágenes vectoriales  (SVG)
+PShape[] shapes;
 
 // Establece las imágenes de la App
 void setMedias() {
@@ -18,6 +21,11 @@ void setMedias() {
   this.imgs[6] = loadImage(URL_IMGS+"enlaces.png");
   this.imgs[7] = loadImage(URL_IMGS+"file.png");
   this.imgs[8] = loadImage(URL_IMGS+"user.png");
+}
+void setVectors() {
+  this.shapes = new PShape[2];
+  this.shapes[0] = loadShape(URL_VECTORS+"/logoNegro.svg");
+  this.shapes[1] = loadShape(URL_VECTORS+"/logoBlanco.svg");
 }
 
 // Getter del número d'imatges
@@ -76,10 +84,20 @@ PImage getImgAt(int i) {
   return this.imgs[i];
 }
 
+// Getter del número d'imatges vectorials
+int getNumVectors(){
+  return this.shapes.length;
+}
+  
+// Getter de la imatge del logo
+PShape getWarning(){
+  return  this.shapes[0];
+}
+
 
 // Dibuja el logo
-void displayLogo(float x, float y, float w, float h) {
-  image(getLogo(), x, y, w, h);
+void displayLogo() {
+  image(getLogo(),30, 20, logoWidth, logoHeight);
 }
 
 // Dibuixa la imágen i-ésima
