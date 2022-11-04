@@ -1,73 +1,72 @@
-// Components de la GUI - Botons
+// Componentes de la GUI - Botones
 
-// Botons de la GUI
+// Botones de la GUI
 Button b1, b2, b3, b4;
 
-// Dimensions dels botons
+// Dimensiones de los botones
 float buttonW = 300;
 float buttonH = 100;
 
-// Color de fons de l'App
+// Color de fondo de la App
 color bgColor = color(255);
 
-void setup(){
-  
-  size(800, 800);      // Dimensions de la Pantalla
-  
+void setup() {
+
+  size(800, 800);      // Dimensiones de la Pantalla
+
   // Creació dels botons
   b1 = new Button("RED", width/3, height/5, buttonW, buttonH);
   b2 = new Button("GREEN", width/3, 2*height/5, buttonW, buttonH);
   b3 = new Button("BLUE", width/3, 3*height/5, buttonW, buttonH);
   b4 = new Button("DISABLED", width/3, 4*height/5, buttonW, buttonH);
-  
-  // Desactiva el botó b4
+
+  //Desactiva el botón b4
   b4.setEnabled(false);
+  b3.setEnabled(false);
 }
 
-void draw(){
-  
-  // Fons de la finestra
+void draw() {
+
+  //Fondo de la ventana
   background(bgColor);
-  
-  // Dibuixa els botons
+
+  // Dibuja los botones
   b1.display();
   b2.display();
   b3.display();
   b4.display();
-  
-  // Actualitza forma del cursor
+
+  //Actualiza forma del cursor
   updateCursor();
 }
 
-// En cas de pitjar el ratolí
-void mousePressed(){
-  
-  // Si pitjam sobre el boto b1 i està abilitat
-  if(b1.mouseOverButton() && b1.enabled){
+// En caso de apretar el mouse
+void mousePressed() {
+
+  //Si apretamos sobre el botón b1 y está habilitado
+  if (b1.mouseOverButton() && b1.enabled) {
     bgColor = color(255, 0, 0);
   }
-  // Si pitjam sobre el boto b2 i està abilitat
-  else if(b2.mouseOverButton() && b2.enabled){
+  //Si apretamos sobre el botón b2 y está habilitado
+  else if (b2.mouseOverButton() && b2.enabled) {
     bgColor = color(0, 255, 0);
   }
-  // Si pitjam sobre el boto b3 i està abilitat
-  else if(b3.mouseOverButton() && b3.enabled){
+  //Si apretamos sobre el botón b3 y está habilitado
+  else if (b3.mouseOverButton() && b3.enabled) {
     bgColor = color(0, 0, 255);
   }
 }
 
 
 // Modifica el cursor
-void updateCursor(){
-  
-  // Si està sobre algun botó (b1, b2 o b3) i està abilitat
-  if((b1.mouseOverButton() && b1.enabled)||
-     (b2.mouseOverButton() && b2.enabled)||
-     (b3.mouseOverButton() && b3.enabled)){
-      cursor(HAND);
+void updateCursor() {
+
+  //Si está sobre algún botón (b1, b2 o b3) y está habilitado
+  if ((b1.mouseOverButton() && b1.enabled)||
+    (b2.mouseOverButton() && b2.enabled)||
+    (b3.mouseOverButton() && b3.enabled)) {
+    cursor(HAND);
+  } else {
+    cursor(ARROW);
   }
-  else {
-     cursor(ARROW);
-  }
-  
 }
