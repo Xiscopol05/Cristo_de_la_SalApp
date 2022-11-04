@@ -85,19 +85,19 @@ PImage getImgAt(int i) {
 }
 
 // Getter del número d'imatges vectorials
-int getNumVectors(){
+int getNumVectors() {
   return this.shapes.length;
 }
-  
+
 // Getter de la imatge del logo
-PShape getWarning(){
+PShape getWarning() {
   return  this.shapes[0];
 }
 
 
 // Dibuja el logo
 void displayLogo() {
-  image(getLogo(),30, 20, logoWidth, logoHeight);
+  image(getLogo(), 30, 20, logoWidth, logoHeight);
 }
 
 // Dibuixa la imágen i-ésima
