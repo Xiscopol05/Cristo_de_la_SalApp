@@ -17,25 +17,25 @@ void draw() {
   // Dibuija la pantalla correspondiente
   switch(pantalla) {
   case INICIO:
-    dibuixaPantallaInici();
+    dibujaPantallaInicio();
     break;
   case PRINCIPAL:
-    dibuixaPantallaJugar();
+    dibujaPantallaPrincipal();
     break;
   case CENSO:
-    dibuixaPantallaPunts();
+    dibujaPantallaCenso();
     break;
   case CONTABILIDAD:
-    dibuixaPantallaPreguntes();
+    dibujaPantallaContabilidad();
     break;
   case ARCHIVO:
-    dibuixaPantallaConfig();
+    dibujaPantallaArchivo();
     break;
   case AVISOS:
-    dibuixaPantallaSobre();
+    dibujaPantallaAvisos();
     break;
   case ENLACES:
-    dibuixaPantallaSobre();
+    dibujaPantallaEnlaces();
     break;
   }
 }
