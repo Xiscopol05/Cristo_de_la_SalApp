@@ -5,16 +5,21 @@ enum PANTALLA {
 ///Pantalla actual
 PANTALLA pantalla =PANTALLA.INICIO;
 
+//Botones
+Button bPrincipal;
+
 void setup() {
   fullScreen();
   setColors();
   setFonts();
   setMedias();
+  
+  //Creación de los botones
+  bPrincipal = new Button("Inicio de sesión", width/2, 620, 50, 50);
 }
 
 void draw() {
-
-  // Dibuija la pantalla correspondiente
+  // Dibuja la pantalla correspondiente
   switch(pantalla) {
   case INICIO:
     dibujaPantallaInicio();

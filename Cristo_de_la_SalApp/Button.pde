@@ -1,13 +1,13 @@
 // Clase Botón
 
-class Button {
+public class Button {
 
   // propiedades de los botones
   float x, y, w, h;  // posición y dimensión
 
   // Colores de contorno, fill, activo i desactivado
   color fillColor, strokeColor;
-  color fillColorOver, fillColorDisabled;
+  color fillColorOver;
 
   String textBoton;  // Texto
   boolean enabled;  // Habilitado / deshabilitado
@@ -20,9 +20,8 @@ class Button {
     this.w = w;
     this.h = h;
     this.enabled = true;
-    fillColor = color(155, 55, 155);
-    fillColorOver = color(255, 55, 155);
-    fillColorDisabled = color(150);
+    fillColor = color(getColorAt(1));
+    fillColorOver = color(getColorAt(0));
     strokeColor = color(0);
   }
 
@@ -35,9 +34,7 @@ class Button {
   // Dibujar el botón
   void display() {
     pushStyle();
-    if (!enabled) {
-      fill(fillColorDisabled);  // Color deshabilitado
-    } else if (mouseOverButton()) {
+    if (mouseOverButton()) {
       fill(fillColorOver);      // Color cuando el mouse está encima
     } else {
       fill(fillColor);          // Color activo sin mouse

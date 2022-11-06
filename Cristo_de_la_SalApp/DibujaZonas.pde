@@ -1,28 +1,13 @@
 // Dibujo de las zonas de la pantalla
 
-void dibuixaZonaLogo(){
-  image(imgLogo, marginH, 0, logoWidth, logoHeight);
-}
-
-void dibuixaSideBar(){
-  bJugar.display();
-  bPunts.display();
-  bPreguntes.display();
-  bConfig.display();
-  bSobre.display();
-}
-
-void dibuixaBanner(){
-}
-
-void dibuixaColumna1(){
-}
-
-void dibuixaColumna2(){
-}
-
-void dibuixaColumna12(){
-}
-
-void dibuixaColumna3(){
+void inicioDeSesion() {
+  pushMatrix();
+  pushStyle();
+  translate(320, 155);
+  fill(getColorAt(4));
+  rect(0, 0, marcoWidth, marcoHeight);
+  fill(getColorAt(3));
+  rect(0,0, marcoWidth, 30);
+  popStyle();
+  popMatrix();
 }

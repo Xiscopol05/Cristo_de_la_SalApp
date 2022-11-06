@@ -43,7 +43,6 @@ class ImageButton {
   }
 
   // Indica si el cursor està sobre el botó
-  // Indica si el cursor està sobre el botó
   boolean mouseOverButton() {
     return (mouseX >= this.x) &&
       (mouseX<=this.x + this.w) &&

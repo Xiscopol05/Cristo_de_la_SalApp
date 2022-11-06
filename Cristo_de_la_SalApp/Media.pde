@@ -24,8 +24,8 @@ void setMedias() {
 }
 void setVectors() {
   this.shapes = new PShape[2];
-  this.shapes[0] = loadShape(URL_VECTORS+"/logoNegro.svg");
-  this.shapes[1] = loadShape(URL_VECTORS+"/logoBlanco.svg");
+  this.shapes[0] = loadShape(URL_VECTORS+"logoNegro.svg");
+  this.shapes[1] = loadShape(URL_VECTORS+"logoBlanco.svg");
 }
 
 // Getter del número d'imatges
@@ -33,9 +33,9 @@ int getNumImatges() {
   return this.imgs.length;
 }
 
-// Getter de la imagen del logo
+//getter de la imagen del logo (.png)
 PImage getLogo() {
-  return  this.imgs[0];
+  return this.imgs[0];
 }
 
 // Getter de la imagen del fondo (mantón de manila)
@@ -90,17 +90,18 @@ int getNumVectors() {
 }
 
 // Getter de la imatge del logo
-PShape getWarning() {
-  return  this.shapes[0];
+PShape getSVGLogo() {
+  return  this.shapes[1];
 }
 
 
 // Dibuja el logo
 void displayLogo() {
   image(getLogo(), 30, 20, logoWidth, logoHeight);
+  //arreglar para poder poner svg
 }
 
-// Dibuixa la imágen i-ésima
+// Dibuja la imágen i-ésima
 void displayImg(int i, float x, float y, float w, float h) {
   image(getImgAt(i), x, y, w, h);
 }

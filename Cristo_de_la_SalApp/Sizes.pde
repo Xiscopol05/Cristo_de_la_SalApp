@@ -26,3 +26,6 @@ float primerIconY = 180,
   tercerIconY = iconHeight+segundoIconY,
   cuartoIconY = iconHeight+tercerIconY,
   quintoIconY = iconHeight+cuartoIconY;
+
+//dimensiones marco inicio de sesión
+int marcoWidth = 650, marcoHeight= 490;
