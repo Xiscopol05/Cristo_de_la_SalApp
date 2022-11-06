@@ -40,14 +40,14 @@ public class Button {
       fill(fillColor);          // Color activo sin mouse
     }
     stroke(strokeColor);
-    strokeWeight(2);        //Color i grosor del contorno
+    strokeWeight(1);        //Color i grosor del contorno
     rect(this.x, this.y, this.w, this.h, 10);    // Rectangulo del botón
 
     // Texto (color, alineación i tamaño)
-    fill(0);
+    fill(255);
     textAlign(CENTER);
-    textSize(20);
-    text(textBoton, this.x + this.w/2, this.y + this.h/2 + 10);
+    textFont(getFontAt(4));
+    text(textBoton, this.x + this.w/2, this.y + this.h/2+5);
     popStyle();
   }
 

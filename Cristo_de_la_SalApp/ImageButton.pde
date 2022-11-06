@@ -1,6 +1,6 @@
 // Classe Botó
 
-class ImageButton {
+public class ImageButton {
 
   // Propietats d'un botó:
   float x, y, w, h;  // Posició i dimensions
