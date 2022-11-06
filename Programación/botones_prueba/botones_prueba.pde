@@ -22,7 +22,6 @@ void setup() {
 
   //Desactiva el botón b4
   b4.setEnabled(false);
-  b3.setEnabled(false);
 }
 
 void draw() {
