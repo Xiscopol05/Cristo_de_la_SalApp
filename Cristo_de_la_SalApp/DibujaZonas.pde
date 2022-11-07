@@ -86,12 +86,12 @@ void columna2() {
   popStyle();
 }
 
-void columna1y2(){
- columna1();
- columna2();
+void columna1y2() {
+  columna1();
+  columna2();
 }
 
-void fila1(){
+void fila1() {
   pushMatrix();
   pushStyle();
   translate(menuWidth+520, bannerHeight);
@@ -101,7 +101,7 @@ void fila1(){
   popStyle();
 }
 
-void fila2(){
+void fila2() {
   pushMatrix();
   pushStyle();
   translate(menuWidth+520, bannerHeight+350);
@@ -111,6 +111,21 @@ void fila2(){
   popStyle();
 }
 
+void tablaGrande() {
+  pushMatrix();
+  pushStyle();
+  translate(menuWidth, bannerHeight);
+  fill(getColorAt(3));
+  rect(20, 304-bannerHeight, 1280-menuWidth-40, 410);
+  popMatrix();
+  popStyle();
+}
 
-  
-  
+void paginador() {
+  pushMatrix();
+  pushStyle();
+  fill(getColorAt(3));
+  rect(1280-20-385, 800-70, 385, 50);
+  popMatrix();
+  popStyle();
+}

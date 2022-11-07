@@ -4,6 +4,9 @@
 //Botones del Menú principal
 Button bPrincipal, bCenso, bContabilidad, bArchivo, bAvisos, bEnlaces;
 
+//Botones
+Button bAñadir, bModificar, bFiltrar;
+
 // Creación de los elementos de la GUI
 void setGUI() {
   initButtons();
@@ -25,4 +28,10 @@ void enableButtons(boolean enabled) {
   bArchivo.setEnabled(enabled);
   bAvisos.setEnabled(enabled);
   bEnlaces.setEnabled(enabled);
+}
+
+void enableButtonsCenso(){
+  bAñadir.setEnabled(true);
+  bModificar.setEnabled(true);
+  bFiltrar.setEnabled(true);
 }
