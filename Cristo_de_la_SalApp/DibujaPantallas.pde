@@ -4,6 +4,7 @@ void dibujaPantallaInicio() {
   image(getFondoManton(), 0, 0, 1280, 800 );
   inicioDeSesion();
   bPrincipal.display();
+  enableButtons(false);
 }
 
 void dibujaPantallaPrincipal() {
@@ -11,7 +12,10 @@ void dibujaPantallaPrincipal() {
   menuBar();
   banner();
   bPrincipal.setEnabled(false);
-  
+  enableButtons(true);
+  columna1();
+  fila1();
+  fila2();
 }
 
 void dibujaPantallaCenso() {
@@ -21,9 +25,10 @@ void dibujaPantallaCenso() {
 }
 
 void dibujaPantallaContabilidad() {
-background(255);
+  background(255);
   menuBar();
   banner();
+  columnaEntera();
 }
 
 void dibujaPantallaArchivo() {

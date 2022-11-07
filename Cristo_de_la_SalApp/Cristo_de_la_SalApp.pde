@@ -13,6 +13,7 @@ void setup() {
   setFonts();
   setMedias();
   setGUI();
+  
   //Creación de los botones
   bPrincipal = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
 }

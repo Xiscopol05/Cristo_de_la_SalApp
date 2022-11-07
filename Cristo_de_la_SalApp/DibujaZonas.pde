@@ -8,7 +8,7 @@ void inicioDeSesion() {
   rect(0, 0, marcoWidth, marcoHeight);
   fill(getColorAt(3));
   rect(0, 0, marcoWidth, 30);
-  displayImg(8, (marcoWidth/2)-25, 60, 50, 50);
+  displayImg(8, (marcoWidth/2)-37.5, 60, 75, 75);
   popStyle();
   popMatrix();
 }
@@ -24,7 +24,9 @@ void logo() {
 void menuBar() {
   pushStyle();
   fill(getColorAt(1));
-  stroke(0);
+  strokeWeight(1);
+  line(menuWidth, 1280, menuWidth, bannerHeight);
+  strokeWeight(0);
   rect(0, 0, menuWidth, menuHeight);
   fill(0);
   text("MENU", menuWidth/2, menuHeight/2);
@@ -43,12 +45,72 @@ void banner() {
   translate(menuWidth, 0);
   fill(getColorAt(1));
   stroke(0);
+  strokeWeight(1);
+  line(0, bannerHeight, 1280, bannerHeight);
+  strokeWeight(0);
   rect(0, 0, bannerWidth, bannerHeight);
-  fill(0);
-  text("banner", menuWidth+bannerWidth/2, bannerHeight/2);
   fill(255);
   textFont(getFontAt(3));
   text("Hermandad del Stmo. Cristo de la Sala", 20, 70);
   popStyle();
   popMatrix();
 }
+
+void columnaEntera() {
+  pushMatrix();
+  pushStyle();
+  translate(menuWidth, bannerHeight);
+  fill(getColorAt(3));
+  rect(20, 20, 1040, 660);
+  popMatrix();
+  popStyle();
+}
+
+void columna1() {
+  pushMatrix();
+  pushStyle();
+  translate(menuWidth, bannerHeight);
+  fill(getColorAt(3));
+  rect(20, 20, 500, 660);
+  popMatrix();
+  popStyle();
+}
+
+void columna2() {
+  pushMatrix();
+  pushStyle();
+  translate(menuWidth+520, bannerHeight);
+  fill(getColorAt(3));
+  rect(20, 20, 500, 660);
+  popMatrix();
+  popStyle();
+}
+
+void columna1y2(){
+ columna1();
+ columna2();
+}
+
+void fila1(){
+  pushMatrix();
+  pushStyle();
+  translate(menuWidth+520, bannerHeight);
+  fill(getColorAt(3));
+  rect(20, 20, 500, 310);
+  popMatrix();
+  popStyle();
+}
+
+void fila2(){
+  pushMatrix();
+  pushStyle();
+  translate(menuWidth+520, bannerHeight+350);
+  fill(getColorAt(3));
+  rect(20, 20, 500, 310);
+  popMatrix();
+  popStyle();
+}
+
+
+  
+  
