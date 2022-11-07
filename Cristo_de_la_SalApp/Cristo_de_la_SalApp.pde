@@ -5,10 +5,6 @@ enum PANTALLA {
 ///Pantalla actual
 PANTALLA pantalla =PANTALLA.INICIO;
 
-
-
-
-
 void setup() {
   fullScreen();
   setColors();
