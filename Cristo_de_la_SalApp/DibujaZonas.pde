@@ -111,15 +111,6 @@ void fila2() {
   popStyle();
 }
 
-void tablaGrande() {
-  pushMatrix();
-  pushStyle();
-  translate(menuWidth, bannerHeight);
-  fill(getColorAt(3));
-  rect(20, 304-bannerHeight, 1280-menuWidth-40, 410);
-  popMatrix();
-  popStyle();
-}
 
 void paginador() {
   pushMatrix();
@@ -128,4 +119,50 @@ void paginador() {
   rect(1280-20-385, 800-70, 385, 50);
   popMatrix();
   popStyle();
+}
+
+void menu() {
+  menuBar();
+  banner();
+  bPrincipal.display();
+}
+
+void buscador() {
+  pushStyle();
+  fill(getColorAt(3));
+  rect(710, primerIconY-(iconHeight/2)-5, 300, 25);
+  fill(0);
+  textFont(getFontAt(2));
+  text("Buscador", 730, primerIconY-(iconHeight/2)+13.5 );
+  popStyle();
+}
+
+void tablaGrande() {
+  pushMatrix();
+  pushStyle();
+  translate(menuWidth, bannerHeight);
+  fill(getColorAt(3));
+  rect(20, 304-bannerHeight, 1280-menuWidth-40, 410);
+  buscador();
+  paginador();
+  popMatrix();
+  popStyle();
+}
+
+void avisos() {
+  pushStyle();
+  pushMatrix();
+  fill(getColorAt(3));
+  rect(menuWidth+20, primerIconY+iconHeight, ((1280-menuWidth)/2)-10, iconHeight*3);
+  popStyle();
+  popMatrix();
+}
+
+void calendario() {
+  pushStyle();
+  pushMatrix();
+  fill(getColorAt(3));
+  rect(menuWidth+20+((1280-menuWidth)/2), primerIconY+iconHeight+20, ((1280-menuWidth)/2)-35, (iconHeight*3)-50);
+  popStyle();
+  popMatrix();
 }

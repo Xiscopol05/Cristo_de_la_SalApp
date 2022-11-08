@@ -11,12 +11,10 @@ void setup() {
   setFonts();
   setMedias();
   setGUI();
-
-  //Creación de los botones
-  bPrincipal = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
 }
 
 void draw() {
+  //println("X= "+mouseX+", Y= "+mouseY);
   // Dibuja la pantalla correspondiente
   switch(pantalla) {
   case INICIO:
@@ -45,13 +43,13 @@ void draw() {
   fill(0);
   text(infoPantalla, width/2, height/2);  // Número i nom de la Pantalla
 
-  updateCursor();   // Modifica l'aparença del cursor
+  updateCursor();   // Modifica la apariencia del cursor
 }
 
-// En cas de pitjar el ratolí
+// En caso de apretar el ratón
 void mousePressed() {
 
-  if (bPrincipal.mouseOverButton() && bPrincipal.enabled) {
+  if (bInicioSesion.mouseOverButton() && bInicioSesion.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
   } else if (bCenso.mouseOverButton() && bCenso.enabled) {
     pantalla = PANTALLA.CENSO;
@@ -63,6 +61,8 @@ void mousePressed() {
     pantalla = PANTALLA.AVISOS;
   } else if (bEnlaces.mouseOverButton() && bEnlaces.enabled) {
     pantalla = PANTALLA.ENLACES;
+  } else if (bPrincipal.mouseOverButton() && bPrincipal.enabled) {
+    pantalla = PANTALLA.PRINCIPAL;
   }
 }
 
@@ -75,7 +75,11 @@ void updateCursor() {
     (bContabilidad.mouseOverButton() && bContabilidad.enabled)||
     (bArchivo.mouseOverButton() && bArchivo.enabled)||
     (bAvisos.mouseOverButton() && bAvisos.enabled)||
-    (bEnlaces.mouseOverButton() && bEnlaces.enabled)) {
+    (bEnlaces.mouseOverButton() && bEnlaces.enabled)||
+    (bInicioSesion.mouseOverButton() && bInicioSesion.enabled)||
+    (bAñadir.mouseOverButton() && bAñadir.enabled)||
+    (bModificar.mouseOverButton() && bModificar.enabled)||
+    (bFiltrar.mouseOverButton() && bFiltrar.enabled)) {
     cursor(HAND);
   } else {
     cursor(ARROW);
