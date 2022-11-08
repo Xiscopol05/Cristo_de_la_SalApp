@@ -14,7 +14,7 @@ void setup() {
 }
 
 void draw() {
-  //println("X= "+mouseX+", Y= "+mouseY);
+  
   // Dibuja la pantalla correspondiente
   switch(pantalla) {
   case INICIO:
@@ -42,6 +42,7 @@ void draw() {
   String infoPantalla = pantalla.ordinal()+" ) "+pantalla.name();
   fill(0);
   text(infoPantalla, width/2, height/2);  // Número i nom de la Pantalla
+  text("X= "+mouseX+", Y= "+mouseY,width/2, height/2 +20);
 
   updateCursor();   // Modifica la apariencia del cursor
 }
@@ -69,7 +70,6 @@ void mousePressed() {
 
 // Modifica el cursor
 void updateCursor() {
-
   if ((bPrincipal.mouseOverButton() && bPrincipal.enabled)||
     (bCenso.mouseOverButton() && bCenso.enabled)||
     (bContabilidad.mouseOverButton() && bContabilidad.enabled)||
@@ -83,5 +83,5 @@ void updateCursor() {
     cursor(HAND);
   } else {
     cursor(ARROW);
-  }
+  } 
 }
