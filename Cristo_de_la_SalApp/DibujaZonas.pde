@@ -96,7 +96,7 @@ void fila1() {
   pushStyle();
   translate(menuWidth+520, bannerHeight);
   fill(getColorAt(3));
-  rect(20, 20, 500, 310);
+  rect(20, 20, 520, 310);
   popMatrix();
   popStyle();
 }
@@ -106,7 +106,7 @@ void fila2() {
   pushStyle();
   translate(menuWidth+520, bannerHeight+350);
   fill(getColorAt(3));
-  rect(20, 20, 500, 310);
+  rect(20, 0, 520, 330);
   popMatrix();
   popStyle();
 }

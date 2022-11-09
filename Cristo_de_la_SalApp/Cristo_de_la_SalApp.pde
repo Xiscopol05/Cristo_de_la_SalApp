@@ -1,6 +1,5 @@
 //enumeración de las pantallas de la aplicación
-enum PANTALLA {
-  INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES
+enum PANTALLA {INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES
 };
 ///Pantalla actual
 PANTALLA pantalla =PANTALLA.INICIO;
@@ -66,7 +65,6 @@ void mousePressed() {
     pantalla = PANTALLA.PRINCIPAL;
   }
 }
-
 
 // Modifica el cursor
 void updateCursor() {

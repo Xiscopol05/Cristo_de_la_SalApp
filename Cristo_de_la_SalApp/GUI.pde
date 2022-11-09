@@ -47,3 +47,6 @@ void displayButtonsTabla() {
   bModificar.display();
   bFiltrar.display();
 }
+
+
+  

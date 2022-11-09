@@ -98,7 +98,6 @@ PShape getSVGLogo() {
 // Dibuja el logo
 void displayLogo() {
   image(getLogo(), 30, 20, logoWidth, logoHeight);
-  //arreglar para poder poner svg
 }
 
 // Dibuja la imágen i-ésima
