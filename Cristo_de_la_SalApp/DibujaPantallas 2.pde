@@ -5,14 +5,14 @@ void dibujaPantallaInicio() {
   inicioDeSesion();
   bInicioSesion.display();
   bInicioSesion.setEnabled(true);
-  enableButtonsMenu(false);
+  enableButtons(false);
 }
 
 void dibujaPantallaPrincipal() {
   background(255);
   menu();
   bInicioSesion.setEnabled(false);
-  enableButtonsMenu(true);
+  enableButtons(true);
   columna1();
   fila1();
   fila2();
@@ -22,9 +22,10 @@ void dibujaPantallaPrincipal() {
 void dibujaPantallaCenso() {
   background(255);
   menu();
-  //tablaGrande();
+  tablaGrande();
   enableButtonsTabla(true);
   displayButtonsTabla();
+  t.display(220, 305, 1280-menuWidth-40, 410);
 }
 
 void dibujaPantallaContabilidad() {
@@ -39,9 +40,11 @@ void dibujaPantallaArchivo() {
   menu();
   background(255);
   menu();
-  //tablaGrande();
+  tablaGrande();
   enableButtonsTabla(true);
   displayButtonsTabla();
+  t.display(220, 305, 1280-menuWidth-40, 410);
+  s1.display();
 }
 
 void dibujaPantallaAvisos() {
