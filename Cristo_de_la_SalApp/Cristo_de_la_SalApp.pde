@@ -69,9 +69,13 @@ void mousePressed() {
 
 // Modifica el cursor
 void updateCursor() {
-  if (buttons[i].mouseOverButton() && buttons[i].enabled) {
-    cursor(HAND);
-  } else {
-    cursor(ARROW);
+
+  for (int i=0; i<buttons.length; i++) {
+    
+    if (buttons[i].mouseOverButton() && buttons[i].enabled) {
+      cursor(HAND);
+    } else {
+      cursor(ARROW);
+    }
   }
 }

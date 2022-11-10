@@ -1,12 +1,13 @@
 //Configuración de los elementos de la GUI
 // Botones, ...
 
+
+Button[] buttons;
 //Botones del Menú principal
 Button bInicioSesion, bCenso, bContabilidad, bArchivo, bAvisos, bEnlaces, bPrincipal;
 
 //Botones
 Button bAñadir, bModificar, bFiltrar;
-Button[] buttons;
 
 // Creación de los elementos de la GUI
 void setGUI() {
