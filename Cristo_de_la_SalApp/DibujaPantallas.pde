@@ -25,6 +25,7 @@ void dibujaPantallaCenso() {
   tablaGrande();
   enableButtonsTabla(true);
   displayButtonsTabla();
+  t.display(220, 305, 1280-menuWidth-40, 410);
 }
 
 void dibujaPantallaContabilidad() {
@@ -42,6 +43,8 @@ void dibujaPantallaArchivo() {
   tablaGrande();
   enableButtonsTabla(true);
   displayButtonsTabla();
+  t.display(220, 305, 1280-menuWidth-40, 410);
+  s1.display();
 }
 
 void dibujaPantallaAvisos() {

@@ -137,17 +137,7 @@ void buscador() {
   popStyle();
 }
 
-void tablaGrande() {
-  pushMatrix();
-  pushStyle();
-  translate(menuWidth, bannerHeight);
-  fill(getColorAt(3));
-  rect(20, 304-bannerHeight, 1280-menuWidth-40, 410);
-  buscador();
-  paginador();
-  popMatrix();
-  popStyle();
-}
+
 
 void avisos() {
   pushStyle();

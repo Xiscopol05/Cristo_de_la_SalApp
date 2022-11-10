@@ -10,6 +10,8 @@ Button bAñadir, bModificar, bFiltrar;
 // Creación de los elementos de la GUI
 void setGUI() {
   initButtons();
+  initTextField();
+  initTable();
 }
 
 // Creación de los botones de la GUI
@@ -48,5 +50,59 @@ void displayButtonsTabla() {
   bFiltrar.display();
 }
 
+//tablas
+Table t;
 
-  
+// Dimensions de la taula
+float tableW = 800, tableH = 300;
+
+// Número de files (capçalera inclosa) i columnes de la taula
+int files = 6, columnes = 5;
+
+// Títols de les columnes
+String[] headers = {"Id", "Nom", "Llinatges", "Edat", "Sexe"};
+
+// Amplades de les columnes
+float[] colWidths = {10, 20, 40, 10, 20};
+
+// Dades de la taula
+String[][] info = {
+  {"1", "Pere", "Soler Miralles", "33", "Home"},
+  {"2", "Maria", "Garcia Lopez", "25", "Dona"},
+  {"3", "Joan", "Melis Cabrer", "47", "Home"},
+  {"4", "Bel", "Riera Mates", "52", "Dona"},
+  {"5", "Jose", "Perez Galdós", "37", "Home"},
+};
+
+void initTable() {
+  t = new Table(files, columnes);
+  t.setHeaders(headers);
+  t.setData(info);
+  t.setColumnWidths(colWidths);
+}
+
+//Select
+// Selects de la GUI
+Select s1, s2;
+
+// Valors dels Selects
+String[] selectValues = {"RED", "GREEN", "BLUE"};
+String[] selectValues2 = {"1", "2", "3"};
+
+// Dimensions dels botons
+float selectW = 300;
+float selectH = 30;
+
+// Color de fons de l'App
+color bgColor = color(255);
+
+// Valor numèric
+int n = 0;
+
+
+//textField
+TextField tfBuscar;
+
+void initTextField() {
+  tfBuscar = new TextField(710, primerIconY-(iconHeight/2)-5, 300, 25);
+}
