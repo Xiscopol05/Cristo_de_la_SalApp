@@ -1,6 +1,5 @@
 //enumeración de las pantallas de la aplicación
-enum PANTALLA {
-  INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES
+enum PANTALLA {INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES
 };
 ///Pantalla actual
 PANTALLA pantalla =PANTALLA.INICIO;
@@ -11,15 +10,10 @@ void setup() {
   setFonts();
   setMedias();
   setGUI();
-
-  t = new Table(files, columnes);
-  t.setHeaders(headers);
-  t.setData(info);
-  t.setColumnWidths(colWidths);
 }
 
 void draw() {
-
+  
   // Dibuja la pantalla correspondiente
   switch(pantalla) {
   case INICIO:
@@ -47,7 +41,7 @@ void draw() {
   String infoPantalla = pantalla.ordinal()+" ) "+pantalla.name();
   fill(0);
   text(infoPantalla, width/2, height/2);  // Número i nom de la Pantalla
-  text("X= "+mouseX+", Y= "+mouseY, width/2, height/2 +20);
+  text("X= "+mouseX+", Y= "+mouseY,width/2, height/2 +20);
 
   updateCursor();   // Modifica la apariencia del cursor
 }
@@ -70,22 +64,6 @@ void mousePressed() {
   } else if (bPrincipal.mouseOverButton() && bPrincipal.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
   }
-  // Si pitjam sobre el select 1
-  if (s1.mouseOverSelect() && s1.enabled) {
-    if (!s1.collapsed) {
-      s1.update();      // Actualitzar valor
-      updateColor();    // Fer acció amb valor
-    }
-    s1.toggle();        // Plegar o desplegar
-  }
-  // Si pitjam sobre el select 2
-  if(s2.mouseOverSelect() && s2.enabled){
-    if(!s2.collapsed){
-      s2.update();      // Actualitzar valor
-      updateNumber();   // Fer acció amb valor
-    }
-    s2.toggle();        // Plegar o desplegar
-  }
 }
 
 // Modifica el cursor
@@ -103,11 +81,5 @@ void updateCursor() {
     cursor(HAND);
   } else {
     cursor(ARROW);
-  }
-  if ((s1.mouseOverSelect() && s1.enabled)||
-    (s2.mouseOverSelect() && s2.enabled)) {
-    cursor(HAND);
-  } else {
-    cursor(ARROW);
-  }
+  } 
 }
