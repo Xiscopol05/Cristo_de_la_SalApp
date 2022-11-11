@@ -1,11 +1,21 @@
 // Funciones de dibujo de las pantallas
 
 void dibujaPantallaInicio() {
+  //imagen de fondo
   image(getFondoManton(), 0, 0, 1280, 800 );
-  inicioDeSesion();
-  bInicioSesion.display();
+
+  //habilitar y deshabilitar los botones
   bInicioSesion.setEnabled(true);
   enableButtonsMenu(false);
+  enableButtonsTabla(false);
+
+
+  //dibujar elementos de la pantalla
+  inicioDeSesion();
+
+  //display botones
+  bInicioSesion.display();
+  displayInicioSesion();
 }
 
 void dibujaPantallaPrincipal() {
@@ -35,6 +45,7 @@ void dibujaPantallaCenso() {
   //dibujar los elementos de la pantalla
   menu();
   tablaGrande();
+  tfBuscar.display();
 }
 
 void dibujaPantallaContabilidad() {
@@ -52,6 +63,7 @@ void dibujaPantallaArchivo() {
   tablaGrande();
   enableButtonsTabla(true);
   displayButtonsTabla();
+  tfBuscar.display();
 }
 
 void dibujaPantallaAvisos() {

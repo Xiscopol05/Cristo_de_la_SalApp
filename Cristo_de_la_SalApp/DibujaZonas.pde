@@ -123,15 +123,7 @@ void menu() {
   bPrincipal.display();
 }
 
-void buscador() {
-  pushStyle();
-  fill(getColorAt(3));
-  rect(710, primerIconY-(iconHeight/2)-5, 300, 25);
-  fill(0);
-  textFont(getFontAt(2));
-  text("Buscador", 730, primerIconY-(iconHeight/2)+13.5 );
-  popStyle();
-}
+
 
 void tablaGrande() {
   pushMatrix();
@@ -139,7 +131,6 @@ void tablaGrande() {
   translate(menuWidth, bannerHeight);
   fill(getColorAt(3));
   t.display(20, 304-bannerHeight, 1280-menuWidth-40, 410);
-  buscador();
   paginador();
   popMatrix();
   popStyle();

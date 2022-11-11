@@ -41,6 +41,7 @@ void draw() {
   }
   String infoPantalla = pantalla.ordinal()+" ) "+pantalla.name();
   fill(0);
+  textFont(getFontAt(4));
   text(infoPantalla, width/2, height/2);  // Número i nom de la Pantalla
   text("X= "+mouseX+", Y= "+mouseY, width/2, height/2 +20);
 
@@ -65,6 +66,10 @@ void mousePressed() {
   } else if (bPrincipal.mouseOverButton() && bPrincipal.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
   }
+  
+  //mira si está pulsado el campo de texto
+   userText.isPressed();
+   passText.isPressed();
 }
 
 // Modifica el cursor
@@ -82,4 +87,10 @@ void updateCursor() {
   } else {
     cursor(ARROW);
   }
+}
+
+void keyPressed() {
+  userText.keyPressed(key, (int)keyCode);
+  passText.keyPressed(key, (int)keyCode);
+  comprovaLogin();
 }

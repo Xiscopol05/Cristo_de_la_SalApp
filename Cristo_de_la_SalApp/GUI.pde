@@ -4,6 +4,7 @@
 void setGUI() {
   initButtons();
   initTables();
+  initTextField();
 }
 
 // Botones, ...
@@ -101,4 +102,47 @@ void initTables() {
   t.setHeaders(headers);
   t.setData(info);
   t.setColumnWidths(colWidths);
+}
+
+//TextField
+
+void initTextField() {
+  initInicioSesion();
+  initBuscar();
+}
+
+//inicio de sesión(usuario y contraseña)
+boolean logged = false;
+TextField userText, passText;
+
+void initInicioSesion() {
+  userText = new TextField(260, 103, 200, 35);
+  passText = new TextField(260, 153, 200, 35);
+}
+
+void displayInicioSesion() {
+  userText.display();
+  passText.display();
+  
+  // Si el login és correcte
+  if (comprovaLogin()) {
+    bInicioSesion.setEnabled(true);
+  }
+}
+
+// Comprova si el login és correcte
+boolean comprovaLogin() {
+  if ( userText.text.equals("admin") &&
+    passText.text.equals("1234")) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+//buscar
+TextField tfBuscar;
+
+void initBuscar(){
+  tfBuscar= new TextField(710, primerIconY-(iconHeight/2)-5, 300, 25);
 }

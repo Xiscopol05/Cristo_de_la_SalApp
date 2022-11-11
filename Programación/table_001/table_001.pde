@@ -3,29 +3,29 @@
 Table t;
 
 // Dimensions de la taula
-float tableW = 800, tableH = 300;
+float tableW = 1200, tableH = 500;
 
 // Número de files (capçalera inclosa) i columnes de la taula
-int files = 6, columnes = 5;
+int files = 4, columnes = 9;
 
 // Títols de les columnes 
-String[] headers = {"Id", "Nom", "Llinatges", "Edat", "Sexe"};
+String[] headers = {"Número hermano", "Nombre", "Apellidos", "Correo electrónico", "Fecha nacimiento", "Fecha de alta", "Fecha alta", "Dirección", "Cuenta Bancaria",};
 
 // Amplades de les columnes
-float[] colWidths = {10, 20, 40, 10, 20};
+float[] colWidths = {5,10,10,10,10,10,15,10,10,10};
 
 // Dades de la taula
 String[][] info = {
-                     {"1", "Pere", "Soler Miralles", "33", "Home"},
-                     {"2", "Maria", "Garcia Lopez", "25", "Dona"},
-                     {"3", "Joan", "Melis Cabrer", "47", "Home"},
-                     {"4", "Bel", "Riera Mates", "52", "Dona"},
-                     {"5", "Jose", "Perez Galdós", "37", "Home"},
+                     {"0001", "Benito","Pérez Galdós", "bps@gmail.com", "31/10/1995", "10/10/2020", "C/Roble, 18, Bargas, 45593", "0000 0000 00 0000000000", "Al corriente"},
+                     {"0001", "Benito","Pérez Galdós", "bps@gmail.com", "31/10/1995", "10/10/2020", "C/Roble, 18, Bargas, 45593", "0000 0000 00 0000000000", "Al corriente"},
+                     {"0001", "Benito","Pérez Galdós", "bps@gmail.com", "31/10/1995", "10/10/2020", "C/Roble, 18, Bargas, 45593", "0000 0000 00 0000000000", "Al corriente"},
+                     {"0001", "Benito","Pérez Galdós", "bps@gmail.com", "31/10/1995", "10/10/2020", "C/Roble, 18, Bargas, 45593", "0000 0000 00 0000000000", "Al corriente"},
+                     {"0001", "Benito","Pérez Galdós", "bps@gmail.com", "31/10/1995", "10/10/2020", "C/Roble, 18, Bargas, 45593", "0000 0000 00 0000000000", "Al corriente"},
                   };
 
 void setup(){
   
-  size(1200, 800);      // Dimensions de la Pantalla
+  fullScreen();      // Dimensions de la Pantalla
   
   // Creació de la taula
   t = new Table(files, columnes);
