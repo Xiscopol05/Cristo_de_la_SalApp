@@ -70,12 +70,16 @@ void mousePressed() {
 // Modifica el cursor
 void updateCursor() {
 
+  boolean mouseOnOneButton = false;
+
   for (int i=0; i<buttons.length; i++) {
-    
     if (buttons[i].mouseOverButton() && buttons[i].enabled) {
-      cursor(HAND);
-    } else {
-      cursor(ARROW);
+      mouseOnOneButton = true;
     }
+  }
+  if (mouseOnOneButton) {
+    cursor(HAND);
+  } else {
+    cursor(ARROW);
   }
 }
