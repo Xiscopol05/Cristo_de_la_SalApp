@@ -1,23 +1,24 @@
 //Configuración de los elementos de la GUI
+
+// Creación de los elementos de la GUI
+void setGUI() {
+  initButtons();
+  initTables();
+}
+
 // Botones, ...
-
-
 Button[] buttons;
+
 //Botones del Menú principal
 Button bInicioSesion, bCenso, bContabilidad, bArchivo, bAvisos, bEnlaces, bPrincipal;
 
 //Botones
 Button bAñadir, bModificar, bFiltrar;
 
-// Creación de los elementos de la GUI
-void setGUI() {
-  initButtons();
-}
-
 // Creación de los botones de la GUI
 
 void initButtons() {
-  Button[] buttons = new Button[10];
+  buttons = new Button[10];
   buttons[0] = new Button("Principal", 1000, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Censo", 0, primerIconY, iconWidth, iconHeight);
   buttons[2] = new Button("Contabilidad", 0, segundoIconY, iconWidth, iconHeight);
@@ -57,8 +58,47 @@ void enableButtonsTabla(boolean enable) {
   bFiltrar.setEnabled(enable);
 }
 
+void displayButtonsMenu() {
+  bCenso.display();
+  bContabilidad.display();
+  bArchivo.display();
+  bAvisos.display();
+  bEnlaces.display();
+}
+
 void displayButtonsTabla() {
   bAñadir.display();
   bModificar.display();
   bFiltrar.display();
+}
+
+// Tabla
+Table t;
+
+// Dimensions de la taula
+float tableW = 800, tableH = 300;
+
+// Número de files (capçalera inclosa) i columnes de la taula
+int files = 6, columnes = 5;
+
+// Títols de les columnes
+String[] headers = {"Id", "Nom", "Llinatges", "Edat", "Sexe"};
+
+// Amplades de les columnes
+float[] colWidths = {10, 20, 40, 10, 20};
+
+// Dades de la taula
+String[][] info = {
+  {"1", "Pere", "Soler Miralles", "33", "Home"},
+  {"2", "Maria", "Garcia Lopez", "25", "Dona"},
+  {"3", "Joan", "Melis Cabrer", "47", "Home"},
+  {"4", "Bel", "Riera Mates", "52", "Dona"},
+  {"5", "Jose", "Perez Galdós", "37", "Home"},
+};
+
+void initTables() {
+  t = new Table(files, columnes);
+  t.setHeaders(headers);
+  t.setData(info);
+  t.setColumnWidths(colWidths);
 }

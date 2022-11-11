@@ -2,6 +2,7 @@
 enum PANTALLA {
   INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES
 };
+
 ///Pantalla actual
 PANTALLA pantalla =PANTALLA.INICIO;
 
@@ -14,7 +15,6 @@ void setup() {
 }
 
 void draw() {
-
   // Dibuja la pantalla correspondiente
   switch(pantalla) {
   case INICIO:

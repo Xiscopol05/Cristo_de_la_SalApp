@@ -10,21 +10,31 @@ void dibujaPantallaInicio() {
 
 void dibujaPantallaPrincipal() {
   background(255);
-  menu();
+
+  //habilitar y deshabilitar los botones
   bInicioSesion.setEnabled(false);
   enableButtonsMenu(true);
+  enableButtonsTabla(false);
+
+  //dibujar los elementos de la pantalla
+  menu();
   columna1();
   fila1();
   fila2();
-  enableButtonsTabla(false);
 }
 
 void dibujaPantallaCenso() {
   background(255);
-  menu();
-  //tablaGrande();
+
+  //habilitar y deshabilitar los botones. Dibujar los botones específicos de la pantalla
+  bInicioSesion.setEnabled(false);
+  enableButtonsMenu(true);
   enableButtonsTabla(true);
   displayButtonsTabla();
+
+  //dibujar los elementos de la pantalla
+  menu();
+  tablaGrande();
 }
 
 void dibujaPantallaContabilidad() {
@@ -39,7 +49,7 @@ void dibujaPantallaArchivo() {
   menu();
   background(255);
   menu();
-  //tablaGrande();
+  tablaGrande();
   enableButtonsTabla(true);
   displayButtonsTabla();
 }

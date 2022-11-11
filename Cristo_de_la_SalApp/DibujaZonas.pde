@@ -23,19 +23,15 @@ void logo() {
 
 void menuBar() {
   pushStyle();
-  fill(getColorAt(1));
   strokeWeight(1);
   line(menuWidth, 1280, menuWidth, bannerHeight);
   strokeWeight(0);
+  fill(getColorAt(1));
   rect(0, 0, menuWidth, menuHeight);
   fill(0);
   text("MENU", menuWidth/2, menuHeight/2);
   logo();
-  bCenso.display();
-  bContabilidad.display();
-  bArchivo.display();
-  bAvisos.display();
-  bEnlaces.display();
+  displayButtonsMenu();
   popStyle();
 }
 
@@ -142,7 +138,7 @@ void tablaGrande() {
   pushStyle();
   translate(menuWidth, bannerHeight);
   fill(getColorAt(3));
-  rect(20, 304-bannerHeight, 1280-menuWidth-40, 410);
+  t.display(20, 304-bannerHeight, 1280-menuWidth-40, 410);
   buscador();
   paginador();
   popMatrix();
