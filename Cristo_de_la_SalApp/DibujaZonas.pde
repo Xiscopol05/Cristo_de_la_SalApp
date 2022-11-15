@@ -1,14 +1,37 @@
 // Dibujo de las zonas de la pantalla
 
-void inicioDeSesion() {
+void inicioSesion() {
   pushMatrix();
   pushStyle();
-  translate((1280/2)-(marcoWidth/2), (800/2)-(marcoHeight/2));
+  translate(inicioSesionX, inicioSesionY);
+
   fill(getColorAt(4));
   rect(0, 0, marcoWidth, marcoHeight);
+
   fill(getColorAt(3));
   rect(0, 0, marcoWidth, 30);
+
   displayImg(8, (marcoWidth/2)-37.5, 60, 75, 75);
+   
+  popMatrix();
+  usuarioInicioSesion();
+  popStyle();
+}
+
+void usuarioInicioSesion() {
+  pushMatrix();
+  pushStyle();
+  translate(inicioSesionX, inicioSesionY);
+  
+  fill(getColorAt(3));
+  rect((marcoWidth/2)-(marcoCuentaWidth/2), (marcoHeight/2)-(marcoCuentaHeight/2)+50, marcoCuentaWidth, marcoCuentaHeight);
+  
+  fill(0);
+  textAlign(LEFT);
+  textSize(24);
+  text("Username: ", (marcoWidth/2)-(marcoCuentaWidth/2)+20, (marcoHeight/2)-(marcoCuentaHeight/2)+110);
+  text("Password: ", (marcoWidth/2)-(marcoCuentaWidth/2)+20, (marcoHeight/2)-(marcoCuentaHeight/2)+210);
+  
   popStyle();
   popMatrix();
 }
@@ -107,23 +130,11 @@ void fila2() {
   popStyle();
 }
 
-
-void paginador() {
-  pushMatrix();
-  pushStyle();
-  fill(getColorAt(3));
-  rect(1280-20-385, 800-70, 385, 50);
-  popMatrix();
-  popStyle();
-}
-
 void menu() {
   menuBar();
   banner();
   bPrincipal.display();
 }
-
-
 
 void tablaGrande() {
   pushMatrix();
@@ -131,7 +142,6 @@ void tablaGrande() {
   translate(menuWidth, bannerHeight);
   fill(getColorAt(3));
   t.display(20, 304-bannerHeight, 1280-menuWidth-40, 410);
-  paginador();
   popMatrix();
   popStyle();
 }

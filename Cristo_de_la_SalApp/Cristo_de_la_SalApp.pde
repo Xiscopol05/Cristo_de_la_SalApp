@@ -6,6 +6,8 @@ enum PANTALLA {
 ///Pantalla actual
 PANTALLA pantalla =PANTALLA.INICIO;
 
+boolean logged= false;
+
 void setup() {
   fullScreen();
   setColors();
@@ -66,10 +68,9 @@ void mousePressed() {
   } else if (bPrincipal.mouseOverButton() && bPrincipal.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
   }
-  
-  //mira si está pulsado el campo de texto
-   userText.isPressed();
-   passText.isPressed();
+  userText.isPressed();
+  passText.isPressed();
+  buscar.isPressed();
 }
 
 // Modifica el cursor
@@ -89,8 +90,20 @@ void updateCursor() {
   }
 }
 
+// Quan pitjam tecla
 void keyPressed() {
   userText.keyPressed(key, (int)keyCode);
   passText.keyPressed(key, (int)keyCode);
+  buscar.keyPressed(key, (int)keyCode);
   comprovaLogin();
+}
+
+// Comprova si el login és correcte
+boolean comprovaLogin() {
+   if ( userText.text.equals("admin") && 
+        passText.text.equals("1234")) {
+      return true;
+   } else {
+      return false;
+   }
 }
