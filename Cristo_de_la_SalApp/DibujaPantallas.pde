@@ -5,7 +5,7 @@ void dibujaPantallaInicio() {
   image(getFondoManton(), 0, 0, 1280, 800 );
 
   //habilitar y deshabilitar botones
-  bInicioSesion.setEnabled(true);
+  bInicioSesion.setEnabled(comprovaLogin());
   enableButtonsMenu(false);
   enableButtonsTabla(false);
 
