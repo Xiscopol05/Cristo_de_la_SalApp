@@ -100,6 +100,7 @@ class TextField {
   void isPressed() {
     if (mouseOverTextField()) {
       selected = true;
+      this.text="";
     } else {
       selected = false;
     }

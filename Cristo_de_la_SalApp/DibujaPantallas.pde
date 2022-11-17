@@ -125,3 +125,37 @@ void dibujaPantallaEnlaces() {
   //display elementos GUI
   displayButtonsMenu();
 }
+
+void dibujaPantallaCensoDetalle() {
+  //imagen de fondo
+  background(255);
+
+  //habilitar y deshabilitar botones
+  bInicioSesion.setEnabled(false);
+  enableButtonsMenu(true);
+  enableButtonsTabla(false);
+
+  //dibujar elementos de la pantalla
+  menu();
+  columna1();
+  columna2();
+
+  //display elementos GUI
+  displayButtonsMenu();
+}
+
+void dibujaPantallaCensoNuevoHermano(){
+    //imagen de fondo
+  background(255);
+
+  //habilitar y deshabilitar botones
+  bInicioSesion.setEnabled(false);
+  enableButtonsMenu(true);
+  enableButtonsTabla(false);
+
+  //dibujar elementos de la pantalla
+  menu();
+
+  //display elementos GUI
+  displayButtonsMenu();
+}

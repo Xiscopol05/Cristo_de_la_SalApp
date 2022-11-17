@@ -1,6 +1,6 @@
 //enumeración de las pantallas de la aplicación
 enum PANTALLA {
-  INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES
+  INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO
 };
 
 ///Pantalla actual
@@ -40,6 +40,12 @@ void draw() {
   case ENLACES:
     dibujaPantallaEnlaces();
     break;
+   case CENSO_DETALLE:
+   dibujaPantallaCensoDetalle();
+   break;
+   case CENSO_NUEVOHERMANO:
+   dibujaPantallaCensoNuevoHermano();
+   break;
   }
   String infoPantalla = pantalla.ordinal()+" ) "+pantalla.name();
   fill(0);

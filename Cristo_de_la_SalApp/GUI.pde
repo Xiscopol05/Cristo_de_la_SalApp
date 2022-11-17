@@ -110,6 +110,9 @@ void initTextField() {
   userText = new TextField((marcoWidth/2)-(marcoCuentaWidth/2)+20+inicioSesionX, (marcoHeight/2)-(marcoCuentaHeight/2)+130+inicioSesionY, 350, 35);
   passText = new TextField((marcoWidth/2)-(marcoCuentaWidth/2)+20+inicioSesionX, (marcoHeight/2)-(marcoCuentaHeight/2)+230+inicioSesionY, 350, 35);
   buscar = new TextField(800, primerIconY+25, 450, 35);
+  buscar.setText("BUSCAR");
+  userText.setText("usuario");
+  passText.setText("contraseña");
 }
 
 void displayInicioSesiontf() {
