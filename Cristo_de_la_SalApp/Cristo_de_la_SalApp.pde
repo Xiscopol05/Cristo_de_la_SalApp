@@ -1,7 +1,6 @@
 //enumeración de las pantallas de la aplicación
-enum PANTALLA {
-  INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO
-};
+
+enum PANTALLA {INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO};
 
 ///Pantalla actual
 PANTALLA pantalla =PANTALLA.INICIO;
@@ -9,7 +8,7 @@ PANTALLA pantalla =PANTALLA.INICIO;
 boolean logged= false;
 
 void setup() {
-  fullScreen();
+  size(1280,800);
   setColors();
   setFonts();
   setMedias();
