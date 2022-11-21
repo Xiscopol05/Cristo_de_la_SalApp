@@ -6,6 +6,7 @@ void setGUI() {
   initTables();
   initTextField();
   initTextInfo();
+  initImgTextButton();
 }
 
 // Botones
@@ -29,7 +30,7 @@ void initButtons() {
   buttons[7] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
   buttons[8] = new Button("Modificar", (2*menuWidth)+20, primerIconY+20, 200, 50);
   buttons[9] = new Button("Aceptar", 641+menuWidth, 20+bannerHeight, 403, 40);
-  buttons[10] = new Button("Ficha Inscripción", 40+menuWidth, 605+bannerHeight, 574,60);
+  buttons[10] = new Button("Ficha Inscripción", 40+menuWidth, 605+bannerHeight, 574, 60);
 
 
   bPrincipal = buttons[0];
@@ -61,7 +62,7 @@ void enableButtonsTabla(boolean enabled) {
 }
 
 void displayButtonsMenu() {
-  bCenso.display();
+  itbCenso.display();
   bContabilidad.display();
   bArchivo.display();
   bAvisos.display();
@@ -175,4 +176,12 @@ void displayDetalleHermano() {
   oficina.display();
   digitoControl.display();
   numeroCuenta.display();
+}
+
+//ImgTextButton
+
+ImgTextButton itbCenso;
+
+void initImgTextButton() {
+  itbCenso= new ImgTextButton(getIconCenso(),"Censo", 0, primerIconY, iconWidth, iconHeight);
 }

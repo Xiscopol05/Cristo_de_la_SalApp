@@ -183,7 +183,6 @@ void detalleHermano() {
   text("Titular de la cuenta:", 40, 480+12);
   text("Fecha de alta:", 630, 625+12);
 
-
   popMatrix();
   popStyle();
 }

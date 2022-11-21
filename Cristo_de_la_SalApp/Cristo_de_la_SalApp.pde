@@ -49,8 +49,8 @@ void draw() {
   String infoPantalla = pantalla.ordinal()+" ) "+pantalla.name();
   fill(0);
   textFont(getFontAt(4));
-  text(infoPantalla, width/2, height/2);  // Número i nom de la Pantalla
-  text("X= "+mouseX+", Y= "+mouseY, width/2, height/2 +20);
+  //text(infoPantalla, width/2, height/2);  // Número i nom de la Pantalla
+  //text("X= "+mouseX+", Y= "+mouseY, width/2, height/2 +20);
 
   updateCursor();   // Modifica la apariencia del cursor
 }
