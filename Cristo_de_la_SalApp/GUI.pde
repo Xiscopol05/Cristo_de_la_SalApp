@@ -5,6 +5,7 @@ void setGUI() {
   initButtons();
   initTables();
   initTextField();
+  initTextInfo();
 }
 
 // Botones
@@ -14,10 +15,10 @@ Button[] buttons;
 Button bInicioSesion, bCenso, bContabilidad, bArchivo, bAvisos, bEnlaces, bPrincipal;
 
 // Creación de los botones de la GUI
-Button bAñadir, bModificar;
+Button bAñadir, bModificar, bAceptar, bFicha;
 
 void initButtons() {
-  buttons = new Button[9];
+  buttons = new Button[11];
   buttons[0] = new Button("Principal", 1000, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Censo", 0, primerIconY, iconWidth, iconHeight);
   buttons[2] = new Button("Contabilidad", 0, segundoIconY, iconWidth, iconHeight);
@@ -27,6 +28,8 @@ void initButtons() {
   buttons[6] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[7] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
   buttons[8] = new Button("Modificar", (2*menuWidth)+20, primerIconY+20, 200, 50);
+  buttons[9] = new Button("Aceptar", 641+menuWidth, 20+bannerHeight, 403, 40);
+  buttons[10] = new Button("Ficha Inscripción", 40+menuWidth, 605+bannerHeight, 574,60);
 
 
   bPrincipal = buttons[0];
@@ -38,6 +41,8 @@ void initButtons() {
   bInicioSesion = buttons[6];
   bAñadir = buttons[7];
   bModificar = buttons[8];
+  bAceptar = buttons[9];
+  bFicha = buttons[10];
 }
 
 // Activar los botones del menú
@@ -118,4 +123,56 @@ void initTextField() {
 void displayInicioSesiontf() {
   userText.display();
   passText.display();
+}
+
+//TextInfo
+
+TextInfo titulo;
+TextInfo nombre, apellidos, DNI, calle, numero, piso, localidad, provincia, telefono, correoElectronico;
+TextInfo banco, titular, DNITitular, IBAN, entidad, oficina, digitoControl, numeroCuenta;
+
+void initTextInfo() {
+  titulo = new TextInfo ("Detalle personal", 20, 25, 605, 35);
+  nombre = new TextInfo ("Nombre", 170, 95, 305, 45);
+  apellidos = new TextInfo ("Apellidos", 500, 95, 535, 45);
+  DNI = new TextInfo ("DNI", 695, 165, 340, 45);
+  calle = new TextInfo ("Calle", 148, 235, 147, 45);
+  numero = new TextInfo ("Nº", 313, 235, 89, 45);
+  piso = new TextInfo ("Piso", 417, 235, 89, 45);
+  localidad = new TextInfo ("Localidad", 521, 235, 198, 45);
+  provincia = new TextInfo ("Provincia", 735, 235, 301, 45);
+  telefono = new TextInfo ("Teléfono", 148, 297, 255, 45);
+  correoElectronico = new TextInfo ("Correo Electrónico", 615, 297, 420, 45);
+  banco = new TextInfo ("Banco", 235, 405, 800, 45);
+  titular= new TextInfo ("Titular", 235, 462, 380, 45);
+  DNITitular = new TextInfo ("DNI del titular", 649, 462, 386, 45);
+  IBAN = new TextInfo ("IBAN", 40, 522, 165, 45);
+  entidad = new TextInfo ("Entidad", 225, 522, 100, 45);
+  oficina = new TextInfo ("Oficina", 341, 522, 100, 45);
+  digitoControl = new TextInfo ("Dígito Control", 460, 522, 222, 45);
+  numeroCuenta = new TextInfo ("Número de cuenta", 697, 522, 337, 45);
+}
+
+
+void displayDetalleHermano() {
+  titulo.setColor(3);
+  titulo.display();
+  nombre.display();
+  apellidos.display();
+  DNI.display();
+  calle.display();
+  numero.display();
+  piso.display();
+  localidad.display();
+  provincia.display();
+  telefono.display();
+  correoElectronico.display();
+  banco.display();
+  titular.display();
+  DNITitular.display();
+  IBAN.display();
+  entidad.display();
+  oficina.display();
+  digitoControl.display();
+  numeroCuenta.display();
 }

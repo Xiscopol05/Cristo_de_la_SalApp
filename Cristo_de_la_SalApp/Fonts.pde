@@ -8,12 +8,14 @@ PFont[] fonts;
 
 // Establece las fuentes de la App
 void setFonts() {
-  this.fonts = new PFont[5];
+  this.fonts = new PFont[7];
   this.fonts[0] = createFont(URL_FONTS+"Sacred Valley.ttf", medidaTitulo);
   this.fonts[1] = createFont(URL_FONTS+"LANENAR_.ttf", medidaSubtitulo);
   this.fonts[2] = createFont(URL_FONTS+"Sono-ExtraLight.ttf", medidaParrafo);
   this.fonts[3] = createFont(URL_FONTS+"La Estroma.ttf", medidaTitulo);
   this.fonts[4] = createFont(URL_FONTS+"LANENAR_.ttf", medidaParrafo);
+  this.fonts[5] = createFont(URL_FONTS+"LANENAR_.ttf", 24);
+  this.fonts[6] = createFont(URL_FONTS+"Sacred Valley.ttf", 24);
 }
 
 // Getter del número de fuentes

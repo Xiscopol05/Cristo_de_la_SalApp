@@ -8,6 +8,8 @@ void dibujaPantallaInicio() {
   bInicioSesion.setEnabled(comprovaLogin());
   enableButtonsMenu(false);
   enableButtonsTabla(false);
+  bAceptar.setEnabled(false);
+  bFicha.setEnabled(false);
 
   //dibujar elementos de la pantalla
   inicioSesion();
@@ -24,6 +26,8 @@ void dibujaPantallaPrincipal() {
   bInicioSesion.setEnabled(false);
   enableButtonsMenu(true);
   enableButtonsTabla(false);
+  bAceptar.setEnabled(false);
+  bFicha.setEnabled(false);
 
   //dibujar elementos de la pantalla
   menu();
@@ -43,6 +47,8 @@ void dibujaPantallaCenso() {
   bInicioSesion.setEnabled(false);
   enableButtonsMenu(true);
   enableButtonsTabla(true);
+  bAceptar.setEnabled(false);
+  bFicha.setEnabled(false);
 
   //dibujar elementos de la pantalla
   menu();
@@ -62,6 +68,8 @@ void dibujaPantallaContabilidad() {
   bInicioSesion.setEnabled(false);
   enableButtonsMenu(true);
   enableButtonsTabla(false);
+  bAceptar.setEnabled(false);
+  bFicha.setEnabled(false);
 
   //dibujar elementos de la pantalla
   menu();
@@ -79,6 +87,8 @@ void dibujaPantallaArchivo() {
   bInicioSesion.setEnabled(false);
   enableButtonsMenu(true);
   enableButtonsTabla(true);
+  bAceptar.setEnabled(false);
+  bFicha.setEnabled(false);
 
   //dibujar elementos de la pantalla
   menu();
@@ -98,6 +108,8 @@ void dibujaPantallaAvisos() {
   bInicioSesion.setEnabled(false);
   enableButtonsMenu(true);
   enableButtonsTabla(false);
+  bAceptar.setEnabled(false);
+  bFicha.setEnabled(false);
 
   //dibujar elementos de la pantalla
   menu();
@@ -116,6 +128,8 @@ void dibujaPantallaEnlaces() {
   bInicioSesion.setEnabled(false);
   enableButtonsMenu(true);
   enableButtonsTabla(false);
+  bAceptar.setEnabled(false);
+  bFicha.setEnabled(false);
 
   //dibujar elementos de la pantalla
   menu();
@@ -134,28 +148,38 @@ void dibujaPantallaCensoDetalle() {
   bInicioSesion.setEnabled(false);
   enableButtonsMenu(true);
   enableButtonsTabla(false);
+  bAceptar.setEnabled(true);
+  bFicha.setEnabled(true);
+
 
   //dibujar elementos de la pantalla
   menu();
-  columna1();
-  columna2();
+
 
   //display elementos GUI
   displayButtonsMenu();
+  detalleHermano();
+  bAceptar.display();
+  bFicha.display();
 }
 
-void dibujaPantallaCensoNuevoHermano(){
-    //imagen de fondo
+void dibujaPantallaCensoNuevoHermano() {
+  //imagen de fondo
   background(255);
 
   //habilitar y deshabilitar botones
   bInicioSesion.setEnabled(false);
   enableButtonsMenu(true);
   enableButtonsTabla(false);
+  bAceptar.setEnabled(true);
+  bFicha.setEnabled(true);
 
   //dibujar elementos de la pantalla
   menu();
+  detalleHermano();
 
   //display elementos GUI
   displayButtonsMenu();
+  bAceptar.display();
+  bFicha.display();
 }
