@@ -12,61 +12,43 @@ void setGUI() {
 // Botones
 Button[] buttons;
 
-//Botones del Menú principal
-Button bInicioSesion, bCenso, bContabilidad, bArchivo, bAvisos, bEnlaces, bPrincipal;
+Button bInicioSesion, bPrincipal;
 
 // Creación de los botones de la GUI
 Button bAñadir, bModificar, bAceptar, bFicha;
 
 void initButtons() {
-  buttons = new Button[11];
+  buttons = new Button[6];
   buttons[0] = new Button("Principal", 1000, (bannerHeight/2)-13.5, 100, 25);
-  buttons[1] = new Button("Censo", 0, primerIconY, iconWidth, iconHeight);
-  buttons[2] = new Button("Contabilidad", 0, segundoIconY, iconWidth, iconHeight);
-  buttons[3] = new Button("Archivo", 0, tercerIconY, iconWidth, iconHeight);
-  buttons[4] = new Button("Avisos y alertas", 0, cuartoIconY, iconWidth, iconHeight );
-  buttons[5] = new Button("Enlaces", 0, quintoIconY, iconWidth, iconHeight);
-  buttons[6] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
-  buttons[7] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
-  buttons[8] = new Button("Modificar", (2*menuWidth)+20, primerIconY+20, 200, 50);
-  buttons[9] = new Button("Aceptar", 641+menuWidth, 20+bannerHeight, 403, 40);
-  buttons[10] = new Button("Ficha Inscripción", 40+menuWidth, 605+bannerHeight, 574, 60);
+  buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
+  buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
+  buttons[3] = new Button("Modificar", (2*menuWidth)+20, primerIconY+20, 200, 50);
+  buttons[4] = new Button("Aceptar", 641+menuWidth, 20+bannerHeight, 403, 40);
+  buttons[5] = new Button("Ficha Inscripción", 40+menuWidth, 605+bannerHeight, 574, 60);
 
 
   bPrincipal = buttons[0];
-  bCenso = buttons[1];
-  bContabilidad = buttons[2];
-  bArchivo =  buttons[3];
-  bAvisos = buttons[4];
-  bEnlaces = buttons[5];
-  bInicioSesion = buttons[6];
-  bAñadir = buttons[7];
-  bModificar = buttons[8];
-  bAceptar = buttons[9];
-  bFicha = buttons[10];
+  bInicioSesion = buttons[1];
+  bAñadir = buttons[2];
+  bModificar = buttons[3];
+  bAceptar = buttons[4];
+  bFicha = buttons[5];
+}
+//Desactivar todos los botones
+void disableButtons() {
+  for (int i = 0; i<buttons.length; i++) {
+    buttons[i].setEnabled(false);
+  }
+  itbCenso.setEnabled(false);
+  itbContabilidad.setEnabled(false);
+  itbArchivo.setEnabled(false);
+  itbAvisos.setEnabled(false);
+  itbEnlaces.setEnabled(false);
 }
 
-// Activar los botones del menú
-void enableButtonsMenu(boolean enabled) {
-  bPrincipal.setEnabled(enabled);
-  bCenso.setEnabled(enabled);
-  bContabilidad.setEnabled(enabled);
-  bArchivo.setEnabled(enabled);
-  bAvisos.setEnabled(enabled);
-  bEnlaces.setEnabled(enabled);
-}
-
-void enableButtonsTabla(boolean enabled) {
-  bAñadir.setEnabled(enabled);
-  bModificar.setEnabled(enabled);
-}
-
-void displayButtonsMenu() {
-  itbCenso.display();
-  bContabilidad.display();
-  bArchivo.display();
-  bAvisos.display();
-  bEnlaces.display();
+void enableButtonsTabla() {
+  bAñadir.setEnabled(true);
+  bModificar.setEnabled(true);
 }
 
 void displayButtonsTabla() {
@@ -180,8 +162,38 @@ void displayDetalleHermano() {
 
 //ImgTextButton
 
-ImgTextButton itbCenso;
+ImgTextButton[] imgtextbuttons;
+ImgTextButton itbCenso, itbContabilidad, itbArchivo, itbAvisos, itbEnlaces;
 
 void initImgTextButton() {
-  itbCenso= new ImgTextButton(getIconCenso(),"Censo", 0, primerIconY, iconWidth, iconHeight);
+  imgtextbuttons = new ImgTextButton[6];
+  imgtextbuttons[0] = new ImgTextButton(getIconCenso(), "Censo", 0, primerIconY, iconWidth, iconHeight);
+  imgtextbuttons[1] = new ImgTextButton(getIconContabilidad(), "Contabilidad", 0, segundoIconY, iconWidth, iconHeight);
+  imgtextbuttons[2] = new ImgTextButton(getIconArchivo(), "Archivo", 0, tercerIconY, iconWidth, iconHeight);
+  imgtextbuttons[3] = new ImgTextButton(getIconAvisos(), "Avisos y alertas", 0, cuartoIconY, iconWidth, iconHeight );
+  imgtextbuttons[4] = new ImgTextButton(getIconEnlaces(), "Enlaces", 0, quintoIconY, iconWidth, iconHeight);
+
+
+  itbCenso = imgtextbuttons[0];
+  itbContabilidad = imgtextbuttons[1];
+  itbArchivo = imgtextbuttons[2];
+  itbAvisos = imgtextbuttons[3];
+  itbEnlaces = imgtextbuttons[4];
+}
+
+// Activar los botones del menú
+void enableButtonsMenu() {
+  itbCenso.setEnabled(true);
+  itbContabilidad.setEnabled(true);
+  itbArchivo.setEnabled(true);
+  itbAvisos.setEnabled(true);
+  itbEnlaces.setEnabled(true);
+}
+
+void displayButtonsMenu() {
+  itbCenso.display();
+  itbContabilidad.display();
+  itbArchivo.display();
+  itbAvisos.display();
+  itbEnlaces.display();
 }
