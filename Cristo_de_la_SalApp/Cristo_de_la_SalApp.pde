@@ -5,14 +5,15 @@ enum PANTALLA {
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.INICIO;
+PANTALLA pantalla =PANTALLA.PRINCIPAL;
 
 boolean logged= false;
+
 
 void setup() {
   size(1280, 800);
   setColors();
-  setFonts();
+ setFonts();
   setMedias();
   setGUI();
 }
@@ -75,6 +76,12 @@ void mousePressed() {
   } else if (bPrincipal.mouseOverButton() && bPrincipal.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
   }
+  if(bNext.mouseOverButton() && bNext.enabled){
+    pt.nextPage();
+  }
+  else if(bPrev.mouseOverButton() && bPrev.enabled){
+    pt.prevPage();
+  }
   userText.isPressed();
   passText.isPressed();
   buscar.isPressed();
@@ -108,7 +115,14 @@ void keyPressed() {
   passText.keyPressed(key, (int)keyCode);
   buscar.keyPressed(key, (int)keyCode);
   comprovaLogin();
+  if(keyCode==LEFT){
+    pt.prevPage();
+  }
+  else if(keyCode==RIGHT){
+    pt.nextPage();
+  }
 }
+
 
 // Comprova si el login és correcte
 boolean comprovaLogin() {

@@ -7,6 +7,7 @@ void setGUI() {
   initTextField();
   initTextInfo();
   initImgTextButton();
+  initPagedTable();
 }
 
 // Botones
@@ -15,16 +16,18 @@ Button[] buttons;
 Button bInicioSesion, bPrincipal;
 
 // Creación de los botones de la GUI
-Button bAñadir, bModificar, bAceptar, bFicha;
+Button bAñadir, bModificar, bAceptar, bFicha, bPrev, bNext;
 
 void initButtons() {
-  buttons = new Button[6];
+  buttons = new Button[8];
   buttons[0] = new Button("Principal", 1000, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
   buttons[3] = new Button("Modificar", (2*menuWidth)+20, primerIconY+20, 200, 50);
   buttons[4] = new Button("Aceptar", 641+menuWidth, 20+bannerHeight, 403, 40);
   buttons[5] = new Button("Ficha Inscripción", 40+menuWidth, 605+bannerHeight, 574, 60);
+  buttons[6] = new Button("NEXT", 25 + tableW/2 + 60/1.5, tableH + 80, 60, 60);
+  buttons[7] = new Button("PREV", 25 + tableW/2 - 60/1.5, tableH + 80, 60, 60);
 
 
   bPrincipal = buttons[0];
@@ -33,6 +36,8 @@ void initButtons() {
   bModificar = buttons[3];
   bAceptar = buttons[4];
   bFicha = buttons[5];
+  bNext = buttons[6];
+  bPrev = buttons[7];
 }
 //Desactivar todos los botones
 void disableButtons() {
@@ -61,7 +66,7 @@ void displayButtonsTabla() {
 Table t;
 
 // Dimensions de la taula
-float tableW = 800, tableH = 300;
+float tableW = 1280-200-40, tableH = 410;
 
 // Número de files (capçalera inclosa) i columnes de la taula
 int files = 6, columnes = 5;
@@ -173,7 +178,6 @@ void initImgTextButton() {
   imgtextbuttons[3] = new ImgTextButton(getIconAvisos(), "Avisos y alertas", 0, cuartoIconY, iconWidth, iconHeight );
   imgtextbuttons[4] = new ImgTextButton(getIconEnlaces(), "Enlaces", 0, quintoIconY, iconWidth, iconHeight);
 
-
   itbCenso = imgtextbuttons[0];
   itbContabilidad = imgtextbuttons[1];
   itbArchivo = imgtextbuttons[2];
@@ -196,4 +200,24 @@ void displayButtonsMenu() {
   itbArchivo.display();
   itbAvisos.display();
   itbEnlaces.display();
+}
+
+//PagedTable
+
+PagedTable pt;
+
+ 
+void initPagedTable() {
+  pt = new PagedTable(files, columnes);
+  pt.setHeaders(headers);
+  pt.setData(info);
+  pt.setColumnWidths(colWidths);
+}
+
+void pagedtableDisplay() {
+  pt.display(20, 304-bannerHeight, 1280-menuWidth-40, 410);
+
+  // Dibuixa els botons
+  bNext.display();
+  bPrev.display();
 }

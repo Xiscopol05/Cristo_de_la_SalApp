@@ -46,12 +46,13 @@ void dibujaPantallaCenso() {
 
   //dibujar elementos de la pantalla
   menu();
-  tablaGrande();
+
 
   //display elementos GUI
   displayButtonsMenu();
   displayButtonsTabla();
   buscar.display();
+  pagedtableDisplay();
 }
 
 void dibujaPantallaContabilidad() {
@@ -82,12 +83,12 @@ void dibujaPantallaArchivo() {
 
   //dibujar elementos de la pantalla
   menu();
-  tablaGrande();
 
   //display elementos GUI
   displayButtonsMenu();
   displayButtonsTabla();
   buscar.display();
+  pagedtableDisplay();
 }
 
 void dibujaPantallaAvisos() {
