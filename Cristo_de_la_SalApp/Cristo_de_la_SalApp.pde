@@ -13,7 +13,7 @@ boolean logged= false;
 void setup() {
   size(1280, 800);
   setColors();
- setFonts();
+  setFonts();
   setMedias();
   setGUI();
 }
@@ -53,15 +53,18 @@ void draw() {
   fill(0);
   textFont(getFontAt(4));
   //text(infoPantalla, width/2, height/2);  // Número i nom de la Pantalla
-  //text("X= "+mouseX+", Y= "+mouseY, width/2, height/2 +20);
+  text("X= "+mouseX+", Y= "+mouseY, width/2, height/2 +20);
 
   //updateCursor();   // Modifica la apariencia del cursor
 }
 
 // En caso de apretar el ratón
 void mousePressed() {
-
-  if (bInicioSesion.mouseOverButton() && bInicioSesion.enabled) {
+ if (bNext.mouseOverButton() && bNext.enabled) {
+    pt.nextPage();
+  } else if (bPrev.mouseOverButton() && bPrev.enabled) {
+    pt.prevPage();
+  } else if (bInicioSesion.mouseOverButton() && bInicioSesion.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
   } else if (itbCenso.mouseOverButton() && itbCenso.enabled) {
     pantalla = PANTALLA.CENSO;
@@ -75,12 +78,6 @@ void mousePressed() {
     pantalla = PANTALLA.ENLACES;
   } else if (bPrincipal.mouseOverButton() && bPrincipal.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
-  }
-  if(bNext.mouseOverButton() && bNext.enabled){
-    pt.nextPage();
-  }
-  else if(bPrev.mouseOverButton() && bPrev.enabled){
-    pt.prevPage();
   }
   userText.isPressed();
   passText.isPressed();
@@ -115,10 +112,9 @@ void keyPressed() {
   passText.keyPressed(key, (int)keyCode);
   buscar.keyPressed(key, (int)keyCode);
   comprovaLogin();
-  if(keyCode==LEFT){
+  if (keyCode==LEFT) {
     pt.prevPage();
-  }
-  else if(keyCode==RIGHT){
+  } else if (keyCode==RIGHT) {
     pt.nextPage();
   }
 }

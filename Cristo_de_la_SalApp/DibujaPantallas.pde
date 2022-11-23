@@ -43,6 +43,7 @@ void dibujaPantallaCenso() {
   disableButtons();
   enableButtonsMenu();
   enableButtonsTabla();
+  enableButtonsPagedTable();
 
   //dibujar elementos de la pantalla
   menu();
@@ -52,7 +53,8 @@ void dibujaPantallaCenso() {
   displayButtonsMenu();
   displayButtonsTabla();
   buscar.display();
-  pagedtableDisplay();
+  displayPagedTable();
+  displayButtonsPagedTable();
 }
 
 void dibujaPantallaContabilidad() {
@@ -79,16 +81,17 @@ void dibujaPantallaArchivo() {
   disableButtons();
   enableButtonsMenu();
   enableButtonsTabla();
-
+  enableButtonsPagedTable();
 
   //dibujar elementos de la pantalla
   menu();
+  displayPagedTable();
 
   //display elementos GUI
   displayButtonsMenu();
   displayButtonsTabla();
   buscar.display();
-  pagedtableDisplay();
+  displayButtonsPagedTable();
 }
 
 void dibujaPantallaAvisos() {

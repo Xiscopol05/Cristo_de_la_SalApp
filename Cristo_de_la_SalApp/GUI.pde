@@ -3,7 +3,6 @@
 // Creación de los elementos de la GUI
 void setGUI() {
   initButtons();
-  initTables();
   initTextField();
   initTextInfo();
   initImgTextButton();
@@ -26,8 +25,8 @@ void initButtons() {
   buttons[3] = new Button("Modificar", (2*menuWidth)+20, primerIconY+20, 200, 50);
   buttons[4] = new Button("Aceptar", 641+menuWidth, 20+bannerHeight, 403, 40);
   buttons[5] = new Button("Ficha Inscripción", 40+menuWidth, 605+bannerHeight, 574, 60);
-  buttons[6] = new Button("NEXT", 25 + tableW/2 + 60/1.5, tableH + 80, 60, 60);
-  buttons[7] = new Button("PREV", 25 + tableW/2 - 60/1.5, tableH + 80, 60, 60);
+  buttons[6] = new Button("PREV", 950, 730, 60, 60);
+  buttons[7] = new Button("NEXT", 1050, 730, 60, 60);
 
 
   bPrincipal = buttons[0];
@@ -36,8 +35,8 @@ void initButtons() {
   bModificar = buttons[3];
   bAceptar = buttons[4];
   bFicha = buttons[5];
-  bNext = buttons[6];
-  bPrev = buttons[7];
+  bPrev = buttons[6];
+  bNext = buttons[7];
 }
 //Desactivar todos los botones
 void disableButtons() {
@@ -56,17 +55,24 @@ void enableButtonsTabla() {
   bModificar.setEnabled(true);
 }
 
+void enableButtonsPagedTable() {
+  bNext.setEnabled(true);
+  bPrev.setEnabled(true);
+}
+
 void displayButtonsTabla() {
   bAñadir.display();
   bModificar.display();
 }
 
+// Dibuixa els botons
+void displayButtonsPagedTable() {
+  bNext.display();
+  bPrev.display();
+}
 
-// Tabla
-Table t;
 
-// Dimensions de la taula
-float tableW = 1280-200-40, tableH = 410;
+//tablas
 
 // Número de files (capçalera inclosa) i columnes de la taula
 int files = 6, columnes = 5;
@@ -84,15 +90,17 @@ String[][] info = {
   {"3", "Joan", "Melis Cabrer", "47", "Home"},
   {"4", "Bel", "Riera Mates", "52", "Dona"},
   {"5", "Jose", "Perez Galdós", "37", "Home"},
+  {"6", "Pere", "Soler Miralles", "33", "Home"},
+  {"7", "Maria", "Garcia Lopez", "25", "Dona"},
+  {"8", "Joan", "Melis Cabrer", "47", "Home"},
+  {"9", "Bel", "Riera Mates", "52", "Dona"},
+  {"10", "Jose", "Perez Galdós", "37", "Home"},
+  {"11", "Pere", "Soler Miralles", "33", "Home"},
+  {"12", "Maria", "Garcia Lopez", "25", "Dona"},
+  {"13", "Joan", "Melis Cabrer", "47", "Home"},
+  {"14", "Bel", "Riera Mates", "52", "Dona"},
+  {"15", "Jose", "Perez Galdós", "37", "Home"},
 };
-
-void initTables() {
-  t = new Table(files, columnes);
-  t.setHeaders(headers);
-  t.setData(info);
-  t.setColumnWidths(colWidths);
-}
-
 //TextField
 
 // Declaració de les variables
@@ -172,7 +180,7 @@ ImgTextButton itbCenso, itbContabilidad, itbArchivo, itbAvisos, itbEnlaces;
 
 void initImgTextButton() {
   imgtextbuttons = new ImgTextButton[6];
-  imgtextbuttons[0] = new ImgTextButton(getIconCenso(), "Censo", 0, primerIconY, iconWidth, iconHeight);
+  imgtextbuttons[0] = new ImgTextButton(getImgAt(1), "Censo", 0, primerIconY, iconWidth, iconHeight);
   imgtextbuttons[1] = new ImgTextButton(getIconContabilidad(), "Contabilidad", 0, segundoIconY, iconWidth, iconHeight);
   imgtextbuttons[2] = new ImgTextButton(getIconArchivo(), "Archivo", 0, tercerIconY, iconWidth, iconHeight);
   imgtextbuttons[3] = new ImgTextButton(getIconAvisos(), "Avisos y alertas", 0, cuartoIconY, iconWidth, iconHeight );
@@ -206,7 +214,7 @@ void displayButtonsMenu() {
 
 PagedTable pt;
 
- 
+
 void initPagedTable() {
   pt = new PagedTable(files, columnes);
   pt.setHeaders(headers);
@@ -214,10 +222,6 @@ void initPagedTable() {
   pt.setColumnWidths(colWidths);
 }
 
-void pagedtableDisplay() {
-  pt.display(20, 304-bannerHeight, 1280-menuWidth-40, 410);
-
-  // Dibuixa els botons
-  bNext.display();
-  bPrev.display();
+void displayPagedTable() {
+  pt.display(20+menuWidth, 304, 1280-menuWidth-40, 410);
 }
