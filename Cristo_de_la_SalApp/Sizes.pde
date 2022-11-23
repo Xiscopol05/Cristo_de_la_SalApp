@@ -37,3 +37,7 @@ int inicioSesionY= (800/2)-(marcoHeight/2);
 //dimensiones marco insertar usuario y contraseña
 int marcoCuentaWidth = 500;
 int marcoCuentaHeight = 250;
+
+// Dimensiones de los botones de Enlaces
+float buttonEnlaceW = 335;
+float buttonEnlaceH = 67;

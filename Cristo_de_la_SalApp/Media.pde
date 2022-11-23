@@ -11,7 +11,7 @@ PShape[] shapes;
 
 // Establece las imágenes de la App
 void setMedias() {
-  this.imgs = new PImage[9];
+  this.imgs = new PImage[10];
   this.imgs[0] = loadImage(URL_IMGS+"logo.png");
   this.imgs[1] = loadImage(URL_IMGS+"mantonmanila.jpeg");
   this.imgs[2] = loadImage(URL_IMGS+"archivo.png");
@@ -21,6 +21,7 @@ void setMedias() {
   this.imgs[6] = loadImage(URL_IMGS+"enlaces.png");
   this.imgs[7] = loadImage(URL_IMGS+"file.png");
   this.imgs[8] = loadImage(URL_IMGS+"user.png");
+  this.imgs[9] = loadImage(URL_IMGS+"cristo1.jpeg");
 }
 void setVectors() {
   this.shapes = new PShape[2];

@@ -5,9 +5,11 @@ enum PANTALLA {
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.PRINCIPAL;
+PANTALLA pantalla =PANTALLA.AVISOS;
 
 boolean logged= false;
+
+String userName = "admin";
 
 
 void setup() {
@@ -16,6 +18,8 @@ void setup() {
   setFonts();
   setMedias();
   setGUI();
+
+  desktop = Desktop.getDesktop();
 }
 
 void draw() {
@@ -55,12 +59,12 @@ void draw() {
   //text(infoPantalla, width/2, height/2);  // Número i nom de la Pantalla
   text("X= "+mouseX+", Y= "+mouseY, width/2, height/2 +20);
 
-  //updateCursor();   // Modifica la apariencia del cursor
+  updateCursor();   // Modifica la apariencia del cursor
 }
 
 // En caso de apretar el ratón
 void mousePressed() {
- if (bNext.mouseOverButton() && bNext.enabled) {
+  if (bNext.mouseOverButton() && bNext.enabled) {
     pt.nextPage();
   } else if (bPrev.mouseOverButton() && bPrev.enabled) {
     pt.prevPage();
@@ -78,10 +82,27 @@ void mousePressed() {
     pantalla = PANTALLA.ENLACES;
   } else if (bPrincipal.mouseOverButton() && bPrincipal.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
+  } else if (bFacebook.mouseOverButton() && bFacebook.enabled) {
+    openWebPage("https://www.facebook.com/stmocristodelasalabargas/");
+  } else if (bTwitter.mouseOverButton() && bTwitter.enabled) {
+    openWebPage("https://twitter.com/cristo_sala");
+  }else if (bInstagram.mouseOverButton() && bInstagram.enabled) {
+    openWebPage("https://www.instagram.com/hermandadcristodelasala/?hl=es");
+  }else if (bYoutube.mouseOverButton() && bYoutube.enabled) {
+    openWebPage("https://www.youtube.com/channel/UCri0gUrGJPZ23ZlmgmGa9Yg");
+  }else if (bArzobispado.mouseOverButton() && bArzobispado.enabled) {
+    openWebPage("https://www.architoledo.org/");
+  }else if (bAyuntamiento.mouseOverButton() && bAyuntamiento.enabled) {
+    openWebPage("https://www.bargas.es/");
+  }else if (bWebCofrade.mouseOverButton() && bWebCofrade.enabled) {
+    openWebPage("http://www.semanasantatoledo.com/");
+  }else if (bOtrasHermandades.mouseOverButton() && bOtrasHermandades.enabled) {
+    openWebPage("https://www.humildadtoledo.com/enlaces-de-interes");
   }
   userText.isPressed();
   passText.isPressed();
   buscar.isPressed();
+  cEventos.checkButtons();
 }
 
 // Modifica el cursor
@@ -91,11 +112,6 @@ void updateCursor() {
 
   for (int i=0; i<buttons.length; i++) {
     if (buttons[i].mouseOverButton() && buttons[i].enabled) {
-      mouseOnOneButton = true;
-    }
-  }
-  for (int i = 0; i<imgtextbuttons.length; i++) {
-    if (imgtextbuttons[i].mouseOverButton() && imgtextbuttons[i].enabled) {
       mouseOnOneButton = true;
     }
   }
@@ -117,12 +133,22 @@ void keyPressed() {
   } else if (keyCode==RIGHT) {
     pt.nextPage();
   }
+   // Anar un mes enrere
+  if(keyCode==LEFT){
+    cEventos.prevMonth();
+    println("PREV MONTH");
+  }
+  // Anar un mes endavant
+  else if(keyCode==RIGHT){
+    cEventos.nextMonth();
+    println("PREV MONTH");
+  }
 }
 
 
 // Comprova si el login és correcte
 boolean comprovaLogin() {
-  if ( userText.text.equals("admin") &&
+  if ( userText.text.equals(userName) &&
     passText.text.equals("1234")) {
     return true;
   } else {

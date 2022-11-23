@@ -27,10 +27,13 @@ void dibujaPantallaPrincipal() {
 
   //dibujar elementos de la pantalla
   menu();
-  columna1();
-  fila1();
-  fila2();
-
+  tituloCarruselFotos();
+  pushStyle();
+  pushMatrix();
+  translate(menuWidth, bannerHeight);
+  image(getImgAt(9), 35, 70, 555, 575); //temporal... añadir carrusel de imagenes con cambio a los 10 segundos
+  popStyle();
+  popMatrix();
   //display elementos GUI
   displayButtonsMenu();
 }
@@ -119,15 +122,17 @@ void dibujaPantallaEnlaces() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
+  enableButtonsEnlaces();
 
 
   //dibujar elementos de la pantalla
   menu();
-  columna1();
-  columna2();
+  cuadroEnlacesRRSS();
+  cuadroEnlacesVarios();
 
   //display elementos GUI
   displayButtonsMenu();
+  displayButtonsEnlaces();
 }
 
 void dibujaPantallaCensoDetalle() {

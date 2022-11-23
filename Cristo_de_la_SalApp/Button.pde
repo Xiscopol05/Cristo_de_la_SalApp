@@ -11,6 +11,8 @@ public class Button {
 
   String textBoton;  // Texto
   boolean enabled;  // Habilitado / deshabilitado
+  
+  int tf=4; // text font
 
   //Constructor
   Button(String text, float x, float y, float w, float h) {
@@ -30,6 +32,10 @@ public class Button {
   void setEnabled(boolean b) {
     this.enabled = b;
   }
+  
+  void setTextFont(int i){
+    this.tf= i;
+  }
 
   // Dibujar el botón
   void display() {
@@ -46,7 +52,7 @@ public class Button {
     // Texto (color, alineación i tamaño)
     fill(255);
     textAlign(CENTER);
-    textFont(getFontAt(4));
+    textFont(getFontAt(tf));
     text(textBoton, this.x + this.w/2, this.y + this.h/2+5);
     popStyle();
   }

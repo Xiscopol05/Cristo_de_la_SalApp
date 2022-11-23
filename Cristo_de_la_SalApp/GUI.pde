@@ -15,10 +15,10 @@ Button[] buttons;
 Button bInicioSesion, bPrincipal;
 
 // Creación de los botones de la GUI
-Button bAñadir, bModificar, bAceptar, bFicha, bPrev, bNext;
+Button bAñadir, bModificar, bAceptar, bFicha, bPrev, bNext, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades;
 
 void initButtons() {
-  buttons = new Button[8];
+  buttons = new Button[16];
   buttons[0] = new Button("Principal", 1000, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
@@ -27,7 +27,14 @@ void initButtons() {
   buttons[5] = new Button("Ficha Inscripción", 40+menuWidth, 605+bannerHeight, 574, 60);
   buttons[6] = new Button("PREV", 950, 730, 60, 60);
   buttons[7] = new Button("NEXT", 1050, 730, 60, 60);
-
+  buttons[8] = new Button("Facebook", 325, bannerHeight+200, buttonEnlaceW, buttonEnlaceH);
+  buttons[9] = new Button("Twitter", 325, bannerHeight+200+(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
+  buttons[10] = new Button("Instagram", 325, bannerHeight+200+2*(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
+  buttons[11] = new Button("Youtube", 325, bannerHeight+200+3*(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
+  buttons[12] = new Button("Arzobispado de Toledo", 835, bannerHeight+200, buttonEnlaceW, buttonEnlaceH);
+  buttons[13] = new Button("Ayuntamiento de Bargas", 835, bannerHeight+200+(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
+  buttons[14] = new Button("Web Cofrade", 835, bannerHeight+200+2*(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
+  buttons[15] = new Button("Otras hermandades", 835, bannerHeight+200+3*(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
 
   bPrincipal = buttons[0];
   bInicioSesion = buttons[1];
@@ -37,6 +44,14 @@ void initButtons() {
   bFicha = buttons[5];
   bPrev = buttons[6];
   bNext = buttons[7];
+  bFacebook = buttons[8];
+  bTwitter =buttons[9];
+  bInstagram= buttons[10];
+  bYoutube= buttons[11];
+  bArzobispado= buttons[12];
+  bAyuntamiento= buttons[13];
+  bWebCofrade= buttons[14];
+  bOtrasHermandades= buttons[15];
 }
 //Desactivar todos los botones
 void disableButtons() {
@@ -71,6 +86,30 @@ void displayButtonsPagedTable() {
   bPrev.display();
 }
 
+void enableButtonsEnlaces() {
+  bFacebook.setEnabled(true);
+  bTwitter.setEnabled(true);
+  bInstagram.setEnabled(true);
+  bYoutube.setEnabled(true);
+  bArzobispado.setEnabled(true);
+  bAyuntamiento.setEnabled(true);
+  bWebCofrade.setEnabled(true);
+  bOtrasHermandades.setEnabled(true);
+}
+void displayButtonsEnlaces() {
+  bFacebook.setTextFont(8);
+  bTwitter.setTextFont(8);
+  bInstagram.setTextFont(8);
+  bYoutube.setTextFont(8);
+  bFacebook.display();
+  bTwitter.display();
+  bInstagram.display();
+  bYoutube.display();
+  bArzobispado.display();
+  bAyuntamiento.display();
+  bWebCofrade.display();
+  bOtrasHermandades.display();
+}
 
 //tablas
 
@@ -180,7 +219,7 @@ ImgTextButton itbCenso, itbContabilidad, itbArchivo, itbAvisos, itbEnlaces;
 
 void initImgTextButton() {
   imgtextbuttons = new ImgTextButton[6];
-  imgtextbuttons[0] = new ImgTextButton(getImgAt(1), "Censo", 0, primerIconY, iconWidth, iconHeight);
+  imgtextbuttons[0] = new ImgTextButton(getIconCenso(), "Censo", 0, primerIconY, iconWidth, iconHeight);
   imgtextbuttons[1] = new ImgTextButton(getIconContabilidad(), "Contabilidad", 0, segundoIconY, iconWidth, iconHeight);
   imgtextbuttons[2] = new ImgTextButton(getIconArchivo(), "Archivo", 0, tercerIconY, iconWidth, iconHeight);
   imgtextbuttons[3] = new ImgTextButton(getIconAvisos(), "Avisos y alertas", 0, cuartoIconY, iconWidth, iconHeight );
@@ -224,4 +263,20 @@ void initPagedTable() {
 
 void displayPagedTable() {
   pt.display(20+menuWidth, 304, 1280-menuWidth-40, 410);
+}
+
+//calendario
+
+
+// Variable de Calendari
+Calendario cEventos;
+
+String[][] fechasClave = {{"2021-03-15", "CUMPLE"}, {"2021-03-28", "FESTA"}};
+
+void initCalendar(){
+  cEventos = new Calendario(50,100,700,550, fechasClave);
+}
+
+void displayCalendarioEventos(){
+  cEventos.display();
 }

@@ -8,6 +8,7 @@ void inicioSesion() {
   fill(getColorAt(4));
   rect(0, 0, marcoWidth, marcoHeight);
 
+
   fill(getColorAt(3));
   rect(0, 0, marcoWidth, 30);
 
@@ -15,6 +16,9 @@ void inicioSesion() {
 
   popMatrix();
   usuarioInicioSesion();
+  fill(0);
+  textFont(getFontAt(7));
+  text("Inicio de sesión", 328, 177);
   popStyle();
 }
 
@@ -177,4 +181,55 @@ void detalleHermano() {
 
   popMatrix();
   popStyle();
+}
+
+void tituloCarruselFotos() {
+  pushStyle();
+  pushMatrix();
+
+  translate(menuWidth, bannerHeight);
+
+  fill(getColorAt(3));
+  rect(35, 35, 555, 35);
+  textFont(getFontAt(7));
+  fill(0);
+  textAlign(LEFT);
+  text("Bienvenido " + userName + " a tu perfil de la hermandad", 40, 57);
+
+  popStyle();
+  popMatrix();
+}
+
+void cuadroEnlacesRRSS() {
+  pushMatrix();
+  pushStyle();
+  translate(menuWidth, bannerHeight);
+  strokeJoin(ROUND);
+  strokeWeight(2);
+  fill(255);
+  rect(70, 140, 445, 410);
+  fill(getColorAt(3));
+  rect(70, 140, 445, 35);
+  fill(0);
+  textFont(getFontAt(7));
+  text("Redes Sociales", 80, 165);
+  popStyle();
+  popMatrix();
+}
+
+void cuadroEnlacesVarios() {
+  pushMatrix();
+  pushStyle();
+  translate(menuWidth, bannerHeight);
+  strokeJoin(ROUND);
+  strokeWeight(2);
+  fill(255);
+  rect(580, 140, 445, 410);
+  fill(getColorAt(3));
+  rect(580, 140, 445, 35);
+  fill(0);
+  textFont(getFontAt(7));
+  text("Otros enlaces de interés", 590, 165);
+  popStyle();
+  popMatrix();
 }
