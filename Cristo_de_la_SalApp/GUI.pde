@@ -22,7 +22,7 @@ Button bAñadir, bModificar, bAceptar, bFicha, bPrev, bNext, bFacebook, bTwitter
 
 void initButtons() {
   buttons = new Button[18];
-  buttons[0] = new Button("Principal", 1000, (bannerHeight/2)-13.5, 100, 25);
+  buttons[0] = new Button("Principal", 850, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
   buttons[3] = new Button("Modificar", (2*menuWidth)+20, primerIconY+20, 200, 50);

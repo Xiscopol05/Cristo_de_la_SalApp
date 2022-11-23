@@ -75,6 +75,9 @@ void banner() {
   fill(255);
   textFont(getFontAt(3));
   text("Hermandad del Stmo. Cristo de la Sala", 20, 70);
+  image(getIconUser(), 830,(bannerHeight/2)-25, 50,50);
+  textFont(getFontAt(5));
+  text(userName, 890,(bannerHeight/2)+7);
   popStyle();
   popMatrix();
 }
