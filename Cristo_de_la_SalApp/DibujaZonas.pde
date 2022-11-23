@@ -151,14 +151,7 @@ void avisos() {
   popMatrix();
 }
 
-void calendario() {
-  pushStyle();
-  pushMatrix();
-  fill(getColorAt(3));
-  rect(menuWidth+20+((1280-menuWidth)/2), primerIconY+iconHeight+20, ((1280-menuWidth)/2)-35, (iconHeight*3)-50);
-  popStyle();
-  popMatrix();
-}
+
 
 void detalleHermano() {
   pushStyle();

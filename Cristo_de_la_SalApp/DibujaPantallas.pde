@@ -67,13 +67,21 @@ void dibujaPantallaContabilidad() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
+  enableButtonsContabilidad();
 
   //dibujar elementos de la pantalla
   menu();
-  columnaEntera();
+  pushStyle();
+  textFont(getFontAt(1));
+  text("Estado de cuentas: " + estadoDeCuentas+ " €", 250, 700);
+  popStyle();
 
   //display elementos GUI
   displayButtonsMenu();
+  ldIngresos.display();
+  gastos.display();
+  bBalance.display();
+  bPresupuesto.display();
 }
 
 void dibujaPantallaArchivo() {
@@ -109,10 +117,11 @@ void dibujaPantallaAvisos() {
   //dibujar elementos de la pantalla
   menu();
   avisos();
-  calendario();
+
 
   //display elementos GUI
   displayButtonsMenu();
+  displayCalendarioEventos();
 }
 
 void dibujaPantallaEnlaces() {
@@ -175,4 +184,37 @@ void dibujaPantallaCensoNuevoHermano() {
   displayButtonsMenu();
   bAceptar.display();
   bFicha.display();
+}
+
+void dibujaPantallaContabilidadBalance() {
+  //imagen de fondo
+  background(255);
+
+  //habilitar y deshabilitar botones
+  disableButtons();
+  enableButtonsMenu();
+
+  //dibujar elementos de la pantalla
+  menu();
+
+
+  //display elementos GUI
+  displayButtonsMenu();
+}
+
+
+void dibujaPantallaContabilidadPresupuesto() {
+  //imagen de fondo
+  background(255);
+
+  //habilitar y deshabilitar botones
+  disableButtons();
+  enableButtonsMenu();
+
+  //dibujar elementos de la pantalla
+  menu();
+
+
+  //display elementos GUI
+  displayButtonsMenu();
 }

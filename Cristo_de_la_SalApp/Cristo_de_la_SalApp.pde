@@ -1,15 +1,16 @@
 //enumeración de las pantallas de la aplicación
 
 enum PANTALLA {
-  INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO
+  INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO, CONTABILIDAD_BALANCE, CONTABILIDAD_PRESUPUESTO
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.AVISOS;
+PANTALLA pantalla =PANTALLA.CONTABILIDAD;
 
 boolean logged= false;
 
 String userName = "admin";
+float estadoDeCuentas = 27500.50;
 
 
 void setup() {
@@ -52,12 +53,18 @@ void draw() {
   case CENSO_NUEVOHERMANO:
     dibujaPantallaCensoNuevoHermano();
     break;
+  case CONTABILIDAD_BALANCE:
+    dibujaPantallaContabilidadBalance();
+    break;
+  case CONTABILIDAD_PRESUPUESTO:
+    dibujaPantallaContabilidadPresupuesto();
+    break;
   }
   String infoPantalla = pantalla.ordinal()+" ) "+pantalla.name();
   fill(0);
   textFont(getFontAt(4));
   //text(infoPantalla, width/2, height/2);  // Número i nom de la Pantalla
-  text("X= "+mouseX+", Y= "+mouseY, width/2, height/2 +20);
+  //text("X= "+mouseX+", Y= "+mouseY, width/2, height/2 +20);
 
   updateCursor();   // Modifica la apariencia del cursor
 }
@@ -82,21 +89,25 @@ void mousePressed() {
     pantalla = PANTALLA.ENLACES;
   } else if (bPrincipal.mouseOverButton() && bPrincipal.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
+  } else if (bBalance.mouseOverButton() && bBalance.enabled) {
+    pantalla = PANTALLA.CONTABILIDAD_BALANCE;
+  } else if (bPresupuesto.mouseOverButton() && bPresupuesto.enabled) {
+    pantalla = PANTALLA.CONTABILIDAD_PRESUPUESTO;
   } else if (bFacebook.mouseOverButton() && bFacebook.enabled) {
     openWebPage("https://www.facebook.com/stmocristodelasalabargas/");
   } else if (bTwitter.mouseOverButton() && bTwitter.enabled) {
     openWebPage("https://twitter.com/cristo_sala");
-  }else if (bInstagram.mouseOverButton() && bInstagram.enabled) {
+  } else if (bInstagram.mouseOverButton() && bInstagram.enabled) {
     openWebPage("https://www.instagram.com/hermandadcristodelasala/?hl=es");
-  }else if (bYoutube.mouseOverButton() && bYoutube.enabled) {
+  } else if (bYoutube.mouseOverButton() && bYoutube.enabled) {
     openWebPage("https://www.youtube.com/channel/UCri0gUrGJPZ23ZlmgmGa9Yg");
-  }else if (bArzobispado.mouseOverButton() && bArzobispado.enabled) {
+  } else if (bArzobispado.mouseOverButton() && bArzobispado.enabled) {
     openWebPage("https://www.architoledo.org/");
-  }else if (bAyuntamiento.mouseOverButton() && bAyuntamiento.enabled) {
+  } else if (bAyuntamiento.mouseOverButton() && bAyuntamiento.enabled) {
     openWebPage("https://www.bargas.es/");
-  }else if (bWebCofrade.mouseOverButton() && bWebCofrade.enabled) {
+  } else if (bWebCofrade.mouseOverButton() && bWebCofrade.enabled) {
     openWebPage("http://www.semanasantatoledo.com/");
-  }else if (bOtrasHermandades.mouseOverButton() && bOtrasHermandades.enabled) {
+  } else if (bOtrasHermandades.mouseOverButton() && bOtrasHermandades.enabled) {
     openWebPage("https://www.humildadtoledo.com/enlaces-de-interes");
   }
   userText.isPressed();
@@ -133,13 +144,13 @@ void keyPressed() {
   } else if (keyCode==RIGHT) {
     pt.nextPage();
   }
-   // Anar un mes enrere
-  if(keyCode==LEFT){
+  // Anar un mes enrere
+  if (keyCode==LEFT) {
     cEventos.prevMonth();
     println("PREV MONTH");
   }
   // Anar un mes endavant
-  else if(keyCode==RIGHT){
+  else if (keyCode==RIGHT) {
     cEventos.nextMonth();
     println("PREV MONTH");
   }

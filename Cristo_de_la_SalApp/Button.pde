@@ -11,7 +11,7 @@ public class Button {
 
   String textBoton;  // Texto
   boolean enabled;  // Habilitado / deshabilitado
-  
+
   int tf=4; // text font
 
   //Constructor
@@ -32,8 +32,8 @@ public class Button {
   void setEnabled(boolean b) {
     this.enabled = b;
   }
-  
-  void setTextFont(int i){
+
+  void setTextFont(int i) {
     this.tf= i;
   }
 

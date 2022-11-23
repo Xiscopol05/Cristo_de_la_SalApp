@@ -13,9 +13,11 @@ void openWebPage(String siteUrl) {
     } else {
       println("App no suporta el navegador");
     }
-  } catch(URISyntaxException e) {
+  }
+  catch(URISyntaxException e) {
     e.printStackTrace();
-  } catch(IOException e) {
+  }
+  catch(IOException e) {
     e.printStackTrace();
   }
 }

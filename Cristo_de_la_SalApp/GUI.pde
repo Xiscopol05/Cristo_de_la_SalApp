@@ -7,6 +7,9 @@ void setGUI() {
   initTextInfo();
   initImgTextButton();
   initPagedTable();
+  initCalendar();
+  initLinesDiagram();
+  initBarsDiagram();
 }
 
 // Botones
@@ -15,10 +18,10 @@ Button[] buttons;
 Button bInicioSesion, bPrincipal;
 
 // Creación de los botones de la GUI
-Button bAñadir, bModificar, bAceptar, bFicha, bPrev, bNext, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades;
+Button bAñadir, bModificar, bAceptar, bFicha, bPrev, bNext, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto;
 
 void initButtons() {
-  buttons = new Button[16];
+  buttons = new Button[18];
   buttons[0] = new Button("Principal", 1000, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
@@ -35,6 +38,8 @@ void initButtons() {
   buttons[13] = new Button("Ayuntamiento de Bargas", 835, bannerHeight+200+(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
   buttons[14] = new Button("Web Cofrade", 835, bannerHeight+200+2*(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
   buttons[15] = new Button("Otras hermandades", 835, bannerHeight+200+3*(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
+  buttons[16] = new Button("Balance de ingresos y gastos", 825, 200, 400, 50);
+  buttons[17] = new Button("Presupuesto", 825, 275, 400, 50);
 
   bPrincipal = buttons[0];
   bInicioSesion = buttons[1];
@@ -52,6 +57,8 @@ void initButtons() {
   bAyuntamiento= buttons[13];
   bWebCofrade= buttons[14];
   bOtrasHermandades= buttons[15];
+  bBalance = buttons[16];
+  bPresupuesto = buttons[17];
 }
 //Desactivar todos los botones
 void disableButtons() {
@@ -73,6 +80,11 @@ void enableButtonsTabla() {
 void enableButtonsPagedTable() {
   bNext.setEnabled(true);
   bPrev.setEnabled(true);
+}
+
+void enableButtonsContabilidad() {
+  bBalance.setEnabled(true);
+  bPresupuesto.setEnabled(true);
 }
 
 void displayButtonsTabla() {
@@ -239,6 +251,7 @@ void enableButtonsMenu() {
   itbArchivo.setEnabled(true);
   itbAvisos.setEnabled(true);
   itbEnlaces.setEnabled(true);
+  bPrincipal.setEnabled(true);
 }
 
 void displayButtonsMenu() {
@@ -273,10 +286,51 @@ Calendario cEventos;
 
 String[][] fechasClave = {{"2021-03-15", "CUMPLE"}, {"2021-03-28", "FESTA"}};
 
-void initCalendar(){
-  cEventos = new Calendario(50,100,700,550, fechasClave);
+void initCalendar() {
+  cEventos = new Calendario(menuWidth+20+((1280-menuWidth)/2), primerIconY+iconHeight+20, ((1280-menuWidth)/2)-35, (iconHeight*3)-50, fechasClave);
 }
 
-void displayCalendarioEventos(){
+void displayCalendarioEventos() {
   cEventos.display();
+}
+
+//LinesDiagram
+
+LinesDiagram ldIngresos;
+
+// Dades del Diagrama (etiquetes)
+String[] textos  = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+
+// Dades del Diagrama (valors)
+float[] values  = {400, 600, 100, 300, 55, 100, 90, 220, 186, 400, 600, 10 };
+
+// Color de la línia
+color colorLine = color(150, 50, 200);
+
+void initLinesDiagram() {
+  ldIngresos = new LinesDiagram(menuWidth+50, bannerHeight+50, (width/2)-100, (height/2)-100);
+
+  // Configuració de Dades (textos, valors, colors)
+  ldIngresos.setTexts(textos);
+  ldIngresos.setValues(values);
+  ldIngresos.setColors(colorLine);
+}
+
+//BarsDiagram
+
+BarsDiagram gastos;
+
+String[] textosbd = {"WATER", "AIR", "FIRE", "EARTH"};
+float[] valuesbd = {400, 600, 100, 300};
+color[] colorsbd = {color(0, 0, 255), color(50, 50, 200),
+  color(255, 0, 0), color(0, 255, 0)};
+
+void initBarsDiagram() {
+  gastos = new BarsDiagram(840, 420, 400, 300);
+
+  // Configuració de Dades (textos, valors, colors)
+  gastos.setTexts(textosbd);
+  gastos.setValues(valuesbd);
+  gastos.setColors(colorsbd);
 }
