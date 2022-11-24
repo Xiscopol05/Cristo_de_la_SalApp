@@ -46,7 +46,7 @@ class DayButton {
 
   // Dibuixa el botó
   void display() {
-
+pushMatrix();
     pushStyle();
     if (enabled) {
       fill(255);
@@ -75,7 +75,7 @@ class DayButton {
     textAlign(CENTER);
     text(dia, x + w/2, y + h/2 + 10);
 
-
+popMatrix();
     popStyle();
   }
 

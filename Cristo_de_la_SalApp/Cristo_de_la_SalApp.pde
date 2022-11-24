@@ -5,7 +5,7 @@ enum PANTALLA {
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.CONTABILIDAD;
+PANTALLA pantalla =PANTALLA.INICIO;
 
 boolean logged= false;
 
@@ -123,6 +123,11 @@ void updateCursor() {
 
   for (int i=0; i<buttons.length; i++) {
     if (buttons[i].mouseOverButton() && buttons[i].enabled) {
+      mouseOnOneButton = true;
+    }
+  }
+  for (int i=0; i<imgtextbuttons.length; i++) {
+    if (imgtextbuttons[i].mouseOverButton() && imgtextbuttons[i].enabled) {
       mouseOnOneButton = true;
     }
   }

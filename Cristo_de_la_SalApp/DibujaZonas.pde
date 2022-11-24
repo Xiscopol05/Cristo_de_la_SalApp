@@ -65,6 +65,7 @@ void menuBar() {
 void banner() {
   pushStyle();
   pushMatrix();
+  textAlign(LEFT);
   translate(menuWidth, 0);
   fill(getColorAt(1));
   stroke(0);

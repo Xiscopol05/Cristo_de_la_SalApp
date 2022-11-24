@@ -230,7 +230,7 @@ ImgTextButton[] imgtextbuttons;
 ImgTextButton itbCenso, itbContabilidad, itbArchivo, itbAvisos, itbEnlaces;
 
 void initImgTextButton() {
-  imgtextbuttons = new ImgTextButton[6];
+  imgtextbuttons = new ImgTextButton[5];
   imgtextbuttons[0] = new ImgTextButton(getIconCenso(), "Censo", 0, primerIconY, iconWidth, iconHeight);
   imgtextbuttons[1] = new ImgTextButton(getIconContabilidad(), "Contabilidad", 0, segundoIconY, iconWidth, iconHeight);
   imgtextbuttons[2] = new ImgTextButton(getIconArchivo(), "Archivo", 0, tercerIconY, iconWidth, iconHeight);
