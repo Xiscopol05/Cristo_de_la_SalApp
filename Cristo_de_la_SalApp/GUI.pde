@@ -10,6 +10,7 @@ void setGUI() {
   initCalendar();
   initLinesDiagram();
   initBarsDiagram();
+  initShowImage();
 }
 
 // Botones
@@ -136,9 +137,9 @@ float[] colWidths = {10, 20, 40, 10, 20};
 
 // Dades de la taula
 String[][] info = {
-  {"1", "Pere", "Soler Miralles", "33", "Home"},
+  {"1", "Pere", "Soler Miralles De las Mercedes", "33", "Home"},
   {"2", "Maria", "Garcia Lopez", "25", "Dona"},
-  {"3", "Joan", "Melis Cabrer", "47", "Home"},
+  {"3", "Joan Jose Maria", "Melis Cabrer", "47", "Home"},
   {"4", "Bel", "Riera Mates", "52", "Dona"},
   {"5", "Jose", "Perez Galdós", "37", "Home"},
   {"6", "Pere", "Soler Miralles", "33", "Home"},
@@ -152,6 +153,7 @@ String[][] info = {
   {"14", "Bel", "Riera Mates", "52", "Dona"},
   {"15", "Jose", "Perez Galdós", "37", "Home"},
 };
+
 //TextField
 
 // Declaració de les variables
@@ -266,12 +268,14 @@ void displayButtonsMenu() {
 
 PagedTable pt;
 
+int[] maxChars = {10, 10, 20, 10, 10};
 
 void initPagedTable() {
   pt = new PagedTable(files, columnes);
   pt.setHeaders(headers);
   pt.setData(info);
   pt.setColumnWidths(colWidths);
+  pt.setColumnMaxChars(maxChars);
 }
 
 void displayPagedTable() {
@@ -329,8 +333,22 @@ color[] colorsbd = {color(0, 0, 255), color(50, 50, 200),
 void initBarsDiagram() {
   gastos = new BarsDiagram(840, 420, 400, 300);
 
-  // Configuració de Dades (textos, valors, colors)
+  // Configuración de datis (textos, valores, colores)
   gastos.setTexts(textosbd);
   gastos.setValues(valuesbd);
   gastos.setColors(colorsbd);
+}
+
+//ShowImage
+
+ShowImage cristo;
+
+// Nombre de las imágenes
+String[] noms = {"cristo1.jpg", "cristo2.jpeg", "cristo3.jpeg",
+  "cristo4.jpeg"};
+
+void initShowImage() {
+
+  cristo = new ShowImage(35, 70, 515, 575, 3);
+  cristo.setImages(noms);
 }

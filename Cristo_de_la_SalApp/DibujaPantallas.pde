@@ -28,14 +28,15 @@ void dibujaPantallaPrincipal() {
   //dibujar elementos de la pantalla
   menu();
   tituloCarruselFotos();
+  
+  //display elementos GUI
+  displayButtonsMenu();
   pushStyle();
   pushMatrix();
   translate(menuWidth, bannerHeight);
-  image(getImgAt(9), 35, 70, 555, 575); //temporal... añadir carrusel de imagenes con cambio a los 10 segundos
+  cristo.display();
   popStyle();
   popMatrix();
-  //display elementos GUI
-  displayButtonsMenu();
 }
 
 void dibujaPantallaCenso() {

@@ -187,7 +187,7 @@ void tituloCarruselFotos() {
   translate(menuWidth, bannerHeight);
 
   fill(getColorAt(3));
-  rect(35, 35, 555, 35);
+  rect(30, 35, 525, 35);
   textFont(getFontAt(7));
   fill(0);
   textAlign(LEFT);
