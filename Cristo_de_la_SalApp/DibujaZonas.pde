@@ -171,7 +171,7 @@ void detalleHermano() {
   text("Fecha de nacimiento:", 167, 177+12);
   text("Domicilio:", 40, 250+12);
   text("Teléfono:", 40, 311+12);
-  text("Correo electrónico:", 420, 311+12);
+  text("Correo electrónico:", 413, 311+12);
   text("Nombre del banco:", 40, 420+12);
   text("Titular de la cuenta:", 40, 480+12);
   text("Fecha de alta:", 630, 625+12);
@@ -187,7 +187,7 @@ void tituloCarruselFotos() {
   translate(menuWidth, bannerHeight);
 
   fill(getColorAt(3));
-  rect(30, 35, 525, 35);
+  rect(30, 35, 495, 35);
   textFont(getFontAt(7));
   fill(0);
   textAlign(LEFT);

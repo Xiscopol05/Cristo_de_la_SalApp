@@ -59,12 +59,12 @@ pushMatrix();
     if (selected) {
       fill(200, 100, 100);
       noStroke();
-      ellipse(x + w/2, y+h/2, 80, 80);
+      ellipse(x + w/2, y+h/2, 50,50);
     }
     if (selected2) {
       fill(10, 200, 100);
       noStroke();
-      ellipse(x + w/2, y+h/2, 80, 80);
+      ellipse(x + w/2, y+h/2, 50,50);
       fill(200);
       textSize(10);
       textAlign(CENTER);

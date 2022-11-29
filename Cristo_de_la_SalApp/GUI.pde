@@ -19,7 +19,7 @@ Button[] buttons;
 Button bInicioSesion, bPrincipal;
 
 // Creación de los botones de la GUI
-Button bAñadir, bModificar, bAceptar, bFicha, bPrev, bNext, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto;
+Button bAñadir, bModificar, bAceptarCenso, bFicha, bPrev, bNext, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto;
 
 void initButtons() {
   buttons = new Button[18];
@@ -27,7 +27,7 @@ void initButtons() {
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
   buttons[3] = new Button("Modificar", (2*menuWidth)+20, primerIconY+20, 200, 50);
-  buttons[4] = new Button("Aceptar", 641+menuWidth, 20+bannerHeight, 403, 40);
+  buttons[4] = new Button("AceptCensoar", 641+menuWidth, 20+bannerHeight, 403, 40);
   buttons[5] = new Button("Ficha Inscripción", 40+menuWidth, 605+bannerHeight, 574, 60);
   buttons[6] = new Button("PREV", 950, 730, 60, 60);
   buttons[7] = new Button("NEXT", 1050, 730, 60, 60);
@@ -46,7 +46,7 @@ void initButtons() {
   bInicioSesion = buttons[1];
   bAñadir = buttons[2];
   bModificar = buttons[3];
-  bAceptar = buttons[4];
+  bAceptarCenso = buttons[4];
   bFicha = buttons[5];
   bPrev = buttons[6];
   bNext = buttons[7];
@@ -124,35 +124,6 @@ void displayButtonsEnlaces() {
   bOtrasHermandades.display();
 }
 
-//tablas
-
-// Número de files (capçalera inclosa) i columnes de la taula
-int files = 6, columnes = 5;
-
-// Títols de les columnes
-String[] headers = {"Id", "Nom", "Llinatges", "Edat", "Sexe"};
-
-// Amplades de les columnes
-float[] colWidths = {10, 20, 40, 10, 20};
-
-// Dades de la taula
-String[][] info = {
-  {"1", "Pere", "Soler Miralles De las Mercedes", "33", "Home"},
-  {"2", "Maria", "Garcia Lopez", "25", "Dona"},
-  {"3", "Joan Jose Maria", "Melis Cabrer", "47", "Home"},
-  {"4", "Bel", "Riera Mates", "52", "Dona"},
-  {"5", "Jose", "Perez Galdós", "37", "Home"},
-  {"6", "Pere", "Soler Miralles", "33", "Home"},
-  {"7", "Maria", "Garcia Lopez", "25", "Dona"},
-  {"8", "Joan", "Melis Cabrer", "47", "Home"},
-  {"9", "Bel", "Riera Mates", "52", "Dona"},
-  {"10", "Jose", "Perez Galdós", "37", "Home"},
-  {"11", "Pere", "Soler Miralles", "33", "Home"},
-  {"12", "Maria", "Garcia Lopez", "25", "Dona"},
-  {"13", "Joan", "Melis Cabrer", "47", "Home"},
-  {"14", "Bel", "Riera Mates", "52", "Dona"},
-  {"15", "Jose", "Perez Galdós", "37", "Home"},
-};
 
 //TextField
 
@@ -198,8 +169,8 @@ void initTextInfo() {
   IBAN = new TextInfo ("IBAN", 40, 522, 165, 45);
   entidad = new TextInfo ("Entidad", 225, 522, 100, 45);
   oficina = new TextInfo ("Oficina", 341, 522, 100, 45);
-  digitoControl = new TextInfo ("Dígito Control", 460, 522, 222, 45);
-  numeroCuenta = new TextInfo ("Número de cuenta", 697, 522, 337, 45);
+  digitoControl = new TextInfo ("Dígito Control", 460, 522, 202, 45);
+  numeroCuenta = new TextInfo ("Número de cuenta", 677, 522, 357, 45);
 }
 
 
@@ -266,20 +237,58 @@ void displayButtonsMenu() {
 
 //PagedTable
 
-PagedTable pt;
+PagedTable ptCenso, ptBalanceIngresos;
 
-int[] maxChars = {10, 10, 20, 10, 10};
+int filasCenso = 6, columnasCenso = 3;
+int filasBalanceIngresos = 4, columnasBalanceIngresos=4;
+
+String[] headersCenso = {"Id", "Nom", "Llinatges", "Edat", "Sexe"};
+String[] headersBalance = {"Código", "Concepto", "Cantidad"};
+
+
+float[] colWidthsCenso = {10, 20, 40, 10, 20};
+float[] colWidthsBalance = {20,50,30};
+
+int[] maxCharsCenso = {10, 10, 20, 10, 10};
+int[] maxCharsBalance = {10,30,15};
+
+
+// Dades de la taula
+String[][] infoCenso = {
+  {"1", "Pere", "Soler Miralles De las Mercedes", "33", "Home"},
+  {"2", "Maria", "Garcia Lopez", "25", "Dona"},
+  {"3", "Joan Jose Maria", "Melis Cabrer", "47", "Home"},
+  {"4", "Bel", "Riera Mates", "52", "Dona"},
+  {"5", "Jose", "Perez Galdós", "37", "Home"},
+  {"6", "Pere", "Soler Miralles", "33", "Home"},
+  {"7", "Maria", "Garcia Lopez", "25", "Dona"},
+  {"8", "Joan", "Melis Cabrer", "47", "Home"},
+  {"9", "Bel", "Riera Mates", "52", "Dona"},
+  {"10", "Jose", "Perez Galdós", "37", "Home"},
+  {"11", "Pere", "Soler Miralles", "33", "Home"},
+  {"12", "Maria", "Garcia Lopez", "25", "Dona"},
+  {"13", "Joan", "Melis Cabrer", "47", "Home"},
+  {"14", "Bel", "Riera Mates", "52", "Dona"},
+  {"15", "Jose", "Perez Galdós", "37", "Home"},
+};
+String[][] infoBalanceIngresos = {
+  {"I.1", "Donativos", "3907,35€"},
+   {"I.1", "Cuotas hermanos", "3907,35€"},
+   {"I.1", "Subvención ayuntamiento", "3907,35€"},
+};
+
+
 
 void initPagedTable() {
-  pt = new PagedTable(files, columnes);
-  pt.setHeaders(headers);
-  pt.setData(info);
-  pt.setColumnWidths(colWidths);
-  pt.setColumnMaxChars(maxChars);
+  ptCenso = new PagedTable(filasCenso, columnasCenso);
+  ptCenso.setHeaders(headersCenso);
+  ptCenso.setData(infoCenso);
+  ptCenso.setColumnWidths(colWidthsCenso);
+  ptCenso.setColumnMaxChars(maxCharsCenso);
 }
 
 void displayPagedTable() {
-  pt.display(20+menuWidth, 304, 1280-menuWidth-40, 410);
+  ptCenso.display(20+menuWidth, 304, 1280-menuWidth-40, 410);
 }
 
 //calendario
@@ -349,6 +358,6 @@ String[] noms = {"cristo1.jpg", "cristo2.jpeg", "cristo3.jpeg",
 
 void initShowImage() {
 
-  cristo = new ShowImage(35, 70, 515, 575, 3);
+  cristo = new ShowImage(35, 70, 485, 575, 3);
   cristo.setImages(noms);
 }

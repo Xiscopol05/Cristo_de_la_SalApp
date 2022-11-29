@@ -26,7 +26,7 @@ class TextInfo {
     rect(x, y, w, h);
     textFont(getFontAt(5));
     fill(0);
-    text(this.text, x + 5, y + 25);
+    text(this.text, x + 5, y + 30);
     popStyle();
     popMatrix();
   }

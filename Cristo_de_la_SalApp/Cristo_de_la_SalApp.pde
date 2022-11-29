@@ -72,9 +72,9 @@ void draw() {
 // En caso de apretar el ratón
 void mousePressed() {
   if (bNext.mouseOverButton() && bNext.enabled) {
-    pt.nextPage();
+    ptCenso.nextPage();
   } else if (bPrev.mouseOverButton() && bPrev.enabled) {
-    pt.prevPage();
+    ptCenso.prevPage();
   } else if (bInicioSesion.mouseOverButton() && bInicioSesion.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
   } else if (itbCenso.mouseOverButton() && itbCenso.enabled) {
@@ -145,9 +145,9 @@ void keyPressed() {
   buscar.keyPressed(key, (int)keyCode);
   comprovaLogin();
   if (keyCode==LEFT) {
-    pt.prevPage();
+    ptCenso.prevPage();
   } else if (keyCode==RIGHT) {
-    pt.nextPage();
+    ptCenso.nextPage();
   }
   // Anar un mes enrere
   if (keyCode==LEFT) {

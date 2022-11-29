@@ -28,6 +28,8 @@ void dibujaPantallaPrincipal() {
   //dibujar elementos de la pantalla
   menu();
   tituloCarruselFotos();
+  fila1();
+  fila2();
   
   //display elementos GUI
   displayButtonsMenu();
@@ -152,7 +154,7 @@ void dibujaPantallaCensoDetalle() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
-  bAceptar.setEnabled(true);
+  bAceptarCenso.setEnabled(true);
   bFicha.setEnabled(true);
 
 
@@ -163,7 +165,7 @@ void dibujaPantallaCensoDetalle() {
   //display elementos GUI
   displayButtonsMenu();
   detalleHermano();
-  bAceptar.display();
+  bAceptarCenso.display();
   bFicha.display();
 }
 
@@ -174,7 +176,7 @@ void dibujaPantallaCensoNuevoHermano() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
-  bAceptar.setEnabled(true);
+  bAceptarCenso.setEnabled(true);
   bFicha.setEnabled(true);
 
   //dibujar elementos de la pantalla
@@ -183,7 +185,7 @@ void dibujaPantallaCensoNuevoHermano() {
 
   //display elementos GUI
   displayButtonsMenu();
-  bAceptar.display();
+  bAceptarCenso.display();
   bFicha.display();
 }
 
