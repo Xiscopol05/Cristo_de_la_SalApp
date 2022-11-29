@@ -27,6 +27,13 @@ class TextField {
     this.h = h;
   }
 
+  TextField(String t, int x, int y, int w, int h) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.text=t;
+  }
   void setText(String t) {
     this.text = t;
   }

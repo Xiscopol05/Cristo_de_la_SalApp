@@ -181,12 +181,14 @@ void dibujaPantallaCensoNuevoHermano() {
 
   //dibujar elementos de la pantalla
   menu();
-  detalleHermano();
 
   //display elementos GUI
   displayButtonsMenu();
   bAceptarCenso.display();
   bFicha.display();
+  nuevoHermano();
+  displayNuevoHermano();
+
 }
 
 void dibujaPantallaContabilidadBalance() {
@@ -203,6 +205,10 @@ void dibujaPantallaContabilidadBalance() {
 
   //display elementos GUI
   displayButtonsMenu();
+  titIngresos.display();
+  titGastos.display();
+  balanceIngresos.display(250,210,755,240);
+  ptGastos.display(250,510,755,240);
 }
 
 

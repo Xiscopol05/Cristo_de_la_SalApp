@@ -1,10 +1,10 @@
-class TextInfo {
+class Titulo {
 
   float x, y, w, h;
   String text;
-  int c = 5;
+  
 
-  TextInfo(String t, float x, float y, float w, float h) {
+  Titulo(String t, float x, float y, float w, float h) {
 
     this.text = t;
     this.x = x;
@@ -13,16 +13,13 @@ class TextInfo {
     this.h = h;
   }
 
-  void setColor(int c) {
-    this.c = c;
-  }
 
   void display() {
     pushStyle();
     pushMatrix();
     stroke(0);
     strokeWeight(2);
-    fill(getColorAt(c));
+    fill(getColorAt(4));
     rect(x, y, w, h);
     textFont(getFontAt(5));
     fill(0);

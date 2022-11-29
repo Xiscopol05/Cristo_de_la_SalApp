@@ -175,6 +175,30 @@ void detalleHermano() {
   text("Nombre del banco:", 40, 420+12);
   text("Titular de la cuenta:", 40, 480+12);
   text("Fecha de alta:", 630, 625+12);
+  displayNuevoHermano();
+
+  popMatrix();
+  popStyle();
+}
+
+void nuevoHermano() {
+  pushStyle();
+  pushMatrix();
+
+  translate(menuWidth, bannerHeight);
+
+  strokeWeight(3);
+  line(50, 375, 1035, 375);
+  image(getImgAt(8), 33, 75, 118, 135);
+  textFont(getFontAt(6));
+  text("Fecha de nacimiento:", 167, 177+12);
+  text("Domicilio:", 40, 250+12);
+  text("Teléfono:", 40, 311+12);
+  text("Correo electrónico:", 413, 311+12);
+  text("Nombre del banco:", 40, 420+12);
+  text("Titular de la cuenta:", 40, 480+12);
+  text("Fecha de alta:", 630, 625+12);
+  titulo.display();
 
   popMatrix();
   popStyle();
@@ -192,7 +216,7 @@ void tituloCarruselFotos() {
   fill(0);
   textAlign(LEFT);
   text("Bienvenido " + userName + " a tu perfil de la hermandad", 40, 57);
-
+  
   popStyle();
   popMatrix();
 }

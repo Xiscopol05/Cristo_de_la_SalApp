@@ -5,7 +5,7 @@ enum PANTALLA {
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.PRINCIPAL;
+PANTALLA pantalla =PANTALLA.CONTABILIDAD_BALANCE;
 
 boolean logged= false;
 
@@ -71,9 +71,9 @@ void draw() {
 
 // En caso de apretar el ratón
 void mousePressed() {
-  if (bNext.mouseOverButton() && bNext.enabled) {
+  if (bNextCenso.mouseOverButton() && bNextCenso.enabled) {
     ptCenso.nextPage();
-  } else if (bPrev.mouseOverButton() && bPrev.enabled) {
+  } else if (bPrevCenso.mouseOverButton() && bPrevCenso.enabled) {
     ptCenso.prevPage();
   } else if (bInicioSesion.mouseOverButton() && bInicioSesion.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
@@ -109,10 +109,30 @@ void mousePressed() {
     openWebPage("http://www.semanasantatoledo.com/");
   } else if (bOtrasHermandades.mouseOverButton() && bOtrasHermandades.enabled) {
     openWebPage("https://www.humildadtoledo.com/enlaces-de-interes");
+  } else if (bAñadir.mouseOverButton() && bAñadir.enabled && pantalla == PANTALLA.CENSO) {
+    pantalla = PANTALLA.CENSO_NUEVOHERMANO;
   }
   userText.isPressed();
   passText.isPressed();
   buscar.isPressed();
+  tfNombre.isPressed();
+  tfApellidos.isPressed();
+  tfDNI.isPressed();
+  tfCalle.isPressed();
+  tfNumero.isPressed();
+  tfPiso.isPressed();
+  tfLocalidad.isPressed();
+  tfProvincia.isPressed();
+  tfTelefono.isPressed();
+  tfCorreoElectronico.isPressed();
+  tfBanco.isPressed();
+  tfTitular.isPressed();
+  tfDNITitular.isPressed();
+  tfIBAN.isPressed();
+  tfEntidad.isPressed();
+  tfOficina.isPressed();
+  tfDigitoControl.isPressed();
+  tfNumeroCuenta.isPressed();
   cEventos.checkButtons();
 }
 
@@ -143,6 +163,24 @@ void keyPressed() {
   userText.keyPressed(key, (int)keyCode);
   passText.keyPressed(key, (int)keyCode);
   buscar.keyPressed(key, (int)keyCode);
+  tfNombre.keyPressed(key, (int)keyCode);
+  tfApellidos.keyPressed(key, (int)keyCode);
+  tfDNI.keyPressed(key, (int)keyCode);
+  tfCalle.keyPressed(key, (int)keyCode);
+  tfNumero.keyPressed(key, (int)keyCode);
+  tfPiso.keyPressed(key, (int)keyCode);
+  tfLocalidad.keyPressed(key, (int)keyCode);
+  tfProvincia.keyPressed(key, (int)keyCode);
+  tfTelefono.keyPressed(key, (int)keyCode);
+  tfCorreoElectronico.keyPressed(key, (int)keyCode);
+  tfBanco.keyPressed(key, (int)keyCode);
+  tfTitular.keyPressed(key, (int)keyCode);
+  tfDNITitular.keyPressed(key, (int)keyCode);
+  tfIBAN.keyPressed(key, (int)keyCode);
+  tfEntidad.keyPressed(key, (int)keyCode);
+  tfOficina.keyPressed(key, (int)keyCode);
+  tfDigitoControl.keyPressed(key, (int)keyCode);
+  tfNumeroCuenta.keyPressed(key, (int)keyCode);
   comprovaLogin();
   if (keyCode==LEFT) {
     ptCenso.prevPage();

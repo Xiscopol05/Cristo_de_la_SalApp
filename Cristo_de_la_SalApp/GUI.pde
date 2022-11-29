@@ -11,6 +11,8 @@ void setGUI() {
   initLinesDiagram();
   initBarsDiagram();
   initShowImage();
+  initTable();
+  initTitulo();
 }
 
 // Botones
@@ -19,7 +21,7 @@ Button[] buttons;
 Button bInicioSesion, bPrincipal;
 
 // Creación de los botones de la GUI
-Button bAñadir, bModificar, bAceptarCenso, bFicha, bPrev, bNext, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto;
+Button bAñadir, bModificar, bAceptarCenso, bFicha, bPrevCenso, bNextCenso, bPrevGastos, bNextGastos, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto;
 
 void initButtons() {
   buttons = new Button[18];
@@ -27,7 +29,7 @@ void initButtons() {
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
   buttons[3] = new Button("Modificar", (2*menuWidth)+20, primerIconY+20, 200, 50);
-  buttons[4] = new Button("AceptCensoar", 641+menuWidth, 20+bannerHeight, 403, 40);
+  buttons[4] = new Button("Aceptar", 641+menuWidth, 20+bannerHeight, 403, 40);
   buttons[5] = new Button("Ficha Inscripción", 40+menuWidth, 605+bannerHeight, 574, 60);
   buttons[6] = new Button("PREV", 950, 730, 60, 60);
   buttons[7] = new Button("NEXT", 1050, 730, 60, 60);
@@ -41,6 +43,8 @@ void initButtons() {
   buttons[15] = new Button("Otras hermandades", 835, bannerHeight+200+3*(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
   buttons[16] = new Button("Balance de ingresos y gastos", 825, 200, 400, 50);
   buttons[17] = new Button("Presupuesto", 825, 275, 400, 50);
+  buttons[18] = new Button("PREV", 950, 730, 60, 60);
+  buttons[19] = new Button("NEXT", 1050, 730, 60, 60);
 
   bPrincipal = buttons[0];
   bInicioSesion = buttons[1];
@@ -48,8 +52,8 @@ void initButtons() {
   bModificar = buttons[3];
   bAceptarCenso = buttons[4];
   bFicha = buttons[5];
-  bPrev = buttons[6];
-  bNext = buttons[7];
+  bPrevCenso = buttons[6];
+  bNextCenso = buttons[7];
   bFacebook = buttons[8];
   bTwitter =buttons[9];
   bInstagram= buttons[10];
@@ -60,6 +64,8 @@ void initButtons() {
   bOtrasHermandades= buttons[15];
   bBalance = buttons[16];
   bPresupuesto = buttons[17];
+  bPrevGastos = buttons[18];
+  bNextGastos = buttons[19];
 }
 //Desactivar todos los botones
 void disableButtons() {
@@ -130,6 +136,8 @@ void displayButtonsEnlaces() {
 // Declaració de les variables
 TextField userText, passText;
 TextField buscar;
+TextField tfNombre, tfApellidos, tfDNI, tfCalle, tfNumero, tfPiso, tfLocalidad, tfProvincia, tfTelefono, tfCorreoElectronico;
+TextField tfBanco, tfTitular, tfDNITitular, tfIBAN, tfEntidad, tfOficina, tfDigitoControl, tfNumeroCuenta;
 
 void initTextField() {
   userText = new TextField((marcoWidth/2)-(marcoCuentaWidth/2)+20+inicioSesionX, (marcoHeight/2)-(marcoCuentaHeight/2)+130+inicioSesionY, 350, 35);
@@ -138,11 +146,50 @@ void initTextField() {
   buscar.setText("BUSCAR");
   userText.setText("usuario");
   passText.setText("contraseña");
+  tfNombre = new TextField ("Nombre", 170+menuWidth, 95+bannerHeight, 305, 45);
+  tfApellidos = new TextField ("Apellidos", 500+menuWidth, 95+bannerHeight, 535, 45);
+  tfDNI = new TextField ("DNI", 695+menuWidth, 165+bannerHeight, 340, 45);
+  tfCalle = new TextField ("Calle", 148+menuWidth, 235+bannerHeight, 147, 45);
+  tfNumero = new TextField ("Nº", 313+menuWidth, 235+bannerHeight, 89, 45);
+  tfPiso = new TextField ("Piso", 417+menuWidth, 235+bannerHeight, 89, 45);
+  tfLocalidad = new TextField ("Localidad", 521+menuWidth, 235+bannerHeight, 198, 45);
+  tfProvincia = new TextField ("Provincia", 735+menuWidth, 235+bannerHeight, 301, 45);
+  tfTelefono = new TextField ("Teléfono", 148+menuWidth, 297+bannerHeight, 255, 45);
+  tfCorreoElectronico = new TextField ("Correo Electrónico", 615+menuWidth, 297+bannerHeight, 420, 45);
+  tfBanco = new TextField ("Banco", 235+menuWidth, 405+bannerHeight, 800, 45);
+  tfTitular= new TextField ("Titular", 235+menuWidth, 462+bannerHeight, 380, 45);
+  tfDNITitular = new TextField ("DNI del titular", 649+menuWidth, 462+bannerHeight, 386, 45);
+  tfIBAN = new TextField ("IBAN", 40+menuWidth, 522+bannerHeight, 165, 45);
+  tfEntidad = new TextField ("Entidad", 225+menuWidth, 522+bannerHeight, 100, 45);
+  tfOficina = new TextField ("Oficina", 341+menuWidth, 522+bannerHeight, 100, 45);
+  tfDigitoControl = new TextField ("Dígito Control", 460+menuWidth, 522+bannerHeight, 202, 45);
+  tfNumeroCuenta = new TextField ("Número de cuenta", 677+menuWidth, 522+bannerHeight, 357, 45);
 }
 
 void displayInicioSesiontf() {
   userText.display();
   passText.display();
+}
+
+void displayNuevoHermano() {
+  tfNombre.display();
+  tfApellidos.display();
+  tfDNI.display();
+  tfCalle.display();
+  tfNumero.display();
+  tfPiso.display();
+  tfLocalidad.display();
+  tfProvincia.display();
+  tfTelefono.display();
+  tfCorreoElectronico.display();
+  tfBanco.display();
+  tfTitular.display();
+  tfDNITitular.display();
+  tfIBAN.display();
+  tfEntidad.display();
+  tfOficina.display();
+  tfDigitoControl.display();
+  tfNumeroCuenta.display();
 }
 
 //TextInfo
@@ -237,21 +284,15 @@ void displayButtonsMenu() {
 
 //PagedTable
 
-PagedTable ptCenso, ptBalanceIngresos;
+PagedTable ptCenso, ptGastos;
 
-int filasCenso = 6, columnasCenso = 3;
-int filasBalanceIngresos = 4, columnasBalanceIngresos=4;
+int filasCenso = 6, columnasCenso = 5;
 
 String[] headersCenso = {"Id", "Nom", "Llinatges", "Edat", "Sexe"};
-String[] headersBalance = {"Código", "Concepto", "Cantidad"};
-
 
 float[] colWidthsCenso = {10, 20, 40, 10, 20};
-float[] colWidthsBalance = {20,50,30};
 
 int[] maxCharsCenso = {10, 10, 20, 10, 10};
-int[] maxCharsBalance = {10,30,15};
-
 
 // Dades de la taula
 String[][] infoCenso = {
@@ -271,15 +312,43 @@ String[][] infoCenso = {
   {"14", "Bel", "Riera Mates", "52", "Dona"},
   {"15", "Jose", "Perez Galdós", "37", "Home"},
 };
-String[][] infoBalanceIngresos = {
-  {"I.1", "Donativos", "3907,35€"},
-   {"I.1", "Cuotas hermanos", "3907,35€"},
-   {"I.1", "Subvención ayuntamiento", "3907,35€"},
+
+int filasGastos = 4, columnasGastos = 3;
+
+String[] headersGastos = {"Id", "Nom", "Llinatges", "Edat", "Sexe"};
+
+float[] colWidthsGastos = {20, 50, 30};
+
+int[] maxCharsGastos = {10, 30, 15};
+
+// Dades de la taula
+String[][] infoGastos = {
+  {"G.1", "Servicios y mantenimiento ermita", "1200.00€"},
+  {"G.2", "Aportación radio Santa Maria", "1200.00€"},
+  {"G.3", "Caridad", "1200.00€"},
+  {"G.4", "Misas hermanos difuntos", "1200.00€"},
+  {"G.5", "Mantenimiento y adquisición patrimonio", "1200.00€"},
+  {"G.6", "Fuegos artificiales", "1200.00€"},
+  {"G.7", "Bandas de música y coros", "1200.00€"},
+  {"G.8", "Flores", "1200.00€"},
+  {"G.9", "Programa de fiestas y más imprenta", "1200.00€"},
+  {"G.10", "Carne cena de hermandad", "1200.00€"},
+  {"G.11", "Luz y sonido miserere", "1200.00€"},
+  {"G.12", "Limonada y migas", "1200.00€"},
+  {"G.13", "Gastos para organización de otros actos", "1200.00€"},
+  {"G.14", "Premio carrozas y colaboraciones civiles", "1200.00€"},
+  {"G.15", "Gastos Bancarios", "1200.00€"},
+  {"G.16", "Alojamineto página web", "1200.00€"},
+  {"G.17", "Varios y gastos extraordinarios", "1200.00€"},
+  {"G.18", "Adquisición artículos devoción", "1200.00€"},
 };
 
-
-
 void initPagedTable() {
+  ptGastos = new PagedTable(filasGastos, columnasGastos);
+  ptGastos.setHeaders(headersGastos);
+  ptGastos.setData(infoGastos);
+  ptGastos.setColumnWidths(colWidthsGastos);
+  ptGastos.setColumnMaxChars(maxCharsGastos);
   ptCenso = new PagedTable(filasCenso, columnasCenso);
   ptCenso.setHeaders(headersCenso);
   ptCenso.setData(infoCenso);
@@ -360,4 +429,38 @@ void initShowImage() {
 
   cristo = new ShowImage(35, 70, 485, 575, 3);
   cristo.setImages(noms);
+}
+
+//Table
+
+Table balanceIngresos;
+
+int filasBalanceIngresos = 4, columnasBalanceIngresos=3;
+
+String[] headersBalance = {"Código", "Concepto", "Cantidad"};
+
+// Amplades de les columnes
+float[] colWidthsBalance = {20, 50, 30};
+
+// Dades de la taula
+String[][] infoBalanceIngresos = {
+  {"I.1", "Donativos", "3907,35€"},
+  {"I.1", "Cuotas hermanos", "3907,35€"},
+  {"I.1", "Subvención ayuntamiento", "3907,35€"},
+};
+
+void initTable() {
+  balanceIngresos = new Table(filasBalanceIngresos, columnasBalanceIngresos);
+  balanceIngresos.setHeaders(headersBalance);
+  balanceIngresos.setData(infoBalanceIngresos);
+  balanceIngresos.setColumnWidths(colWidthsBalance);
+}
+
+//Titulo
+
+Titulo titIngresos, titGastos;
+
+void initTitulo() {
+  titIngresos = new Titulo("Ingresos", 250, 170, 755, 40);
+  titGastos = new Titulo("Gastos", 250, 470, 755, 40);
 }
