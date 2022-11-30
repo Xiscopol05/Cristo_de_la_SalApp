@@ -19,7 +19,7 @@ class Titulo {
     pushMatrix();
     stroke(0);
     strokeWeight(2);
-    fill(getColorAt(4));
+    fill(getColorAt(3));
     rect(x, y, w, h);
     textFont(getFontAt(5));
     fill(0);

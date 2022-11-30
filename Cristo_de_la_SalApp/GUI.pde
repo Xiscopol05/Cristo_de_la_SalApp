@@ -13,6 +13,7 @@ void setGUI() {
   initShowImage();
   initTable();
   initTitulo();
+  initSelect();
 }
 
 // Botones
@@ -21,18 +22,18 @@ Button[] buttons;
 Button bInicioSesion, bPrincipal;
 
 // Creación de los botones de la GUI
-Button bAñadir, bModificar, bAceptarCenso, bFicha, bPrevCenso, bNextCenso, bPrevGastos, bNextGastos, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto;
-
+Button bAñadir, bModificar, bAceptarCenso, bFicha, bPrevCenso, bNextCenso, bPrevGastos, bNextGastos, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto, bAñadirConcepto;
+Button bAceptarConcepto;
 void initButtons() {
-  buttons = new Button[18];
+  buttons = new Button[22];
   buttons[0] = new Button("Principal", 850, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
   buttons[3] = new Button("Modificar", (2*menuWidth)+20, primerIconY+20, 200, 50);
   buttons[4] = new Button("Aceptar", 641+menuWidth, 20+bannerHeight, 403, 40);
   buttons[5] = new Button("Ficha Inscripción", 40+menuWidth, 605+bannerHeight, 574, 60);
-  buttons[6] = new Button("PREV", 950, 730, 60, 60);
-  buttons[7] = new Button("NEXT", 1050, 730, 60, 60);
+  buttons[6] = new Button("PREV", 950, 715, 60, 60);
+  buttons[7] = new Button("NEXT", 1050, 715, 60, 60);
   buttons[8] = new Button("Facebook", 325, bannerHeight+200, buttonEnlaceW, buttonEnlaceH);
   buttons[9] = new Button("Twitter", 325, bannerHeight+200+(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
   buttons[10] = new Button("Instagram", 325, bannerHeight+200+2*(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
@@ -43,8 +44,10 @@ void initButtons() {
   buttons[15] = new Button("Otras hermandades", 835, bannerHeight+200+3*(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
   buttons[16] = new Button("Balance de ingresos y gastos", 825, 200, 400, 50);
   buttons[17] = new Button("Presupuesto", 825, 275, 400, 50);
-  buttons[18] = new Button("PREV", 950, 730, 60, 60);
-  buttons[19] = new Button("NEXT", 1050, 730, 60, 60);
+  buttons[18] = new Button("PREV", 1080, 680, 150, 30);
+  buttons[19] = new Button("NEXT", 1080, 720, 150, 30);
+  buttons[20] = new Button("Añadir concepto", 1080, 170, 150, 40);
+  buttons[21] = new Button("Aceptar", 645+menuWidth, 175+bannerHeight, 405, 40);
 
   bPrincipal = buttons[0];
   bInicioSesion = buttons[1];
@@ -66,6 +69,8 @@ void initButtons() {
   bPresupuesto = buttons[17];
   bPrevGastos = buttons[18];
   bNextGastos = buttons[19];
+  bAñadirConcepto = buttons[20];
+  bAceptarConcepto = buttons[21];
 }
 //Desactivar todos los botones
 void disableButtons() {
@@ -85,8 +90,8 @@ void enableButtonsTabla() {
 }
 
 void enableButtonsPagedTable() {
-  bNext.setEnabled(true);
-  bPrev.setEnabled(true);
+  bNextCenso.setEnabled(true);
+  bPrevCenso.setEnabled(true);
 }
 
 void enableButtonsContabilidad() {
@@ -101,8 +106,8 @@ void displayButtonsTabla() {
 
 // Dibuixa els botons
 void displayButtonsPagedTable() {
-  bNext.display();
-  bPrev.display();
+  bNextCenso.display();
+  bPrevCenso.display();
 }
 
 void enableButtonsEnlaces() {
@@ -138,6 +143,7 @@ TextField userText, passText;
 TextField buscar;
 TextField tfNombre, tfApellidos, tfDNI, tfCalle, tfNumero, tfPiso, tfLocalidad, tfProvincia, tfTelefono, tfCorreoElectronico;
 TextField tfBanco, tfTitular, tfDNITitular, tfIBAN, tfEntidad, tfOficina, tfDigitoControl, tfNumeroCuenta;
+TextField tfTitulo, tfCantidad;
 
 void initTextField() {
   userText = new TextField((marcoWidth/2)-(marcoCuentaWidth/2)+20+inicioSesionX, (marcoHeight/2)-(marcoCuentaHeight/2)+130+inicioSesionY, 350, 35);
@@ -164,6 +170,8 @@ void initTextField() {
   tfOficina = new TextField ("Oficina", 341+menuWidth, 522+bannerHeight, 100, 45);
   tfDigitoControl = new TextField ("Dígito Control", 460+menuWidth, 522+bannerHeight, 202, 45);
   tfNumeroCuenta = new TextField ("Número de cuenta", 677+menuWidth, 522+bannerHeight, 357, 45);
+  tfTitulo = new TextField ("Titulo", 230, 350, 1020, 40);
+  tfCantidad = new TextField ("Cantidad", 780, 490, 465, 40);
 }
 
 void displayInicioSesiontf() {
@@ -193,13 +201,11 @@ void displayNuevoHermano() {
 }
 
 //TextInfo
-
-TextInfo titulo;
 TextInfo nombre, apellidos, DNI, calle, numero, piso, localidad, provincia, telefono, correoElectronico;
 TextInfo banco, titular, DNITitular, IBAN, entidad, oficina, digitoControl, numeroCuenta;
 
 void initTextInfo() {
-  titulo = new TextInfo ("Detalle personal", 20, 25, 605, 35);
+
   nombre = new TextInfo ("Nombre", 170, 95, 305, 45);
   apellidos = new TextInfo ("Apellidos", 500, 95, 535, 45);
   DNI = new TextInfo ("DNI", 695, 165, 340, 45);
@@ -222,8 +228,6 @@ void initTextInfo() {
 
 
 void displayDetalleHermano() {
-  titulo.setColor(3);
-  titulo.display();
   nombre.display();
   apellidos.display();
   DNI.display();
@@ -284,11 +288,11 @@ void displayButtonsMenu() {
 
 //PagedTable
 
-PagedTable ptCenso, ptGastos;
+PagedTable ptCenso, ptGastos, ptGastosPresupuesto;
 
 int filasCenso = 6, columnasCenso = 5;
 
-String[] headersCenso = {"Id", "Nom", "Llinatges", "Edat", "Sexe"};
+String[] headersCenso = {"Nº", "Nombre", "Apellidos", "Alta", "Estado de cobro"};
 
 float[] colWidthsCenso = {10, 20, 40, 10, 20};
 
@@ -315,11 +319,11 @@ String[][] infoCenso = {
 
 int filasGastos = 4, columnasGastos = 3;
 
-String[] headersGastos = {"Id", "Nom", "Llinatges", "Edat", "Sexe"};
+String[] headersGastos = {"Código", "Concepto", "Cantidad"};
 
 float[] colWidthsGastos = {20, 50, 30};
 
-int[] maxCharsGastos = {10, 30, 15};
+int[] maxCharsGastos = {10, 35, 15};
 
 // Dades de la taula
 String[][] infoGastos = {
@@ -343,6 +347,26 @@ String[][] infoGastos = {
   {"G.18", "Adquisición artículos devoción", "1200.00€"},
 };
 
+String[][] infoGastosPresupuesto = {
+  {"G.1", "Servicios y mantenimiento ermita", "1200.00€"},
+  {"G.2", "Aportación radio Santa Maria", "1200.00€"},
+  {"G.3", "Caridad", "1200.00€"},
+  {"G.4", "Misas hermanos difuntos", "1200.00€"},
+  {"G.5", "Mantenimiento y adquisición patrimonio", "1200.00€"},
+  {"G.6", "Fuegos artificiales", "1200.00€"},
+  {"G.7", "Bandas de música y coros", "1200.00€"},
+  {"G.8", "Flores", "1200.00€"},
+  {"G.9", "Programa de fiestas y más imprenta", "1200.00€"},
+  {"G.10", "Carne cena de hermandad", "1200.00€"},
+  {"G.11", "Luz y sonido miserere", "1200.00€"},
+  {"G.12", "Limonada y migas", "1200.00€"},
+  {"G.13", "Gastos para organización de otros actos", "1200.00€"},
+  {"G.14", "Premio carrozas y colaboraciones civiles", "1200.00€"},
+  {"G.15", "Gastos Bancarios", "1200.00€"},
+  {"G.16", "Alojamineto página web", "1200.00€"},
+  {"G.17", "Varios y gastos extraordinarios", "1200.00€"},
+  {"G.18", "Adquisición artículos devoción", "1200.00€"},
+};
 void initPagedTable() {
   ptGastos = new PagedTable(filasGastos, columnasGastos);
   ptGastos.setHeaders(headersGastos);
@@ -354,10 +378,11 @@ void initPagedTable() {
   ptCenso.setData(infoCenso);
   ptCenso.setColumnWidths(colWidthsCenso);
   ptCenso.setColumnMaxChars(maxCharsCenso);
-}
-
-void displayPagedTable() {
-  ptCenso.display(20+menuWidth, 304, 1280-menuWidth-40, 410);
+  ptGastosPresupuesto = new PagedTable(filasGastos, columnasGastos);
+  ptGastosPresupuesto.setHeaders(headersGastos);
+  ptGastosPresupuesto.setData(infoGastosPresupuesto);
+  ptGastosPresupuesto.setColumnWidths(colWidthsGastos);
+  ptGastosPresupuesto.setColumnMaxChars(maxCharsGastos);
 }
 
 //calendario
@@ -458,9 +483,26 @@ void initTable() {
 
 //Titulo
 
-Titulo titIngresos, titGastos;
+Titulo titIngresos, titGastos, titConcepto, titDetallePersonal;
 
 void initTitulo() {
-  titIngresos = new Titulo("Ingresos", 250, 170, 755, 40);
-  titGastos = new Titulo("Gastos", 250, 470, 755, 40);
+  titIngresos = new Titulo("Ingresos", 250, 170, 800, 40);
+  titGastos = new Titulo("Gastos", 250, 470, 800, 40);
+  titConcepto = new Titulo ("Concepto", 230, 275, 610, 40);
+  titDetallePersonal = new Titulo ("Detalle personal", 20, 25, 605, 35);
+}
+
+//Select
+
+Select sTipoConcepto;
+
+
+String[] selectValuesConcepto = {"I.1", "I.2", "I.3", "G.1", "G.2", "G.3", "G.4", "G.5", "G.6", "G.7", "G.8", "G.9", "G.10", "G.11", "G.12", "G.13", "G.14", "G.15", "G.16", "G.17", "G.18", };
+
+// Dimensions dels botons
+float selectConceptoW = 465;
+float selectConceptoH = 40;
+
+void initSelect() {
+  sTipoConcepto = new Select(selectValuesConcepto, 780, 420, selectConceptoW, selectConceptoH);
 }

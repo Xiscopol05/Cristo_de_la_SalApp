@@ -1,11 +1,11 @@
 //enumeración de las pantallas de la aplicación
 
 enum PANTALLA {
-  INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO, CONTABILIDAD_BALANCE, CONTABILIDAD_PRESUPUESTO
+  INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO, CONTABILIDAD_BALANCE, CONTABILIDAD_PRESUPUESTO, CONTABILIDAD_AÑADIRCONCEPTO
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.CONTABILIDAD_BALANCE;
+PANTALLA pantalla =PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO;
 
 boolean logged= false;
 
@@ -15,6 +15,7 @@ float estadoDeCuentas = 27500.50;
 
 void setup() {
   size(1280, 800);
+  //fullScreen();
   setColors();
   setFonts();
   setMedias();
@@ -24,6 +25,10 @@ void setup() {
 }
 
 void draw() {
+  //Establece una configuración por defecto
+  textAlign(LEFT);
+  fill(0);
+  textFont(getFontAt(4));
   // Dibuja la pantalla correspondiente
   switch(pantalla) {
   case INICIO:
@@ -59,10 +64,12 @@ void draw() {
   case CONTABILIDAD_PRESUPUESTO:
     dibujaPantallaContabilidadPresupuesto();
     break;
+  case CONTABILIDAD_AÑADIRCONCEPTO:
+    dibujaPantallaContabilidadAñadirConcepto();
+    break;
   }
-  String infoPantalla = pantalla.ordinal()+" ) "+pantalla.name();
-  fill(0);
-  textFont(getFontAt(4));
+  //String infoPantalla = pantalla.ordinal()+" ) "+pantalla.name();
+  //fill(0);
   //text(infoPantalla, width/2, height/2);  // Número i nom de la Pantalla
   //text("X= "+mouseX+", Y= "+mouseY, width/2, height/2 +20);
 
@@ -75,6 +82,14 @@ void mousePressed() {
     ptCenso.nextPage();
   } else if (bPrevCenso.mouseOverButton() && bPrevCenso.enabled) {
     ptCenso.prevPage();
+  } else if (bNextGastos.mouseOverButton() && bNextGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_BALANCE) {
+    ptGastos.nextPage();
+  } else if (bPrevGastos.mouseOverButton() && bPrevGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_BALANCE) {
+    ptGastos.prevPage();
+  } else if (bNextGastos.mouseOverButton() && bNextGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_PRESUPUESTO) {
+    ptGastosPresupuesto.nextPage();
+  } else if (bPrevGastos.mouseOverButton() && bPrevGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_PRESUPUESTO) {
+    ptGastosPresupuesto.prevPage();
   } else if (bInicioSesion.mouseOverButton() && bInicioSesion.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
   } else if (itbCenso.mouseOverButton() && itbCenso.enabled) {
@@ -111,6 +126,10 @@ void mousePressed() {
     openWebPage("https://www.humildadtoledo.com/enlaces-de-interes");
   } else if (bAñadir.mouseOverButton() && bAñadir.enabled && pantalla == PANTALLA.CENSO) {
     pantalla = PANTALLA.CENSO_NUEVOHERMANO;
+  } else if (bAñadirConcepto.mouseOverButton() && bAñadirConcepto.enabled) {
+    pantalla = PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO;
+  } else if (bAceptarConcepto.mouseOverButton() && bAceptarConcepto.enabled) {
+    pantalla = PANTALLA.CONTABILIDAD_BALANCE;
   }
   userText.isPressed();
   passText.isPressed();
@@ -133,7 +152,16 @@ void mousePressed() {
   tfOficina.isPressed();
   tfDigitoControl.isPressed();
   tfNumeroCuenta.isPressed();
+  tfTitulo.isPressed();
+  tfCantidad.isPressed();
   cEventos.checkButtons();
+
+  if (sTipoConcepto.mouseOverSelect() && sTipoConcepto.enabled) {
+    if (!sTipoConcepto.collapsed) {
+      sTipoConcepto.update();      // Actualitzar valor
+    }
+    sTipoConcepto.toggle();        // Plegar o desplegar
+  }
 }
 
 // Modifica el cursor
@@ -181,6 +209,7 @@ void keyPressed() {
   tfOficina.keyPressed(key, (int)keyCode);
   tfDigitoControl.keyPressed(key, (int)keyCode);
   tfNumeroCuenta.keyPressed(key, (int)keyCode);
+  tfTitulo.keyPressed(key, (int)keyCode);
   comprovaLogin();
   if (keyCode==LEFT) {
     ptCenso.prevPage();

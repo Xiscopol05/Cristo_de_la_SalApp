@@ -198,7 +198,7 @@ void nuevoHermano() {
   text("Nombre del banco:", 40, 420+12);
   text("Titular de la cuenta:", 40, 480+12);
   text("Fecha de alta:", 630, 625+12);
-  titulo.display();
+  titDetallePersonal.display();
 
   popMatrix();
   popStyle();

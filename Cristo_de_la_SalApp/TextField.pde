@@ -6,9 +6,9 @@ class TextField {
   int x, y, h, w;
 
   // Colors
-  color bgColor = color(140, 140, 140);
+  color bgColor = color(getColorAt(5));
   color fgColor = color(0, 0, 0);
-  color selectedColor = color(190, 190, 60);
+  color selectedColor = color(getColorAt(4));
   color borderColor = color(30, 30, 30);
   int borderWeight = 1;
 

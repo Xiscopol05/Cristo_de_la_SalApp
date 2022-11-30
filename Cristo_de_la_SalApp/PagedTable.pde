@@ -62,7 +62,7 @@ class PagedTable {
     rect(x, y, w, h);
     
     float rowHeight = h / numRows;
-    fill(getColorAt(1)); stroke(0);strokeWeight(3);
+    fill(getColorAt(0)); stroke(0);strokeWeight(3);
     rect(x, y, w, rowHeight);
     
     // Dibuixa files
