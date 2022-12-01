@@ -1,4 +1,5 @@
 //enumeración de las pantallas de la aplicación
+int lastKeyCodePressed;
 
 enum PANTALLA {
   INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO, CONTABILIDAD_BALANCE, CONTABILIDAD_PRESUPUESTO, CONTABILIDAD_AÑADIRCONCEPTO
@@ -70,8 +71,10 @@ void draw() {
   }
   //String infoPantalla = pantalla.ordinal()+" ) "+pantalla.name();
   //fill(0);
+  
   //text(infoPantalla, width/2, height/2);  // Número i nom de la Pantalla
   //text("X= "+mouseX+", Y= "+mouseY, width/2, height/2 +20);
+  
 
   updateCursor();   // Modifica la apariencia del cursor
 }
@@ -211,11 +214,7 @@ void keyPressed() {
   tfNumeroCuenta.keyPressed(key, (int)keyCode);
   tfTitulo.keyPressed(key, (int)keyCode);
   comprovaLogin();
-  if (keyCode==LEFT) {
-    ptCenso.prevPage();
-  } else if (keyCode==RIGHT) {
-    ptCenso.nextPage();
-  }
+ lastKeyCodePressed= (int)keyCode;
   // Anar un mes enrere
   if (keyCode==LEFT) {
     cEventos.prevMonth();
@@ -226,6 +225,7 @@ void keyPressed() {
     cEventos.nextMonth();
     println("PREV MONTH");
   }
+  println(lastKeyCodePressed);
 }
 
 

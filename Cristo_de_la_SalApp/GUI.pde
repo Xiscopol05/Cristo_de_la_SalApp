@@ -146,12 +146,9 @@ TextField tfBanco, tfTitular, tfDNITitular, tfIBAN, tfEntidad, tfOficina, tfDigi
 TextField tfTitulo, tfCantidad;
 
 void initTextField() {
-  userText = new TextField((marcoWidth/2)-(marcoCuentaWidth/2)+20+inicioSesionX, (marcoHeight/2)-(marcoCuentaHeight/2)+130+inicioSesionY, 350, 35);
-  passText = new TextField((marcoWidth/2)-(marcoCuentaWidth/2)+20+inicioSesionX, (marcoHeight/2)-(marcoCuentaHeight/2)+230+inicioSesionY, 350, 35);
-  buscar = new TextField(800, primerIconY+25, 450, 35);
-  buscar.setText("BUSCAR");
-  userText.setText("usuario");
-  passText.setText("contraseña");
+  userText = new TextField("usuario", (marcoWidth/2)-(marcoCuentaWidth/2)+20+inicioSesionX, (marcoHeight/2)-(marcoCuentaHeight/2)+130+inicioSesionY, 350, 35);
+  passText = new TextField("contraseña", (marcoWidth/2)-(marcoCuentaWidth/2)+20+inicioSesionX, (marcoHeight/2)-(marcoCuentaHeight/2)+230+inicioSesionY, 350, 35);
+  buscar = new TextField("BUSCAR", 800, primerIconY+25, 450, 35);
   tfNombre = new TextField ("Nombre", 170+menuWidth, 95+bannerHeight, 305, 45);
   tfApellidos = new TextField ("Apellidos", 500+menuWidth, 95+bannerHeight, 535, 45);
   tfDNI = new TextField ("DNI", 695+menuWidth, 165+bannerHeight, 340, 45);

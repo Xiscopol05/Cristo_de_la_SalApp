@@ -14,6 +14,7 @@ class TextField {
 
   // Text del camp
   String text = "";
+  String textDefault = "";
   int textLength = 0;
   int textSize = 24;
 
@@ -33,9 +34,7 @@ class TextField {
     this.w = w;
     this.h = h;
     this.text=t;
-  }
-  void setText(String t) {
-    this.text = t;
+    this.textDefault = t;
   }
 
   // Dibuixa el Camp de Text
@@ -68,8 +67,10 @@ class TextField {
         boolean isKeyCapitalLetter = (key >= 'A' && key <= 'Z');
         boolean isKeySmallLetter = (key >= 'a' && key <= 'z');
         boolean isKeyNumber = (key >= '0' && key <= '9');
-
-        if (isKeyCapitalLetter || isKeySmallLetter || isKeyNumber) {
+        boolean isSpecialKey = (keyCode==50);
+        boolean isKeyAcento = (keyCode==65 || keyCode==69 || keyCode==73 || keyCode==79 ||
+          keyCode==85);
+        if (isKeyCapitalLetter || isKeySmallLetter || isKeyNumber || isSpecialKey || isKeyAcento) {
           addText(key);
         }
       }
@@ -107,9 +108,14 @@ class TextField {
   void isPressed() {
     if (mouseOverTextField()) {
       selected = true;
-      this.text="";
+      if (this.text==this.textDefault) {
+        this.text="";
+      }
     } else {
       selected = false;
+      if (this.text=="") {
+        this.text=this.textDefault;
+      }
     }
   }
 }
