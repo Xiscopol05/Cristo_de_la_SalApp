@@ -78,7 +78,7 @@ void banner() {
   text("Hermandad del Stmo. Cristo de la Sala", 20, 70);
   image(getIconUser(), 830,(bannerHeight/2)-25, 50,50);
   textFont(getFontAt(5));
-  text(userName, 890,(bannerHeight/2)+7);
+  text(userNameAdmin, 890,(bannerHeight/2)+7);
   popStyle();
   popMatrix();
 }
@@ -215,7 +215,7 @@ void tituloCarruselFotos() {
   textFont(getFontAt(7));
   fill(0);
   textAlign(LEFT);
-  text("Bienvenido " + userName + " a tu perfil de la hermandad", 40, 57);
+  text("Bienvenido " + userNameAdmin + " a tu perfil de la hermandad", 40, 57);
   
   popStyle();
   popMatrix();

@@ -10,7 +10,11 @@ PANTALLA pantalla =PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO;
 
 boolean logged= false;
 
-String userName = "admin";
+boolean admin= false;
+
+String userNameAdmin = "admin";
+String userNameUser = "user";
+
 float estadoDeCuentas = 27500.50;
 
 
@@ -231,7 +235,7 @@ void keyPressed() {
 
 // Comprova si el login és correcte
 boolean comprovaLogin() {
-  if ( userText.text.equals(userName) &&
+  if ( userText.text.equals(userNameAdmin) &&
     passText.text.equals("1234")) {
     return true;
   } else {
