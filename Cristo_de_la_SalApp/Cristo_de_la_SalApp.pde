@@ -1,21 +1,20 @@
 //enumeración de las pantallas de la aplicación
-int lastKeyCodePressed;
-
 enum PANTALLA {
   INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO, CONTABILIDAD_BALANCE, CONTABILIDAD_PRESUPUESTO, CONTABILIDAD_AÑADIRCONCEPTO
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO;
+PANTALLA pantalla =PANTALLA.PRINCIPAL;
 
 boolean logged= false;
 
-boolean admin= false;
+boolean admin= true;
 
 String userNameAdmin = "admin";
 String userNameUser = "user";
 
 float estadoDeCuentas = 27500.50;
+int lastKeyCodePressed;
 
 
 void setup() {
@@ -34,6 +33,7 @@ void draw() {
   textAlign(LEFT);
   fill(0);
   textFont(getFontAt(4));
+
   // Dibuja la pantalla correspondiente
   switch(pantalla) {
   case INICIO:
@@ -75,28 +75,36 @@ void draw() {
   }
   //String infoPantalla = pantalla.ordinal()+" ) "+pantalla.name();
   //fill(0);
-  
+
   //text(infoPantalla, width/2, height/2);  // Número i nom de la Pantalla
   //text("X= "+mouseX+", Y= "+mouseY, width/2, height/2 +20);
-  
+
 
   updateCursor();   // Modifica la apariencia del cursor
+
+  if ( userText.text.equals(userNameAdmin) &&
+    passText.text.equals("1234")) {
+    admin = true;
+  } else if (( userText.text.equals(userNameUser) &&
+    passText.text.equals("1234"))) {
+    admin = false;
+  }
 }
 
 // En caso de apretar el ratón
 void mousePressed() {
   if (bNextCenso.mouseOverButton() && bNextCenso.enabled) {
-    ptCenso.nextPage();
+    stCenso.nextPage();
   } else if (bPrevCenso.mouseOverButton() && bPrevCenso.enabled) {
-    ptCenso.prevPage();
+    stCenso.prevPage();
   } else if (bNextGastos.mouseOverButton() && bNextGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_BALANCE) {
-    ptGastos.nextPage();
+    stGastos.nextPage();
   } else if (bPrevGastos.mouseOverButton() && bPrevGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_BALANCE) {
-    ptGastos.prevPage();
+    stGastos.prevPage();
   } else if (bNextGastos.mouseOverButton() && bNextGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_PRESUPUESTO) {
-    ptGastosPresupuesto.nextPage();
+    stGastosPresupuesto.nextPage();
   } else if (bPrevGastos.mouseOverButton() && bPrevGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_PRESUPUESTO) {
-    ptGastosPresupuesto.prevPage();
+    stGastosPresupuesto.prevPage();
   } else if (bInicioSesion.mouseOverButton() && bInicioSesion.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
   } else if (itbCenso.mouseOverButton() && itbCenso.enabled) {
@@ -137,6 +145,10 @@ void mousePressed() {
     pantalla = PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO;
   } else if (bAceptarConcepto.mouseOverButton() && bAceptarConcepto.enabled) {
     pantalla = PANTALLA.CONTABILIDAD_BALANCE;
+  } else if (itbPerfilPersonal.mouseOverButton() && itbPerfilPersonal.enabled) {
+    pantalla = PANTALLA.CENSO_DETALLE;
+  } else if (bFicha.mouseOverButton() && bFicha.enabled) {
+    selectInput("Selecciona un fitxer ...", "fileSelected");
   }
   userText.isPressed();
   passText.isPressed();
@@ -169,6 +181,10 @@ void mousePressed() {
     }
     sTipoConcepto.toggle();        // Plegar o desplegar
   }
+  stCenso.checkSelections();
+  stGastos.checkSelections();
+  stGastosPresupuesto.checkSelections();
+  stBalanceIngresos.checkSelections();
 }
 
 // Modifica el cursor
@@ -218,7 +234,7 @@ void keyPressed() {
   tfNumeroCuenta.keyPressed(key, (int)keyCode);
   tfTitulo.keyPressed(key, (int)keyCode);
   comprovaLogin();
- lastKeyCodePressed= (int)keyCode;
+  lastKeyCodePressed= (int)keyCode;
   // Anar un mes enrere
   if (keyCode==LEFT) {
     cEventos.prevMonth();
@@ -229,14 +245,13 @@ void keyPressed() {
     cEventos.nextMonth();
     println("PREV MONTH");
   }
-  println(lastKeyCodePressed);
 }
 
 
 // Comprova si el login és correcte
 boolean comprovaLogin() {
-  if ( userText.text.equals(userNameAdmin) &&
-    passText.text.equals("1234")) {
+  if (((userText.text.equals(userNameAdmin)||(userText.text.equals(userNameUser))) &&
+    passText.text.equals("1234"))) {
     return true;
   } else {
     return false;

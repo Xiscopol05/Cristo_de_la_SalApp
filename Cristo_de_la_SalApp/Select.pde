@@ -3,6 +3,7 @@ class Select {
   
   float x, y, w, h;          // Posició i dimensions
   String[] texts;            // Valors possibles
+  String[] filteredTexts;            // Valors possibles
   String selectedValue;      // Valor Seleccionat
   
   boolean collapsed = true;  // Plegat / Desplegat
@@ -13,6 +14,8 @@ class Select {
   Select(String[] texts, float x, float y, float w, float h){
     
     this.texts = texts;
+    this.filteredTexts = texts;
+    
     this.selectedValue = "";
     this.x = x;
     this.y = y;

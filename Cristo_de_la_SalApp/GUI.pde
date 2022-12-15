@@ -6,14 +6,13 @@ void setGUI() {
   initTextField();
   initTextInfo();
   initImgTextButton();
-  initPagedTable();
   initCalendar();
   initLinesDiagram();
   initBarsDiagram();
   initShowImage();
-  initTable();
   initTitulo();
   initSelect();
+  initSelectTable();
 }
 
 // Botones
@@ -24,6 +23,7 @@ Button bInicioSesion, bPrincipal;
 // Creación de los botones de la GUI
 Button bAñadir, bModificar, bAceptarCenso, bFicha, bPrevCenso, bNextCenso, bPrevGastos, bNextGastos, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto, bAñadirConcepto;
 Button bAceptarConcepto;
+
 void initButtons() {
   buttons = new Button[22];
   buttons[0] = new Button("Principal", 850, (bannerHeight/2)-13.5, 100, 25);
@@ -48,6 +48,7 @@ void initButtons() {
   buttons[19] = new Button("NEXT", 1080, 720, 150, 30);
   buttons[20] = new Button("Añadir concepto", 1080, 170, 150, 40);
   buttons[21] = new Button("Aceptar", 645+menuWidth, 175+bannerHeight, 405, 40);
+
 
   bPrincipal = buttons[0];
   bInicioSesion = buttons[1];
@@ -125,6 +126,10 @@ void displayButtonsEnlaces() {
   bTwitter.setTextFont(8);
   bInstagram.setTextFont(8);
   bYoutube.setTextFont(8);
+  bArzobispado.setTextFont(8);
+  bAyuntamiento.setTextFont(8);
+  bWebCofrade.setTextFont(8);
+  bOtrasHermandades.setTextFont(8);
   bFacebook.display();
   bTwitter.display();
   bInstagram.display();
@@ -176,7 +181,7 @@ void displayInicioSesiontf() {
   passText.display();
 }
 
-void displayNuevoHermano() {
+void displaytfNuevoHermano() {
   tfNombre.display();
   tfApellidos.display();
   tfDNI.display();
@@ -198,76 +203,86 @@ void displayNuevoHermano() {
 }
 
 //TextInfo
-TextInfo nombre, apellidos, DNI, calle, numero, piso, localidad, provincia, telefono, correoElectronico;
-TextInfo banco, titular, DNITitular, IBAN, entidad, oficina, digitoControl, numeroCuenta;
+TextInfo tiNombre, tiApellidos, tiDNI, tiCalle, tiNumero, tiPiso, tiLocalidad, tiProvincia, tiTelefono, tiCorreoElectronico;
+TextInfo tiBanco, tiTitular, tiDNITitular, tiIBAN, tiEntidad, tiOficina, tiDigitoControl, tiNumeroCuenta;
 
 void initTextInfo() {
-
-  nombre = new TextInfo ("Nombre", 170, 95, 305, 45);
-  apellidos = new TextInfo ("Apellidos", 500, 95, 535, 45);
-  DNI = new TextInfo ("DNI", 695, 165, 340, 45);
-  calle = new TextInfo ("Calle", 148, 235, 147, 45);
-  numero = new TextInfo ("Nº", 313, 235, 89, 45);
-  piso = new TextInfo ("Piso", 417, 235, 89, 45);
-  localidad = new TextInfo ("Localidad", 521, 235, 198, 45);
-  provincia = new TextInfo ("Provincia", 735, 235, 301, 45);
-  telefono = new TextInfo ("Teléfono", 148, 297, 255, 45);
-  correoElectronico = new TextInfo ("Correo Electrónico", 615, 297, 420, 45);
-  banco = new TextInfo ("Banco", 235, 405, 800, 45);
-  titular= new TextInfo ("Titular", 235, 462, 380, 45);
-  DNITitular = new TextInfo ("DNI del titular", 649, 462, 386, 45);
-  IBAN = new TextInfo ("IBAN", 40, 522, 165, 45);
-  entidad = new TextInfo ("Entidad", 225, 522, 100, 45);
-  oficina = new TextInfo ("Oficina", 341, 522, 100, 45);
-  digitoControl = new TextInfo ("Dígito Control", 460, 522, 202, 45);
-  numeroCuenta = new TextInfo ("Número de cuenta", 677, 522, 357, 45);
+  pushMatrix();
+  tiNombre = new TextInfo ("Nombre", 170, 95, 305, 45);
+  tiApellidos = new TextInfo ("Apellidos", 500, 95, 535, 45);
+  tiDNI = new TextInfo ("DNI", 695, 165, 340, 45);
+  tiCalle = new TextInfo ("Calle", 148, 235, 147, 45);
+  tiNumero = new TextInfo ("Nº", 313, 235, 89, 45);
+  tiPiso = new TextInfo ("Piso", 417, 235, 89, 45);
+  tiLocalidad = new TextInfo ("Localidad", 521, 235, 198, 45);
+  tiProvincia = new TextInfo ("Provincia", 735, 235, 301, 45);
+  tiTelefono = new TextInfo ("Teléfono", 148, 297, 255, 45);
+  tiCorreoElectronico = new TextInfo ("Correo Electrónico", 615, 297, 420, 45);
+  tiBanco = new TextInfo ("Banco", 235, 405, 800, 45);
+  tiTitular= new TextInfo ("Titular", 235, 462, 380, 45);
+  tiDNITitular = new TextInfo ("DNI del titular", 649, 462, 386, 45);
+  tiIBAN = new TextInfo ("IBAN", 40, 522, 165, 45);
+  tiEntidad = new TextInfo ("Entidad", 225, 522, 100, 45);
+  tiOficina = new TextInfo ("Oficina", 341, 522, 100, 45);
+  tiDigitoControl = new TextInfo ("Dígito Control", 460, 522, 202, 45);
+  tiNumeroCuenta = new TextInfo ("Número de cuenta", 677, 522, 357, 45);
+  popMatrix();
 }
 
 
 void displayDetalleHermano() {
-  nombre.display();
-  apellidos.display();
-  DNI.display();
-  calle.display();
-  numero.display();
-  piso.display();
-  localidad.display();
-  provincia.display();
-  telefono.display();
-  correoElectronico.display();
-  banco.display();
-  titular.display();
-  DNITitular.display();
-  IBAN.display();
-  entidad.display();
-  oficina.display();
-  digitoControl.display();
-  numeroCuenta.display();
+
+  tiNombre.display();
+  tiApellidos.display();
+  tiDNI.display();
+  tiCalle.display();
+  tiNumero.display();
+  tiPiso.display();
+  tiLocalidad.display();
+  tiProvincia.display();
+  tiTelefono.display();
+  tiCorreoElectronico.display();
+  tiBanco.display();
+  tiTitular.display();
+  tiDNITitular.display();
+  tiIBAN.display();
+  tiEntidad.display();
+  tiOficina.display();
+  tiDigitoControl.display();
+  tiNumeroCuenta.display();
 }
 
 //ImgTextButton
 
 ImgTextButton[] imgtextbuttons;
-ImgTextButton itbCenso, itbContabilidad, itbArchivo, itbAvisos, itbEnlaces;
+ImgTextButton itbCenso, itbContabilidad, itbArchivo, itbAvisos, itbEnlaces, itbPerfilPersonal;
 
 void initImgTextButton() {
-  imgtextbuttons = new ImgTextButton[5];
+  imgtextbuttons = new ImgTextButton[6];
   imgtextbuttons[0] = new ImgTextButton(getIconCenso(), "Censo", 0, primerIconY, iconWidth, iconHeight);
   imgtextbuttons[1] = new ImgTextButton(getIconContabilidad(), "Contabilidad", 0, segundoIconY, iconWidth, iconHeight);
   imgtextbuttons[2] = new ImgTextButton(getIconArchivo(), "Archivo", 0, tercerIconY, iconWidth, iconHeight);
   imgtextbuttons[3] = new ImgTextButton(getIconAvisos(), "Avisos y alertas", 0, cuartoIconY, iconWidth, iconHeight );
   imgtextbuttons[4] = new ImgTextButton(getIconEnlaces(), "Enlaces", 0, quintoIconY, iconWidth, iconHeight);
+  imgtextbuttons[5] = new ImgTextButton(getIconCenso(), "Perfil Personal", 0, primerIconY, iconWidth, iconHeight);
 
   itbCenso = imgtextbuttons[0];
   itbContabilidad = imgtextbuttons[1];
   itbArchivo = imgtextbuttons[2];
   itbAvisos = imgtextbuttons[3];
   itbEnlaces = imgtextbuttons[4];
+  itbPerfilPersonal = imgtextbuttons[5];
 }
 
 // Activar los botones del menú
 void enableButtonsMenu() {
-  itbCenso.setEnabled(true);
+  if (admin == true) {
+    itbCenso.setEnabled(true);
+    itbPerfilPersonal.setEnabled(false);
+  } else {
+    itbCenso.setEnabled(false);
+    itbPerfilPersonal.setEnabled(true);
+  }
   itbContabilidad.setEnabled(true);
   itbArchivo.setEnabled(true);
   itbAvisos.setEnabled(true);
@@ -276,16 +291,117 @@ void enableButtonsMenu() {
 }
 
 void displayButtonsMenu() {
-  itbCenso.display();
+  if (admin == true) {
+    itbCenso.display();
+  } else {
+    itbPerfilPersonal.display();
+  }
   itbContabilidad.display();
   itbArchivo.display();
   itbAvisos.display();
   itbEnlaces.display();
 }
 
-//PagedTable
+//calendario
 
-PagedTable ptCenso, ptGastos, ptGastosPresupuesto;
+
+// Variable de Calendari
+Calendario cEventos;
+
+String[][] fechasClave = {{"2021-03-15", "CUMPLE"}, {"2021-03-28", "FESTA"}};
+
+void initCalendar() {
+  cEventos = new Calendario(menuWidth+20+((1280-menuWidth)/2), primerIconY+iconHeight+20, ((1280-menuWidth)/2)-35, (iconHeight*3)-50, fechasClave);
+}
+
+void displayCalendarioEventos() {
+  cEventos.display();
+}
+
+//LinesDiagram
+
+LinesDiagram ldIngresos;
+
+// Dades del Diagrama (etiquetes)
+String[] textos  = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+
+// Dades del Diagrama (valors)
+float[] values  = {400, 600, 100, 300, 55, 100, 90, 220, 186, 400, 600, 10 };
+
+// Color de la línia
+color colorLine = color(150, 50, 200);
+
+void initLinesDiagram() {
+  ldIngresos = new LinesDiagram(menuWidth+50, bannerHeight+50, (width/2)-100, (height/2)-100);
+
+  // Configuració de Dades (textos, valors, colors)
+  ldIngresos.setTexts(textos);
+  ldIngresos.setValues(values);
+  ldIngresos.setColors(colorLine);
+}
+
+//BarsDiagram
+
+BarsDiagram gastos;
+
+String[] textosbd = {"WATER", "AIR", "FIRE", "EARTH"};
+float[] valuesbd = {400, 600, 100, 300};
+color[] colorsbd = {color(0, 0, 255), color(50, 50, 200),
+  color(255, 0, 0), color(0, 255, 0)};
+
+void initBarsDiagram() {
+  gastos = new BarsDiagram(840, 420, 400, 300);
+
+  // Configuración de datis (textos, valores, colores)
+  gastos.setTexts(textosbd);
+  gastos.setValues(valuesbd);
+  gastos.setColors(colorsbd);
+}
+
+//ShowImage
+
+ShowImage cristo;
+
+// Nombre de las imágenes
+String[] noms = {"cristo1.jpg", "cristo2.jpeg", "cristo3.jpeg",
+  "cristo4.jpeg"};
+
+void initShowImage() {
+
+  cristo = new ShowImage(35, 70, 485, 575);
+  cristo.setImages(noms);
+}
+
+//Titulo
+
+Titulo titIngresos, titGastos, titConcepto, titDetallePersonal;
+
+void initTitulo() {
+  titIngresos = new Titulo("Ingresos", 250, 170, 800, 40);
+  titGastos = new Titulo("Gastos", 250, 470, 800, 40);
+  titConcepto = new Titulo ("Concepto", 230, 275, 610, 40);
+  titDetallePersonal = new Titulo ("Detalle personal", 20, 25, 605, 35);
+}
+
+//Select
+
+Select sTipoConcepto;
+
+
+String[] selectValuesConcepto = {"I.1", "I.2", "I.3", "G.1", "G.2", "G.3", "G.4", "G.5", "G.6", "G.7", "G.8", "G.9", "G.10", "G.11", "G.12", "G.13", "G.14", "G.15", "G.16", "G.17", "G.18", };
+
+// Dimensions dels botons
+float selectConceptoW = 465;
+float selectConceptoH = 40;
+
+void initSelect() {
+  sTipoConcepto = new Select(selectValuesConcepto, 780, 420, selectConceptoW, selectConceptoH);
+}
+
+//SelectTable
+
+SelectTable stCenso, stGastos, stGastosPresupuesto;
 
 int filasCenso = 6, columnasCenso = 5;
 
@@ -364,98 +480,7 @@ String[][] infoGastosPresupuesto = {
   {"G.17", "Varios y gastos extraordinarios", "1200.00€"},
   {"G.18", "Adquisición artículos devoción", "1200.00€"},
 };
-void initPagedTable() {
-  ptGastos = new PagedTable(filasGastos, columnasGastos);
-  ptGastos.setHeaders(headersGastos);
-  ptGastos.setData(infoGastos);
-  ptGastos.setColumnWidths(colWidthsGastos);
-  ptGastos.setColumnMaxChars(maxCharsGastos);
-  ptCenso = new PagedTable(filasCenso, columnasCenso);
-  ptCenso.setHeaders(headersCenso);
-  ptCenso.setData(infoCenso);
-  ptCenso.setColumnWidths(colWidthsCenso);
-  ptCenso.setColumnMaxChars(maxCharsCenso);
-  ptGastosPresupuesto = new PagedTable(filasGastos, columnasGastos);
-  ptGastosPresupuesto.setHeaders(headersGastos);
-  ptGastosPresupuesto.setData(infoGastosPresupuesto);
-  ptGastosPresupuesto.setColumnWidths(colWidthsGastos);
-  ptGastosPresupuesto.setColumnMaxChars(maxCharsGastos);
-}
-
-//calendario
-
-
-// Variable de Calendari
-Calendario cEventos;
-
-String[][] fechasClave = {{"2021-03-15", "CUMPLE"}, {"2021-03-28", "FESTA"}};
-
-void initCalendar() {
-  cEventos = new Calendario(menuWidth+20+((1280-menuWidth)/2), primerIconY+iconHeight+20, ((1280-menuWidth)/2)-35, (iconHeight*3)-50, fechasClave);
-}
-
-void displayCalendarioEventos() {
-  cEventos.display();
-}
-
-//LinesDiagram
-
-LinesDiagram ldIngresos;
-
-// Dades del Diagrama (etiquetes)
-String[] textos  = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
-
-// Dades del Diagrama (valors)
-float[] values  = {400, 600, 100, 300, 55, 100, 90, 220, 186, 400, 600, 10 };
-
-// Color de la línia
-color colorLine = color(150, 50, 200);
-
-void initLinesDiagram() {
-  ldIngresos = new LinesDiagram(menuWidth+50, bannerHeight+50, (width/2)-100, (height/2)-100);
-
-  // Configuració de Dades (textos, valors, colors)
-  ldIngresos.setTexts(textos);
-  ldIngresos.setValues(values);
-  ldIngresos.setColors(colorLine);
-}
-
-//BarsDiagram
-
-BarsDiagram gastos;
-
-String[] textosbd = {"WATER", "AIR", "FIRE", "EARTH"};
-float[] valuesbd = {400, 600, 100, 300};
-color[] colorsbd = {color(0, 0, 255), color(50, 50, 200),
-  color(255, 0, 0), color(0, 255, 0)};
-
-void initBarsDiagram() {
-  gastos = new BarsDiagram(840, 420, 400, 300);
-
-  // Configuración de datis (textos, valores, colores)
-  gastos.setTexts(textosbd);
-  gastos.setValues(valuesbd);
-  gastos.setColors(colorsbd);
-}
-
-//ShowImage
-
-ShowImage cristo;
-
-// Nombre de las imágenes
-String[] noms = {"cristo1.jpg", "cristo2.jpeg", "cristo3.jpeg",
-  "cristo4.jpeg"};
-
-void initShowImage() {
-
-  cristo = new ShowImage(35, 70, 485, 575, 3);
-  cristo.setImages(noms);
-}
-
-//Table
-
-Table balanceIngresos;
+SelectTable stBalanceIngresos;
 
 int filasBalanceIngresos = 4, columnasBalanceIngresos=3;
 
@@ -471,35 +496,27 @@ String[][] infoBalanceIngresos = {
   {"I.1", "Subvención ayuntamiento", "3907,35€"},
 };
 
-void initTable() {
-  balanceIngresos = new Table(filasBalanceIngresos, columnasBalanceIngresos);
-  balanceIngresos.setHeaders(headersBalance);
-  balanceIngresos.setData(infoBalanceIngresos);
-  balanceIngresos.setColumnWidths(colWidthsBalance);
-}
+int[] maxCharsBalanceIngresos = {10, 35, 15};
 
-//Titulo
-
-Titulo titIngresos, titGastos, titConcepto, titDetallePersonal;
-
-void initTitulo() {
-  titIngresos = new Titulo("Ingresos", 250, 170, 800, 40);
-  titGastos = new Titulo("Gastos", 250, 470, 800, 40);
-  titConcepto = new Titulo ("Concepto", 230, 275, 610, 40);
-  titDetallePersonal = new Titulo ("Detalle personal", 20, 25, 605, 35);
-}
-
-//Select
-
-Select sTipoConcepto;
-
-
-String[] selectValuesConcepto = {"I.1", "I.2", "I.3", "G.1", "G.2", "G.3", "G.4", "G.5", "G.6", "G.7", "G.8", "G.9", "G.10", "G.11", "G.12", "G.13", "G.14", "G.15", "G.16", "G.17", "G.18", };
-
-// Dimensions dels botons
-float selectConceptoW = 465;
-float selectConceptoH = 40;
-
-void initSelect() {
-  sTipoConcepto = new Select(selectValuesConcepto, 780, 420, selectConceptoW, selectConceptoH);
+void initSelectTable() {
+  stBalanceIngresos = new SelectTable(filasBalanceIngresos, columnasBalanceIngresos, 250, 210, 800, 240);
+  stBalanceIngresos.setHeaders(headersBalance);
+  stBalanceIngresos.setData(infoBalanceIngresos);
+  stBalanceIngresos.setColumnWidths(colWidthsBalance);
+  stBalanceIngresos.setColumnMaxChars(maxCharsBalanceIngresos);
+  stGastos = new SelectTable(filasGastos, columnasGastos, 250, 510, 800, 240);
+  stGastos.setHeaders(headersGastos);
+  stGastos.setData(infoGastos);
+  stGastos.setColumnWidths(colWidthsGastos);
+  stGastos.setColumnMaxChars(maxCharsGastos);
+  stCenso = new SelectTable(filasCenso, columnasCenso, 20+menuWidth, 285, 1280-menuWidth-40, 410);
+  stCenso.setHeaders(headersCenso);
+  stCenso.setData(infoCenso);
+  stCenso.setColumnWidths(colWidthsCenso);
+  stCenso.setColumnMaxChars(maxCharsCenso);
+  stGastosPresupuesto = new SelectTable(filasGastos, columnasGastos, 250, 510, 800, 240);
+  stGastosPresupuesto.setHeaders(headersGastos);
+  stGastosPresupuesto.setData(infoGastosPresupuesto);
+  stGastosPresupuesto.setColumnWidths(colWidthsGastos);
+  stGastosPresupuesto.setColumnMaxChars(maxCharsGastos);
 }

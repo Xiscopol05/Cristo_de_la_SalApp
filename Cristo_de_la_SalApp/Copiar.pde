@@ -7,7 +7,8 @@ void copiar(String rutaOriginal, String rutaCopia, String titol){
   Path copia    = Paths.get(rutaCopia+"/"+titol);
   try{
       Files.copy(original, copia);
-      println("OK: fitxer copiat a la carpeta.");
+      println("OK: archivo copiado en la carpeta.");
+      
   } catch (IOException e) {
       println("ERROR: No s'ha pogut copiar el fitxer.");
   }

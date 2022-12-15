@@ -17,7 +17,7 @@ class ShowImage {
   int tempsImg = 100;
   
   // Constructor
-  ShowImage(int x, int y, int w, int h, int nv){
+  ShowImage(int x, int y, int w, int h){
     this.x = x; this.y = y; this.w = w; this.h = h;
     this.currentImage = 0;  
   }

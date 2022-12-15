@@ -1,6 +1,7 @@
 // Funciones de dibujo de las pantallas
 
 void dibujaPantallaInicio() {
+
   pushMatrix();
   pushStyle();
   //imagen de fondo
@@ -37,13 +38,13 @@ void dibujaPantallaPrincipal() {
   tituloCarruselFotos();
   fila1();
   fila2();
-  
+
   //display elementos GUI
   displayButtonsMenu();
- 
+
   translate(menuWidth, bannerHeight);
   cristo.display();
- 
+
   popStyle();
   popMatrix();
 }
@@ -68,7 +69,7 @@ void dibujaPantallaCenso() {
   displayButtonsMenu();
   displayButtonsTabla();
   buscar.display();
-  ptCenso.display(20+menuWidth, 285, 1280-menuWidth-40, 410);
+  stCenso.display();
   displayButtonsPagedTable();
   popStyle();
   popMatrix();
@@ -117,7 +118,7 @@ void dibujaPantallaArchivo() {
 
   //dibujar elementos de la pantalla
   menu();
-  ptCenso.display(20+menuWidth, 285, 1280-menuWidth-40, 410);
+  stCenso.display();
 
   //display elementos GUI
   displayButtonsMenu();
@@ -184,7 +185,9 @@ void dibujaPantallaCensoDetalle() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
+  if(admin==true){
   bAceptarCenso.setEnabled(true);
+  }
   bFicha.setEnabled(true);
 
 
@@ -195,7 +198,9 @@ void dibujaPantallaCensoDetalle() {
   //display elementos GUI
   displayButtonsMenu();
   detalleHermano();
+  if(admin==true){
   bAceptarCenso.display();
+  }
   bFicha.display();
   popStyle();
   popMatrix();
@@ -221,10 +226,9 @@ void dibujaPantallaCensoNuevoHermano() {
   bAceptarCenso.display();
   bFicha.display();
   nuevoHermano();
-  displayNuevoHermano();
+  displaytfNuevoHermano();
   popStyle();
   popMatrix();
-
 }
 
 void dibujaPantallaContabilidadBalance() {
@@ -248,8 +252,8 @@ void dibujaPantallaContabilidadBalance() {
   displayButtonsMenu();
   titIngresos.display();
   titGastos.display();
-  balanceIngresos.display(250,210,800,240);
-  ptGastos.display(250,510,800,240);
+  stBalanceIngresos.display();
+  stGastos.display();
   bPrevGastos.display();
   bNextGastos.display();
   bAñadirConcepto.display();
@@ -279,8 +283,8 @@ void dibujaPantallaContabilidadPresupuesto() {
   displayButtonsMenu();
   titIngresos.display();
   titGastos.display();
-  balanceIngresos.display(250,210,800,240);
-  ptGastosPresupuesto.display(250,510,800,240);
+  stBalanceIngresos.display();
+  stGastosPresupuesto.display();
   bPrevGastos.display();
   bNextGastos.display();
   bAñadirConcepto.display();
