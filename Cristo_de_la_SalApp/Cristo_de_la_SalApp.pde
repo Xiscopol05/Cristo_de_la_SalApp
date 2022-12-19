@@ -4,7 +4,7 @@ enum PANTALLA {
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.PRINCIPAL;
+PANTALLA pantalla =PANTALLA.CENSO_DETALLE;
 
 boolean logged= false;
 
@@ -73,12 +73,6 @@ void draw() {
     dibujaPantallaContabilidadAñadirConcepto();
     break;
   }
-  //String infoPantalla = pantalla.ordinal()+" ) "+pantalla.name();
-  //fill(0);
-
-  //text(infoPantalla, width/2, height/2);  // Número i nom de la Pantalla
-  //text("X= "+mouseX+", Y= "+mouseY, width/2, height/2 +20);
-
 
   updateCursor();   // Modifica la apariencia del cursor
 
@@ -145,10 +139,16 @@ void mousePressed() {
     pantalla = PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO;
   } else if (bAceptarConcepto.mouseOverButton() && bAceptarConcepto.enabled) {
     pantalla = PANTALLA.CONTABILIDAD_BALANCE;
+  } else if (bDetalle.mouseOverButton() && bDetalle.enabled && pantalla == PANTALLA.CENSO) {
+    pantalla = PANTALLA.CENSO_DETALLE;
+  } else if ( bAceptarCenso.mouseOverButton() && bAceptarCenso.enabled && pantalla == PANTALLA.CENSO_DETALLE) {
+    pantalla = PANTALLA.CENSO;
   } else if (itbPerfilPersonal.mouseOverButton() && itbPerfilPersonal.enabled) {
     pantalla = PANTALLA.CENSO_DETALLE;
-  } else if (bFicha.mouseOverButton() && bFicha.enabled) {
+  } else if (bFicha.mouseOverButton() && bFicha.enabled && pantalla == PANTALLA.CENSO_NUEVOHERMANO) {
     selectInput("Selecciona un fitxer ...", "fileSelected");
+  } else if (bFicha.mouseOverButton() && bFicha.enabled && pantalla == PANTALLA.CENSO_DETALLE){
+    launch(ruta+titulo2); // !!!NO FUNCIONA!!!
   }
   userText.isPressed();
   passText.isPressed();

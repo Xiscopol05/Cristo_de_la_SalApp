@@ -21,11 +21,11 @@ Button[] buttons;
 Button bInicioSesion, bPrincipal;
 
 // Creación de los botones de la GUI
-Button bAñadir, bModificar, bAceptarCenso, bFicha, bPrevCenso, bNextCenso, bPrevGastos, bNextGastos, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto, bAñadirConcepto;
+Button bAñadir, bModificar, bDetalle, bAceptarCenso, bFicha, bPrevCenso, bNextCenso, bPrevGastos, bNextGastos, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto, bAñadirConcepto;
 Button bAceptarConcepto;
 
 void initButtons() {
-  buttons = new Button[22];
+  buttons = new Button[23];
   buttons[0] = new Button("Principal", 850, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
@@ -48,6 +48,7 @@ void initButtons() {
   buttons[19] = new Button("NEXT", 1080, 720, 150, 30);
   buttons[20] = new Button("Añadir concepto", 1080, 170, 150, 40);
   buttons[21] = new Button("Aceptar", 645+menuWidth, 175+bannerHeight, 405, 40);
+  buttons[22] = new Button("Detalle", (3*menuWidth)+20, primerIconY+20, 200, 50);
 
 
   bPrincipal = buttons[0];
@@ -72,6 +73,7 @@ void initButtons() {
   bNextGastos = buttons[19];
   bAñadirConcepto = buttons[20];
   bAceptarConcepto = buttons[21];
+  bDetalle = buttons[22];
 }
 //Desactivar todos los botones
 void disableButtons() {
@@ -88,6 +90,7 @@ void disableButtons() {
 void enableButtonsTabla() {
   bAñadir.setEnabled(true);
   bModificar.setEnabled(true);
+  bDetalle.setEnabled(true);
 }
 
 void enableButtonsPagedTable() {
@@ -103,6 +106,7 @@ void enableButtonsContabilidad() {
 void displayButtonsTabla() {
   bAñadir.display();
   bModificar.display();
+  bDetalle.display();
 }
 
 // Dibuixa els botons
@@ -153,7 +157,7 @@ TextField tfTitulo, tfCantidad;
 void initTextField() {
   userText = new TextField("usuario", (marcoWidth/2)-(marcoCuentaWidth/2)+20+inicioSesionX, (marcoHeight/2)-(marcoCuentaHeight/2)+130+inicioSesionY, 350, 35);
   passText = new TextField("contraseña", (marcoWidth/2)-(marcoCuentaWidth/2)+20+inicioSesionX, (marcoHeight/2)-(marcoCuentaHeight/2)+230+inicioSesionY, 350, 35);
-  buscar = new TextField("BUSCAR", 800, primerIconY+25, 450, 35);
+  buscar = new TextField("BUSCAR", 850, primerIconY+25, 410, 35);
   tfNombre = new TextField ("Nombre", 170+menuWidth, 95+bannerHeight, 305, 45);
   tfApellidos = new TextField ("Apellidos", 500+menuWidth, 95+bannerHeight, 535, 45);
   tfDNI = new TextField ("DNI", 695+menuWidth, 165+bannerHeight, 340, 45);
@@ -203,7 +207,7 @@ void displaytfNuevoHermano() {
 }
 
 //TextInfo
-TextInfo tiNombre, tiApellidos, tiDNI, tiCalle, tiNumero, tiPiso, tiLocalidad, tiProvincia, tiTelefono, tiCorreoElectronico;
+TextInfo tiNombre, tiApellidos, tiDNI, tiCalle, tiFechaNacimiento, tiFechaAlta, tiNumero, tiPiso, tiLocalidad, tiProvincia, tiTelefono, tiCorreoElectronico;
 TextInfo tiBanco, tiTitular, tiDNITitular, tiIBAN, tiEntidad, tiOficina, tiDigitoControl, tiNumeroCuenta;
 
 void initTextInfo() {
@@ -226,6 +230,8 @@ void initTextInfo() {
   tiOficina = new TextInfo ("Oficina", 341, 522, 100, 45);
   tiDigitoControl = new TextInfo ("Dígito Control", 460, 522, 202, 45);
   tiNumeroCuenta = new TextInfo ("Número de cuenta", 677, 522, 357, 45);
+  tiFechaNacimiento = new TextInfo("Fecha Nacimiento", 380,165,300,45);
+  tiFechaAlta = new TextInfo("Fecha Alta", 770,608,268,45);
   popMatrix();
 }
 
@@ -250,6 +256,8 @@ void displayDetalleHermano() {
   tiOficina.display();
   tiDigitoControl.display();
   tiNumeroCuenta.display();
+  tiFechaNacimiento.display();
+  tiFechaAlta.display();
 }
 
 //ImgTextButton
@@ -375,13 +383,15 @@ void initShowImage() {
 
 //Titulo
 
-Titulo titIngresos, titGastos, titConcepto, titDetallePersonal;
+Titulo titIngresos, titGastos, titConcepto, titDetallePersonal, titDetallePersonalUser;
 
 void initTitulo() {
   titIngresos = new Titulo("Ingresos", 250, 170, 800, 40);
   titGastos = new Titulo("Gastos", 250, 470, 800, 40);
   titConcepto = new Titulo ("Concepto", 230, 275, 610, 40);
   titDetallePersonal = new Titulo ("Detalle personal", 20, 25, 605, 35);
+  titDetallePersonalUser = new Titulo("Detalle personal", 20,25, 1080-20-10, 35);
+  
 }
 
 //Select

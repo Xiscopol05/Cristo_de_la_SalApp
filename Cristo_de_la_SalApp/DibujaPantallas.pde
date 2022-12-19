@@ -185,8 +185,8 @@ void dibujaPantallaCensoDetalle() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
-  if(admin==true){
-  bAceptarCenso.setEnabled(true);
+  if (admin==true) {
+    bAceptarCenso.setEnabled(true);
   }
   bFicha.setEnabled(true);
 
@@ -194,14 +194,22 @@ void dibujaPantallaCensoDetalle() {
   //dibujar elementos de la pantalla
   menu();
 
-
   //display elementos GUI
   displayButtonsMenu();
   detalleHermano();
-  if(admin==true){
-  bAceptarCenso.display();
+  if (admin==true) {
+    bAceptarCenso.display();
   }
   bFicha.display();
+  pushMatrix();
+  translate(menuWidth, bannerHeight);
+  if (admin== true) {
+    titDetallePersonal.display();
+  } else {
+    titDetallePersonalUser.display();
+  }
+  popMatrix();
+  
   popStyle();
   popMatrix();
 }
