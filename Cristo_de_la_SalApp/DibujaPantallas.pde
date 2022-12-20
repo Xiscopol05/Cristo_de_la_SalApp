@@ -225,6 +225,8 @@ void dibujaPantallaCensoNuevoHermano() {
   enableButtonsMenu();
   bAceptarCenso.setEnabled(true);
   bFicha.setEnabled(true);
+  bCalendario.setEnabled(true);
+  bCalendarioAlta.setEnabled(true);
 
   //dibujar elementos de la pantalla
   menu();
@@ -235,6 +237,8 @@ void dibujaPantallaCensoNuevoHermano() {
   bFicha.display();
   nuevoHermano();
   displaytfNuevoHermano();
+  displaycpFechaNacimiento();
+  displaycpFechaAlta();
   popStyle();
   popMatrix();
 }

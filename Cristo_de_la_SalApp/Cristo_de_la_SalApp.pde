@@ -4,7 +4,7 @@ enum PANTALLA {
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.CENSO_DETALLE;
+PANTALLA pantalla =PANTALLA.CENSO_NUEVOHERMANO;
 
 boolean logged= false;
 
@@ -185,6 +185,46 @@ void mousePressed() {
   stGastos.checkSelections();
   stGastosPresupuesto.checkSelections();
   stBalanceIngresos.checkSelections();
+  
+  cpFechaNacimiento.checkButtons();
+  
+  // Si pitja el botó, canvia la visibilitat del calendari.
+  if(bCalendario.mouseOverButton()&& bCalendario.enabled){
+    cpFechaNacimiento.visible = !cpFechaNacimiento.visible;
+  }
+  
+  if(cpFechaNacimiento.bNext.mouseOverButton()){
+    cpFechaNacimiento.nextMonth();
+  }
+  
+  if(cpFechaNacimiento.bPrev.mouseOverButton()){
+    cpFechaNacimiento.prevMonth();
+  }
+  
+  if(cpFechaNacimiento.bOK.mouseOverButton() && cpFechaNacimiento.dateSelected){
+    dataCalendari = cpFechaNacimiento.selectedDay +"/"+ cpFechaNacimiento.selectedMonth + "/"+ cpFechaNacimiento.selectedYear;
+    cpFechaNacimiento.visible = false;
+  }
+
+cpFechaAlta.checkButtons();
+  
+  // Si pitja el botó, canvia la visibilitat del calendari.
+  if(bCalendarioAlta.mouseOverButton()&& bCalendarioAlta.enabled){
+    cpFechaAlta.visible = !cpFechaAlta.visible;
+  }
+  
+  if(cpFechaAlta.bNext.mouseOverButton()){
+    cpFechaAlta.nextMonth();
+  }
+  
+  if(cpFechaAlta.bPrev.mouseOverButton()){
+    cpFechaAlta.prevMonth();
+  }
+  
+  if(cpFechaAlta.bOK.mouseOverButton() && cpFechaAlta.dateSelected){
+    dataCalendariAlta = cpFechaAlta.selectedDay +"/"+ cpFechaAlta.selectedMonth + "/"+ cpFechaAlta.selectedYear;
+    cpFechaAlta.visible = false;
+  }
 }
 
 // Modifica el cursor

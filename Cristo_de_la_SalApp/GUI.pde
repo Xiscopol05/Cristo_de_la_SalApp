@@ -13,6 +13,7 @@ void setGUI() {
   initTitulo();
   initSelect();
   initSelectTable();
+  initCalendariPlus();
 }
 
 // Botones
@@ -22,10 +23,10 @@ Button bInicioSesion, bPrincipal;
 
 // Creación de los botones de la GUI
 Button bAñadir, bModificar, bDetalle, bAceptarCenso, bFicha, bPrevCenso, bNextCenso, bPrevGastos, bNextGastos, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto, bAñadirConcepto;
-Button bAceptarConcepto;
+Button bAceptarConcepto, bCalendario, bCalendarioAlta;
 
 void initButtons() {
-  buttons = new Button[23];
+  buttons = new Button[25];
   buttons[0] = new Button("Principal", 850, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
@@ -49,6 +50,8 @@ void initButtons() {
   buttons[20] = new Button("Añadir concepto", 1080, 170, 150, 40);
   buttons[21] = new Button("Aceptar", 645+menuWidth, 175+bannerHeight, 405, 40);
   buttons[22] = new Button("Detalle", (3*menuWidth)+20, primerIconY+20, 200, 50);
+  buttons [23] = new Button("Calendario", 575, 165+bannerHeight, 100, 45);
+  buttons[24] = new Button("Calendario", 970, 605+bannerHeight, 100, 45);
 
 
   bPrincipal = buttons[0];
@@ -74,6 +77,8 @@ void initButtons() {
   bAñadirConcepto = buttons[20];
   bAceptarConcepto = buttons[21];
   bDetalle = buttons[22];
+  bCalendario = buttons[23];
+  bCalendarioAlta = buttons[24];
 }
 //Desactivar todos los botones
 void disableButtons() {
@@ -208,7 +213,7 @@ void displaytfNuevoHermano() {
 
 //TextInfo
 TextInfo tiNombre, tiApellidos, tiDNI, tiCalle, tiFechaNacimiento, tiFechaAlta, tiNumero, tiPiso, tiLocalidad, tiProvincia, tiTelefono, tiCorreoElectronico;
-TextInfo tiBanco, tiTitular, tiDNITitular, tiIBAN, tiEntidad, tiOficina, tiDigitoControl, tiNumeroCuenta;
+TextInfo tiBanco, tiTitular, tiDNITitular, tiIBAN, tiEntidad, tiOficina, tiDigitoControl, tiNumeroCuenta, tiFechaNacimientoAñadir;
 
 void initTextInfo() {
   pushMatrix();
@@ -230,8 +235,9 @@ void initTextInfo() {
   tiOficina = new TextInfo ("Oficina", 341, 522, 100, 45);
   tiDigitoControl = new TextInfo ("Dígito Control", 460, 522, 202, 45);
   tiNumeroCuenta = new TextInfo ("Número de cuenta", 677, 522, 357, 45);
-  tiFechaNacimiento = new TextInfo("Fecha Nacimiento", 380,165,300,45);
-  tiFechaAlta = new TextInfo("Fecha Alta", 770,608,268,45);
+  tiFechaNacimiento = new TextInfo("Fecha Nacimiento", 380, 165, 300, 45);
+  tiFechaAlta = new TextInfo("Fecha Alta", 770, 608, 268, 45);
+  tiFechaNacimientoAñadir = new TextInfo(dataCalendari, 680, 165+bannerHeight, 200, 45);
   popMatrix();
 }
 
@@ -390,8 +396,7 @@ void initTitulo() {
   titGastos = new Titulo("Gastos", 250, 470, 800, 40);
   titConcepto = new Titulo ("Concepto", 230, 275, 610, 40);
   titDetallePersonal = new Titulo ("Detalle personal", 20, 25, 605, 35);
-  titDetallePersonalUser = new Titulo("Detalle personal", 20,25, 1080-20-10, 35);
-  
+  titDetallePersonalUser = new Titulo("Detalle personal", 20, 25, 1080-20-10, 35);
 }
 
 //Select
@@ -529,4 +534,47 @@ void initSelectTable() {
   stGastosPresupuesto.setData(infoGastosPresupuesto);
   stGastosPresupuesto.setColumnWidths(colWidthsGastos);
   stGastosPresupuesto.setColumnMaxChars(maxCharsGastos);
+}
+
+//CalendariPlus
+
+CalendariPlus cpFechaNacimiento, cpFechaAlta;
+String dataCalendari="";
+String dataCalendariAlta="";
+
+void initCalendariPlus() {
+  cpFechaNacimiento = new CalendariPlus(680, 300, 600, 380);
+  cpFechaAlta = new CalendariPlus(680, 300, 600, 380);
+}
+
+void displaycpFechaNacimiento() {
+  pushStyle();
+  // Rectangle
+  fill(255);
+  rect(680, 165+bannerHeight, 200, 45);
+
+  // Text amb data seleccionada
+  fill(0);
+  textAlign(LEFT);
+  textSize(24);
+  text(dataCalendari, 690, 165+bannerHeight+30);
+  popStyle();
+  cpFechaNacimiento.display();
+  bCalendario.display();
+}
+
+void displaycpFechaAlta() {
+  pushStyle();
+  // Rectangle
+  fill(255);
+  rect(1080, 605+bannerHeight, 180, 45);
+
+  // Text amb data seleccionada
+  fill(0);
+  textAlign(LEFT);
+  textSize(24);
+  text(dataCalendariAlta, 1082, 605+bannerHeight+30); //SE PINTA EL MATEIX QUE A dataCalendari!!
+  popStyle();
+  cpFechaAlta.display();
+  bCalendarioAlta.display();
 }
