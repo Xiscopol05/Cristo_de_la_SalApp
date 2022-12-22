@@ -14,6 +14,7 @@ void setGUI() {
   initSelect();
   initSelectTable();
   initCalendariPlus();
+  initTable();
 }
 
 // Botones
@@ -23,10 +24,10 @@ Button bInicioSesion, bPrincipal;
 
 // Creación de los botones de la GUI
 Button bAñadir, bModificar, bDetalle, bAceptarCenso, bFicha, bPrevCenso, bNextCenso, bPrevGastos, bNextGastos, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto, bAñadirConcepto;
-Button bAceptarConcepto, bCalendario, bCalendarioAlta;
+Button bAceptarConcepto, bCalendario, bCalendarioAlta, bCalendarioMovimiento, bAñadirRecibo, bDetalleBalance;
 
 void initButtons() {
-  buttons = new Button[25];
+  buttons = new Button[28];
   buttons[0] = new Button("Principal", 850, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
@@ -52,6 +53,10 @@ void initButtons() {
   buttons[22] = new Button("Detalle", (3*menuWidth)+20, primerIconY+20, 200, 50);
   buttons [23] = new Button("Calendario", 575, 165+bannerHeight, 100, 45);
   buttons[24] = new Button("Calendario", 970, 605+bannerHeight, 100, 45);
+  buttons[25] = new Button("Calendario", 420, 410, 100, 45);
+  buttons[26] = new Button("Añadir recibo", 780, 560, 465, 45);
+  buttons[27] = new Button("Detalle", 1080, 220, 150, 40);
+
 
 
   bPrincipal = buttons[0];
@@ -79,6 +84,9 @@ void initButtons() {
   bDetalle = buttons[22];
   bCalendario = buttons[23];
   bCalendarioAlta = buttons[24];
+  bCalendarioMovimiento = buttons[25];
+  bAñadirRecibo = buttons[26];
+  bDetalleBalance = buttons[27];
 }
 //Desactivar todos los botones
 void disableButtons() {
@@ -214,6 +222,7 @@ void displaytfNuevoHermano() {
 //TextInfo
 TextInfo tiNombre, tiApellidos, tiDNI, tiCalle, tiFechaNacimiento, tiFechaAlta, tiNumero, tiPiso, tiLocalidad, tiProvincia, tiTelefono, tiCorreoElectronico;
 TextInfo tiBanco, tiTitular, tiDNITitular, tiIBAN, tiEntidad, tiOficina, tiDigitoControl, tiNumeroCuenta, tiFechaNacimientoAñadir;
+TextInfo tiTitulo, tiCantidad, tiFechaMovimiento, tiTipo;
 
 void initTextInfo() {
   pushMatrix();
@@ -238,12 +247,15 @@ void initTextInfo() {
   tiFechaNacimiento = new TextInfo("Fecha Nacimiento", 380, 165, 300, 45);
   tiFechaAlta = new TextInfo("Fecha Alta", 770, 608, 268, 45);
   tiFechaNacimientoAñadir = new TextInfo(dataCalendari, 680, 165+bannerHeight, 200, 45);
+  tiTitulo = new TextInfo ("Titulo", 230, 350, 1020, 40);
+  tiCantidad = new TextInfo ("Cantidad", 780, 490, 465, 40);
+  tiFechaMovimiento = new TextInfo ("Fecha de movimiento", 420, 413, 350, 40);
+  tiTipo = new TextInfo ("Tipo", 780, 413, 465, 40);
   popMatrix();
 }
 
 
 void displayDetalleHermano() {
-
   tiNombre.display();
   tiApellidos.display();
   tiDNI.display();
@@ -495,23 +507,33 @@ String[][] infoGastosPresupuesto = {
   {"G.17", "Varios y gastos extraordinarios", "1200.00€"},
   {"G.18", "Adquisición artículos devoción", "1200.00€"},
 };
-SelectTable stBalanceIngresos;
+SelectTable stBalanceIngresos, stDetalleItem;
 
 int filasBalanceIngresos = 4, columnasBalanceIngresos=3;
+int filasDetalleItem = 5, columnasDetalleItem = 3;
+int filasArchivo = 4, columnasArchivo = 3;
 
 String[] headersBalance = {"Código", "Concepto", "Cantidad"};
+String[] headersDetalleItem = {"G.1", "GASTOS SERVICIOS Y MANTENIMIENTO ERMITA", "-1321.06"};
 
 // Amplades de les columnes
 float[] colWidthsBalance = {20, 50, 30};
+float[] colWidthsDetalleItem = {10, 70, 20};
 
 // Dades de la taula
 String[][] infoBalanceIngresos = {
   {"I.1", "Donativos", "3907,35€"},
-  {"I.1", "Cuotas hermanos", "3907,35€"},
-  {"I.1", "Subvención ayuntamiento", "3907,35€"},
+  {"I.2", "Cuotas hermanos", "3907,35€"},
+  {"I.3", "Subvención ayuntamiento", "3907,35€"},
+};
+String[][] infoDetalleItem = {
+  {"", "Rcbo. Iberdrola", "-269,25"},
+  {"", "Rcbo. Iberdrola", "-269,25"},
+  {"", "Rcbo. Iberdrola", "-269,25"},
 };
 
 int[] maxCharsBalanceIngresos = {10, 35, 15};
+int[] maxCharsDetalleItem = {10, 50, 20};
 
 void initSelectTable() {
   stBalanceIngresos = new SelectTable(filasBalanceIngresos, columnasBalanceIngresos, 250, 210, 800, 240);
@@ -529,22 +551,29 @@ void initSelectTable() {
   stCenso.setData(infoCenso);
   stCenso.setColumnWidths(colWidthsCenso);
   stCenso.setColumnMaxChars(maxCharsCenso);
-  stGastosPresupuesto = new SelectTable(filasGastos, columnasGastos, 250, 510, 800, 240);
+  stGastosPresupuesto = new SelectTable(filasGastos, columnasGastos, 250, 510, 1000, 165);
   stGastosPresupuesto.setHeaders(headersGastos);
   stGastosPresupuesto.setData(infoGastosPresupuesto);
   stGastosPresupuesto.setColumnWidths(colWidthsGastos);
   stGastosPresupuesto.setColumnMaxChars(maxCharsGastos);
+  stDetalleItem = new SelectTable(filasDetalleItem, columnasDetalleItem, 45+menuWidth, 320+bannerHeight, 800, 240);
+  stDetalleItem.setHeaders(headersDetalleItem);
+  stDetalleItem.setData(infoDetalleItem);
+  stDetalleItem.setColumnWidths(colWidthsDetalleItem);
+  stDetalleItem.setColumnMaxChars(maxCharsDetalleItem);
 }
 
 //CalendariPlus
 
-CalendariPlus cpFechaNacimiento, cpFechaAlta;
+CalendariPlus cpFechaNacimiento, cpFechaAlta, cpFechaMovimiento;
 String dataCalendari="";
 String dataCalendariAlta="";
+String dataCalendariMovimiento="";
 
 void initCalendariPlus() {
   cpFechaNacimiento = new CalendariPlus(680, 300, 600, 380);
   cpFechaAlta = new CalendariPlus(680, 300, 600, 380);
+  cpFechaMovimiento = new CalendariPlus(550, 410, 600, 380);
 }
 
 void displaycpFechaNacimiento() {
@@ -577,4 +606,41 @@ void displaycpFechaAlta() {
   popStyle();
   cpFechaAlta.display();
   bCalendarioAlta.display();
+}
+void displaycpFechaMovimiento() {
+  pushStyle();
+  // Rectangle
+  fill(255);
+  rect(530, 410, 180, 45);
+
+  // Text amb data seleccionada
+  fill(0);
+  textAlign(LEFT);
+  textSize(24);
+  text(dataCalendariMovimiento, 535, 410+30); //SE PINTA EL MATEIX QUE A dataCalendari!!
+  popStyle();
+  cpFechaMovimiento.display();
+  bCalendarioMovimiento.display();
+}
+
+//Table
+Table tDetalleItem;
+
+// Número de files (capçalera inclosa) i columnes de la taula
+int filas = 1, columnas = 3;
+
+// Títols de les columnes
+String[] headers = {"G.1", "GASTOS SERVICIOS Y MANTENIMIENTO ERMITA", "-1332,05€"};
+
+// Amplades de les columnes
+float[] colWidths = {10, 70, 20};
+
+// Dades de la taula
+String[][] info = {};
+
+void initTable() {
+  tDetalleItem = new Table(1, 3);
+  tDetalleItem.setHeaders(headers);
+  tDetalleItem.setData(info);
+  tDetalleItem.setColumnWidths(colWidths);
 }

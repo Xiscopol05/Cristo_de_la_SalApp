@@ -209,7 +209,7 @@ void dibujaPantallaCensoDetalle() {
     titDetallePersonalUser.display();
   }
   popMatrix();
-  
+
   popStyle();
   popMatrix();
 }
@@ -255,6 +255,7 @@ void dibujaPantallaContabilidadBalance() {
   bPrevGastos.setEnabled(true);
   bNextGastos.setEnabled(true);
   bAñadirConcepto.setEnabled(true);
+  bDetalleBalance.setEnabled(true);
 
   //dibujar elementos de la pantalla
   menu();
@@ -264,6 +265,7 @@ void dibujaPantallaContabilidadBalance() {
   displayButtonsMenu();
   titIngresos.display();
   titGastos.display();
+  bDetalleBalance.display();
   stBalanceIngresos.display();
   stGastos.display();
   bPrevGastos.display();
@@ -313,7 +315,17 @@ void dibujaPantallaContabilidadAñadirConcepto() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
+
   bAceptarConcepto.setEnabled(true);
+  bCalendarioMovimiento.setEnabled(true);
+  bAñadirRecibo.setEnabled(true);
+  if (cpFechaMovimiento.visible == true) {
+    disableButtons();
+    bAceptarConcepto.setEnabled(false);
+    bCalendarioMovimiento.setEnabled(false);
+    bAñadirRecibo.setEnabled(false);
+    sTipoConcepto.setCollapsed(true);
+  }
 
   //dibujar elementos de la pantalla
   menu();
@@ -327,7 +339,59 @@ void dibujaPantallaContabilidadAñadirConcepto() {
   tfTitulo.display();
   tfCantidad.display();
   bAceptarConcepto.display();
+  bAñadirRecibo.display();
   sTipoConcepto.display();
+  displaycpFechaMovimiento();
+  popStyle();
+  popMatrix();
+}
+
+void dibujaPantallaContabilidadDetalleBalance() {
+  pushMatrix();
+  pushStyle();
+  background(255);
+
+  //habilitar y deshabilitar botones
+  disableButtons();
+  enableButtonsMenu();
+  bAceptarConcepto.setEnabled(true);
+
+  //dibujar elementos de la pantalla
+  menu();
+  
+  //display elementos GUI
+  displayButtonsMenu();
+  tDetalleItem.display(45+menuWidth,230+bannerHeight,1000,65);
+  stDetalleItem.display();
+  popStyle();
+  popMatrix();
+}
+
+void dibujaPantallaContabilidadDetalleMovimiento() {
+  pushMatrix();
+  pushStyle();
+  //imagen de fondo
+  background(255);
+
+  //habilitar y deshabilitar botones
+  disableButtons();
+  enableButtonsMenu();
+  bAceptarConcepto.setEnabled(true);
+
+  //dibujar elementos de la pantalla
+  menu();
+  textFont(getFontAt(8));
+  text("Fecha de movimiento: ", 230, 440);
+
+
+  //display elementos GUI
+  displayButtonsMenu();
+  titConcepto.display();
+  bAceptarConcepto.display();
+  tiTitulo.display();
+  tiCantidad.display();
+  tiFechaMovimiento.display();
+  tiTipo.display();
   popStyle();
   popMatrix();
 }

@@ -1,10 +1,12 @@
 //enumeración de las pantallas de la aplicación
 enum PANTALLA {
-  INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO, CONTABILIDAD_BALANCE, CONTABILIDAD_PRESUPUESTO, CONTABILIDAD_AÑADIRCONCEPTO
+  INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO,
+    CONTABILIDAD_BALANCE, CONTABILIDAD_PRESUPUESTO, CONTABILIDAD_AÑADIRCONCEPTO, CONTABILIDAD_DETALLEBALANCE,
+    CONTABILIDAD_DETALLEMOVIMIENTO
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.CENSO_NUEVOHERMANO;
+PANTALLA pantalla =PANTALLA.CONTABILIDAD_DETALLEBALANCE;
 
 boolean logged= false;
 
@@ -72,6 +74,12 @@ void draw() {
   case CONTABILIDAD_AÑADIRCONCEPTO:
     dibujaPantallaContabilidadAñadirConcepto();
     break;
+  case CONTABILIDAD_DETALLEBALANCE:
+    dibujaPantallaContabilidadDetalleBalance();
+    break;
+  case CONTABILIDAD_DETALLEMOVIMIENTO:
+    dibujaPantallaContabilidadDetalleMovimiento();
+    break;
   }
 
   updateCursor();   // Modifica la apariencia del cursor
@@ -135,7 +143,7 @@ void mousePressed() {
     openWebPage("https://www.humildadtoledo.com/enlaces-de-interes");
   } else if (bAñadir.mouseOverButton() && bAñadir.enabled && pantalla == PANTALLA.CENSO) {
     pantalla = PANTALLA.CENSO_NUEVOHERMANO;
-  } else if (bAñadirConcepto.mouseOverButton() && bAñadirConcepto.enabled) {
+  } else if (bAñadirConcepto.mouseOverButton() && bAñadirConcepto.enabled && admin == true) {
     pantalla = PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO;
   } else if (bAceptarConcepto.mouseOverButton() && bAceptarConcepto.enabled) {
     pantalla = PANTALLA.CONTABILIDAD_BALANCE;
@@ -145,10 +153,15 @@ void mousePressed() {
     pantalla = PANTALLA.CENSO;
   } else if (itbPerfilPersonal.mouseOverButton() && itbPerfilPersonal.enabled) {
     pantalla = PANTALLA.CENSO_DETALLE;
+  } else if (bDetalleBalance.mouseOverButton() && bDetalleBalance.enabled) {
+    pantalla = PANTALLA.CONTABILIDAD_DETALLEBALANCE;
   } else if (bFicha.mouseOverButton() && bFicha.enabled && pantalla == PANTALLA.CENSO_NUEVOHERMANO) {
     selectInput("Selecciona un fitxer ...", "fileSelected");
-  } else if (bFicha.mouseOverButton() && bFicha.enabled && pantalla == PANTALLA.CENSO_DETALLE){
+  } else if (bAñadirRecibo.mouseOverButton() && bAñadirRecibo.enabled && pantalla == PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO) {
+    selectInput("Selecciona un fitxer ...", "fileSelected");
+  } else if (bFicha.mouseOverButton() && bFicha.enabled && pantalla == PANTALLA.CENSO_DETALLE) {
     launch(ruta+titulo2); // !!!NO FUNCIONA!!!
+    println(ruta+titulo2);
   }
   userText.isPressed();
   passText.isPressed();
@@ -185,45 +198,67 @@ void mousePressed() {
   stGastos.checkSelections();
   stGastosPresupuesto.checkSelections();
   stBalanceIngresos.checkSelections();
-  
+  stDetalleItem.checkSelections();
+
   cpFechaNacimiento.checkButtons();
-  
+
   // Si pitja el botó, canvia la visibilitat del calendari.
-  if(bCalendario.mouseOverButton()&& bCalendario.enabled){
+  if (bCalendario.mouseOverButton()&& bCalendario.enabled) {
     cpFechaNacimiento.visible = !cpFechaNacimiento.visible;
   }
-  
-  if(cpFechaNacimiento.bNext.mouseOverButton()){
+
+  if (cpFechaNacimiento.bNext.mouseOverButton()) {
     cpFechaNacimiento.nextMonth();
   }
-  
-  if(cpFechaNacimiento.bPrev.mouseOverButton()){
+
+  if (cpFechaNacimiento.bPrev.mouseOverButton()) {
     cpFechaNacimiento.prevMonth();
   }
-  
-  if(cpFechaNacimiento.bOK.mouseOverButton() && cpFechaNacimiento.dateSelected){
+
+  if (cpFechaNacimiento.bOK.mouseOverButton() && cpFechaNacimiento.dateSelected) {
     dataCalendari = cpFechaNacimiento.selectedDay +"/"+ cpFechaNacimiento.selectedMonth + "/"+ cpFechaNacimiento.selectedYear;
     cpFechaNacimiento.visible = false;
   }
 
-cpFechaAlta.checkButtons();
-  
+  cpFechaAlta.checkButtons();
+
   // Si pitja el botó, canvia la visibilitat del calendari.
-  if(bCalendarioAlta.mouseOverButton()&& bCalendarioAlta.enabled){
+  if (bCalendarioAlta.mouseOverButton()&& bCalendarioAlta.enabled) {
     cpFechaAlta.visible = !cpFechaAlta.visible;
   }
-  
-  if(cpFechaAlta.bNext.mouseOverButton()){
+
+  if (cpFechaAlta.bNext.mouseOverButton()) {
     cpFechaAlta.nextMonth();
   }
-  
-  if(cpFechaAlta.bPrev.mouseOverButton()){
+
+  if (cpFechaAlta.bPrev.mouseOverButton()) {
     cpFechaAlta.prevMonth();
   }
-  
-  if(cpFechaAlta.bOK.mouseOverButton() && cpFechaAlta.dateSelected){
+
+  if (cpFechaAlta.bOK.mouseOverButton() && cpFechaAlta.dateSelected) {
     dataCalendariAlta = cpFechaAlta.selectedDay +"/"+ cpFechaAlta.selectedMonth + "/"+ cpFechaAlta.selectedYear;
     cpFechaAlta.visible = false;
+  }
+
+
+  cpFechaMovimiento.checkButtons();
+
+  // Si pitja el botó, canvia la visibilitat del calendari.
+  if (bCalendarioMovimiento.mouseOverButton()&& bCalendarioMovimiento.enabled) {
+    cpFechaMovimiento.visible = !cpFechaMovimiento.visible;
+  }
+
+  if (cpFechaMovimiento.bNext.mouseOverButton()) {
+    cpFechaMovimiento.nextMonth();
+  }
+
+  if (cpFechaMovimiento.bPrev.mouseOverButton()) {
+    cpFechaMovimiento.prevMonth();
+  }
+
+  if (cpFechaMovimiento.bOK.mouseOverButton() && cpFechaMovimiento.dateSelected) {
+    dataCalendariMovimiento = cpFechaMovimiento.selectedDay +"/"+ cpFechaMovimiento.selectedMonth + "/"+ cpFechaMovimiento.selectedYear;
+    cpFechaMovimiento.visible = false;
   }
 }
 
