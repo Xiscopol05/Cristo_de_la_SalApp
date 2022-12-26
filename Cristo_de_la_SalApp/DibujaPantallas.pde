@@ -70,7 +70,7 @@ void dibujaPantallaCenso() {
   displayButtonsTabla();
   buscar.display();
   stCenso.display();
-  displayButtonsPagedTable();
+  displayButtonsPagedTableCenso();
   popStyle();
   popMatrix();
 }
@@ -114,17 +114,16 @@ void dibujaPantallaArchivo() {
   disableButtons();
   enableButtonsMenu();
   enableButtonsTabla();
-  enableButtonsPagedTable();
-
+  bPrevArchivo.setEnabled(true);
+  bNextArchivo.setEnabled(true);
   //dibujar elementos de la pantalla
   menu();
-  stCenso.display();
+  stArchivo.display();
 
   //display elementos GUI
   displayButtonsMenu();
   displayButtonsTabla();
-  buscar.display();
-  displayButtonsPagedTable();
+  displayButtonsPagedTableArchivo();
   popStyle();
   popMatrix();
 }
@@ -307,8 +306,9 @@ void dibujaPantallaContabilidadPresupuesto() {
 }
 
 void dibujaPantallaContabilidadAñadirConcepto() {
-  pushMatrix();
   pushStyle();
+
+  pushMatrix();
   //imagen de fondo
   background(255);
 
@@ -342,7 +342,6 @@ void dibujaPantallaContabilidadAñadirConcepto() {
   bAñadirRecibo.display();
   sTipoConcepto.display();
   displaycpFechaMovimiento();
-  popStyle();
   popMatrix();
 }
 
@@ -355,14 +354,20 @@ void dibujaPantallaContabilidadDetalleBalance() {
   disableButtons();
   enableButtonsMenu();
   bAceptarConcepto.setEnabled(true);
+  bPrevDetalle.setEnabled(true);
+  bNextDetalle.setEnabled(true);
+  bDetalleConcepto.setEnabled(true);
 
   //dibujar elementos de la pantalla
   menu();
-  
+
   //display elementos GUI
   displayButtonsMenu();
-  tDetalleItem.display(45+menuWidth,230+bannerHeight,1000,65);
+  tDetalleItem.display(45+menuWidth, 230+bannerHeight, 1000, 65);
   stDetalleItem.display();
+  bPrevDetalle.display();
+  bNextDetalle.display();
+  bDetalleConcepto.display();
   popStyle();
   popMatrix();
 }
@@ -392,6 +397,57 @@ void dibujaPantallaContabilidadDetalleMovimiento() {
   tiCantidad.display();
   tiFechaMovimiento.display();
   tiTipo.display();
+  popStyle();
+  popMatrix();
+}
+
+void dibujaPantallaArchivoNuevo() {
+  pushMatrix();
+  pushStyle();
+  //imagen de fondo
+  background(255);
+
+  //habilitar y deshabilitar botones
+  disableButtons();
+  enableButtonsMenu();
+  bCalendarioArchivo.setEnabled(true);
+  itbInsertarArchivo.setEnabled(true);
+  bAceptarArchivo.setEnabled(true);
+
+  //dibujar elementos de la pantalla
+  menu();
+  textFont(getFontAt(8));
+  text("Fecha de datación: ", 230, 440);
+  
+
+  //display elementos GUI
+  displayButtonsMenu();
+  titArchivo.display();
+  bAceptarArchivo.display();
+  tfTituloArchivo.display();
+  sCategoriaArchivo.display();
+  itbInsertarArchivo.display();
+  displaycpFechaArchivo();
+  popStyle();
+  popMatrix();
+}
+
+void dibujaPantallaArchivoDetalle() {
+  pushMatrix();
+  pushStyle();
+  //imagen de fondo
+  background(255);
+
+  //habilitar y deshabilitar botones
+  disableButtons();
+  enableButtonsMenu();
+
+  //dibujar elementos de la pantalla
+  menu();
+
+  //display elementos GUI
+  displayButtonsMenu();
+  titArchivo.display();
   popStyle();
   popMatrix();
 }

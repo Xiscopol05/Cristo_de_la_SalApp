@@ -25,9 +25,11 @@ Button bInicioSesion, bPrincipal;
 // Creación de los botones de la GUI
 Button bAñadir, bModificar, bDetalle, bAceptarCenso, bFicha, bPrevCenso, bNextCenso, bPrevGastos, bNextGastos, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto, bAñadirConcepto;
 Button bAceptarConcepto, bCalendario, bCalendarioAlta, bCalendarioMovimiento, bAñadirRecibo, bDetalleBalance;
+Button bPrevDetalle, bNextDetalle, bPrevArchivo, bNextArchivo, bAceptarArchivo, bCalendarioArchivo;
+Button bDetalleConcepto;
 
 void initButtons() {
-  buttons = new Button[28];
+  buttons = new Button[35];
   buttons[0] = new Button("Principal", 850, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
@@ -51,13 +53,18 @@ void initButtons() {
   buttons[20] = new Button("Añadir concepto", 1080, 170, 150, 40);
   buttons[21] = new Button("Aceptar", 645+menuWidth, 175+bannerHeight, 405, 40);
   buttons[22] = new Button("Detalle", (3*menuWidth)+20, primerIconY+20, 200, 50);
-  buttons [23] = new Button("Calendario", 575, 165+bannerHeight, 100, 45);
+  buttons[23] = new Button("Calendario", 575, 165+bannerHeight, 100, 45);
   buttons[24] = new Button("Calendario", 970, 605+bannerHeight, 100, 45);
   buttons[25] = new Button("Calendario", 420, 410, 100, 45);
   buttons[26] = new Button("Añadir recibo", 780, 560, 465, 45);
   buttons[27] = new Button("Detalle", 1080, 220, 150, 40);
-
-
+  buttons[28] = new Button("PREV", 1080, 680, 150, 30);
+  buttons[29] = new Button("NEXT", 1080, 720, 150, 30);
+  buttons[30] = new Button("Detalle", 45+menuWidth, 680, 150, 80);
+  buttons[31] = new Button("PREV", 950, 715, 60, 60);
+  buttons[32] = new Button("NEXT", 1050, 715, 60, 60);
+  buttons[33] = new Button("Aceptar", 643+menuWidth, 175+bannerHeight, 400, 40);
+  buttons[34] = new Button("Calendario", 400, 310+bannerHeight, 100, 45);
 
   bPrincipal = buttons[0];
   bInicioSesion = buttons[1];
@@ -87,6 +94,13 @@ void initButtons() {
   bCalendarioMovimiento = buttons[25];
   bAñadirRecibo = buttons[26];
   bDetalleBalance = buttons[27];
+  bPrevDetalle= buttons[28];
+  bNextDetalle= buttons[29];
+  bDetalleConcepto = buttons[30];
+  bPrevArchivo = buttons[31];
+  bNextArchivo = buttons[32];
+  bAceptarArchivo = buttons [33];
+  bCalendarioArchivo = buttons[34];
 }
 //Desactivar todos los botones
 void disableButtons() {
@@ -123,9 +137,13 @@ void displayButtonsTabla() {
 }
 
 // Dibuixa els botons
-void displayButtonsPagedTable() {
+void displayButtonsPagedTableCenso() {
   bNextCenso.display();
   bPrevCenso.display();
+}
+void displayButtonsPagedTableArchivo() {
+  bNextArchivo.display();
+  bPrevArchivo.display();
 }
 
 void enableButtonsEnlaces() {
@@ -166,6 +184,7 @@ TextField buscar;
 TextField tfNombre, tfApellidos, tfDNI, tfCalle, tfNumero, tfPiso, tfLocalidad, tfProvincia, tfTelefono, tfCorreoElectronico;
 TextField tfBanco, tfTitular, tfDNITitular, tfIBAN, tfEntidad, tfOficina, tfDigitoControl, tfNumeroCuenta;
 TextField tfTitulo, tfCantidad;
+TextField tfTituloArchivo;
 
 void initTextField() {
   userText = new TextField("usuario", (marcoWidth/2)-(marcoCuentaWidth/2)+20+inicioSesionX, (marcoHeight/2)-(marcoCuentaHeight/2)+130+inicioSesionY, 350, 35);
@@ -191,6 +210,7 @@ void initTextField() {
   tfNumeroCuenta = new TextField ("Número de cuenta", 677+menuWidth, 522+bannerHeight, 357, 45);
   tfTitulo = new TextField ("Titulo", 230, 350, 1020, 40);
   tfCantidad = new TextField ("Cantidad", 780, 490, 465, 40);
+  tfTituloArchivo = new TextField("Título", 27+menuWidth, 247+bannerHeight, 1020, 45);
 }
 
 void displayInicioSesiontf() {
@@ -246,7 +266,6 @@ void initTextInfo() {
   tiNumeroCuenta = new TextInfo ("Número de cuenta", 677, 522, 357, 45);
   tiFechaNacimiento = new TextInfo("Fecha Nacimiento", 380, 165, 300, 45);
   tiFechaAlta = new TextInfo("Fecha Alta", 770, 608, 268, 45);
-  tiFechaNacimientoAñadir = new TextInfo(dataCalendari, 680, 165+bannerHeight, 200, 45);
   tiTitulo = new TextInfo ("Titulo", 230, 350, 1020, 40);
   tiCantidad = new TextInfo ("Cantidad", 780, 490, 465, 40);
   tiFechaMovimiento = new TextInfo ("Fecha de movimiento", 420, 413, 350, 40);
@@ -282,15 +301,17 @@ void displayDetalleHermano() {
 
 ImgTextButton[] imgtextbuttons;
 ImgTextButton itbCenso, itbContabilidad, itbArchivo, itbAvisos, itbEnlaces, itbPerfilPersonal;
+ImgTextButton itbInsertarArchivo;
 
 void initImgTextButton() {
-  imgtextbuttons = new ImgTextButton[6];
+  imgtextbuttons = new ImgTextButton[7];
   imgtextbuttons[0] = new ImgTextButton(getIconCenso(), "Censo", 0, primerIconY, iconWidth, iconHeight);
   imgtextbuttons[1] = new ImgTextButton(getIconContabilidad(), "Contabilidad", 0, segundoIconY, iconWidth, iconHeight);
   imgtextbuttons[2] = new ImgTextButton(getIconArchivo(), "Archivo", 0, tercerIconY, iconWidth, iconHeight);
   imgtextbuttons[3] = new ImgTextButton(getIconAvisos(), "Avisos y alertas", 0, cuartoIconY, iconWidth, iconHeight );
   imgtextbuttons[4] = new ImgTextButton(getIconEnlaces(), "Enlaces", 0, quintoIconY, iconWidth, iconHeight);
   imgtextbuttons[5] = new ImgTextButton(getIconCenso(), "Perfil Personal", 0, primerIconY, iconWidth, iconHeight);
+  imgtextbuttons[6] = new ImgTextButton(getIconFile(), "Insertar Archivo", 730+menuWidth, 380+bannerHeight, 190, 100);
 
   itbCenso = imgtextbuttons[0];
   itbContabilidad = imgtextbuttons[1];
@@ -298,6 +319,7 @@ void initImgTextButton() {
   itbAvisos = imgtextbuttons[3];
   itbEnlaces = imgtextbuttons[4];
   itbPerfilPersonal = imgtextbuttons[5];
+  itbInsertarArchivo = imgtextbuttons[6];
 }
 
 // Activar los botones del menú
@@ -401,7 +423,7 @@ void initShowImage() {
 
 //Titulo
 
-Titulo titIngresos, titGastos, titConcepto, titDetallePersonal, titDetallePersonalUser;
+Titulo titIngresos, titGastos, titConcepto, titDetallePersonal, titDetallePersonalUser, titArchivo;
 
 void initTitulo() {
   titIngresos = new Titulo("Ingresos", 250, 170, 800, 40);
@@ -409,26 +431,31 @@ void initTitulo() {
   titConcepto = new Titulo ("Concepto", 230, 275, 610, 40);
   titDetallePersonal = new Titulo ("Detalle personal", 20, 25, 605, 35);
   titDetallePersonalUser = new Titulo("Detalle personal", 20, 25, 1080-20-10, 35);
+  titArchivo = new Titulo("Archivo", 27+menuWidth, 175+bannerHeight, 610, 40);
 }
 
 //Select
 
-Select sTipoConcepto;
+Select sTipoConcepto, sCategoriaArchivo;
 
 
 String[] selectValuesConcepto = {"I.1", "I.2", "I.3", "G.1", "G.2", "G.3", "G.4", "G.5", "G.6", "G.7", "G.8", "G.9", "G.10", "G.11", "G.12", "G.13", "G.14", "G.15", "G.16", "G.17", "G.18", };
+String[] selectValuesCategoriaArchivo = {"Imágen", "Documento", "Programa", "Vídeo"};
 
 // Dimensions dels botons
 float selectConceptoW = 465;
 float selectConceptoH = 40;
+float selectArchivoW = 470;
+float selectArchivoH = 45;
 
 void initSelect() {
   sTipoConcepto = new Select(selectValuesConcepto, 780, 420, selectConceptoW, selectConceptoH);
+  sCategoriaArchivo = new Select(selectValuesCategoriaArchivo, 580+menuWidth, 310+bannerHeight, selectArchivoW, selectArchivoH);
 }
 
 //SelectTable
 
-SelectTable stCenso, stGastos, stGastosPresupuesto;
+SelectTable stCenso, stGastos, stGastosPresupuesto, stArchivo;
 
 int filasCenso = 6, columnasCenso = 5;
 
@@ -455,6 +482,24 @@ String[][] infoCenso = {
   {"13", "Joan", "Melis Cabrer", "47", "Home"},
   {"14", "Bel", "Riera Mates", "52", "Dona"},
   {"15", "Jose", "Perez Galdós", "37", "Home"},
+};
+
+int filasArchivo = 5, columnasArchivo = 3;
+String[] headersArchivo = {"Título", "Fecha", "Categoría"};
+
+float[] colWidthsArchivo = {40, 30, 30};
+
+int[] maxCharsArchivo = {30, 20, 20};
+
+// Dades de la taula
+String[][] infoArchivo = {
+  {"Cristo Antiguo", "1920", "Imágen"},
+  {"Programa de fiestas", "2020", "Programa"},
+  {"Boletín de inscripción", "1620", "Documento"},
+  {"Cristo Antiguo", "1920", "Imágen"},
+  {"Procesión COVID-19", "2021", "Vídeo"},
+  {"Cristo Antiguo", "1920", "Imágen"},
+
 };
 
 int filasGastos = 4, columnasGastos = 3;
@@ -510,8 +555,8 @@ String[][] infoGastosPresupuesto = {
 SelectTable stBalanceIngresos, stDetalleItem;
 
 int filasBalanceIngresos = 4, columnasBalanceIngresos=3;
-int filasDetalleItem = 5, columnasDetalleItem = 3;
-int filasArchivo = 4, columnasArchivo = 3;
+int filasDetalleItem = 4, columnasDetalleItem = 3;
+
 
 String[] headersBalance = {"Código", "Concepto", "Cantidad"};
 String[] headersDetalleItem = {"G.1", "GASTOS SERVICIOS Y MANTENIMIENTO ERMITA", "-1321.06"};
@@ -527,9 +572,12 @@ String[][] infoBalanceIngresos = {
   {"I.3", "Subvención ayuntamiento", "3907,35€"},
 };
 String[][] infoDetalleItem = {
-  {"", "Rcbo. Iberdrola", "-269,25"},
-  {"", "Rcbo. Iberdrola", "-269,25"},
-  {"", "Rcbo. Iberdrola", "-269,25"},
+  {"", "Rcbo. Iberdrola", "-234,25€"},
+  {"", "Rcbo. Iberdrola", "-686,25€"},
+  {"", "Rcbo. Iberdrola", "-123,25€"},
+  {"", "Rcbo. Iberdrola", "-432,25€"},
+  {"", "Rcbo. Iberdrola", "-369,25€"},
+  {"", "Rcbo. Iberdrola", "-234,25€"},
 };
 
 int[] maxCharsBalanceIngresos = {10, 35, 15};
@@ -551,29 +599,36 @@ void initSelectTable() {
   stCenso.setData(infoCenso);
   stCenso.setColumnWidths(colWidthsCenso);
   stCenso.setColumnMaxChars(maxCharsCenso);
-  stGastosPresupuesto = new SelectTable(filasGastos, columnasGastos, 250, 510, 1000, 165);
+  stGastosPresupuesto = new SelectTable(filasGastos, columnasGastos, 250, 510, 800, 240);
   stGastosPresupuesto.setHeaders(headersGastos);
   stGastosPresupuesto.setData(infoGastosPresupuesto);
   stGastosPresupuesto.setColumnWidths(colWidthsGastos);
   stGastosPresupuesto.setColumnMaxChars(maxCharsGastos);
-  stDetalleItem = new SelectTable(filasDetalleItem, columnasDetalleItem, 45+menuWidth, 320+bannerHeight, 800, 240);
+  stDetalleItem = new SelectTable(filasDetalleItem, columnasDetalleItem, 45+menuWidth, 320+bannerHeight, 1000, 240);
   stDetalleItem.setHeaders(headersDetalleItem);
   stDetalleItem.setData(infoDetalleItem);
   stDetalleItem.setColumnWidths(colWidthsDetalleItem);
   stDetalleItem.setColumnMaxChars(maxCharsDetalleItem);
+  stArchivo = new SelectTable(filasArchivo, columnasArchivo, 20+menuWidth, 285, 1280-menuWidth-40, 410);
+  stArchivo.setHeaders(headersArchivo);
+  stArchivo.setData(infoArchivo);
+  stArchivo.setColumnWidths(colWidthsArchivo);
+  stArchivo.setColumnMaxChars(maxCharsArchivo);
 }
 
 //CalendariPlus
 
-CalendariPlus cpFechaNacimiento, cpFechaAlta, cpFechaMovimiento;
-String dataCalendari="";
+CalendariPlus cpFechaNacimiento, cpFechaAlta, cpFechaMovimiento, cpFechaArchivo;
+String dataCalendariNacimiento=" ";
 String dataCalendariAlta="";
 String dataCalendariMovimiento="";
+String dataCalendarioArchivo = "";
 
 void initCalendariPlus() {
   cpFechaNacimiento = new CalendariPlus(680, 300, 600, 380);
   cpFechaAlta = new CalendariPlus(680, 300, 600, 380);
   cpFechaMovimiento = new CalendariPlus(550, 410, 600, 380);
+  cpFechaArchivo = new CalendariPlus(300+menuWidth, 400+bannerHeight, 600, 300);
 }
 
 void displaycpFechaNacimiento() {
@@ -583,13 +638,15 @@ void displaycpFechaNacimiento() {
   rect(680, 165+bannerHeight, 200, 45);
 
   // Text amb data seleccionada
+  text(dataCalendariNacimiento, 690, 165+bannerHeight+30);
   fill(0);
   textAlign(LEFT);
   textSize(24);
-  text(dataCalendari, 690, 165+bannerHeight+30);
-  popStyle();
+
   cpFechaNacimiento.display();
   bCalendario.display();
+
+  popStyle();
 }
 
 void displaycpFechaAlta() {
@@ -603,10 +660,29 @@ void displaycpFechaAlta() {
   textAlign(LEFT);
   textSize(24);
   text(dataCalendariAlta, 1082, 605+bannerHeight+30); //SE PINTA EL MATEIX QUE A dataCalendari!!
-  popStyle();
   cpFechaAlta.display();
   bCalendarioAlta.display();
+  
+  popStyle();
 }
+
+void displaycpFechaArchivo() {
+  pushStyle();
+  // Rectangle
+  fill(255);
+  rect(510, 310+bannerHeight, 180, 45);
+
+  // Text amb data seleccionada
+  fill(0);
+  textAlign(LEFT);
+  textSize(24);
+  text(dataCalendarioArchivo, 514, 310+bannerHeight+30); 
+  cpFechaArchivo.display();
+  bCalendarioArchivo.display();
+  
+  popStyle();
+}
+
 void displaycpFechaMovimiento() {
   pushStyle();
   // Rectangle
@@ -621,6 +697,11 @@ void displaycpFechaMovimiento() {
   popStyle();
   cpFechaMovimiento.display();
   bCalendarioMovimiento.display();
+  fill(0);
+  textAlign(LEFT);
+  textSize(24);
+  text(dataCalendariMovimiento, 535, 410+30); //SE PINTA EL MATEIX QUE A dataCalendari!!
+  popStyle();
 }
 
 //Table

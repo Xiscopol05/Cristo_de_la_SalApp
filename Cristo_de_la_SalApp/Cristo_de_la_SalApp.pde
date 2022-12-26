@@ -2,11 +2,11 @@
 enum PANTALLA {
   INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO,
     CONTABILIDAD_BALANCE, CONTABILIDAD_PRESUPUESTO, CONTABILIDAD_AÑADIRCONCEPTO, CONTABILIDAD_DETALLEBALANCE,
-    CONTABILIDAD_DETALLEMOVIMIENTO
+    CONTABILIDAD_DETALLEMOVIMIENTO, ARCHIVO_NUEVO, ARCHIVO_DETALLE
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.CONTABILIDAD_DETALLEBALANCE;
+PANTALLA pantalla =PANTALLA.ARCHIVO_NUEVO;
 
 boolean logged= false;
 
@@ -20,8 +20,7 @@ int lastKeyCodePressed;
 
 
 void setup() {
-  size(1280, 800);
-  //fullScreen();
+  fullScreen();
   setColors();
   setFonts();
   setMedias();
@@ -35,6 +34,7 @@ void draw() {
   textAlign(LEFT);
   fill(0);
   textFont(getFontAt(4));
+
 
   // Dibuja la pantalla correspondiente
   switch(pantalla) {
@@ -80,6 +80,12 @@ void draw() {
   case CONTABILIDAD_DETALLEMOVIMIENTO:
     dibujaPantallaContabilidadDetalleMovimiento();
     break;
+  case ARCHIVO_NUEVO:
+    dibujaPantallaArchivoNuevo();
+    break;
+  case ARCHIVO_DETALLE:
+    dibujaPantallaArchivoDetalle();
+    break;
   }
 
   updateCursor();   // Modifica la apariencia del cursor
@@ -107,6 +113,10 @@ void mousePressed() {
     stGastosPresupuesto.nextPage();
   } else if (bPrevGastos.mouseOverButton() && bPrevGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_PRESUPUESTO) {
     stGastosPresupuesto.prevPage();
+  } else if (bPrevDetalle.mouseOverButton() && bPrevDetalle.enabled) {
+    stDetalleItem.prevPage();
+  } else if (bNextDetalle.mouseOverButton() && bNextDetalle.enabled) {
+    stDetalleItem.nextPage();
   } else if (bInicioSesion.mouseOverButton() && bInicioSesion.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
   } else if (itbCenso.mouseOverButton() && itbCenso.enabled) {
@@ -149,7 +159,7 @@ void mousePressed() {
     pantalla = PANTALLA.CONTABILIDAD_BALANCE;
   } else if (bDetalle.mouseOverButton() && bDetalle.enabled && pantalla == PANTALLA.CENSO) {
     pantalla = PANTALLA.CENSO_DETALLE;
-  } else if ( bAceptarCenso.mouseOverButton() && bAceptarCenso.enabled && pantalla == PANTALLA.CENSO_DETALLE) {
+  } else if ( bAceptarCenso.mouseOverButton() && bAceptarCenso.enabled && pantalla == PANTALLA.CENSO_NUEVOHERMANO) {
     pantalla = PANTALLA.CENSO;
   } else if (itbPerfilPersonal.mouseOverButton() && itbPerfilPersonal.enabled) {
     pantalla = PANTALLA.CENSO_DETALLE;
@@ -160,8 +170,21 @@ void mousePressed() {
   } else if (bAñadirRecibo.mouseOverButton() && bAñadirRecibo.enabled && pantalla == PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO) {
     selectInput("Selecciona un fitxer ...", "fileSelected");
   } else if (bFicha.mouseOverButton() && bFicha.enabled && pantalla == PANTALLA.CENSO_DETALLE) {
-    launch(ruta+titulo2); // !!!NO FUNCIONA!!!
-    println(ruta+titulo2);
+    launch(ruta+titulo1); // !!!NO FUNCIONA!!!
+  } else if (bDetalleConcepto.mouseOverButton() && bDetalleConcepto.enabled) {
+    pantalla =  PANTALLA.CONTABILIDAD_DETALLEMOVIMIENTO;
+  } else if (bPrevArchivo.mouseOverButton() && bPrevArchivo.enabled) {
+    stArchivo.prevPage();
+  } else if (bNextArchivo.mouseOverButton() && bNextArchivo.enabled) {
+    stArchivo.nextPage();
+  } else if (bAñadir.mouseOverButton() && bAñadir.enabled && pantalla == PANTALLA.ARCHIVO) {
+    pantalla = PANTALLA.ARCHIVO_NUEVO;
+  } else if (bDetalle.mouseOverButton() && bDetalle.enabled && pantalla == PANTALLA.ARCHIVO) {
+    pantalla = PANTALLA.ARCHIVO_DETALLE;
+  } else if (itbInsertarArchivo.mouseOverButton() && itbInsertarArchivo.enabled && pantalla == PANTALLA.ARCHIVO_NUEVO) {
+    selectInput("Selecciona un fitxer ...", "fileSelected");
+  } else if (bAceptarArchivo.mouseOverButton() && bAceptarArchivo.enabled && pantalla == PANTALLA.ARCHIVO_NUEVO) {
+    pantalla = PANTALLA.ARCHIVO;
   }
   userText.isPressed();
   passText.isPressed();
@@ -186,6 +209,7 @@ void mousePressed() {
   tfNumeroCuenta.isPressed();
   tfTitulo.isPressed();
   tfCantidad.isPressed();
+  tfTituloArchivo.isPressed();
   cEventos.checkButtons();
 
   if (sTipoConcepto.mouseOverSelect() && sTipoConcepto.enabled) {
@@ -194,31 +218,19 @@ void mousePressed() {
     }
     sTipoConcepto.toggle();        // Plegar o desplegar
   }
+  if (sCategoriaArchivo.mouseOverSelect() && sCategoriaArchivo.enabled) {
+    if (!sCategoriaArchivo.collapsed) {
+      sCategoriaArchivo.update();      // Actualitzar valor
+    }
+    sCategoriaArchivo.toggle();        // Plegar o desplegar
+  }
   stCenso.checkSelections();
   stGastos.checkSelections();
   stGastosPresupuesto.checkSelections();
   stBalanceIngresos.checkSelections();
   stDetalleItem.checkSelections();
+  stArchivo.checkSelections();
 
-  cpFechaNacimiento.checkButtons();
-
-  // Si pitja el botó, canvia la visibilitat del calendari.
-  if (bCalendario.mouseOverButton()&& bCalendario.enabled) {
-    cpFechaNacimiento.visible = !cpFechaNacimiento.visible;
-  }
-
-  if (cpFechaNacimiento.bNext.mouseOverButton()) {
-    cpFechaNacimiento.nextMonth();
-  }
-
-  if (cpFechaNacimiento.bPrev.mouseOverButton()) {
-    cpFechaNacimiento.prevMonth();
-  }
-
-  if (cpFechaNacimiento.bOK.mouseOverButton() && cpFechaNacimiento.dateSelected) {
-    dataCalendari = cpFechaNacimiento.selectedDay +"/"+ cpFechaNacimiento.selectedMonth + "/"+ cpFechaNacimiento.selectedYear;
-    cpFechaNacimiento.visible = false;
-  }
 
   cpFechaAlta.checkButtons();
 
@@ -259,6 +271,44 @@ void mousePressed() {
   if (cpFechaMovimiento.bOK.mouseOverButton() && cpFechaMovimiento.dateSelected) {
     dataCalendariMovimiento = cpFechaMovimiento.selectedDay +"/"+ cpFechaMovimiento.selectedMonth + "/"+ cpFechaMovimiento.selectedYear;
     cpFechaMovimiento.visible = false;
+  }
+  cpFechaNacimiento.checkButtons();
+
+  // Si pitja el botó, canvia la visibilitat del calendari.
+  if (bCalendario.mouseOverButton()&& bCalendario.enabled) {
+    cpFechaNacimiento.visible = !cpFechaNacimiento.visible;
+  }
+
+  if (cpFechaNacimiento.bNext.mouseOverButton()) {
+    cpFechaNacimiento.nextMonth();
+  }
+
+  if (cpFechaNacimiento.bPrev.mouseOverButton()) {
+    cpFechaNacimiento.prevMonth();
+  }
+
+  if (cpFechaNacimiento.bOK.mouseOverButton() && cpFechaNacimiento.dateSelected) {
+    dataCalendariNacimiento= cpFechaNacimiento.selectedDay +"/"+ cpFechaNacimiento.selectedMonth + "/"+ cpFechaNacimiento.selectedYear;
+    cpFechaNacimiento.visible = false;
+  }
+  cpFechaArchivo.checkButtons();
+
+  // Si pitja el botó, canvia la visibilitat del calendari.
+  if (bCalendarioArchivo.mouseOverButton()&& bCalendarioArchivo.enabled) {
+    cpFechaArchivo.visible = !cpFechaArchivo.visible;
+  }
+
+  if (cpFechaArchivo.bNext.mouseOverButton()) {
+    cpFechaArchivo.nextMonth();
+  }
+
+  if (cpFechaArchivo.bPrev.mouseOverButton()) {
+    cpFechaArchivo.prevMonth();
+  }
+
+  if (cpFechaArchivo.bOK.mouseOverButton() && cpFechaArchivo.dateSelected) {
+    dataCalendarioArchivo= cpFechaArchivo.selectedDay +"/"+ cpFechaArchivo.selectedMonth + "/"+ cpFechaArchivo.selectedYear;
+    cpFechaArchivo.visible = false;
   }
 }
 
@@ -308,6 +358,7 @@ void keyPressed() {
   tfDigitoControl.keyPressed(key, (int)keyCode);
   tfNumeroCuenta.keyPressed(key, (int)keyCode);
   tfTitulo.keyPressed(key, (int)keyCode);
+  tfTituloArchivo.keyPressed(key, (int)keyCode);
   comprovaLogin();
   lastKeyCodePressed= (int)keyCode;
   // Anar un mes enrere
