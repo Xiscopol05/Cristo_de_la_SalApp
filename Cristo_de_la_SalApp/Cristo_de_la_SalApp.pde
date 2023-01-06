@@ -20,7 +20,7 @@ int lastKeyCodePressed;
 
 
 void setup() {
-  fullScreen();
+  size(1280,800);
   setColors();
   setFonts();
   setMedias();
