@@ -212,12 +212,6 @@ void mousePressed() {
   tfTituloArchivo.isPressed();
   cEventos.checkButtons();
 
-  if (sTipoConcepto.mouseOverSelect() && sTipoConcepto.enabled) {
-    if (!sTipoConcepto.collapsed) {
-      sTipoConcepto.update();      // Actualitzar valor
-    }
-    sTipoConcepto.toggle();        // Plegar o desplegar
-  }
   if (sCategoriaArchivo.mouseOverSelect() && sCategoriaArchivo.enabled) {
     if (!sCategoriaArchivo.collapsed) {
       sCategoriaArchivo.update();      // Actualitzar valor
@@ -310,6 +304,8 @@ void mousePressed() {
     dataCalendarioArchivo= cpFechaArchivo.selectedDay +"/"+ cpFechaArchivo.selectedMonth + "/"+ cpFechaArchivo.selectedYear;
     cpFechaArchivo.visible = false;
   }
+  stlTipoConcepto.mouseOn();
+  
 }
 
 // Modifica el cursor
@@ -371,6 +367,7 @@ void keyPressed() {
     cEventos.nextMonth();
     println("PREV MONTH");
   }
+  stlTipoConcepto.keyOn();
 }
 
 

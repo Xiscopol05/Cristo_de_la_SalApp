@@ -15,6 +15,7 @@ void setGUI() {
   initSelectTable();
   initCalendariPlus();
   initTable();
+  initSelectTextList();
 }
 
 // Botones
@@ -436,10 +437,10 @@ void initTitulo() {
 
 //Select
 
-Select sTipoConcepto, sCategoriaArchivo;
+Select sCategoriaArchivo;
 
 
-String[] selectValuesConcepto = {"I.1", "I.2", "I.3", "G.1", "G.2", "G.3", "G.4", "G.5", "G.6", "G.7", "G.8", "G.9", "G.10", "G.11", "G.12", "G.13", "G.14", "G.15", "G.16", "G.17", "G.18", };
+
 String[] selectValuesCategoriaArchivo = {"Imágen", "Documento", "Programa", "Vídeo"};
 
 // Dimensions dels botons
@@ -449,8 +450,20 @@ float selectArchivoW = 470;
 float selectArchivoH = 45;
 
 void initSelect() {
-  sTipoConcepto = new Select(selectValuesConcepto, 780, 420, selectConceptoW, selectConceptoH);
   sCategoriaArchivo = new Select(selectValuesCategoriaArchivo, 580+menuWidth, 310+bannerHeight, selectArchivoW, selectArchivoH);
+}
+
+//SelectTextList
+
+SelectTextList stlTipoConcepto;
+
+String selectedCountry; 
+String[][] selectValuesConcepto = {{"0", "I.1"}, {"1", "I.2"}, {"2", "I.3"}, {"3", "G.1"}, {"4","G.2"}, {"5", "G.3"},
+  {"6", "G.4"}, {"7", "G.5"}, {"8", "G.6"}, {"9", "G.7"}, {"10", "G.8"}, {"11", "G.9"}, {"12", "G.10"},
+  {"13", "G.11"}, {"14", "G.12"}, {"15", "G.13"}, {"16", "G.14"}, {"17", "G.15"}, {"18", "G.16"}, {"19", "G.17"}, {"20", "G.18"} };
+
+void initSelectTextList() {
+  stlTipoConcepto = new SelectTextList(selectValuesConcepto, 780, 420, selectConceptoW-50, selectConceptoH);
 }
 
 //SelectTable
@@ -662,7 +675,7 @@ void displaycpFechaAlta() {
   text(dataCalendariAlta, 1082, 605+bannerHeight+30); //SE PINTA EL MATEIX QUE A dataCalendari!!
   cpFechaAlta.display();
   bCalendarioAlta.display();
-  
+
   popStyle();
 }
 
@@ -676,10 +689,10 @@ void displaycpFechaArchivo() {
   fill(0);
   textAlign(LEFT);
   textSize(24);
-  text(dataCalendarioArchivo, 514, 310+bannerHeight+30); 
+  text(dataCalendarioArchivo, 514, 310+bannerHeight+30);
   cpFechaArchivo.display();
   bCalendarioArchivo.display();
-  
+
   popStyle();
 }
 

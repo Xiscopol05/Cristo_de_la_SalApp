@@ -324,7 +324,6 @@ void dibujaPantallaContabilidadAñadirConcepto() {
     bAceptarConcepto.setEnabled(false);
     bCalendarioMovimiento.setEnabled(false);
     bAñadirRecibo.setEnabled(false);
-    sTipoConcepto.setCollapsed(true);
   }
 
   //dibujar elementos de la pantalla
@@ -340,7 +339,10 @@ void dibujaPantallaContabilidadAñadirConcepto() {
   tfCantidad.display();
   bAceptarConcepto.display();
   bAñadirRecibo.display();
-  sTipoConcepto.display();
+  pushStyle();
+  textFont(getFontAt(7));
+  stlTipoConcepto.display();
+  popStyle();
   displaycpFechaMovimiento();
   popMatrix();
 }
@@ -410,23 +412,27 @@ void dibujaPantallaArchivoNuevo() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
+
   bCalendarioArchivo.setEnabled(true);
   itbInsertarArchivo.setEnabled(true);
   bAceptarArchivo.setEnabled(true);
+  if (sCategoriaArchivo.collapsed == false) {
+    itbInsertarArchivo.setEnabled(false);
+  }
 
   //dibujar elementos de la pantalla
   menu();
   textFont(getFontAt(8));
   text("Fecha de datación: ", 230, 440);
-  
+
 
   //display elementos GUI
   displayButtonsMenu();
   titArchivo.display();
   bAceptarArchivo.display();
   tfTituloArchivo.display();
-  sCategoriaArchivo.display();
   itbInsertarArchivo.display();
+  sCategoriaArchivo.display();
   displaycpFechaArchivo();
   popStyle();
   popMatrix();
