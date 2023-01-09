@@ -457,3 +457,33 @@ void dibujaPantallaArchivoDetalle() {
   popStyle();
   popMatrix();
 }
+
+void dibujaPantallaAvisosNuevoAviso(){
+  pushMatrix();
+  pushStyle();
+  //imagen de fondo
+  background(255);
+
+  //habilitar y deshabilitar botones
+  disableButtons();
+  enableButtonsMenu();
+  itbInsertarArchivoAvisos.setEnabled(true);
+
+
+  //dibujar elementos de la pantalla
+  menu();
+  
+  //display elementos GUI
+  displayButtonsMenu();
+  titNuevoAviso.display();
+  bAceptarAvisosAlertas.display();
+  tfTituloAviso.display();
+  taNuevoAviso.display();
+  itbInsertarArchivoAvisos.display();
+  popStyle();
+  popMatrix();
+}
+
+void dibujaPantallaAvisosNuevoEvento(){
+  
+}

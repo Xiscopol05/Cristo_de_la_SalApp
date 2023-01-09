@@ -66,7 +66,7 @@ class TextField {
 
         boolean isKeyCapitalLetter = (key >= 'A' && key <= 'Z');
         boolean isKeySmallLetter = (key >= 'a' && key <= 'z');
-        boolean isKeyNumber = (key >= '0' && key <= '9');
+        boolean isKeyNumber = (key >= '0' && key <= '9') || (key=='.');
         boolean isSpecialKey = (keyCode==50);
         boolean isKeyAcento = (keyCode==65 || keyCode==69 || keyCode==73 || keyCode==79 ||
           keyCode==85);

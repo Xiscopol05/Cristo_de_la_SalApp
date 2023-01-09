@@ -2,11 +2,11 @@
 enum PANTALLA {
   INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO,
     CONTABILIDAD_BALANCE, CONTABILIDAD_PRESUPUESTO, CONTABILIDAD_AÑADIRCONCEPTO, CONTABILIDAD_DETALLEBALANCE,
-    CONTABILIDAD_DETALLEMOVIMIENTO, ARCHIVO_NUEVO, ARCHIVO_DETALLE
+    CONTABILIDAD_DETALLEMOVIMIENTO, ARCHIVO_NUEVO, ARCHIVO_DETALLE, AVISOS_NUEVOAVISO, AVISOS_NUEVOEVENTO;
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.ARCHIVO_NUEVO;
+PANTALLA pantalla =PANTALLA.AVISOS_NUEVOAVISO;
 
 boolean logged= false;
 
@@ -20,7 +20,7 @@ int lastKeyCodePressed;
 
 
 void setup() {
-  size(1280,800);
+  size(1280, 800);
   setColors();
   setFonts();
   setMedias();
@@ -85,6 +85,12 @@ void draw() {
     break;
   case ARCHIVO_DETALLE:
     dibujaPantallaArchivoDetalle();
+    break;
+  case AVISOS_NUEVOAVISO:
+    dibujaPantallaAvisosNuevoAviso();
+    break;
+  case AVISOS_NUEVOEVENTO:
+    dibujaPantallaAvisosNuevoEvento();
     break;
   }
 
@@ -183,6 +189,8 @@ void mousePressed() {
     pantalla = PANTALLA.ARCHIVO_DETALLE;
   } else if (itbInsertarArchivo.mouseOverButton() && itbInsertarArchivo.enabled && pantalla == PANTALLA.ARCHIVO_NUEVO) {
     selectInput("Selecciona un fitxer ...", "fileSelected");
+  } else if (itbInsertarArchivoAvisos.mouseOverButton() && itbInsertarArchivoAvisos.enabled) {
+    selectInput("Selecciona un fitxer ...", "fileSelected");
   } else if (bAceptarArchivo.mouseOverButton() && bAceptarArchivo.enabled && pantalla == PANTALLA.ARCHIVO_NUEVO) {
     pantalla = PANTALLA.ARCHIVO;
   }
@@ -210,6 +218,8 @@ void mousePressed() {
   tfTitulo.isPressed();
   tfCantidad.isPressed();
   tfTituloArchivo.isPressed();
+  tfTituloAviso.isPressed();
+  taNuevoAviso.isPressed();
   cEventos.checkButtons();
 
   if (sCategoriaArchivo.mouseOverSelect() && sCategoriaArchivo.enabled) {
@@ -305,7 +315,6 @@ void mousePressed() {
     cpFechaArchivo.visible = false;
   }
   stlTipoConcepto.mouseOn();
-  
 }
 
 // Modifica el cursor
@@ -355,6 +364,8 @@ void keyPressed() {
   tfNumeroCuenta.keyPressed(key, (int)keyCode);
   tfTitulo.keyPressed(key, (int)keyCode);
   tfTituloArchivo.keyPressed(key, (int)keyCode);
+  tfTituloAviso.keyPressed(key, (int)keyCode);
+  taNuevoAviso.keyPressed(key, (int)keyCode);
   comprovaLogin();
   lastKeyCodePressed= (int)keyCode;
   // Anar un mes enrere

@@ -16,6 +16,7 @@ void setGUI() {
   initCalendariPlus();
   initTable();
   initSelectTextList();
+  initTextArea();
 }
 
 // Botones
@@ -26,11 +27,11 @@ Button bInicioSesion, bPrincipal;
 // Creación de los botones de la GUI
 Button bAñadir, bModificar, bDetalle, bAceptarCenso, bFicha, bPrevCenso, bNextCenso, bPrevGastos, bNextGastos, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto, bAñadirConcepto;
 Button bAceptarConcepto, bCalendario, bCalendarioAlta, bCalendarioMovimiento, bAñadirRecibo, bDetalleBalance;
-Button bPrevDetalle, bNextDetalle, bPrevArchivo, bNextArchivo, bAceptarArchivo, bCalendarioArchivo;
+Button bPrevDetalle, bNextDetalle, bPrevArchivo, bNextArchivo, bAceptarArchivo, bCalendarioArchivo, bAceptarAvisosAlertas;
 Button bDetalleConcepto;
 
 void initButtons() {
-  buttons = new Button[35];
+  buttons = new Button[36];
   buttons[0] = new Button("Principal", 850, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
@@ -66,6 +67,7 @@ void initButtons() {
   buttons[32] = new Button("NEXT", 1050, 715, 60, 60);
   buttons[33] = new Button("Aceptar", 643+menuWidth, 175+bannerHeight, 400, 40);
   buttons[34] = new Button("Calendario", 400, 310+bannerHeight, 100, 45);
+  buttons[35] = new Button("Aceptar", 643+menuWidth, 120+bannerHeight, 400, 40);
 
   bPrincipal = buttons[0];
   bInicioSesion = buttons[1];
@@ -102,6 +104,7 @@ void initButtons() {
   bNextArchivo = buttons[32];
   bAceptarArchivo = buttons [33];
   bCalendarioArchivo = buttons[34];
+  bAceptarAvisosAlertas = buttons[35];
 }
 //Desactivar todos los botones
 void disableButtons() {
@@ -185,7 +188,7 @@ TextField buscar;
 TextField tfNombre, tfApellidos, tfDNI, tfCalle, tfNumero, tfPiso, tfLocalidad, tfProvincia, tfTelefono, tfCorreoElectronico;
 TextField tfBanco, tfTitular, tfDNITitular, tfIBAN, tfEntidad, tfOficina, tfDigitoControl, tfNumeroCuenta;
 TextField tfTitulo, tfCantidad;
-TextField tfTituloArchivo;
+TextField tfTituloArchivo, tfTituloAviso;
 
 void initTextField() {
   userText = new TextField("usuario", (marcoWidth/2)-(marcoCuentaWidth/2)+20+inicioSesionX, (marcoHeight/2)-(marcoCuentaHeight/2)+130+inicioSesionY, 350, 35);
@@ -212,6 +215,7 @@ void initTextField() {
   tfTitulo = new TextField ("Titulo", 230, 350, 1020, 40);
   tfCantidad = new TextField ("Cantidad", 780, 490, 465, 40);
   tfTituloArchivo = new TextField("Título", 27+menuWidth, 247+bannerHeight, 1020, 45);
+  tfTituloAviso = new TextField("Título", 27+menuWidth, 190+bannerHeight, 1020, 45);
 }
 
 void displayInicioSesiontf() {
@@ -302,10 +306,10 @@ void displayDetalleHermano() {
 
 ImgTextButton[] imgtextbuttons;
 ImgTextButton itbCenso, itbContabilidad, itbArchivo, itbAvisos, itbEnlaces, itbPerfilPersonal;
-ImgTextButton itbInsertarArchivo;
+ImgTextButton itbInsertarArchivo, itbInsertarArchivoAvisos;
 
 void initImgTextButton() {
-  imgtextbuttons = new ImgTextButton[7];
+  imgtextbuttons = new ImgTextButton[8];
   imgtextbuttons[0] = new ImgTextButton(getIconCenso(), "Censo", 0, primerIconY, iconWidth, iconHeight);
   imgtextbuttons[1] = new ImgTextButton(getIconContabilidad(), "Contabilidad", 0, segundoIconY, iconWidth, iconHeight);
   imgtextbuttons[2] = new ImgTextButton(getIconArchivo(), "Archivo", 0, tercerIconY, iconWidth, iconHeight);
@@ -313,6 +317,7 @@ void initImgTextButton() {
   imgtextbuttons[4] = new ImgTextButton(getIconEnlaces(), "Enlaces", 0, quintoIconY, iconWidth, iconHeight);
   imgtextbuttons[5] = new ImgTextButton(getIconCenso(), "Perfil Personal", 0, primerIconY, iconWidth, iconHeight);
   imgtextbuttons[6] = new ImgTextButton(getIconFile(), "Insertar Archivo", 730+menuWidth, 380+bannerHeight, 190, 100);
+  imgtextbuttons[7] = new ImgTextButton(getIconFile(), "Insertar Archivo", 440+menuWidth, 550+bannerHeight, 160, 100);
 
   itbCenso = imgtextbuttons[0];
   itbContabilidad = imgtextbuttons[1];
@@ -321,6 +326,7 @@ void initImgTextButton() {
   itbEnlaces = imgtextbuttons[4];
   itbPerfilPersonal = imgtextbuttons[5];
   itbInsertarArchivo = imgtextbuttons[6];
+  itbInsertarArchivoAvisos = imgtextbuttons[7];
 }
 
 // Activar los botones del menú
@@ -424,7 +430,7 @@ void initShowImage() {
 
 //Titulo
 
-Titulo titIngresos, titGastos, titConcepto, titDetallePersonal, titDetallePersonalUser, titArchivo;
+Titulo titIngresos, titGastos, titConcepto, titDetallePersonal, titDetallePersonalUser, titArchivo, titNuevoAviso;
 
 void initTitulo() {
   titIngresos = new Titulo("Ingresos", 250, 170, 800, 40);
@@ -433,6 +439,7 @@ void initTitulo() {
   titDetallePersonal = new Titulo ("Detalle personal", 20, 25, 605, 35);
   titDetallePersonalUser = new Titulo("Detalle personal", 20, 25, 1080-20-10, 35);
   titArchivo = new Titulo("Archivo", 27+menuWidth, 175+bannerHeight, 610, 40);
+  titNuevoAviso = new Titulo("Nuevo aviso", 27+menuWidth, 120+bannerHeight, 610, 40);
 }
 
 //Select
@@ -737,4 +744,13 @@ void initTable() {
   tDetalleItem.setHeaders(headers);
   tDetalleItem.setData(info);
   tDetalleItem.setColumnWidths(colWidths);
+}
+
+
+//TextArea
+
+TextArea taNuevoAviso;
+
+void initTextArea(){
+ taNuevoAviso = new TextArea (27+menuWidth, 250+bannerHeight, 1020, 260, 90, 10);
 }
