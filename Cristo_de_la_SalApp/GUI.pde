@@ -28,10 +28,10 @@ Button bInicioSesion, bPrincipal;
 Button bAñadir, bModificar, bDetalle, bAceptarCenso, bFicha, bPrevCenso, bNextCenso, bPrevGastos, bNextGastos, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto, bAñadirConcepto;
 Button bAceptarConcepto, bCalendario, bCalendarioAlta, bCalendarioMovimiento, bAñadirRecibo, bDetalleBalance;
 Button bPrevDetalle, bNextDetalle, bPrevArchivo, bNextArchivo, bAceptarArchivo, bCalendarioArchivo, bAceptarAvisosAlertas;
-Button bDetalleConcepto;
+Button bDetalleConcepto, bCalendarioEvento;
 
 void initButtons() {
-  buttons = new Button[36];
+  buttons = new Button[37];
   buttons[0] = new Button("Principal", 850, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
@@ -60,14 +60,15 @@ void initButtons() {
   buttons[25] = new Button("Calendario", 420, 410, 100, 45);
   buttons[26] = new Button("Añadir recibo", 780, 560, 465, 45);
   buttons[27] = new Button("Detalle", 1080, 220, 150, 40);
-  buttons[28] = new Button("PREV", 1080, 680, 150, 30);
-  buttons[29] = new Button("NEXT", 1080, 720, 150, 30);
-  buttons[30] = new Button("Detalle", 45+menuWidth, 680, 150, 80);
+  buttons[28] = new Button("PREV", 1080, 580, 150, 30);
+  buttons[29] = new Button("NEXT", 1080, 620, 150, 30);
+  buttons[30] = new Button("Detalle", 45+menuWidth, 580, 150, 80);
   buttons[31] = new Button("PREV", 950, 715, 60, 60);
   buttons[32] = new Button("NEXT", 1050, 715, 60, 60);
   buttons[33] = new Button("Aceptar", 643+menuWidth, 175+bannerHeight, 400, 40);
   buttons[34] = new Button("Calendario", 400, 310+bannerHeight, 100, 45);
   buttons[35] = new Button("Aceptar", 643+menuWidth, 120+bannerHeight, 400, 40);
+  buttons[36] = new Button("Calendario", 680+menuWidth+225, 570+bannerHeight, 130, 45);
 
   bPrincipal = buttons[0];
   bInicioSesion = buttons[1];
@@ -105,6 +106,7 @@ void initButtons() {
   bAceptarArchivo = buttons [33];
   bCalendarioArchivo = buttons[34];
   bAceptarAvisosAlertas = buttons[35];
+  bCalendarioEvento = buttons[36];
 }
 //Desactivar todos los botones
 void disableButtons() {
@@ -188,7 +190,7 @@ TextField buscar;
 TextField tfNombre, tfApellidos, tfDNI, tfCalle, tfNumero, tfPiso, tfLocalidad, tfProvincia, tfTelefono, tfCorreoElectronico;
 TextField tfBanco, tfTitular, tfDNITitular, tfIBAN, tfEntidad, tfOficina, tfDigitoControl, tfNumeroCuenta;
 TextField tfTitulo, tfCantidad;
-TextField tfTituloArchivo, tfTituloAviso;
+TextField tfTituloArchivo, tfTituloAviso, tfTituloEvento;
 
 void initTextField() {
   userText = new TextField("usuario", (marcoWidth/2)-(marcoCuentaWidth/2)+20+inicioSesionX, (marcoHeight/2)-(marcoCuentaHeight/2)+130+inicioSesionY, 350, 35);
@@ -216,6 +218,7 @@ void initTextField() {
   tfCantidad = new TextField ("Cantidad", 780, 490, 465, 40);
   tfTituloArchivo = new TextField("Título", 27+menuWidth, 247+bannerHeight, 1020, 45);
   tfTituloAviso = new TextField("Título", 27+menuWidth, 190+bannerHeight, 1020, 45);
+  tfTituloEvento = new TextField("Título", 27+menuWidth, 190+bannerHeight, 1020, 45);
 }
 
 void displayInicioSesiontf() {
@@ -306,10 +309,10 @@ void displayDetalleHermano() {
 
 ImgTextButton[] imgtextbuttons;
 ImgTextButton itbCenso, itbContabilidad, itbArchivo, itbAvisos, itbEnlaces, itbPerfilPersonal;
-ImgTextButton itbInsertarArchivo, itbInsertarArchivoAvisos;
+ImgTextButton itbInsertarArchivo, itbInsertarArchivoAvisos, itbInsertarArchivoEventos;
 
 void initImgTextButton() {
-  imgtextbuttons = new ImgTextButton[8];
+  imgtextbuttons = new ImgTextButton[9];
   imgtextbuttons[0] = new ImgTextButton(getIconCenso(), "Censo", 0, primerIconY, iconWidth, iconHeight);
   imgtextbuttons[1] = new ImgTextButton(getIconContabilidad(), "Contabilidad", 0, segundoIconY, iconWidth, iconHeight);
   imgtextbuttons[2] = new ImgTextButton(getIconArchivo(), "Archivo", 0, tercerIconY, iconWidth, iconHeight);
@@ -318,6 +321,7 @@ void initImgTextButton() {
   imgtextbuttons[5] = new ImgTextButton(getIconCenso(), "Perfil Personal", 0, primerIconY, iconWidth, iconHeight);
   imgtextbuttons[6] = new ImgTextButton(getIconFile(), "Insertar Archivo", 730+menuWidth, 380+bannerHeight, 190, 100);
   imgtextbuttons[7] = new ImgTextButton(getIconFile(), "Insertar Archivo", 440+menuWidth, 550+bannerHeight, 160, 100);
+  imgtextbuttons[8] = new ImgTextButton(getIconFile(), "Insertar Archivo", 200+menuWidth, 550+bannerHeight, 160, 100);
 
   itbCenso = imgtextbuttons[0];
   itbContabilidad = imgtextbuttons[1];
@@ -327,6 +331,7 @@ void initImgTextButton() {
   itbPerfilPersonal = imgtextbuttons[5];
   itbInsertarArchivo = imgtextbuttons[6];
   itbInsertarArchivoAvisos = imgtextbuttons[7];
+  itbInsertarArchivoEventos = imgtextbuttons[8];
 }
 
 // Activar los botones del menú
@@ -385,7 +390,7 @@ String[] textos  = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
 float[] values  = {400, 600, 100, 300, 55, 100, 90, 220, 186, 400, 600, 10 };
 
 // Color de la línia
-color colorLine = color(150, 50, 200);
+color colorLine = color(#401E3A);
 
 void initLinesDiagram() {
   ldIngresos = new LinesDiagram(menuWidth+50, bannerHeight+50, (width/2)-100, (height/2)-100);
@@ -430,7 +435,7 @@ void initShowImage() {
 
 //Titulo
 
-Titulo titIngresos, titGastos, titConcepto, titDetallePersonal, titDetallePersonalUser, titArchivo, titNuevoAviso;
+Titulo titIngresos, titGastos, titConcepto, titDetallePersonal, titDetallePersonalUser, titArchivo, titNuevoAviso, titNuevoEvento;
 
 void initTitulo() {
   titIngresos = new Titulo("Ingresos", 250, 170, 800, 40);
@@ -440,6 +445,7 @@ void initTitulo() {
   titDetallePersonalUser = new Titulo("Detalle personal", 20, 25, 1080-20-10, 35);
   titArchivo = new Titulo("Archivo", 27+menuWidth, 175+bannerHeight, 610, 40);
   titNuevoAviso = new Titulo("Nuevo aviso", 27+menuWidth, 120+bannerHeight, 610, 40);
+  titNuevoEvento = new Titulo("Nuevo evento", 27+menuWidth, 120+bannerHeight, 610, 40);
 }
 
 //Select
@@ -464,8 +470,8 @@ void initSelect() {
 
 SelectTextList stlTipoConcepto;
 
-String selectedCountry; 
-String[][] selectValuesConcepto = {{"0", "I.1"}, {"1", "I.2"}, {"2", "I.3"}, {"3", "G.1"}, {"4","G.2"}, {"5", "G.3"},
+String selectedCountry;
+String[][] selectValuesConcepto = {{"0", "I.1"}, {"1", "I.2"}, {"2", "I.3"}, {"3", "G.1"}, {"4", "G.2"}, {"5", "G.3"},
   {"6", "G.4"}, {"7", "G.5"}, {"8", "G.6"}, {"9", "G.7"}, {"10", "G.8"}, {"11", "G.9"}, {"12", "G.10"},
   {"13", "G.11"}, {"14", "G.12"}, {"15", "G.13"}, {"16", "G.14"}, {"17", "G.15"}, {"18", "G.16"}, {"19", "G.17"}, {"20", "G.18"} };
 
@@ -624,7 +630,7 @@ void initSelectTable() {
   stGastosPresupuesto.setData(infoGastosPresupuesto);
   stGastosPresupuesto.setColumnWidths(colWidthsGastos);
   stGastosPresupuesto.setColumnMaxChars(maxCharsGastos);
-  stDetalleItem = new SelectTable(filasDetalleItem, columnasDetalleItem, 45+menuWidth, 320+bannerHeight, 1000, 240);
+  stDetalleItem = new SelectTable(filasDetalleItem, columnasDetalleItem, 45+menuWidth, 220+bannerHeight, 1000, 240);
   stDetalleItem.setHeaders(headersDetalleItem);
   stDetalleItem.setData(infoDetalleItem);
   stDetalleItem.setColumnWidths(colWidthsDetalleItem);
@@ -638,17 +644,19 @@ void initSelectTable() {
 
 //CalendariPlus
 
-CalendariPlus cpFechaNacimiento, cpFechaAlta, cpFechaMovimiento, cpFechaArchivo;
+CalendariPlus cpFechaNacimiento, cpFechaAlta, cpFechaMovimiento, cpFechaArchivo, cpNuevoEvento;
 String dataCalendariNacimiento=" ";
 String dataCalendariAlta="";
 String dataCalendariMovimiento="";
 String dataCalendarioArchivo = "";
+String dataCalendarioEvento = "";
 
 void initCalendariPlus() {
   cpFechaNacimiento = new CalendariPlus(680, 300, 600, 380);
   cpFechaAlta = new CalendariPlus(680, 300, 600, 380);
   cpFechaMovimiento = new CalendariPlus(550, 410, 600, 380);
   cpFechaArchivo = new CalendariPlus(300+menuWidth, 400+bannerHeight, 600, 300);
+  cpNuevoEvento = new CalendariPlus (400, 300, 600, 380);
 }
 
 void displaycpFechaNacimiento() {
@@ -665,6 +673,24 @@ void displaycpFechaNacimiento() {
 
   cpFechaNacimiento.display();
   bCalendario.display();
+
+  popStyle();
+}
+
+void displaycpNuevoEvento() {
+  pushStyle();
+  // Rectangle
+  fill(255);
+  rect(680+menuWidth, 570+bannerHeight, 220, 45);
+
+  // Text amb data seleccionada
+  fill(0);
+  textAlign(LEFT);
+  textSize(24);
+  text(dataCalendarioEvento, 685+menuWidth, 570+bannerHeight+30);
+
+  cpNuevoEvento.display();
+  bCalendarioEvento.display();
 
   popStyle();
 }
@@ -749,8 +775,9 @@ void initTable() {
 
 //TextArea
 
-TextArea taNuevoAviso;
+TextArea taNuevoAviso, taNuevoEvento;
 
-void initTextArea(){
- taNuevoAviso = new TextArea (27+menuWidth, 250+bannerHeight, 1020, 260, 90, 10);
+void initTextArea() {
+  taNuevoAviso = new TextArea (27+menuWidth, 250+bannerHeight, 1020, 260, 90, 10);
+  taNuevoEvento = new TextArea (27+menuWidth, 250+bannerHeight, 1020, 260, 90, 10);
 }

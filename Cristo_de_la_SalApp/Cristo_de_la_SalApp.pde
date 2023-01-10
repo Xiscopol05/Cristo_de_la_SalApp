@@ -6,7 +6,7 @@ enum PANTALLA {
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.AVISOS_NUEVOAVISO;
+PANTALLA pantalla =PANTALLA.CONTABILIDAD_DETALLEBALANCE;
 
 boolean logged= false;
 
@@ -30,6 +30,7 @@ void setup() {
 }
 
 void draw() {
+  println(pantalla);
   //Establece una configuración por defecto
   textAlign(LEFT);
   fill(0);
@@ -193,6 +194,8 @@ void mousePressed() {
     selectInput("Selecciona un fitxer ...", "fileSelected");
   } else if (bAceptarArchivo.mouseOverButton() && bAceptarArchivo.enabled && pantalla == PANTALLA.ARCHIVO_NUEVO) {
     pantalla = PANTALLA.ARCHIVO;
+  } else if (bAceptarAvisosAlertas.mouseOverButton() && bAceptarAvisosAlertas.enabled) {
+    pantalla = PANTALLA.AVISOS;
   }
   userText.isPressed();
   passText.isPressed();
@@ -219,7 +222,9 @@ void mousePressed() {
   tfCantidad.isPressed();
   tfTituloArchivo.isPressed();
   tfTituloAviso.isPressed();
+  tfTituloEvento.isPressed();
   taNuevoAviso.isPressed();
+  taNuevoEvento.isPressed();
   cEventos.checkButtons();
 
   if (sCategoriaArchivo.mouseOverSelect() && sCategoriaArchivo.enabled) {
@@ -314,6 +319,28 @@ void mousePressed() {
     dataCalendarioArchivo= cpFechaArchivo.selectedDay +"/"+ cpFechaArchivo.selectedMonth + "/"+ cpFechaArchivo.selectedYear;
     cpFechaArchivo.visible = false;
   }
+  
+  cpNuevoEvento.checkButtons();
+
+  // Si pitja el botó, canvia la visibilitat del calendari.
+  if (bCalendarioEvento.mouseOverButton()&& bCalendarioEvento.enabled) {
+    cpNuevoEvento.visible = !cpNuevoEvento.visible;
+  }
+
+  if (cpNuevoEvento.bNext.mouseOverButton()) {
+    cpNuevoEvento.nextMonth();
+  }
+
+  if (cpNuevoEvento.bPrev.mouseOverButton()) {
+    cpNuevoEvento.prevMonth();
+  }
+
+  if (cpNuevoEvento.bOK.mouseOverButton() && cpNuevoEvento.dateSelected) {
+    dataCalendarioEvento= cpNuevoEvento.selectedDay +"/"+ cpNuevoEvento.selectedMonth + "/"+ cpNuevoEvento.selectedYear;
+    cpNuevoEvento.visible = false;
+  }
+  
+  
   stlTipoConcepto.mouseOn();
 }
 
@@ -366,6 +393,8 @@ void keyPressed() {
   tfTituloArchivo.keyPressed(key, (int)keyCode);
   tfTituloAviso.keyPressed(key, (int)keyCode);
   taNuevoAviso.keyPressed(key, (int)keyCode);
+  tfTituloEvento.keyPressed(key, (int)keyCode);
+  taNuevoEvento.keyPressed(key, (int)keyCode);
   comprovaLogin();
   lastKeyCodePressed= (int)keyCode;
   // Anar un mes enrere

@@ -365,7 +365,7 @@ void dibujaPantallaContabilidadDetalleBalance() {
 
   //display elementos GUI
   displayButtonsMenu();
-  tDetalleItem.display(45+menuWidth, 230+bannerHeight, 1000, 65);
+  tDetalleItem.display(45+menuWidth, 130+bannerHeight, 1000, 65);
   stDetalleItem.display();
   bPrevDetalle.display();
   bNextDetalle.display();
@@ -468,6 +468,7 @@ void dibujaPantallaAvisosNuevoAviso(){
   disableButtons();
   enableButtonsMenu();
   itbInsertarArchivoAvisos.setEnabled(true);
+  bAceptarAvisosAlertas.setEnabled(true);
 
 
   //dibujar elementos de la pantalla
@@ -485,5 +486,33 @@ void dibujaPantallaAvisosNuevoAviso(){
 }
 
 void dibujaPantallaAvisosNuevoEvento(){
+  pushMatrix();
+  pushStyle();
+  //imagen de fondo
+  background(255);
+
+  //habilitar y deshabilitar botones
+  disableButtons();
+  enableButtonsMenu();
+  itbInsertarArchivoEventos.setEnabled(true);
+  bAceptarAvisosAlertas.setEnabled(true);
+  bCalendarioEvento.setEnabled(true);
+
+  //dibujar elementos de la pantalla
+  menu();
+  pushStyle();
+  textFont(getFontAt(5));
+  text("Fecha:", 600+menuWidth, 600+bannerHeight);
+  popStyle();
   
+  //display elementos GUI
+  displayButtonsMenu();
+  titNuevoEvento.display();
+  bAceptarAvisosAlertas.display();
+  tfTituloEvento.display();
+  taNuevoEvento.display();
+  itbInsertarArchivoEventos.display();
+  displaycpNuevoEvento();
+  popStyle();
+  popMatrix();
 }
