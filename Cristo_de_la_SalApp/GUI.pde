@@ -250,7 +250,7 @@ void displaytfNuevoHermano() {
 //TextInfo
 TextInfo tiNombre, tiApellidos, tiDNI, tiCalle, tiFechaNacimiento, tiFechaAlta, tiNumero, tiPiso, tiLocalidad, tiProvincia, tiTelefono, tiCorreoElectronico;
 TextInfo tiBanco, tiTitular, tiDNITitular, tiIBAN, tiEntidad, tiOficina, tiDigitoControl, tiNumeroCuenta, tiFechaNacimientoAñadir;
-TextInfo tiTitulo, tiCantidad, tiFechaMovimiento, tiTipo;
+TextInfo tiTitulo, tiCantidad, tiFechaMovimiento, tiTipo, tiDetalleEvento, tiDetalleAviso, tiTituloDetalleEvento, tiTituloDetalleAviso;
 
 void initTextInfo() {
   pushMatrix();
@@ -278,6 +278,12 @@ void initTextInfo() {
   tiCantidad = new TextInfo ("Cantidad", 780, 490, 465, 40);
   tiFechaMovimiento = new TextInfo ("Fecha de movimiento", 420, 413, 350, 40);
   tiTipo = new TextInfo ("Tipo", 780, 413, 465, 40);
+  tiTituloDetalleEvento = new TextInfo ("Título", 27+menuWidth, 190+bannerHeight, 1020, 45);
+  tiTituloDetalleAviso = new TextInfo("Título", 27+menuWidth, 190+bannerHeight, 1020, 45);
+  tiDetalleEvento = new TextInfo ("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation", 27+menuWidth, 250+bannerHeight, 1020, 260);
+  tiDetalleAviso = new TextInfo ("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation", 27+menuWidth, 250+bannerHeight, 1020, 260);
+  
+
   popMatrix();
 }
 
@@ -309,10 +315,10 @@ void displayDetalleHermano() {
 
 ImgTextButton[] imgtextbuttons;
 ImgTextButton itbCenso, itbContabilidad, itbArchivo, itbAvisos, itbEnlaces, itbPerfilPersonal;
-ImgTextButton itbInsertarArchivo, itbInsertarArchivoAvisos, itbInsertarArchivoEventos;
+ImgTextButton itbInsertarArchivo, itbInsertarArchivoAvisos, itbInsertarArchivoEventos, itbVerArchivoAvisos, itbVerArchivoEventos;
 
 void initImgTextButton() {
-  imgtextbuttons = new ImgTextButton[9];
+  imgtextbuttons = new ImgTextButton[11];
   imgtextbuttons[0] = new ImgTextButton(getIconCenso(), "Censo", 0, primerIconY, iconWidth, iconHeight);
   imgtextbuttons[1] = new ImgTextButton(getIconContabilidad(), "Contabilidad", 0, segundoIconY, iconWidth, iconHeight);
   imgtextbuttons[2] = new ImgTextButton(getIconArchivo(), "Archivo", 0, tercerIconY, iconWidth, iconHeight);
@@ -322,6 +328,8 @@ void initImgTextButton() {
   imgtextbuttons[6] = new ImgTextButton(getIconFile(), "Insertar Archivo", 730+menuWidth, 380+bannerHeight, 190, 100);
   imgtextbuttons[7] = new ImgTextButton(getIconFile(), "Insertar Archivo", 440+menuWidth, 550+bannerHeight, 160, 100);
   imgtextbuttons[8] = new ImgTextButton(getIconFile(), "Insertar Archivo", 200+menuWidth, 550+bannerHeight, 160, 100);
+  imgtextbuttons[9] = new ImgTextButton(getIconFile(), "Ver Archivo", 440+menuWidth, 550+bannerHeight, 160, 100);
+  imgtextbuttons[10] = new ImgTextButton(getIconFile(), "Ver Archivo", 200+menuWidth, 550+bannerHeight, 160, 100);
 
   itbCenso = imgtextbuttons[0];
   itbContabilidad = imgtextbuttons[1];
@@ -332,6 +340,8 @@ void initImgTextButton() {
   itbInsertarArchivo = imgtextbuttons[6];
   itbInsertarArchivoAvisos = imgtextbuttons[7];
   itbInsertarArchivoEventos = imgtextbuttons[8];
+  itbVerArchivoAvisos = imgtextbuttons[9];
+  itbVerArchivoEventos = imgtextbuttons[10];
 }
 
 // Activar los botones del menú
@@ -436,7 +446,7 @@ void initShowImage() {
 //Titulo
 
 Titulo titIngresos, titGastos, titConcepto, titDetallePersonal, titDetallePersonalUser, titArchivo, titNuevoAviso, titNuevoEvento;
-
+Titulo titDetalleAviso, titDetalleEvento;
 void initTitulo() {
   titIngresos = new Titulo("Ingresos", 250, 170, 800, 40);
   titGastos = new Titulo("Gastos", 250, 470, 800, 40);
@@ -446,6 +456,8 @@ void initTitulo() {
   titArchivo = new Titulo("Archivo", 27+menuWidth, 175+bannerHeight, 610, 40);
   titNuevoAviso = new Titulo("Nuevo aviso", 27+menuWidth, 120+bannerHeight, 610, 40);
   titNuevoEvento = new Titulo("Nuevo evento", 27+menuWidth, 120+bannerHeight, 610, 40);
+  titDetalleAviso = new Titulo("Detalle aviso", 27+menuWidth, 120+bannerHeight, 610, 40);
+  titDetalleEvento = new Titulo("Detalle evento", 27+menuWidth, 120+bannerHeight, 610, 40);
 }
 
 //Select
@@ -778,6 +790,6 @@ void initTable() {
 TextArea taNuevoAviso, taNuevoEvento;
 
 void initTextArea() {
-  taNuevoAviso = new TextArea (27+menuWidth, 250+bannerHeight, 1020, 260, 90, 10);
-  taNuevoEvento = new TextArea (27+menuWidth, 250+bannerHeight, 1020, 260, 90, 10);
+  taNuevoAviso = new TextArea (27+menuWidth, 250+bannerHeight, 1020, 260, 70, 10);
+  taNuevoEvento = new TextArea (27+menuWidth, 250+bannerHeight, 1020, 260, 70, 10);
 }

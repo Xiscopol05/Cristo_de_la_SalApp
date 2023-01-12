@@ -458,7 +458,7 @@ void dibujaPantallaArchivoDetalle() {
   popMatrix();
 }
 
-void dibujaPantallaAvisosNuevoAviso(){
+void dibujaPantallaAvisosNuevoAviso() {
   pushMatrix();
   pushStyle();
   //imagen de fondo
@@ -473,7 +473,7 @@ void dibujaPantallaAvisosNuevoAviso(){
 
   //dibujar elementos de la pantalla
   menu();
-  
+
   //display elementos GUI
   displayButtonsMenu();
   titNuevoAviso.display();
@@ -485,7 +485,34 @@ void dibujaPantallaAvisosNuevoAviso(){
   popMatrix();
 }
 
-void dibujaPantallaAvisosNuevoEvento(){
+void dibujaPantallaAvisosDetalleAviso() {
+  pushMatrix();
+  pushStyle();
+  //imagen de fondo
+  background(255);
+
+  //habilitar y deshabilitar botones
+  disableButtons();
+  enableButtonsMenu();
+  itbVerArchivoAvisos.setEnabled(true);
+  bAceptarAvisosAlertas.setEnabled(true);
+
+
+  //dibujar elementos de la pantalla
+  menu();
+
+  //display elementos GUI
+  displayButtonsMenu();
+  titDetalleAviso.display();
+  bAceptarAvisosAlertas.display();
+  tiTituloDetalleAviso.display();
+  tiDetalleAviso.display();
+  itbVerArchivoAvisos.display();
+  popStyle();
+  popMatrix();
+}
+
+void dibujaPantallaAvisosNuevoEvento() {
   pushMatrix();
   pushStyle();
   //imagen de fondo
@@ -504,7 +531,7 @@ void dibujaPantallaAvisosNuevoEvento(){
   textFont(getFontAt(5));
   text("Fecha:", 600+menuWidth, 600+bannerHeight);
   popStyle();
-  
+
   //display elementos GUI
   displayButtonsMenu();
   titNuevoEvento.display();
@@ -513,6 +540,40 @@ void dibujaPantallaAvisosNuevoEvento(){
   taNuevoEvento.display();
   itbInsertarArchivoEventos.display();
   displaycpNuevoEvento();
+  //tiDetalleEvento.display();
+  popStyle();
+  popMatrix();
+}
+
+void dibujaPantallaAvisosDetalleEvento() {
+  pushMatrix();
+  pushStyle();
+  //imagen de fondo
+  background(255);
+
+  //habilitar y deshabilitar botones
+  disableButtons();
+  enableButtonsMenu();
+  itbVerArchivoEventos.setEnabled(true);
+  bAceptarAvisosAlertas.setEnabled(true);
+  bCalendarioEvento.setEnabled(true);
+
+  //dibujar elementos de la pantalla
+  menu();
+  pushStyle();
+  textFont(getFontAt(5));
+  text("Fecha:", 600+menuWidth, 600+bannerHeight);
+  popStyle();
+
+  //display elementos GUI
+  displayButtonsMenu();
+  titDetalleEvento.display();
+  bAceptarAvisosAlertas.display();
+  tiDetalleEvento.display();
+  tiTituloDetalleEvento.display();
+  itbVerArchivoEventos.display();
+  //displaycpNuevoEvento();
+  
   popStyle();
   popMatrix();
 }

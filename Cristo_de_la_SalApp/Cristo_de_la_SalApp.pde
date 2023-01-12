@@ -2,11 +2,11 @@
 enum PANTALLA {
   INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO,
     CONTABILIDAD_BALANCE, CONTABILIDAD_PRESUPUESTO, CONTABILIDAD_AÑADIRCONCEPTO, CONTABILIDAD_DETALLEBALANCE,
-    CONTABILIDAD_DETALLEMOVIMIENTO, ARCHIVO_NUEVO, ARCHIVO_DETALLE, AVISOS_NUEVOAVISO, AVISOS_NUEVOEVENTO;
+    CONTABILIDAD_DETALLEMOVIMIENTO, ARCHIVO_NUEVO, ARCHIVO_DETALLE, AVISOS_NUEVOAVISO, AVISOS_NUEVOEVENTO, AVISOS_DETALLEAVISO, AVISOS_DETALLEEVENTO;
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.CONTABILIDAD_DETALLEBALANCE;
+PANTALLA pantalla =PANTALLA.AVISOS_DETALLEEVENTO;
 
 boolean logged= false;
 
@@ -92,6 +92,12 @@ void draw() {
     break;
   case AVISOS_NUEVOEVENTO:
     dibujaPantallaAvisosNuevoEvento();
+    break;
+  case AVISOS_DETALLEAVISO:
+    dibujaPantallaAvisosDetalleAviso();
+    break;
+  case AVISOS_DETALLEEVENTO:
+    dibujaPantallaAvisosDetalleEvento();
     break;
   }
 
@@ -319,7 +325,7 @@ void mousePressed() {
     dataCalendarioArchivo= cpFechaArchivo.selectedDay +"/"+ cpFechaArchivo.selectedMonth + "/"+ cpFechaArchivo.selectedYear;
     cpFechaArchivo.visible = false;
   }
-  
+
   cpNuevoEvento.checkButtons();
 
   // Si pitja el botó, canvia la visibilitat del calendari.
@@ -339,8 +345,8 @@ void mousePressed() {
     dataCalendarioEvento= cpNuevoEvento.selectedDay +"/"+ cpNuevoEvento.selectedMonth + "/"+ cpNuevoEvento.selectedYear;
     cpNuevoEvento.visible = false;
   }
-  
-  
+
+
   stlTipoConcepto.mouseOn();
 }
 
