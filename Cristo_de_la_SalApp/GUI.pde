@@ -17,6 +17,7 @@ void setGUI() {
   initTable();
   initSelectTextList();
   initTextArea();
+  initPagedCard();
 }
 
 // Botones
@@ -282,7 +283,7 @@ void initTextInfo() {
   tiTituloDetalleAviso = new TextInfo("Título", 27+menuWidth, 190+bannerHeight, 1020, 45);
   tiDetalleEvento = new TextInfo ("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation", 27+menuWidth, 250+bannerHeight, 1020, 260);
   tiDetalleAviso = new TextInfo ("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation", 27+menuWidth, 250+bannerHeight, 1020, 260);
-  
+
 
   popMatrix();
 }
@@ -792,4 +793,33 @@ TextArea taNuevoAviso, taNuevoEvento;
 void initTextArea() {
   taNuevoAviso = new TextArea (27+menuWidth, 250+bannerHeight, 1020, 260, 70, 10);
   taNuevoEvento = new TextArea (27+menuWidth, 250+bannerHeight, 1020, 260, 70, 10);
+}
+
+//pagedCard
+
+PagedCard pcAvisos;
+
+// Número de files (capçalera inclosa) i columnes de la taula
+int numCardsPage = 4;
+
+// Dades de la taula
+String[][] infoCards = {
+  {"Títol 1", "Descripció 1 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"},
+  {"Títol 2", "Descripció 2"},
+  {"Títol 3", "Descripció 3"},
+  {"Títol 4", "Descripció 4"},
+  {"Títol 5", "Descripció 5"},
+  {"Títol 6", "Descripció 6"},
+  {"Títol 7", "Descripció 7"},
+  {"Títol 8", "Descripció 8"},
+  {"Títol 9", "Descripció 9"},
+  {"Títol 0", "Descripció 0"},
+};
+
+
+void initPagedCard() {
+  pcAvisos = new PagedCard(numCardsPage);
+  pcAvisos.setDimensions(menuWidth, bannerHeight, 300, 300);
+  pcAvisos.setData(info);
+  pcAvisos.setCards();
 }

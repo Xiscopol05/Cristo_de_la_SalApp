@@ -146,7 +146,7 @@ void dibujaPantallaAvisos() {
 
   //display elementos GUI
   displayButtonsMenu();
-  displayCalendarioEventos();
+  //displayCalendarioEventos();
   popStyle();
   popMatrix();
 }
@@ -447,13 +447,21 @@ void dibujaPantallaArchivoDetalle() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
+  bAceptarArchivo.setEnabled(true);
 
   //dibujar elementos de la pantalla
   menu();
+  text("Fecha de datación: ", 230, 440);
+
 
   //display elementos GUI
   displayButtonsMenu();
   titArchivo.display();
+  bAceptarArchivo.display();
+  tfTituloArchivo.display();
+  itbInsertarArchivo.display();
+  sCategoriaArchivo.display();
+  displaycpFechaArchivo();
   popStyle();
   popMatrix();
 }
@@ -563,6 +571,8 @@ void dibujaPantallaAvisosDetalleEvento() {
   pushStyle();
   textFont(getFontAt(5));
   text("Fecha:", 600+menuWidth, 600+bannerHeight);
+  fill(255);
+  rect(680+menuWidth, 575+bannerHeight, 200, 45);
   popStyle();
 
   //display elementos GUI
