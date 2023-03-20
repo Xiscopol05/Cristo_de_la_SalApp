@@ -819,7 +819,7 @@ String[][] infoCards = {
 
 void initPagedCard() {
   pcAvisos = new PagedCard(numCardsPage);
-  pcAvisos.setDimensions(menuWidth, bannerHeight, 300, 300);
-  pcAvisos.setData(info);
+  pcAvisos.setDimensions(menuWidth+20, primerIconY+iconHeight, ((1280-menuWidth)/2)-10, iconHeight*3);
+  pcAvisos.setData(infoCards);
   pcAvisos.setCards();
 }

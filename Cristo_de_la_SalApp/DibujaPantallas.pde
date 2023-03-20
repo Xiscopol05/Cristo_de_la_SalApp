@@ -141,12 +141,13 @@ void dibujaPantallaAvisos() {
 
   //dibujar elementos de la pantalla
   menu();
-  avisos();
+  //avisos();
 
 
   //display elementos GUI
   displayButtonsMenu();
-  //displayCalendarioEventos();
+  displayCalendarioEventos();
+  pcAvisos.display();
   popStyle();
   popMatrix();
 }

@@ -1,3 +1,6 @@
+// Librería de MySQL i Processing
+import de.bezier.data.sql.*;
+
 //enumeración de las pantallas de la aplicación
 enum PANTALLA {
   INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO,
@@ -6,7 +9,7 @@ enum PANTALLA {
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.AVISOS_DETALLEEVENTO;
+PANTALLA pantalla =PANTALLA.AVISOS;
 
 boolean logged= false;
 
@@ -25,12 +28,12 @@ void setup() {
   setFonts();
   setMedias();
   setGUI();
+  connexionBBDD();
 
   desktop = Desktop.getDesktop();
 }
 
 void draw() {
-  println(pantalla);
   //Establece una configuración por defecto
   textAlign(LEFT);
   fill(0);
