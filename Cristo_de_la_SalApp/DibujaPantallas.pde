@@ -4,12 +4,13 @@ void dibujaPantallaInicio() {
 
   pushMatrix();
   pushStyle();
-  //imagen de fondo
-  image(getFondoManton(), 0, 0, 1280, 800 );
+  background(colors[1]);
+
 
   //habilitar y deshabilitar botones
   disableButtons();
   bInicioSesion.setEnabled(comprovaLogin());
+
 
 
   //dibujar elementos de la pantalla
@@ -18,6 +19,12 @@ void dibujaPantallaInicio() {
   //display elementos GUI
   bInicioSesion.display();
   displayInicioSesiontf();
+  if (bInicioSesion.enabled) {
+    PopUpinicioSesion.setVisible(true);
+  } else if (!bInicioSesion.enabled) {
+    PopUpinicioSesion.setVisible(false);
+  }
+  PopUpinicioSesion.display();
   popStyle();
   popMatrix();
 }
@@ -137,17 +144,33 @@ void dibujaPantallaAvisos() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
+  bPrevAviso.setEnabled(true);
+  bNextAviso.setEnabled(true);
+  bAñadirAviso.setEnabled(true) ;
+  bModificarAviso.setEnabled(true);
+  bDetalleAviso.setEnabled(true);
+  bAñadirEvento.setEnabled(true);
+  bModificarEvento.setEnabled(true);
+  bDetalleEvento.setEnabled(true);
+
 
 
   //dibujar elementos de la pantalla
   menu();
-  //avisos();
-
 
   //display elementos GUI
   displayButtonsMenu();
   displayCalendarioEventos();
   pcAvisos.display();
+  bPrevAviso.display();
+  bNextAviso.display();
+  bAñadirAviso.display();
+  bModificarAviso.display();
+  bDetalleAviso.display();
+  bAñadirEvento.display();
+  bModificarEvento.display();
+  bDetalleEvento.display();
+
   popStyle();
   popMatrix();
 }
@@ -584,7 +607,7 @@ void dibujaPantallaAvisosDetalleEvento() {
   tiTituloDetalleEvento.display();
   itbVerArchivoEventos.display();
   //displaycpNuevoEvento();
-  
+
   popStyle();
   popMatrix();
 }

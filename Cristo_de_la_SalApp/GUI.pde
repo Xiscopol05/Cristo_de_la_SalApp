@@ -18,6 +18,7 @@ void setGUI() {
   initSelectTextList();
   initTextArea();
   initPagedCard();
+  initPopUp();
 }
 
 // Botones
@@ -29,10 +30,11 @@ Button bInicioSesion, bPrincipal;
 Button bAñadir, bModificar, bDetalle, bAceptarCenso, bFicha, bPrevCenso, bNextCenso, bPrevGastos, bNextGastos, bFacebook, bTwitter, bInstagram, bYoutube, bAyuntamiento, bArzobispado, bWebCofrade, bOtrasHermandades, bBalance, bPresupuesto, bAñadirConcepto;
 Button bAceptarConcepto, bCalendario, bCalendarioAlta, bCalendarioMovimiento, bAñadirRecibo, bDetalleBalance;
 Button bPrevDetalle, bNextDetalle, bPrevArchivo, bNextArchivo, bAceptarArchivo, bCalendarioArchivo, bAceptarAvisosAlertas;
-Button bDetalleConcepto, bCalendarioEvento;
+Button bDetalleConcepto, bCalendarioEvento, bPrevAviso, bNextAviso, bAñadirAviso, bModificarAviso, bDetalleAviso;
+Button bAñadirEvento, bModificarEvento, bDetalleEvento, bRecuerdos;
 
 void initButtons() {
-  buttons = new Button[37];
+  buttons = new Button[46];
   buttons[0] = new Button("Principal", 850, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
@@ -70,6 +72,15 @@ void initButtons() {
   buttons[34] = new Button("Calendario", 400, 310+bannerHeight, 100, 45);
   buttons[35] = new Button("Aceptar", 643+menuWidth, 120+bannerHeight, 400, 40);
   buttons[36] = new Button("Calendario", 680+menuWidth+225, 570+bannerHeight, 130, 45);
+  buttons[37] = new Button("PREV", menuWidth+20, 680, 60, 60);
+  buttons[38] = new Button("NEXT", menuWidth+90, 680, 60, 60);
+  buttons[39] = new Button("Añadir", menuWidth+20, primerIconY+10, 100, 50);
+  buttons[40] = new Button("Modificar", (2*menuWidth)-80, primerIconY+10, 100, 50);
+  buttons[41] = new Button("Detalle", menuWidth+220, primerIconY+10, 100, 50);
+  buttons[42] = new Button("Añadir", (2*menuWidth)+350, primerIconY+10, 100, 50);
+  buttons[43] = new Button("Modificar", (2*menuWidth)+450, primerIconY+10, 100, 50);
+  buttons[44] = new Button("detalle", (2*menuWidth)+550, primerIconY+10, 100, 50);
+  buttons[45] = new Button("Recuerdos de la hermandad", 325, 680, 850, buttonEnlaceH);
 
   bPrincipal = buttons[0];
   bInicioSesion = buttons[1];
@@ -108,7 +119,17 @@ void initButtons() {
   bCalendarioArchivo = buttons[34];
   bAceptarAvisosAlertas = buttons[35];
   bCalendarioEvento = buttons[36];
+  bPrevAviso = buttons [37];
+  bNextAviso = buttons [38];
+  bAñadirAviso = buttons [39];
+  bModificarAviso = buttons [40];
+  bDetalleAviso = buttons [41];
+  bAñadirEvento = buttons [42];
+  bModificarEvento = buttons [43];
+  bDetalleEvento = buttons [44];
+  bRecuerdos = buttons[45];
 }
+
 //Desactivar todos los botones
 void disableButtons() {
   for (int i = 0; i<buttons.length; i++) {
@@ -162,6 +183,7 @@ void enableButtonsEnlaces() {
   bAyuntamiento.setEnabled(true);
   bWebCofrade.setEnabled(true);
   bOtrasHermandades.setEnabled(true);
+  bRecuerdos.setEnabled(true);
 }
 void displayButtonsEnlaces() {
   bFacebook.setTextFont(8);
@@ -180,6 +202,7 @@ void displayButtonsEnlaces() {
   bAyuntamiento.display();
   bWebCofrade.display();
   bOtrasHermandades.display();
+  bRecuerdos.display();
 }
 
 
@@ -819,7 +842,13 @@ String[][] infoCards = {
 
 void initPagedCard() {
   pcAvisos = new PagedCard(numCardsPage);
-  pcAvisos.setDimensions(menuWidth+20, primerIconY+iconHeight, ((1280-menuWidth)/2)-10, iconHeight*3);
+  pcAvisos.setDimensions(menuWidth+20, primerIconY+(iconHeight-50), ((1280-menuWidth)/2)-10, iconHeight*4-iconHeight);
   pcAvisos.setData(infoCards);
   pcAvisos.setCards();
+}
+
+PopUp PopUpinicioSesion;
+
+void initPopUp() {
+  PopUpinicioSesion  = new PopUp("Bienvenido, "+ userNameUser, "Usuario y contraseña correctos", width/2-250, height/2-125, 500, 300);
 }

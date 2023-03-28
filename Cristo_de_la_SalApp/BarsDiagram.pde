@@ -1,16 +1,16 @@
 
 class BarsDiagram {
 
-  // Dimensions del diagrama de Barres
+  // Dimensiones del diagrama de Barras
   float x, y, w, h;
 
-  // Informació del diagrama (textos, valors i colors)
+  // Información del diagrama (textos, valores y colores)
   String[] texts;
   float[] values;
   float[] percentages;
   color[] colors;
 
-  // Suma total dels valors
+  // Suma total de los valores
   float total;
 
   // Constructor
@@ -45,7 +45,7 @@ class BarsDiagram {
     this.colors = c;
   }
 
-  // Dibuixa el Diagrama de Sectors
+  // Dibuja el Diagrama de Sectores
 
   void display() {
     pushStyle();

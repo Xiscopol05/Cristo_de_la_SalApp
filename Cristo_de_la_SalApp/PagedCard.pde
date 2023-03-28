@@ -79,11 +79,6 @@ class PagedCard {
         cards[i].display(i==this.selectedCard);
       }
     }
-
-    // Informació de la Pàgina
-    fill(0);
-    text("Pag: "+(this.numPage+1)+" / "+(this.numTotalPages+1), x + w + 50, y+10);
-
     popStyle();
   }
   
