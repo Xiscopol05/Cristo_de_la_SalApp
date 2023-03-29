@@ -37,6 +37,13 @@ class TextField {
     this.textDefault = t;
   }
 
+  // Getters
+
+  String getValue() {
+    return this.text;
+  }
+
+
   // Dibuixa el Camp de Text
   void display() {
 

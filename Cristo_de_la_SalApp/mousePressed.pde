@@ -16,8 +16,6 @@ void mousePressed() {
     stDetalleItem.prevPage();
   } else if (bNextDetalle.mouseOverButton() && bNextDetalle.enabled) {
     stDetalleItem.nextPage();
-  } else if (bInicioSesion.mouseOverButton() && bInicioSesion.enabled) {
-    pantalla = PANTALLA.PRINCIPAL;
   } else if (itbCenso.mouseOverButton() && itbCenso.enabled) {
     pantalla = PANTALLA.CENSO;
   } else if (itbContabilidad.mouseOverButton() && itbContabilidad.enabled) {
@@ -102,6 +100,10 @@ void mousePressed() {
     pantalla = PANTALLA.AVISOS_NUEVOEVENTO;
   } else if (bDetalleEvento.mouseOverButton() && bDetalleEvento.enabled) {
     pantalla = PANTALLA.AVISOS_DETALLEEVENTO;
+  } else if (bMesAnteriorAviso.mouseOverButton() && bMesAnteriorAviso.enabled) {
+    cEventos.prevMonth();
+  } else if (bMesPosteriorAviso.mouseOverButton() && bMesPosteriorAviso.enabled) {
+     cEventos.nextMonth();
   }
 
 
@@ -256,13 +258,15 @@ void mousePressed() {
     cpNuevoEvento.visible = false;
   }
 
+  if (bInicioSesion.mouseOverButton() && bInicioSesion.enabled && comprovaLogin()) {
+    logged = true;
+  }
+
 
   stlTipoConcepto.mouseOn();
 
   if (PopUpinicioSesion.bAceptar.mouseOverButton() && PopUpinicioSesion.bAceptar.enabled) {
-    PopUpinicioSesion.setVisible(false);
-  } else {
-    PopUpinicioSesion.setVisible(true);
+    pantalla = PANTALLA.PRINCIPAL;
   }
 
   if (bNextAviso.mouseOverButton() && bNextAviso.enabled) {

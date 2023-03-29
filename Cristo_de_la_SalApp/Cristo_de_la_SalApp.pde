@@ -9,7 +9,7 @@ enum PANTALLA {
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.ENLACES;
+PANTALLA pantalla =PANTALLA.AVISOS;
 
 boolean logged= false;
 
@@ -17,6 +17,7 @@ boolean admin= true;
 
 String userNameAdmin = "admin";
 String userNameUser = "user";
+String userValidated="";
 
 float estadoDeCuentas = 27500.50;
 int lastKeyCodePressed;
@@ -118,6 +119,7 @@ void draw() {
 boolean comprovaLogin() {
   if (((userText.text.equals(userNameAdmin)||(userText.text.equals(userNameUser))) &&
     passText.text.equals("1234"))) {
+          userValidated = userText.getValue();
     return true;
   } else {
     return false;

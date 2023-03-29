@@ -19,11 +19,14 @@ void dibujaPantallaInicio() {
   //display elementos GUI
   bInicioSesion.display();
   displayInicioSesiontf();
-  if (bInicioSesion.enabled) {
+  PopUpinicioSesion.setVisible(false);
+
+  if (logged == true) {
+    PopUpinicioSesion.setTexts("Bienvenido, " + userValidated, "Usuario y contraseña correctos");
     PopUpinicioSesion.setVisible(true);
-  } else if (!bInicioSesion.enabled) {
-    PopUpinicioSesion.setVisible(false);
+    PopUpinicioSesion.bAceptar.setEnabled(true);
   }
+
   PopUpinicioSesion.display();
   popStyle();
   popMatrix();
@@ -152,8 +155,8 @@ void dibujaPantallaAvisos() {
   bAñadirEvento.setEnabled(true);
   bModificarEvento.setEnabled(true);
   bDetalleEvento.setEnabled(true);
-
-
+  bMesAnteriorAviso.setEnabled(true);
+  bMesPosteriorAviso.setEnabled(true);
 
   //dibujar elementos de la pantalla
   menu();
@@ -170,6 +173,8 @@ void dibujaPantallaAvisos() {
   bAñadirEvento.display();
   bModificarEvento.display();
   bDetalleEvento.display();
+  bMesAnteriorAviso.display();
+  bMesPosteriorAviso.display();
 
   popStyle();
   popMatrix();

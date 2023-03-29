@@ -31,10 +31,10 @@ Button bAñadir, bModificar, bDetalle, bAceptarCenso, bFicha, bPrevCenso, bNextC
 Button bAceptarConcepto, bCalendario, bCalendarioAlta, bCalendarioMovimiento, bAñadirRecibo, bDetalleBalance;
 Button bPrevDetalle, bNextDetalle, bPrevArchivo, bNextArchivo, bAceptarArchivo, bCalendarioArchivo, bAceptarAvisosAlertas;
 Button bDetalleConcepto, bCalendarioEvento, bPrevAviso, bNextAviso, bAñadirAviso, bModificarAviso, bDetalleAviso;
-Button bAñadirEvento, bModificarEvento, bDetalleEvento, bRecuerdos;
+Button bAñadirEvento, bModificarEvento, bDetalleEvento, bRecuerdos, bMesAnteriorAviso, bMesPosteriorAviso;
 
 void initButtons() {
-  buttons = new Button[46];
+  buttons = new Button[48];
   buttons[0] = new Button("Principal", 850, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
@@ -79,8 +79,10 @@ void initButtons() {
   buttons[41] = new Button("Detalle", menuWidth+220, primerIconY+10, 100, 50);
   buttons[42] = new Button("Añadir", (2*menuWidth)+350, primerIconY+10, 100, 50);
   buttons[43] = new Button("Modificar", (2*menuWidth)+450, primerIconY+10, 100, 50);
-  buttons[44] = new Button("detalle", (2*menuWidth)+550, primerIconY+10, 100, 50);
+  buttons[44] = new Button("Detalle", (2*menuWidth)+550, primerIconY+10, 100, 50);
   buttons[45] = new Button("Recuerdos de la hermandad", 325, 680, 850, buttonEnlaceH);
+  buttons[46] = new Button("Siguiente", (2*menuWidth)+780, primerIconY+10, 80, 50);
+  buttons[47] = new Button("Anterior", (2*menuWidth)+700, primerIconY+10, 80, 50);
 
   bPrincipal = buttons[0];
   bInicioSesion = buttons[1];
@@ -128,6 +130,8 @@ void initButtons() {
   bModificarEvento = buttons [43];
   bDetalleEvento = buttons [44];
   bRecuerdos = buttons[45];
+  bMesAnteriorAviso = buttons[46];
+  bMesPosteriorAviso = buttons[47];
 }
 
 //Desactivar todos los botones
@@ -402,7 +406,7 @@ void displayButtonsMenu() {
 // Variable de Calendari
 Calendario cEventos;
 
-String[][] fechasClave = {{"2021-03-15", "CUMPLE"}, {"2021-03-28", "FESTA"}};
+String[][] fechasClave = {{"2023-03-15", "CUMPLE"}, {"2023-03-28", "FESTA"}};
 
 void initCalendar() {
   cEventos = new Calendario(menuWidth+20+((1280-menuWidth)/2), primerIconY+iconHeight+20, ((1280-menuWidth)/2)-35, (iconHeight*3)-50, fechasClave);
@@ -850,5 +854,5 @@ void initPagedCard() {
 PopUp PopUpinicioSesion;
 
 void initPopUp() {
-  PopUpinicioSesion  = new PopUp("Bienvenido, "+ userNameUser, "Usuario y contraseña correctos", width/2-250, height/2-125, 500, 300);
+  PopUpinicioSesion  = new PopUp("Bienvenido, "+ userValidated, "Usuario y contraseña correctos", width/2-250, height/2-125, 500, 300);
 }
