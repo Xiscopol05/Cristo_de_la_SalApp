@@ -144,6 +144,13 @@ void disableButtons() {
   itbArchivo.setEnabled(false);
   itbAvisos.setEnabled(false);
   itbEnlaces.setEnabled(false);
+  itbPerfilPersonal.setEnabled(false);
+  itbInsertarArchivo .setEnabled(false);
+  itbInsertarArchivoAvisos .setEnabled(false);
+  itbInsertarArchivoEventos.setEnabled(false);
+  itbVerArchivoAvisos.setEnabled(false);
+  itbVerArchivoEventos.setEnabled(false);
+  PopUpinicioSesion.bAceptar.setEnabled(false);
 }
 
 void enableButtonsTabla() {
@@ -173,6 +180,7 @@ void displayButtonsPagedTableCenso() {
   bNextCenso.display();
   bPrevCenso.display();
 }
+
 void displayButtonsPagedTableArchivo() {
   bNextArchivo.display();
   bPrevArchivo.display();
@@ -525,11 +533,11 @@ SelectTable stCenso, stGastos, stGastosPresupuesto, stArchivo;
 
 int filasCenso = 6, columnasCenso = 5;
 
-String[] headersCenso = {"Nº", "Nombre", "Apellidos", "Alta", "Estado de cobro"};
+String[] headersCenso = {"Nº", "Nombre", "Apellidos", "Fecha Alta", "Teléfono"};
 
-float[] colWidthsCenso = {10, 20, 40, 10, 20};
+float[] colWidthsCenso = {10, 20, 30, 20, 20};
 
-int[] maxCharsCenso = {10, 10, 20, 10, 10};
+int[] maxCharsCenso = {5, 10, 20, 15, 10};
 
 // Dades de la taula
 String[][] infoCenso = {
@@ -662,7 +670,7 @@ void initSelectTable() {
   stGastos.setColumnMaxChars(maxCharsGastos);
   stCenso = new SelectTable(filasCenso, columnasCenso, 20+menuWidth, 285, 1280-menuWidth-40, 410);
   stCenso.setHeaders(headersCenso);
-  stCenso.setData(infoCenso);
+  stCenso.setData(getInfoTablaCenso());
   stCenso.setColumnWidths(colWidthsCenso);
   stCenso.setColumnMaxChars(maxCharsCenso);
   stGastosPresupuesto = new SelectTable(filasGastos, columnasGastos, 250, 510, 800, 240);
@@ -824,7 +832,7 @@ void initTextArea() {
 
 //pagedCard
 
-PagedCard pcAvisos;
+PagedCard pcAvisos, pcAvisosPrincipal;
 
 // Número de files (capçalera inclosa) i columnes de la taula
 int numCardsPage = 4;
@@ -849,10 +857,14 @@ void initPagedCard() {
   pcAvisos.setDimensions(menuWidth+20, primerIconY+(iconHeight-50), ((1280-menuWidth)/2)-10, iconHeight*4-iconHeight);
   pcAvisos.setData(infoCards);
   pcAvisos.setCards();
+  pcAvisosPrincipal = new PagedCard(8);
+  pcAvisosPrincipal.setDimensions(menuWidth+540, bannerHeight+30, 520, 550);
+  pcAvisosPrincipal.setData(infoCards);
+  pcAvisosPrincipal.setCards();
 }
 
 PopUp PopUpinicioSesion;
 
 void initPopUp() {
-  PopUpinicioSesion  = new PopUp("Bienvenido, "+ userValidated, "Usuario y contraseña correctos", width/2-250, height/2-125, 500, 300);
+  PopUpinicioSesion  = new PopUp("Bienvenido, "+ userText.getValue(), "Usuario y contraseña correctos", width/2-250, height/2-125, 500, 300);
 }

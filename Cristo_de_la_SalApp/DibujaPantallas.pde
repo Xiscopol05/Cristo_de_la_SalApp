@@ -22,7 +22,7 @@ void dibujaPantallaInicio() {
   PopUpinicioSesion.setVisible(false);
 
   if (logged == true) {
-    PopUpinicioSesion.setTexts("Bienvenido, " + userValidated, "Usuario y contraseña correctos");
+    PopUpinicioSesion.setTexts("Bienvenido, " + userText.getValue(), "Usuario y contraseña correctos");
     PopUpinicioSesion.setVisible(true);
     PopUpinicioSesion.bAceptar.setEnabled(true);
   }
@@ -46,8 +46,8 @@ void dibujaPantallaPrincipal() {
   //dibujar elementos de la pantalla
   menu();
   tituloCarruselFotos();
-  fila1();
-  fila2();
+  pcAvisosPrincipal.display();
+  //fila2();
 
   //display elementos GUI
   displayButtonsMenu();

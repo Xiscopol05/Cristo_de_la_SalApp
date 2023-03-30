@@ -5,19 +5,20 @@ import de.bezier.data.sql.*;
 enum PANTALLA {
   INICIO, PRINCIPAL, CENSO, CONTABILIDAD, ARCHIVO, AVISOS, ENLACES, CENSO_DETALLE, CENSO_NUEVOHERMANO,
     CONTABILIDAD_BALANCE, CONTABILIDAD_PRESUPUESTO, CONTABILIDAD_AÑADIRCONCEPTO, CONTABILIDAD_DETALLEBALANCE,
-    CONTABILIDAD_DETALLEMOVIMIENTO, ARCHIVO_NUEVO, ARCHIVO_DETALLE, AVISOS_NUEVOAVISO, AVISOS_NUEVOEVENTO, AVISOS_DETALLEAVISO, AVISOS_DETALLEEVENTO;
+    CONTABILIDAD_DETALLEMOVIMIENTO, ARCHIVO_NUEVO, ARCHIVO_DETALLE, AVISOS_NUEVOAVISO, AVISOS_NUEVOEVENTO,
+    AVISOS_DETALLEAVISO, AVISOS_DETALLEEVENTO;
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.AVISOS;
+PANTALLA pantalla =PANTALLA.PRINCIPAL;
 
 boolean logged= false;
 
-boolean admin= true;
-
 String userNameAdmin = "admin";
 String userNameUser = "user";
-String userValidated="";
+
+boolean admin= true;
+
 
 float estadoDeCuentas = 27500.50;
 int lastKeyCodePressed;
@@ -25,11 +26,12 @@ int lastKeyCodePressed;
 
 void setup() {
   size(1280, 800);
+  connexionBBDD();
   setColors();
   setFonts();
   setMedias();
   setGUI();
-  connexionBBDD();
+  
 
   desktop = Desktop.getDesktop();
 }
@@ -117,11 +119,9 @@ void draw() {
 }
 // Comprova si el login és correcte
 boolean comprovaLogin() {
-  if (((userText.text.equals(userNameAdmin)||(userText.text.equals(userNameUser))) &&
-    passText.text.equals("1234"))) {
-          userValidated = userText.getValue();
-    return true;
-  } else {
-    return false;
-  }
+  return isValidated(userText.getValue(), passText.getValue() );
+}
+
+boolean comprovaAdmin() {
+  return isAdmin(userText.getValue());
 }

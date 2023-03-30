@@ -103,7 +103,7 @@ void mousePressed() {
   } else if (bMesAnteriorAviso.mouseOverButton() && bMesAnteriorAviso.enabled) {
     cEventos.prevMonth();
   } else if (bMesPosteriorAviso.mouseOverButton() && bMesPosteriorAviso.enabled) {
-     cEventos.nextMonth();
+    cEventos.nextMonth();
   }
 
 
@@ -159,123 +159,159 @@ void mousePressed() {
   stArchivo.checkSelections();
 
 
-  cpFechaAlta.checkButtons();
-
-  // Si pitja el botó, canvia la visibilitat del calendari.
-  if (bCalendarioAlta.mouseOverButton()&& bCalendarioAlta.enabled) {
-    cpFechaAlta.visible = !cpFechaAlta.visible;
-  }
-
-  if (cpFechaAlta.bNext.mouseOverButton()) {
-    cpFechaAlta.nextMonth();
-  }
-
-  if (cpFechaAlta.bPrev.mouseOverButton()) {
-    cpFechaAlta.prevMonth();
-  }
-
-  if (cpFechaAlta.bOK.mouseOverButton() && cpFechaAlta.dateSelected) {
-    dataCalendariAlta = cpFechaAlta.selectedDay +"/"+ cpFechaAlta.selectedMonth + "/"+ cpFechaAlta.selectedYear;
-    cpFechaAlta.visible = false;
-  }
 
 
-  cpFechaMovimiento.checkButtons();
-
-  // Si pitja el botó, canvia la visibilitat del calendari.
-  if (bCalendarioMovimiento.mouseOverButton()&& bCalendarioMovimiento.enabled) {
-    cpFechaMovimiento.visible = !cpFechaMovimiento.visible;
-  }
-
-  if (cpFechaMovimiento.bNext.mouseOverButton()) {
-    cpFechaMovimiento.nextMonth();
-  }
-
-  if (cpFechaMovimiento.bPrev.mouseOverButton()) {
-    cpFechaMovimiento.prevMonth();
-  }
-
-  if (cpFechaMovimiento.bOK.mouseOverButton() && cpFechaMovimiento.dateSelected) {
-    dataCalendariMovimiento = cpFechaMovimiento.selectedDay +"/"+ cpFechaMovimiento.selectedMonth + "/"+ cpFechaMovimiento.selectedYear;
-    cpFechaMovimiento.visible = false;
-  }
-  cpFechaNacimiento.checkButtons();
-
-  // Si pitja el botó, canvia la visibilitat del calendari.
-  if (bCalendario.mouseOverButton()&& bCalendario.enabled) {
-    cpFechaNacimiento.visible = !cpFechaNacimiento.visible;
-  }
-
-  if (cpFechaNacimiento.bNext.mouseOverButton()) {
-    cpFechaNacimiento.nextMonth();
-  }
-
-  if (cpFechaNacimiento.bPrev.mouseOverButton()) {
-    cpFechaNacimiento.prevMonth();
-  }
-
-  if (cpFechaNacimiento.bOK.mouseOverButton() && cpFechaNacimiento.dateSelected) {
-    dataCalendariNacimiento= cpFechaNacimiento.selectedDay +"/"+ cpFechaNacimiento.selectedMonth + "/"+ cpFechaNacimiento.selectedYear;
-    cpFechaNacimiento.visible = false;
-  }
-  cpFechaArchivo.checkButtons();
-
-  // Si pitja el botó, canvia la visibilitat del calendari.
-  if (bCalendarioArchivo.mouseOverButton()&& bCalendarioArchivo.enabled) {
-    cpFechaArchivo.visible = !cpFechaArchivo.visible;
-  }
-
-  if (cpFechaArchivo.bNext.mouseOverButton()) {
-    cpFechaArchivo.nextMonth();
-  }
-
-  if (cpFechaArchivo.bPrev.mouseOverButton()) {
-    cpFechaArchivo.prevMonth();
-  }
-
-  if (cpFechaArchivo.bOK.mouseOverButton() && cpFechaArchivo.dateSelected) {
-    dataCalendarioArchivo= cpFechaArchivo.selectedDay +"/"+ cpFechaArchivo.selectedMonth + "/"+ cpFechaArchivo.selectedYear;
-    cpFechaArchivo.visible = false;
-  }
-
-  cpNuevoEvento.checkButtons();
-
-  // Si pitja el botó, canvia la visibilitat del calendari.
-  if (bCalendarioEvento.mouseOverButton()&& bCalendarioEvento.enabled) {
-    cpNuevoEvento.visible = !cpNuevoEvento.visible;
-  }
-
-  if (cpNuevoEvento.bNext.mouseOverButton()) {
-    cpNuevoEvento.nextMonth();
-  }
-
-  if (cpNuevoEvento.bPrev.mouseOverButton()) {
-    cpNuevoEvento.prevMonth();
-  }
-
-  if (cpNuevoEvento.bOK.mouseOverButton() && cpNuevoEvento.dateSelected) {
-    dataCalendarioEvento= cpNuevoEvento.selectedDay +"/"+ cpNuevoEvento.selectedMonth + "/"+ cpNuevoEvento.selectedYear;
-    cpNuevoEvento.visible = false;
-  }
-
-  if (bInicioSesion.mouseOverButton() && bInicioSesion.enabled && comprovaLogin()) {
-    logged = true;
+  if (bAceptarCenso.mouseOverButton() && bAceptarCenso.enabled) {
+    // Agafar els valors dels camps del formulari
+    String nombre = String.valueOf(tfNombre.getValue());
+    String apellidos = String.valueOf(tfApellidos.getValue());
+    String fechanacimiento = "2023-03-03";
+    String dni = String.valueOf(tfDNI.getValue());
+    String calle = String.valueOf(tfCalle.getValue());
+    String numero = String.valueOf(tfNumero.getValue());
+    String piso = String.valueOf(tfPiso.getValue());
+    String localidad = String.valueOf(tfLocalidad.getValue());
+    String provincia = String.valueOf(tfProvincia.getValue());
+    String telefono = String.valueOf(tfTelefono.getValue());
+    String correoelectronico = String.valueOf(tfCorreoElectronico.getValue());
+    String banco = String.valueOf(tfBanco.getValue());
+    String titular = String.valueOf(tfTitular.getValue());
+    String dnititular = String.valueOf(tfDNITitular.getValue());
+    String iban = String.valueOf(tfIBAN.getValue());
+    String entidad = String.valueOf(tfEntidad.getValue());
+    String oficina = String.valueOf(tfOficina.getValue());
+    String digitocontrol = String.valueOf(tfDigitoControl.getValue());
+    String numerocuenta = String.valueOf(tfNumeroCuenta.getValue());
+    String fechaalta = "2023-03-03";
+    // Inserir a la BBDD
+    insertInfoTablaHermano(nombre, apellidos, fechanacimiento, dni, calle, numero, piso, localidad, provincia, telefono, correoelectronico, banco, titular, dnititular, iban, entidad, oficina, digitocontrol, numerocuenta, fechaalta);
+    // Resetear camps del formulari
+    resetFormularioCenso();
   }
 
 
-  stlTipoConcepto.mouseOn();
 
-  if (PopUpinicioSesion.bAceptar.mouseOverButton() && PopUpinicioSesion.bAceptar.enabled) {
-    pantalla = PANTALLA.PRINCIPAL;
-  }
 
-  if (bNextAviso.mouseOverButton() && bNextAviso.enabled) {
-    pcAvisos.nextPage();
-  } else if (bPrevAviso.mouseOverButton() && bPrevAviso.enabled) {
-    pcAvisos.prevPage();
-  } else {
-    pcAvisos.checkCardSelection();
-  }
+
+
+cpFechaAlta.checkButtons();
+
+// Si pitja el botó, canvia la visibilitat del calendari.
+if (bCalendarioAlta.mouseOverButton()&& bCalendarioAlta.enabled) {
+  cpFechaAlta.visible = !cpFechaAlta.visible;
+}
+
+if (cpFechaAlta.bNext.mouseOverButton()) {
+  cpFechaAlta.nextMonth();
+}
+
+if (cpFechaAlta.bPrev.mouseOverButton()) {
+  cpFechaAlta.prevMonth();
+}
+
+if (cpFechaAlta.bOK.mouseOverButton() && cpFechaAlta.dateSelected) {
+  dataCalendariAlta = cpFechaAlta.selectedDay +"/"+ cpFechaAlta.selectedMonth + "/"+ cpFechaAlta.selectedYear;
+  cpFechaAlta.visible = false;
+}
+
+
+cpFechaMovimiento.checkButtons();
+
+// Si pitja el botó, canvia la visibilitat del calendari.
+if (bCalendarioMovimiento.mouseOverButton()&& bCalendarioMovimiento.enabled) {
+  cpFechaMovimiento.visible = !cpFechaMovimiento.visible;
+}
+
+if (cpFechaMovimiento.bNext.mouseOverButton()) {
+  cpFechaMovimiento.nextMonth();
+}
+
+if (cpFechaMovimiento.bPrev.mouseOverButton()) {
+  cpFechaMovimiento.prevMonth();
+}
+
+if (cpFechaMovimiento.bOK.mouseOverButton() && cpFechaMovimiento.dateSelected) {
+  dataCalendariMovimiento = cpFechaMovimiento.selectedDay +"/"+ cpFechaMovimiento.selectedMonth + "/"+ cpFechaMovimiento.selectedYear;
+  cpFechaMovimiento.visible = false;
+}
+cpFechaNacimiento.checkButtons();
+
+// Si pitja el botó, canvia la visibilitat del calendari.
+if (bCalendario.mouseOverButton()&& bCalendario.enabled) {
+  cpFechaNacimiento.visible = !cpFechaNacimiento.visible;
+}
+
+if (cpFechaNacimiento.bNext.mouseOverButton()) {
+  cpFechaNacimiento.nextMonth();
+}
+
+if (cpFechaNacimiento.bPrev.mouseOverButton()) {
+  cpFechaNacimiento.prevMonth();
+}
+
+if (cpFechaNacimiento.bOK.mouseOverButton() && cpFechaNacimiento.dateSelected) {
+  dataCalendariNacimiento= cpFechaNacimiento.selectedDay +"/"+ cpFechaNacimiento.selectedMonth + "/"+ cpFechaNacimiento.selectedYear;
+  cpFechaNacimiento.visible = false;
+}
+cpFechaArchivo.checkButtons();
+
+// Si pitja el botó, canvia la visibilitat del calendari.
+if (bCalendarioArchivo.mouseOverButton()&& bCalendarioArchivo.enabled) {
+  cpFechaArchivo.visible = !cpFechaArchivo.visible;
+}
+
+if (cpFechaArchivo.bNext.mouseOverButton()) {
+  cpFechaArchivo.nextMonth();
+}
+
+if (cpFechaArchivo.bPrev.mouseOverButton()) {
+  cpFechaArchivo.prevMonth();
+}
+
+if (cpFechaArchivo.bOK.mouseOverButton() && cpFechaArchivo.dateSelected) {
+  dataCalendarioArchivo= cpFechaArchivo.selectedDay +"/"+ cpFechaArchivo.selectedMonth + "/"+ cpFechaArchivo.selectedYear;
+  cpFechaArchivo.visible = false;
+}
+
+cpNuevoEvento.checkButtons();
+
+// Si pitja el botó, canvia la visibilitat del calendari.
+if (bCalendarioEvento.mouseOverButton()&& bCalendarioEvento.enabled) {
+  cpNuevoEvento.visible = !cpNuevoEvento.visible;
+}
+
+if (cpNuevoEvento.bNext.mouseOverButton()) {
+  cpNuevoEvento.nextMonth();
+}
+
+if (cpNuevoEvento.bPrev.mouseOverButton()) {
+  cpNuevoEvento.prevMonth();
+}
+
+if (cpNuevoEvento.bOK.mouseOverButton() && cpNuevoEvento.dateSelected) {
+  dataCalendarioEvento= cpNuevoEvento.selectedDay +"/"+ cpNuevoEvento.selectedMonth + "/"+ cpNuevoEvento.selectedYear;
+  cpNuevoEvento.visible = false;
+}
+
+if (bInicioSesion.mouseOverButton() && bInicioSesion.enabled && comprovaLogin()) {
+  logged = true;
+  admin = comprovaAdmin();
+}
+
+
+stlTipoConcepto.mouseOn();
+
+if (PopUpinicioSesion.bAceptar.mouseOverButton() && PopUpinicioSesion.bAceptar.enabled) {
+  pantalla = PANTALLA.PRINCIPAL;
+}
+
+if (bNextAviso.mouseOverButton() && bNextAviso.enabled) {
+  pcAvisos.nextPage();
+} else if (bPrevAviso.mouseOverButton() && bPrevAviso.enabled) {
+  pcAvisos.prevPage();
+} else {
+  pcAvisos.checkCardSelection();
+}
 }
 
 // Modifica el cursor
@@ -298,4 +334,26 @@ void updateCursor() {
   } else {
     cursor(ARROW);
   }
+}
+
+// Reset del Formulari
+void resetFormularioCenso() {
+  tfNombre.removeAllText();
+  tfApellidos.removeAllText();
+  tfDNI.removeAllText();
+  tfCalle.removeAllText();
+  tfNumero.removeAllText();
+  tfPiso.removeAllText();
+  tfLocalidad.removeAllText();
+  tfProvincia.removeAllText();
+  tfTelefono.removeAllText();
+  tfCorreoElectronico.removeAllText();
+  tfBanco.removeAllText();
+  tfTitular.removeAllText();
+  tfDNITitular.removeAllText();
+  tfIBAN.removeAllText();
+  tfEntidad.removeAllText();
+  tfOficina.removeAllText();
+  tfDigitoControl.removeAllText();
+  tfNumeroCuenta.removeAllText();
 }

@@ -97,7 +97,7 @@ void columna1() {
   pushMatrix();
   pushStyle();
   translate(menuWidth, bannerHeight);
-  fill(getColorAt(3));
+  fill(getColorAt(2));
   rect(20, 20, 500, 660);
   popMatrix();
   popStyle();
@@ -123,7 +123,7 @@ void fila1() {
   pushStyle();
   translate(menuWidth+520, bannerHeight);
   fill(getColorAt(3));
-  rect(20, 20, 520, 310);
+  rect(menuWidth+540, bannerHeight+20, 520, 310);
   popMatrix();
   popStyle();
 }
@@ -215,7 +215,7 @@ void tituloCarruselFotos() {
   textFont(getFontAt(7));
   fill(0);
   textAlign(LEFT);
-  text("Bienvenido " + userNameAdmin + " a tu perfil de la hermandad", 40, 57);
+  text("Bienvenido" + userText.getValue() + " a tu perfil de la hermandad", 40, 57);
   
   popStyle();
   popMatrix();

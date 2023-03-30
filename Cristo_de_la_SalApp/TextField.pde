@@ -99,6 +99,11 @@ class TextField {
       textLength--;
     }
   }
+  
+  // Lleva tot el text
+   void removeAllText(){
+     this.text = "";
+   }
 
   // Indica si el ratolí està sobre el camp de text
   boolean mouseOverTextField() {
