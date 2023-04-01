@@ -1,5 +1,7 @@
 // Librería de MySQL i Processing
 import de.bezier.data.sql.*;
+import java.util.Random;
+
 
 //enumeración de las pantallas de la aplicación
 enum PANTALLA {
@@ -10,7 +12,7 @@ enum PANTALLA {
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.PRINCIPAL;
+PANTALLA pantalla =PANTALLA.CENSO;
 
 boolean logged= false;
 

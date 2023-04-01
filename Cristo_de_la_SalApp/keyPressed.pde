@@ -35,6 +35,7 @@ void keyPressed() {
   //Archivo Nuevo
   else if (pantalla == PANTALLA.ARCHIVO_NUEVO) {
     tfTituloArchivo.keyPressed(key, (int)keyCode);
+    tfAñoDatacion.keyPressed(key, (int)keyCode);
   }
   //Nuevo Aviso
   else if (pantalla == PANTALLA.AVISOS_NUEVOAVISO) {

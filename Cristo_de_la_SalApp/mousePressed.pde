@@ -141,6 +141,7 @@ void mousePressed() {
   tfTituloArchivo.isPressed();
   tfTituloAviso.isPressed();
   tfTituloEvento.isPressed();
+  tfAñoDatacion.isPressed();
   taNuevoAviso.isPressed();
   taNuevoEvento.isPressed();
   cEventos.checkButtons();
@@ -187,131 +188,130 @@ void mousePressed() {
     insertInfoTablaHermano(nombre, apellidos, fechanacimiento, dni, calle, numero, piso, localidad, provincia, telefono, correoelectronico, banco, titular, dnititular, iban, entidad, oficina, digitocontrol, numerocuenta, fechaalta);
     // Resetear camps del formulari
     resetFormularioCenso();
+    stCenso = new SelectTable(filasCenso, columnasCenso, 20+menuWidth, 285, 1280-menuWidth-40, 410);
+    stCenso.setHeaders(headersCenso);
+    stCenso.setData(getInfoTablaCenso());
+    stCenso.setColumnWidths(colWidthsCenso);
+    stCenso.setColumnMaxChars(maxCharsCenso);
+  }
+
+  if (bAceptarArchivo.mouseOverButton() && bAceptarArchivo.enabled) {
+    // Agafar els valors dels camps del formulari
+    String titulo = String.valueOf(tfTituloArchivo.getValue());
+    String datacion = String.valueOf(tfAñoDatacion.getValue());
+    String file = "";
+    String tipo = String.valueOf(sCategoriaArchivo.selectedValue);
+    String idTipoArchivo = String.valueOf(obtenerIdTipoArchivo(tipo));
+    insertInfoTablaArchivo( titulo, datacion, file, idTipoArchivo);
+    // Inserir a la BBDD
+    // Resetear camps del formulari
+    resetFormularioArchivo();
   }
 
 
 
 
 
+  // Si pitja el botó, canvia la visibilitat del calendari.
+  if (bCalendarioAlta.mouseOverButton()&& bCalendarioAlta.enabled) {
+    cpFechaAlta.visible = !cpFechaAlta.visible;
+  }
 
-cpFechaAlta.checkButtons();
+  if (cpFechaAlta.bNext.mouseOverButton()) {
+    cpFechaAlta.nextMonth();
+  }
 
-// Si pitja el botó, canvia la visibilitat del calendari.
-if (bCalendarioAlta.mouseOverButton()&& bCalendarioAlta.enabled) {
-  cpFechaAlta.visible = !cpFechaAlta.visible;
-}
+  if (cpFechaAlta.bPrev.mouseOverButton()) {
+    cpFechaAlta.prevMonth();
+  }
 
-if (cpFechaAlta.bNext.mouseOverButton()) {
-  cpFechaAlta.nextMonth();
-}
+  if (cpFechaAlta.bOK.mouseOverButton() && cpFechaAlta.dateSelected) {
+    dataCalendariAlta = cpFechaAlta.selectedDay +"/"+ cpFechaAlta.selectedMonth + "/"+ cpFechaAlta.selectedYear;
+    cpFechaAlta.visible = false;
+  }
 
-if (cpFechaAlta.bPrev.mouseOverButton()) {
-  cpFechaAlta.prevMonth();
-}
-
-if (cpFechaAlta.bOK.mouseOverButton() && cpFechaAlta.dateSelected) {
-  dataCalendariAlta = cpFechaAlta.selectedDay +"/"+ cpFechaAlta.selectedMonth + "/"+ cpFechaAlta.selectedYear;
-  cpFechaAlta.visible = false;
-}
-
-
-cpFechaMovimiento.checkButtons();
-
-// Si pitja el botó, canvia la visibilitat del calendari.
-if (bCalendarioMovimiento.mouseOverButton()&& bCalendarioMovimiento.enabled) {
-  cpFechaMovimiento.visible = !cpFechaMovimiento.visible;
-}
-
-if (cpFechaMovimiento.bNext.mouseOverButton()) {
-  cpFechaMovimiento.nextMonth();
-}
-
-if (cpFechaMovimiento.bPrev.mouseOverButton()) {
-  cpFechaMovimiento.prevMonth();
-}
-
-if (cpFechaMovimiento.bOK.mouseOverButton() && cpFechaMovimiento.dateSelected) {
-  dataCalendariMovimiento = cpFechaMovimiento.selectedDay +"/"+ cpFechaMovimiento.selectedMonth + "/"+ cpFechaMovimiento.selectedYear;
-  cpFechaMovimiento.visible = false;
-}
-cpFechaNacimiento.checkButtons();
-
-// Si pitja el botó, canvia la visibilitat del calendari.
-if (bCalendario.mouseOverButton()&& bCalendario.enabled) {
-  cpFechaNacimiento.visible = !cpFechaNacimiento.visible;
-}
-
-if (cpFechaNacimiento.bNext.mouseOverButton()) {
-  cpFechaNacimiento.nextMonth();
-}
-
-if (cpFechaNacimiento.bPrev.mouseOverButton()) {
-  cpFechaNacimiento.prevMonth();
-}
-
-if (cpFechaNacimiento.bOK.mouseOverButton() && cpFechaNacimiento.dateSelected) {
-  dataCalendariNacimiento= cpFechaNacimiento.selectedDay +"/"+ cpFechaNacimiento.selectedMonth + "/"+ cpFechaNacimiento.selectedYear;
-  cpFechaNacimiento.visible = false;
-}
-cpFechaArchivo.checkButtons();
-
-// Si pitja el botó, canvia la visibilitat del calendari.
-if (bCalendarioArchivo.mouseOverButton()&& bCalendarioArchivo.enabled) {
-  cpFechaArchivo.visible = !cpFechaArchivo.visible;
-}
-
-if (cpFechaArchivo.bNext.mouseOverButton()) {
-  cpFechaArchivo.nextMonth();
-}
-
-if (cpFechaArchivo.bPrev.mouseOverButton()) {
-  cpFechaArchivo.prevMonth();
-}
-
-if (cpFechaArchivo.bOK.mouseOverButton() && cpFechaArchivo.dateSelected) {
-  dataCalendarioArchivo= cpFechaArchivo.selectedDay +"/"+ cpFechaArchivo.selectedMonth + "/"+ cpFechaArchivo.selectedYear;
-  cpFechaArchivo.visible = false;
-}
-
-cpNuevoEvento.checkButtons();
-
-// Si pitja el botó, canvia la visibilitat del calendari.
-if (bCalendarioEvento.mouseOverButton()&& bCalendarioEvento.enabled) {
-  cpNuevoEvento.visible = !cpNuevoEvento.visible;
-}
-
-if (cpNuevoEvento.bNext.mouseOverButton()) {
-  cpNuevoEvento.nextMonth();
-}
-
-if (cpNuevoEvento.bPrev.mouseOverButton()) {
-  cpNuevoEvento.prevMonth();
-}
-
-if (cpNuevoEvento.bOK.mouseOverButton() && cpNuevoEvento.dateSelected) {
-  dataCalendarioEvento= cpNuevoEvento.selectedDay +"/"+ cpNuevoEvento.selectedMonth + "/"+ cpNuevoEvento.selectedYear;
-  cpNuevoEvento.visible = false;
-}
-
-if (bInicioSesion.mouseOverButton() && bInicioSesion.enabled && comprovaLogin()) {
-  logged = true;
-  admin = comprovaAdmin();
-}
+  cpFechaAlta.checkButtons();
 
 
-stlTipoConcepto.mouseOn();
+  cpFechaMovimiento.checkButtons();
 
-if (PopUpinicioSesion.bAceptar.mouseOverButton() && PopUpinicioSesion.bAceptar.enabled) {
-  pantalla = PANTALLA.PRINCIPAL;
-}
+  // Si pitja el botó, canvia la visibilitat del calendari.
+  if (bCalendarioMovimiento.mouseOverButton()&& bCalendarioMovimiento.enabled) {
+    cpFechaMovimiento.visible = !cpFechaMovimiento.visible;
+  }
 
-if (bNextAviso.mouseOverButton() && bNextAviso.enabled) {
-  pcAvisos.nextPage();
-} else if (bPrevAviso.mouseOverButton() && bPrevAviso.enabled) {
-  pcAvisos.prevPage();
-} else {
-  pcAvisos.checkCardSelection();
-}
+  if (cpFechaMovimiento.bNext.mouseOverButton()) {
+    cpFechaMovimiento.nextMonth();
+  }
+
+  if (cpFechaMovimiento.bPrev.mouseOverButton()) {
+    cpFechaMovimiento.prevMonth();
+  }
+
+  if (cpFechaMovimiento.bOK.mouseOverButton() && cpFechaMovimiento.dateSelected) {
+    dataCalendariMovimiento = cpFechaMovimiento.selectedDay +"/"+ cpFechaMovimiento.selectedMonth + "/"+ cpFechaMovimiento.selectedYear;
+    cpFechaMovimiento.visible = false;
+  }
+  cpFechaNacimiento.checkButtons();
+
+  // Si pitja el botó, canvia la visibilitat del calendari.
+  if (bCalendario.mouseOverButton()&& bCalendario.enabled) {
+    cpFechaNacimiento.visible = !cpFechaNacimiento.visible;
+  }
+
+  if (cpFechaNacimiento.bNext.mouseOverButton()) {
+    cpFechaNacimiento.nextMonth();
+  }
+
+  if (cpFechaNacimiento.bPrev.mouseOverButton()) {
+    cpFechaNacimiento.prevMonth();
+  }
+
+  if (cpFechaNacimiento.bOK.mouseOverButton() && cpFechaNacimiento.dateSelected) {
+    dataCalendariNacimiento= cpFechaNacimiento.selectedDay +"/"+ cpFechaNacimiento.selectedMonth + "/"+ cpFechaNacimiento.selectedYear;
+    cpFechaNacimiento.visible = false;
+  }
+
+
+  cpNuevoEvento.checkButtons();
+
+  // Si pitja el botó, canvia la visibilitat del calendari.
+  if (bCalendarioEvento.mouseOverButton()&& bCalendarioEvento.enabled) {
+    cpNuevoEvento.visible = !cpNuevoEvento.visible;
+  }
+
+  if (cpNuevoEvento.bNext.mouseOverButton()) {
+    cpNuevoEvento.nextMonth();
+  }
+
+  if (cpNuevoEvento.bPrev.mouseOverButton()) {
+    cpNuevoEvento.prevMonth();
+  }
+
+  if (cpNuevoEvento.bOK.mouseOverButton() && cpNuevoEvento.dateSelected) {
+    dataCalendarioEvento= cpNuevoEvento.selectedDay +"/"+ cpNuevoEvento.selectedMonth + "/"+ cpNuevoEvento.selectedYear;
+    cpNuevoEvento.visible = false;
+  }
+
+  if (bInicioSesion.mouseOverButton() && bInicioSesion.enabled && comprovaLogin()) {
+    logged = true;
+    admin = comprovaAdmin();
+  }
+
+
+  stlTipoConcepto.mouseOn();
+
+  if (PopUpinicioSesion.bAceptar.mouseOverButton() && PopUpinicioSesion.bAceptar.enabled) {
+    pantalla = PANTALLA.PRINCIPAL;
+  }
+
+  if (bNextAviso.mouseOverButton() && bNextAviso.enabled) {
+    pcAvisos.nextPage();
+  } else if (bPrevAviso.mouseOverButton() && bPrevAviso.enabled) {
+    pcAvisos.prevPage();
+  } else {
+    pcAvisos.checkCardSelection();
+  }
 }
 
 // Modifica el cursor
@@ -356,4 +356,19 @@ void resetFormularioCenso() {
   tfOficina.removeAllText();
   tfDigitoControl.removeAllText();
   tfNumeroCuenta.removeAllText();
+}
+
+// Reset del Formulari
+void resetFormularioArchivo() {
+  tfTituloArchivo.removeAllText();
+  dataCalendarioArchivo = "";
+}
+
+ int obtenerIdTipoArchivo(String tipo) {
+    int idTipoArchivo = -1;
+    msql.query("SELECT idtipo_arch FROM tipo_arch WHERE tipo = '"+tipo+"'");
+    if (msql.next()) {
+        idTipoArchivo = msql.getInt("idtipo_arch");
+    }
+    return idTipoArchivo;
 }

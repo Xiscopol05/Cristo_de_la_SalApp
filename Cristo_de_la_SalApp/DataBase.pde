@@ -92,16 +92,72 @@ String formataFecha(String fechaEntrada) {
 }
 
 
-
 void insertInfoTablaHermano(String nombre, String apellidos, String fechanacimiento, String dni, String calle, String numerodireccion, String piso, String localidad, String provincia, String telefono, String correoelectronico, String banco, String titular, String dnititular, String iban, String entidad, String oficina, String digitocontrol, String numerocuenta, String fechaalta){
-// Obtener el siguiente número libre en la tabla 'user' y la columna 'numhermano'
-//int lastNumRow = msql.query("SELECT MAX(numhermano) AS lastNum FROM user";);
-//int nextNumHermano = lastNumRow.getInt("lastNum") + 1;
-
+String numHermano = String.valueOf(getNumeroUltimoHermano()+1);
+// Insertar el nuevo registro en la tabla 'user'
+String password = generatePassword(6);
+String q2 = "INSERT INTO user (numhermano, password, role_id) VALUES ('"+numHermano+"','"+password+"','2')";
 // Insertar el nuevo registro en la tabla 'hermano'
 String sNombre = nombre.replace("'", "\'");
 String sApellidos = apellidos.replace("'", "\'");
-String q2 = "INSERT INTO hermano (user_numhermano, user_role_id, nombre, apellidos, fechanacimiento, dni, calle, numerodireccion, piso, localidad, provincia, telefono, correoelectronico, banco, titular, dnititular, iban, entidad, oficina, digitocontrol, numerocuenta, fechaalta) VALUES ('123456','2','"+sNombre+"','"+sApellidos+"','"+fechanacimiento+"','"+dni+"','"+calle+"','"+numerodireccion+"','"+piso+"','"+localidad+"','"+provincia+"','"+telefono+"','"+correoelectronico+"','"+banco+"','"+titular+"','"+dnititular+"','"+iban+"','"+entidad+"','"+oficina+"','"+digitocontrol+"','"+numerocuenta+"','"+fechaalta+"')";
+String q3 = "INSERT INTO hermano (user_numhermano, user_role_id, nombre, apellidos, fechanacimiento, dni, calle, numerodireccion, piso, localidad, provincia, telefono, correoelectronico, banco, titular, dnititular, iban, entidad, oficina, digitocontrol, numerocuenta, fechaalta) VALUES ('"+numHermano+"','2', '"+sNombre+"','"+sApellidos+"','"+fechanacimiento+"','"+dni+"','"+calle+"','"+numerodireccion+"','"+piso+"','"+localidad+"','"+provincia+"','"+telefono+"','"+correoelectronico+"','"+banco+"','"+titular+"','"+dnititular+"','"+iban+"','"+entidad+"','"+oficina+"','"+digitocontrol+"','"+numerocuenta+"','"+fechaalta+"')";
 println(q2);
+println(q3);
+msql.query(q3);
 msql.query(q2);
+
+}
+
+
+String generatePassword(int length) {
+  String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
+  String specialCharacters = "!@#$";
+  String numbers = "1234567890";
+  String combinedChars = capitalCaseLetters + lowerCaseLetters + specialCharacters + numbers;
+  Random random = new Random();
+  char[] password = new char[length];
+
+  password[0] = lowerCaseLetters.charAt(random.nextInt(lowerCaseLetters.length()));
+  password[1] = capitalCaseLetters.charAt(random.nextInt(capitalCaseLetters.length()));
+  password[2] = specialCharacters.charAt(random.nextInt(specialCharacters.length()));
+  password[3] = numbers.charAt(random.nextInt(numbers.length()));
+
+  for (int i = 4; i< length; i++) {
+    password[i] = combinedChars.charAt(random.nextInt(combinedChars.length()));
+  }
+  return new String(password);
+}
+
+int getNumeroUltimoHermano() {
+  String q = "SELECT MAX( user_numhermano  ) AS n FROM hermano";
+  println(q);
+  msql.query(q);
+  msql.next();
+  return (msql.getInt("n"));
+}
+
+
+
+// Obté informació de la taula Unitat
+String[][] getInfoTablaArchivo() {
+
+  int numRows = getNumRowsTabla("archivo");
+  String[][] data = new String[numRows][3];
+
+  int nr=0;
+  msql.query( "SELECT archivo.titulo AS titulo, archivo.datacion AS datacion, archivo.file AS file, tipo_arch.tipo FROM archivo, tipo_arch WHERE archivo.tipo_arch_idtipo_arch=tipo_arch.idtipo_arch ORDER BY datacion ASC;" );
+  while (msql.next()) {
+    data[nr][0] = msql.getString("titulo");
+    data[nr][1] = String.valueOf(msql.getInt("datacion"));
+    data[nr][2] = msql.getString("tipo"); 
+    nr++;
+  }
+  return data;
+}
+
+void insertInfoTablaArchivo(String titulo, String datacion, String file, String tipo){
+String q4 = "INSERT INTO `archivo` (`id`, `titulo`, `datacion`, `file`, `tipo_arch_idtipo_arch`) VALUES (NULL, '"+titulo+"', '"+datacion+"', '"+file+"', '"+tipo+"');";
+println(q4);
+msql.query(q4);
 }

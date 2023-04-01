@@ -452,7 +452,7 @@ void dibujaPantallaArchivoNuevo() {
   //dibujar elementos de la pantalla
   menu();
   textFont(getFontAt(8));
-  text("Fecha de datación: ", 230, 440);
+  text("Año de datación: ", 230, 440);
 
 
   //display elementos GUI
@@ -462,7 +462,7 @@ void dibujaPantallaArchivoNuevo() {
   tfTituloArchivo.display();
   itbInsertarArchivo.display();
   sCategoriaArchivo.display();
-  displaycpFechaArchivo();
+  tfAñoDatacion.display();
   popStyle();
   popMatrix();
 }
@@ -490,7 +490,7 @@ void dibujaPantallaArchivoDetalle() {
   tfTituloArchivo.display();
   itbInsertarArchivo.display();
   sCategoriaArchivo.display();
-  displaycpFechaArchivo();
+  tfAñoDatacion.display();
   popStyle();
   popMatrix();
 }

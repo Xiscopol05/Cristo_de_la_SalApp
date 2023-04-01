@@ -226,7 +226,7 @@ TextField buscar;
 TextField tfNombre, tfApellidos, tfDNI, tfCalle, tfNumero, tfPiso, tfLocalidad, tfProvincia, tfTelefono, tfCorreoElectronico;
 TextField tfBanco, tfTitular, tfDNITitular, tfIBAN, tfEntidad, tfOficina, tfDigitoControl, tfNumeroCuenta;
 TextField tfTitulo, tfCantidad;
-TextField tfTituloArchivo, tfTituloAviso, tfTituloEvento;
+TextField tfTituloArchivo, tfTituloAviso, tfTituloEvento, tfAñoDatacion;
 
 void initTextField() {
   userText = new TextField("usuario", (marcoWidth/2)-(marcoCuentaWidth/2)+20+inicioSesionX, (marcoHeight/2)-(marcoCuentaHeight/2)+130+inicioSesionY, 350, 35);
@@ -255,6 +255,7 @@ void initTextField() {
   tfTituloArchivo = new TextField("Título", 27+menuWidth, 247+bannerHeight, 1020, 45);
   tfTituloAviso = new TextField("Título", 27+menuWidth, 190+bannerHeight, 1020, 45);
   tfTituloEvento = new TextField("Título", 27+menuWidth, 190+bannerHeight, 1020, 45);
+  tfAñoDatacion  = new TextField("Año", 400, 310+bannerHeight, 100, 45);
 }
 
 void displayInicioSesiontf() {
@@ -685,7 +686,7 @@ void initSelectTable() {
   stDetalleItem.setColumnMaxChars(maxCharsDetalleItem);
   stArchivo = new SelectTable(filasArchivo, columnasArchivo, 20+menuWidth, 285, 1280-menuWidth-40, 410);
   stArchivo.setHeaders(headersArchivo);
-  stArchivo.setData(infoArchivo);
+  stArchivo.setData(getInfoTablaArchivo());
   stArchivo.setColumnWidths(colWidthsArchivo);
   stArchivo.setColumnMaxChars(maxCharsArchivo);
 }
@@ -703,7 +704,7 @@ void initCalendariPlus() {
   cpFechaNacimiento = new CalendariPlus(680, 300, 600, 380);
   cpFechaAlta = new CalendariPlus(680, 300, 600, 380);
   cpFechaMovimiento = new CalendariPlus(550, 410, 600, 380);
-  cpFechaArchivo = new CalendariPlus(300+menuWidth, 400+bannerHeight, 600, 300);
+  //cpFechaArchivo = new CalendariPlus(300+menuWidth, 400+bannerHeight, 600, 300);
   cpNuevoEvento = new CalendariPlus (400, 300, 600, 380);
 }
 
@@ -714,10 +715,11 @@ void displaycpFechaNacimiento() {
   rect(680, 165+bannerHeight, 200, 45);
 
   // Text amb data seleccionada
-  text(dataCalendariNacimiento, 690, 165+bannerHeight+30);
   fill(0);
   textAlign(LEFT);
   textSize(24);
+    text(dataCalendariNacimiento, 690, 165+bannerHeight+30);
+
 
   cpFechaNacimiento.display();
   bCalendario.display();
@@ -756,24 +758,6 @@ void displaycpFechaAlta() {
   text(dataCalendariAlta, 1082, 605+bannerHeight+30); //SE PINTA EL MATEIX QUE A dataCalendari!!
   cpFechaAlta.display();
   bCalendarioAlta.display();
-
-  popStyle();
-}
-
-void displaycpFechaArchivo() {
-  pushStyle();
-  // Rectangle
-  fill(255);
-  rect(510, 310+bannerHeight, 180, 45);
-
-  // Text amb data seleccionada
-  fill(0);
-  textAlign(LEFT);
-  textSize(24);
-  text(dataCalendarioArchivo, 514, 310+bannerHeight+30);
-  cpFechaArchivo.display();
-  bCalendarioArchivo.display();
-
   popStyle();
 }
 
@@ -784,13 +768,6 @@ void displaycpFechaMovimiento() {
   rect(530, 410, 180, 45);
 
   // Text amb data seleccionada
-  fill(0);
-  textAlign(LEFT);
-  textSize(24);
-  text(dataCalendariMovimiento, 535, 410+30); //SE PINTA EL MATEIX QUE A dataCalendari!!
-  popStyle();
-  cpFechaMovimiento.display();
-  bCalendarioMovimiento.display();
   fill(0);
   textAlign(LEFT);
   textSize(24);
