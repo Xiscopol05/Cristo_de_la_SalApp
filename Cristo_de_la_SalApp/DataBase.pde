@@ -139,7 +139,7 @@ int getNumeroUltimoHermano() {
 
 
 
-// Obté informació de la taula Unitat
+// Obté informació de la taula archivo
 String[][] getInfoTablaArchivo() {
 
   int numRows = getNumRowsTabla("archivo");
@@ -160,4 +160,19 @@ void insertInfoTablaArchivo(String titulo, String datacion, String file, String 
 String q4 = "INSERT INTO `archivo` (`id`, `titulo`, `datacion`, `file`, `tipo_arch_idtipo_arch`) VALUES (NULL, '"+titulo+"', '"+datacion+"', '"+file+"', '"+tipo+"');";
 println(q4);
 msql.query(q4);
+}
+
+String[][] getInfoTablaMovimientos(String tipoMov, int numFilas){
+  String q = "SELECT CONCAT(UPPER(SUBSTRING(c.nombre, 1, 1)) ,'.', t.idtipo_mov) AS codigo, t.nombre AS concepto, SUM(m.cantidad) AS cantidad FROM movimiento m, tipo_mov t, categoria_mov c WHERE m.tipo_mov_idtipo_mov=t.idtipo_mov AND t.categoria=c.idcategoria_mov AND c.nombre='"+tipoMov+"' GROUP BY m.tipo_mov_idtipo_mov, t.categoria ORDER BY t.idtipo_mov ASC;";
+  String[][] data = new String[numFilas][3];
+
+  int nr=0;
+  msql.query(q );
+  while (msql.next()) {
+    data[nr][0] = msql.getString("codigo");
+    data[nr][1] = msql.getString("concepto");
+    data[nr][2] = String.valueOf(msql.getFloat("cantidad")); 
+    nr++;
+  }
+  return data;
 }

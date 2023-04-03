@@ -17,8 +17,7 @@ void fileSelected(File selection) {
     rutaFitxer = selection.getAbsolutePath();
     println("Ruta del Fitxer:"+rutaFitxer);
     
-    //titol = selection.getName();  
-    titol = userNameUser+".pdf";
+    titol = selection.getName();  
     println("Nom del Fitxer:"+titol);
     
     copiar(rutaFitxer, rutaCopia, titol);

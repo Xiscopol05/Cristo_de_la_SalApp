@@ -661,11 +661,17 @@ int[] maxCharsDetalleItem = {10, 50, 20};
 void initSelectTable() {
   stBalanceIngresos = new SelectTable(filasBalanceIngresos, columnasBalanceIngresos, 250, 210, 800, 240);
   stBalanceIngresos.setHeaders(headersBalance);
-  stBalanceIngresos.setData(infoBalanceIngresos);
+  String[][] infoIngresos = getInfoTablaMovimientos("ingresos", 3);
+  println(infoIngresos.length);
+  for (int i=0; i<infoIngresos.length; i++) {
+    printArray(infoIngresos[i]);
+  }
+  stBalanceIngresos.setData(infoIngresos);
   stBalanceIngresos.setColumnWidths(colWidthsBalance);
   stBalanceIngresos.setColumnMaxChars(maxCharsBalanceIngresos);
   stGastos = new SelectTable(filasGastos, columnasGastos, 250, 510, 800, 240);
   stGastos.setHeaders(headersGastos);
+  //stGastos.setData(getInfoTablaMovimientos("gastos", 18));
   stGastos.setData(infoGastos);
   stGastos.setColumnWidths(colWidthsGastos);
   stGastos.setColumnMaxChars(maxCharsGastos);
@@ -701,7 +707,7 @@ String dataCalendarioArchivo = "";
 String dataCalendarioEvento = "";
 
 void initCalendariPlus() {
-  cpFechaNacimiento = new CalendariPlus(680, 300, 600, 380);
+  cpFechaNacimiento = new CalendariPlus(680, 250, 600, 380);
   cpFechaAlta = new CalendariPlus(680, 300, 600, 380);
   cpFechaMovimiento = new CalendariPlus(550, 410, 600, 380);
   //cpFechaArchivo = new CalendariPlus(300+menuWidth, 400+bannerHeight, 600, 300);
@@ -718,7 +724,7 @@ void displaycpFechaNacimiento() {
   fill(0);
   textAlign(LEFT);
   textSize(24);
-    text(dataCalendariNacimiento, 690, 165+bannerHeight+30);
+  text(dataCalendariNacimiento, 690, 165+bannerHeight+30);
 
 
   cpFechaNacimiento.display();

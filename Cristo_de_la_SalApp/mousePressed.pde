@@ -166,7 +166,7 @@ void mousePressed() {
     // Agafar els valors dels camps del formulari
     String nombre = String.valueOf(tfNombre.getValue());
     String apellidos = String.valueOf(tfApellidos.getValue());
-    String fechanacimiento = "2023-03-03";
+    String fechanacimiento = formataFecha2(String.valueOf(dataCalendariNacimiento));
     String dni = String.valueOf(tfDNI.getValue());
     String calle = String.valueOf(tfCalle.getValue());
     String numero = String.valueOf(tfNumero.getValue());
@@ -183,7 +183,7 @@ void mousePressed() {
     String oficina = String.valueOf(tfOficina.getValue());
     String digitocontrol = String.valueOf(tfDigitoControl.getValue());
     String numerocuenta = String.valueOf(tfNumeroCuenta.getValue());
-    String fechaalta = "2023-03-03";
+    String fechaalta = formataFecha2(String.valueOf(dataCalendariAlta));
     // Inserir a la BBDD
     insertInfoTablaHermano(nombre, apellidos, fechanacimiento, dni, calle, numero, piso, localidad, provincia, telefono, correoelectronico, banco, titular, dnititular, iban, entidad, oficina, digitocontrol, numerocuenta, fechaalta);
     // Resetear camps del formulari
@@ -199,14 +199,20 @@ void mousePressed() {
     // Agafar els valors dels camps del formulari
     String titulo = String.valueOf(tfTituloArchivo.getValue());
     String datacion = String.valueOf(tfAñoDatacion.getValue());
-    String file = "";
+    String file = titol;
     String tipo = String.valueOf(sCategoriaArchivo.selectedValue);
     String idTipoArchivo = String.valueOf(obtenerIdTipoArchivo(tipo));
     insertInfoTablaArchivo( titulo, datacion, file, idTipoArchivo);
     // Inserir a la BBDD
     // Resetear camps del formulari
     resetFormularioArchivo();
+    stArchivo = new SelectTable(filasArchivo, columnasArchivo, 20+menuWidth, 285, 1280-menuWidth-40, 410);
+    stArchivo.setHeaders(headersArchivo);
+    stArchivo.setData(getInfoTablaArchivo());
+    stArchivo.setColumnWidths(colWidthsArchivo);
+    stArchivo.setColumnMaxChars(maxCharsArchivo);
   }
+
 
 
 
@@ -301,6 +307,10 @@ void mousePressed() {
 
   stlTipoConcepto.mouseOn();
 
+if (pantalla == PANTALLA.PRINCIPAL) {
+  pcAvisosPrincipal.checkCardSelection();
+}
+
   if (PopUpinicioSesion.bAceptar.mouseOverButton() && PopUpinicioSesion.bAceptar.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
   }
@@ -309,9 +319,8 @@ void mousePressed() {
     pcAvisos.nextPage();
   } else if (bPrevAviso.mouseOverButton() && bPrevAviso.enabled) {
     pcAvisos.prevPage();
-  } else {
+  } else if (pantalla == PANTALLA.AVISOS)
     pcAvisos.checkCardSelection();
-  }
 }
 
 // Modifica el cursor
@@ -362,13 +371,15 @@ void resetFormularioCenso() {
 void resetFormularioArchivo() {
   tfTituloArchivo.removeAllText();
   dataCalendarioArchivo = "";
+  titol="";
+  tfAñoDatacion.removeAllText();
 }
 
- int obtenerIdTipoArchivo(String tipo) {
-    int idTipoArchivo = -1;
-    msql.query("SELECT idtipo_arch FROM tipo_arch WHERE tipo = '"+tipo+"'");
-    if (msql.next()) {
-        idTipoArchivo = msql.getInt("idtipo_arch");
-    }
-    return idTipoArchivo;
+int obtenerIdTipoArchivo(String tipo) {
+  int idTipoArchivo = -1;
+  msql.query("SELECT idtipo_arch FROM tipo_arch WHERE tipo = '"+tipo+"'");
+  if (msql.next()) {
+    idTipoArchivo = msql.getInt("idtipo_arch");
+  }
+  return idTipoArchivo;
 }
