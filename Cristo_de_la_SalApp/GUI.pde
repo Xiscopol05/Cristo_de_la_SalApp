@@ -38,7 +38,7 @@ void initButtons() {
   buttons[0] = new Button("Principal", 850, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
-  buttons[3] = new Button("Modificar", (2*menuWidth)+20, primerIconY+20, 200, 50);
+  buttons[3] = new Button("Buscar", (3*menuWidth)+20, primerIconY+20, 200, 50);
   buttons[4] = new Button("Aceptar", 641+menuWidth, 20+bannerHeight, 403, 40);
   buttons[5] = new Button("Ficha Inscripción", 40+menuWidth, 605+bannerHeight, 574, 60);
   buttons[6] = new Button("PREV", 950, 715, 60, 60);
@@ -57,7 +57,7 @@ void initButtons() {
   buttons[19] = new Button("NEXT", 1080, 720, 150, 30);
   buttons[20] = new Button("Añadir concepto", 1080, 170, 150, 40);
   buttons[21] = new Button("Aceptar", 645+menuWidth, 175+bannerHeight, 405, 40);
-  buttons[22] = new Button("Detalle", (3*menuWidth)+20, primerIconY+20, 200, 50);
+  buttons[22] = new Button("Detalle", (2*menuWidth)+20, primerIconY+20, 200, 50); // (2*menuWidth)+20, primerIconY+20, 200, 50)
   buttons[23] = new Button("Calendario", 575, 165+bannerHeight, 100, 45);
   buttons[24] = new Button("Calendario", 970, 605+bannerHeight, 100, 45);
   buttons[25] = new Button("Calendario", 420, 410, 100, 45);

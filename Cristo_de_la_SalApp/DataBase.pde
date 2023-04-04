@@ -1,4 +1,4 @@
-
+ 
 // Objecte de connexió a la BBDD
 MySQL msql;
 
@@ -172,11 +172,11 @@ void insertInfoTablaHermano(String nombre, String apellidos, String fechanacimie
   String numHermano = String.valueOf(getNumeroUltimoHermano()+1);
   // Insertar el nuevo registro en la tabla 'user'
   String password = generatePassword(6);
-  String q2 = "INSERT INTO user (numhermano, password, role_id) VALUES ('"+numHermano+"','"+password+"','2')";
+  String q2 = "INSERT INTO user (numhermano, password, role_id) VALUES ('"+numHermano+"','"+password+"','2');";
   // Insertar el nuevo registro en la tabla 'hermano'
   String sNombre = nombre.replace("'", "\'");
   String sApellidos = apellidos.replace("'", "\'");
-  String q3 = "INSERT INTO hermano (user_numhermano, user_role_id, nombre, apellidos, fechanacimiento, dni, calle, numerodireccion, piso, localidad, provincia, telefono, correoelectronico, banco, titular, dnititular, iban, entidad, oficina, digitocontrol, numerocuenta, fechaalta) VALUES ('"+numHermano+"','2', '"+sNombre+"','"+sApellidos+"','"+fechanacimiento+"','"+dni+"','"+calle+"','"+numerodireccion+"','"+piso+"','"+localidad+"','"+provincia+"','"+telefono+"','"+correoelectronico+"','"+banco+"','"+titular+"','"+dnititular+"','"+iban+"','"+entidad+"','"+oficina+"','"+digitocontrol+"','"+numerocuenta+"','"+fechaalta+"')";
+  String q3 = "INSERT INTO hermano (user_numhermano, user_role_id, nombre, apellidos, fechanacimiento, dni, calle, numerodireccion, piso, localidad, provincia, telefono, correoelectronico, banco, titular, dnititular, iban, entidad, oficina, digitocontrol, numerocuenta, fechaalta) VALUES ('"+numHermano+"','2', '"+sNombre+"','"+sApellidos+"','"+fechanacimiento+"','"+dni+"','"+calle+"','"+numerodireccion+"','"+piso+"','"+localidad+"','"+provincia+"','"+telefono+"','"+correoelectronico+"','"+banco+"','"+titular+"','"+dnititular+"','"+iban+"','"+entidad+"','"+oficina+"','"+digitocontrol+"','"+numerocuenta+"','"+fechaalta+"');";
   println(q2);
   println(q3);
   msql.query(q3);
@@ -187,7 +187,7 @@ void insertInfoTablaHermano(String nombre, String apellidos, String fechanacimie
 String generatePassword(int length) {
   String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
-  String specialCharacters = "!@#$";
+  String specialCharacters = "";
   String numbers = "1234567890";
   String combinedChars = capitalCaseLetters + lowerCaseLetters + specialCharacters + numbers;
   Random random = new Random();
@@ -264,4 +264,17 @@ float getTotalGastos(){
   msql.query(q);
   msql.next();
   return msql.getFloat("total");
+}
+
+float getEstadoCuentas(){
+  String qCantIng = "SELECT SUM(m.cantidad) AS cantidad FROM movimiento m, tipo_mov t, categoria_mov c WHERE m.tipo_mov_idtipo_mov=t.idtipo_mov AND t.categoria=c.idcategoria_mov AND c.nombre='Ingresos' GROUP BY c.nombre;";
+  msql.query(qCantIng);
+  msql.next();
+  float CantIng= msql.getFloat("cantidad");
+  String qCantGast = "SELECT SUM(m.cantidad) AS cantidad FROM movimiento m, tipo_mov t, categoria_mov c WHERE m.tipo_mov_idtipo_mov=t.idtipo_mov AND t.categoria=c.idcategoria_mov AND c.nombre='Gastos' GROUP BY c.nombre;";
+  msql.query(qCantGast);
+  msql.next();
+  float CantGast= msql.getFloat("cantidad");
+  float CantTot = CantIng - CantGast;
+  return CantTot;
 }

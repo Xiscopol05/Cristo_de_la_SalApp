@@ -12,7 +12,7 @@ enum PANTALLA {
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.CENSO;
+PANTALLA pantalla =PANTALLA.CONTABILIDAD_DETALLEBALANCE;
 
 boolean logged= false;
 
@@ -22,7 +22,7 @@ String userNameUser = "user";
 boolean admin= true;
 
 
-float estadoDeCuentas = 27500.50;
+float estadoDeCuentas=3.0;
 int lastKeyCodePressed;
 
 
@@ -33,7 +33,7 @@ void setup() {
   setFonts();
   setMedias();
   setGUI();
-  
+
 
   desktop = Desktop.getDesktop();
 }
@@ -110,14 +110,6 @@ void draw() {
   }
 
   updateCursor();   // Modifica la apariencia del cursor
-
-  if ( userText.text.equals(userNameAdmin) &&
-    passText.text.equals("1234")) {
-    admin = true;
-  } else if (( userText.text.equals(userNameUser) &&
-    passText.text.equals("1234"))) {
-    admin = false;
-  }
 }
 // Comprova si el login és correcte
 boolean comprovaLogin() {

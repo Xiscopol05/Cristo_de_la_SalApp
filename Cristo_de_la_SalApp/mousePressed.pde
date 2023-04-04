@@ -1,4 +1,3 @@
-// En caso de apretar el ratón
 void mousePressed() {
   if (bNextCenso.mouseOverButton() && bNextCenso.enabled) {
     stCenso.nextPage();
@@ -19,6 +18,7 @@ void mousePressed() {
   } else if (itbCenso.mouseOverButton() && itbCenso.enabled) {
     pantalla = PANTALLA.CENSO;
   } else if (itbContabilidad.mouseOverButton() && itbContabilidad.enabled) {
+    estadoDeCuentas = getEstadoCuentas();
     pantalla = PANTALLA.CONTABILIDAD;
   } else if (itbArchivo.mouseOverButton() && itbArchivo.enabled) {
     pantalla = PANTALLA.ARCHIVO;
@@ -78,7 +78,7 @@ void mousePressed() {
     tiDigitoControl.text = infoH[19];
     tiNumeroCuenta.text = infoH[20];
     tiCorreoElectronico.text = infoH[12];
-    //FALTA OBRIR ARXIU DE INSCRIPCION
+                                              //FALTA OBRIR ARXIU DE INSCRIPCION!!!!!!!!!!!!!!!!!!!!!
     pantalla = PANTALLA.CENSO_DETALLE;
   } else if ( bAceptarCenso.mouseOverButton() && bAceptarCenso.enabled && pantalla == PANTALLA.CENSO_NUEVOHERMANO) {
     pantalla = PANTALLA.CENSO;

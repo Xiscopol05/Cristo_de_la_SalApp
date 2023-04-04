@@ -101,12 +101,12 @@ void dibujaPantallaContabilidad() {
   pushStyle();
   textFont(getFontAt(1));
   fill(0);
-  text("Estado de cuentas: " + estadoDeCuentas+ " €", 250, 700);
+  text("Estado de cuentas: " + estadoDeCuentas+ " €", 250, 450);
   popStyle();
 
   //display elementos GUI
   displayButtonsMenu();
-  ldIngresos.display();
+  //ldIngresos.display();
   gastos.display();
   bBalance.display();
   bPresupuesto.display();
