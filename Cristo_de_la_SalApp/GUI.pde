@@ -452,16 +452,18 @@ void initLinesDiagram() {
 
 BarsDiagram gastos;
 
-String[] textosbd = {"WATER", "AIR", "FIRE", "EARTH"};
-float[] valuesbd = {400, 600, 100, 300};
-color[] colorsbd = {color(0, 0, 255), color(50, 50, 200),
+String[] textosbd = {"INGRESOS", "GASTOS"};
+float[] valuesbd = {0, 0};
+color[] colorsbd = {color (64, 30, 58), color (150, 13, 15),
   color(255, 0, 0), color(0, 255, 0)};
 
 void initBarsDiagram() {
-  gastos = new BarsDiagram(840, 420, 400, 300);
+  gastos = new BarsDiagram(870, 520, 350, 200);
 
   // Configuración de datis (textos, valores, colores)
   gastos.setTexts(textosbd);
+  valuesbd[0] = getTotalIngresos();
+  valuesbd[1] = getTotalGastos();
   gastos.setValues(valuesbd);
   gastos.setColors(colorsbd);
 }
@@ -581,9 +583,9 @@ int filasGastos = 4, columnasGastos = 3;
 
 String[] headersGastos = {"Código", "Concepto", "Cantidad"};
 
-float[] colWidthsGastos = {20, 50, 30};
+float[] colWidthsGastos = {20, 60, 20};
 
-int[] maxCharsGastos = {10, 35, 15};
+int[] maxCharsGastos = {10, 30, 15};
 
 // Dades de la taula
 String[][] infoGastos = {
@@ -662,17 +664,13 @@ void initSelectTable() {
   stBalanceIngresos = new SelectTable(filasBalanceIngresos, columnasBalanceIngresos, 250, 210, 800, 240);
   stBalanceIngresos.setHeaders(headersBalance);
   String[][] infoIngresos = getInfoTablaMovimientos("ingresos", 3);
-  println(infoIngresos.length);
-  for (int i=0; i<infoIngresos.length; i++) {
-    printArray(infoIngresos[i]);
-  }
   stBalanceIngresos.setData(infoIngresos);
   stBalanceIngresos.setColumnWidths(colWidthsBalance);
   stBalanceIngresos.setColumnMaxChars(maxCharsBalanceIngresos);
   stGastos = new SelectTable(filasGastos, columnasGastos, 250, 510, 800, 240);
   stGastos.setHeaders(headersGastos);
-  //stGastos.setData(getInfoTablaMovimientos("gastos", 18));
-  stGastos.setData(infoGastos);
+  stGastos.setData(getInfoTablaMovimientos("gastos", 18));
+  //stGastos.setData(infoGastos);
   stGastos.setColumnWidths(colWidthsGastos);
   stGastos.setColumnMaxChars(maxCharsGastos);
   stCenso = new SelectTable(filasCenso, columnasCenso, 20+menuWidth, 285, 1280-menuWidth-40, 410);

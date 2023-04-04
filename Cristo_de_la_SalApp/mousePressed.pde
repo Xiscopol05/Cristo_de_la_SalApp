@@ -55,6 +55,30 @@ void mousePressed() {
   } else if (bAceptarConcepto.mouseOverButton() && bAceptarConcepto.enabled) {
     pantalla = PANTALLA.CONTABILIDAD_BALANCE;
   } else if (bDetalle.mouseOverButton() && bDetalle.enabled && pantalla == PANTALLA.CENSO) {
+    String[] info = stCenso.getSelectedInfo();
+    String [] infoH = getInfoTablaHermano(info[0]);
+    printArray(infoH);
+    tiNombre.text= infoH[2];
+    tiApellidos.text = infoH[3];
+    tiDNI.text = infoH[5];
+    tiCalle.text = infoH[6];
+    tiFechaNacimiento.text = infoH[4];
+    tiFechaAlta.text = infoH[21];
+    tiNumero.text = infoH[7];
+    tiPiso.text = infoH[8];
+    tiLocalidad.text = infoH[9];
+    tiProvincia.text = infoH[10];
+    tiTelefono.text = infoH[11];
+    tiBanco.text = infoH[13];
+    tiTitular.text = infoH[14];
+    tiDNITitular.text = infoH[15];
+    tiIBAN.text = infoH[16];
+    tiEntidad.text = infoH[17];
+    tiOficina.text = infoH[18];
+    tiDigitoControl.text = infoH[19];
+    tiNumeroCuenta.text = infoH[20];
+    tiCorreoElectronico.text = infoH[12];
+    //FALTA OBRIR ARXIU DE INSCRIPCION
     pantalla = PANTALLA.CENSO_DETALLE;
   } else if ( bAceptarCenso.mouseOverButton() && bAceptarCenso.enabled && pantalla == PANTALLA.CENSO_NUEVOHERMANO) {
     pantalla = PANTALLA.CENSO;
@@ -104,8 +128,14 @@ void mousePressed() {
     cEventos.prevMonth();
   } else if (bMesPosteriorAviso.mouseOverButton() && bMesPosteriorAviso.enabled) {
     cEventos.nextMonth();
+  } else if (bModificar.mouseOverButton()&& bModificar.enabled) {
+    String [][] info = getInfoTablaCensoBuscar(buscar.getValue());
+    stCenso = new SelectTable(filasCenso, columnasCenso, 20+menuWidth, 285, 1280-menuWidth-40, 410);
+    stCenso.setHeaders(headersCenso);
+    stCenso.setData(info);
+    stCenso.setColumnWidths(colWidthsCenso);
+    stCenso.setColumnMaxChars(maxCharsCenso);
   }
-
 
   bAñadirAviso = buttons [39];
   bModificarAviso = buttons [40];
@@ -307,9 +337,9 @@ void mousePressed() {
 
   stlTipoConcepto.mouseOn();
 
-if (pantalla == PANTALLA.PRINCIPAL) {
-  pcAvisosPrincipal.checkCardSelection();
-}
+  if (pantalla == PANTALLA.PRINCIPAL) {
+    pcAvisosPrincipal.checkCardSelection();
+  }
 
   if (PopUpinicioSesion.bAceptar.mouseOverButton() && PopUpinicioSesion.bAceptar.enabled) {
     pantalla = PANTALLA.PRINCIPAL;

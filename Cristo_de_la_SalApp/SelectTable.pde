@@ -12,7 +12,7 @@ class SelectTable {
   int numTotalPages;
 
   int selectedRow = -1;
-  
+
   float x, y, w, h;
   float rowHeight;
 
@@ -21,8 +21,10 @@ class SelectTable {
     this.numRows = nr;
     this.numCols = nc;
     this.numPage = 0;
-    this.x = x; this.y = y;
-    this.h =  h; this.w = w;
+    this.x = x;
+    this.y = y;
+    this.h =  h;
+    this.w = w;
     this.rowHeight = h / nr;
   }
 
@@ -34,10 +36,9 @@ class SelectTable {
 
   void setData(String[][] d) {
     this.tableData = d;
-    if(d.length % (this.numRows-1)==0){
+    if (d.length % (this.numRows-1)==0) {
       this.numTotalPages = (d.length / (this.numRows-1)) -1;
-    }
-    else {
+    } else {
       this.numTotalPages = (d.length / (this.numRows-1)) ;
     }
   }
@@ -71,12 +72,12 @@ class SelectTable {
 
     pushStyle();
 
-    fill(200, 50); 
+    fill(200, 50);
     stroke(0);
     strokeWeight(3);
     rect(x, y, w, h);
 
-    fill(getColorAt(0)); 
+    fill(getColorAt(0));
     stroke(0);
     strokeWeight(3);
     rect(x, y, w, rowHeight);
@@ -84,9 +85,9 @@ class SelectTable {
     // Dibuixa files
     stroke(0);
     for (int r = 1; r <numRows; r++) {
-      if (r==1) { 
+      if (r==1) {
         strokeWeight(3);
-      } else {    
+      } else {
         strokeWeight(1);
       }
       line(x, y + r*rowHeight, x + w, y + r*rowHeight);
@@ -100,7 +101,7 @@ class SelectTable {
     }
 
     // Dibuixa textos
-    fill(0); 
+    fill(0);
     textSize(24);
     for (int r = 0; r < numRows; r++) {
       xCol = x;
@@ -145,21 +146,24 @@ class SelectTable {
   }
 
   boolean clickOnTableRow(int nr) {
-    return mouseX>= x && mouseX<= x+this.w && 
+    return mouseX>= x && mouseX<= x+this.w &&
       mouseY>= y + nr*rowHeight && mouseY<= y + (nr+1)*rowHeight;
   }
 
   void checkSelections() {
     for (int r = 0; r < numRows; r++) {
       if (clickOnTableRow(r)) {
-        if(selectedRow==-1){
+        if (selectedRow==-1) {
           selectedRow = (r-1) + (numRows-1)*numPage;
-        }
-        else {
+        } else {
           selectedRow=-1;
         }
       }
     }
+  }
+
+  String getSelectedInfoId() {
+    return this.tableData[selectedRow][1];
   }
 
   String[] getSelectedInfo() {

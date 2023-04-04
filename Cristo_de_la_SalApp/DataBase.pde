@@ -53,6 +53,14 @@ int getNumRowsTabla(String nombreTabla) {
   return numRows;
 }
 
+// Obté el número de files de la query
+int getNumRowsQuery(String q) {
+  msql.query( q);
+  msql.next();
+  int numRows = msql.getInt("n");
+  return numRows;
+}
+
 // Obté informació de la taula Unitat
 String[][] getInfoTablaCenso() {
 
@@ -69,6 +77,74 @@ String[][] getInfoTablaCenso() {
     data[nr][4] = String.valueOf(msql.getInt("telefono"));
     nr++;
   }
+  return data;
+}
+
+// Obté informació de la taula Unitat
+String[][] getInfoTablaCensoBuscar(String buscar) {
+
+  String q2 = "SELECT COUNT(*) AS n FROM hermano WHERE apellidos LIKE '%"+buscar+"%'";
+  int numRows = getNumRowsQuery(q2);
+  println("NR:"+numRows);
+
+  if (numRows>0) {
+    String[][] data = new String[numRows][5];
+
+    String q = "SELECT * FROM hermano WHERE apellidos LIKE '%"+buscar+"%'";
+    int nr=0;
+    msql.query( q );
+    while (msql.next()) {
+      data[nr][0] = String.valueOf(msql.getInt("user_numhermano"));
+      data[nr][1] = msql.getString("nombre");
+      data[nr][2] = msql.getString("apellidos");
+      data[nr][3] = formataFecha(String.valueOf(msql.getDate("fechaalta")));
+      data[nr][4] = String.valueOf(msql.getInt("telefono"));
+      nr++;
+    }
+    return data;
+  } else {
+    String[][] array = new String[5][5];
+
+    // Rellenar el array con strings vacíos
+    for (int i = 0; i < 5; i++) {
+      for (int j = 0; j < 5; j++) {
+        array[i][j] = "";
+      }
+    }
+
+    return array;
+  }
+}
+
+// Obté informació de la taula Hermano
+String[] getInfoTablaHermano(String idHermano) {
+
+  String[] data = new String[22];
+
+  msql.query( "SELECT * FROM hermano WHERE user_numhermano='"+idHermano+"'" );
+  msql.next();
+  data[0] = String.valueOf(msql.getInt("user_numhermano"));
+  data[1] = String.valueOf(msql.getInt("user_role_id"));
+  data[2] = msql.getString("nombre");
+  data[3] = msql.getString("apellidos");
+  data[4] = formataFecha(String.valueOf(msql.getDate("fechanacimiento")));
+  data[5] = msql.getString("dni");
+  data[6] = msql.getString("calle");
+  data[7] = String.valueOf(msql.getInt("numerodireccion"));
+  data[8] = msql.getString("piso");
+  data[9] = msql.getString("localidad");
+  data[10] = msql.getString("provincia");
+  data[11] = msql.getString("telefono");
+  data[12] = msql.getString("correoelectronico");
+  data[13] = msql.getString("banco");
+  data[14] = msql.getString("titular");
+  data[15] = msql.getString("dnititular");
+  data[16] = msql.getString("iban");
+  data[17] = msql.getString("entidad");
+  data[18] = msql.getString("oficina");
+  data[19] = msql.getString("digitocontrol");
+  data[20] = msql.getString("numerocuenta");
+  data[21] = formataFecha(String.valueOf(msql.getDate("fechaalta")));
   return data;
 }
 
@@ -92,20 +168,19 @@ String formataFecha(String fechaEntrada) {
 }
 
 
-void insertInfoTablaHermano(String nombre, String apellidos, String fechanacimiento, String dni, String calle, String numerodireccion, String piso, String localidad, String provincia, String telefono, String correoelectronico, String banco, String titular, String dnititular, String iban, String entidad, String oficina, String digitocontrol, String numerocuenta, String fechaalta){
-String numHermano = String.valueOf(getNumeroUltimoHermano()+1);
-// Insertar el nuevo registro en la tabla 'user'
-String password = generatePassword(6);
-String q2 = "INSERT INTO user (numhermano, password, role_id) VALUES ('"+numHermano+"','"+password+"','2')";
-// Insertar el nuevo registro en la tabla 'hermano'
-String sNombre = nombre.replace("'", "\'");
-String sApellidos = apellidos.replace("'", "\'");
-String q3 = "INSERT INTO hermano (user_numhermano, user_role_id, nombre, apellidos, fechanacimiento, dni, calle, numerodireccion, piso, localidad, provincia, telefono, correoelectronico, banco, titular, dnititular, iban, entidad, oficina, digitocontrol, numerocuenta, fechaalta) VALUES ('"+numHermano+"','2', '"+sNombre+"','"+sApellidos+"','"+fechanacimiento+"','"+dni+"','"+calle+"','"+numerodireccion+"','"+piso+"','"+localidad+"','"+provincia+"','"+telefono+"','"+correoelectronico+"','"+banco+"','"+titular+"','"+dnititular+"','"+iban+"','"+entidad+"','"+oficina+"','"+digitocontrol+"','"+numerocuenta+"','"+fechaalta+"')";
-println(q2);
-println(q3);
-msql.query(q3);
-msql.query(q2);
-
+void insertInfoTablaHermano(String nombre, String apellidos, String fechanacimiento, String dni, String calle, String numerodireccion, String piso, String localidad, String provincia, String telefono, String correoelectronico, String banco, String titular, String dnititular, String iban, String entidad, String oficina, String digitocontrol, String numerocuenta, String fechaalta) {
+  String numHermano = String.valueOf(getNumeroUltimoHermano()+1);
+  // Insertar el nuevo registro en la tabla 'user'
+  String password = generatePassword(6);
+  String q2 = "INSERT INTO user (numhermano, password, role_id) VALUES ('"+numHermano+"','"+password+"','2')";
+  // Insertar el nuevo registro en la tabla 'hermano'
+  String sNombre = nombre.replace("'", "\'");
+  String sApellidos = apellidos.replace("'", "\'");
+  String q3 = "INSERT INTO hermano (user_numhermano, user_role_id, nombre, apellidos, fechanacimiento, dni, calle, numerodireccion, piso, localidad, provincia, telefono, correoelectronico, banco, titular, dnititular, iban, entidad, oficina, digitocontrol, numerocuenta, fechaalta) VALUES ('"+numHermano+"','2', '"+sNombre+"','"+sApellidos+"','"+fechanacimiento+"','"+dni+"','"+calle+"','"+numerodireccion+"','"+piso+"','"+localidad+"','"+provincia+"','"+telefono+"','"+correoelectronico+"','"+banco+"','"+titular+"','"+dnititular+"','"+iban+"','"+entidad+"','"+oficina+"','"+digitocontrol+"','"+numerocuenta+"','"+fechaalta+"')";
+  println(q2);
+  println(q3);
+  msql.query(q3);
+  msql.query(q2);
 }
 
 
@@ -150,19 +225,19 @@ String[][] getInfoTablaArchivo() {
   while (msql.next()) {
     data[nr][0] = msql.getString("titulo");
     data[nr][1] = String.valueOf(msql.getInt("datacion"));
-    data[nr][2] = msql.getString("tipo"); 
+    data[nr][2] = msql.getString("tipo");
     nr++;
   }
   return data;
 }
 
-void insertInfoTablaArchivo(String titulo, String datacion, String file, String tipo){
-String q4 = "INSERT INTO `archivo` (`id`, `titulo`, `datacion`, `file`, `tipo_arch_idtipo_arch`) VALUES (NULL, '"+titulo+"', '"+datacion+"', '"+file+"', '"+tipo+"');";
-println(q4);
-msql.query(q4);
+void insertInfoTablaArchivo(String titulo, String datacion, String file, String tipo) {
+  String q4 = "INSERT INTO `archivo` (`id`, `titulo`, `datacion`, `file`, `tipo_arch_idtipo_arch`) VALUES (NULL, '"+titulo+"', '"+datacion+"', '"+file+"', '"+tipo+"');";
+  println(q4);
+  msql.query(q4);
 }
 
-String[][] getInfoTablaMovimientos(String tipoMov, int numFilas){
+String[][] getInfoTablaMovimientos(String tipoMov, int numFilas) {
   String q = "SELECT CONCAT(UPPER(SUBSTRING(c.nombre, 1, 1)) ,'.', t.idtipo_mov) AS codigo, t.nombre AS concepto, SUM(m.cantidad) AS cantidad FROM movimiento m, tipo_mov t, categoria_mov c WHERE m.tipo_mov_idtipo_mov=t.idtipo_mov AND t.categoria=c.idcategoria_mov AND c.nombre='"+tipoMov+"' GROUP BY m.tipo_mov_idtipo_mov, t.categoria ORDER BY t.idtipo_mov ASC;";
   String[][] data = new String[numFilas][3];
 
@@ -171,8 +246,22 @@ String[][] getInfoTablaMovimientos(String tipoMov, int numFilas){
   while (msql.next()) {
     data[nr][0] = msql.getString("codigo");
     data[nr][1] = msql.getString("concepto");
-    data[nr][2] = String.valueOf(msql.getFloat("cantidad")); 
+    data[nr][2] = String.valueOf(msql.getFloat("cantidad"));
     nr++;
   }
   return data;
+}
+
+float getTotalIngresos(){
+  String q ="SELECT SUM(m.cantidad) AS total FROM movimiento m, categoria_mov c, tipo_mov t WHERE m.tipo_mov_idtipo_mov=t.idtipo_mov AND t.categoria=c.idcategoria_mov AND c.idcategoria_mov='1'";
+  msql.query(q);
+  msql.next();
+  return msql.getFloat("total");
+}
+
+float getTotalGastos(){
+  String q ="SELECT SUM(m.cantidad) AS total FROM movimiento m, categoria_mov c, tipo_mov t WHERE m.tipo_mov_idtipo_mov=t.idtipo_mov AND t.categoria=c.idcategoria_mov AND c.idcategoria_mov='2'";
+  msql.query(q);
+  msql.next();
+  return msql.getFloat("total");
 }
