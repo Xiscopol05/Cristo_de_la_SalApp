@@ -34,7 +34,6 @@ void setup() {
   setMedias();
   setGUI();
 
-
   desktop = Desktop.getDesktop();
 }
 

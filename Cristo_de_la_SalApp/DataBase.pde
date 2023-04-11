@@ -314,9 +314,61 @@ String[][] getInfoTablaAviso() {
 }
 
 void insertInfoAviso(String titulo, String descripcion) {
-  String q = "INSERT INTO `aviso` (`titulo`, `descripcion`) VALUES ('"+titulo+"', '"+descripcion+"')";
+  String numAviso = String.valueOf(getNumeroUltimoAviso()+1);
+  String q = "INSERT INTO `aviso`  (`idaviso`, `titulo`, `descripcion`) VALUES ('"+numAviso+"', '"+titulo+"', '"+descripcion+"')";
   println(q);
   msql.query(q);
 }
 
-String 
+int getNumeroUltimoAviso() {
+  String q = "SELECT MAX(idaviso) AS n FROM aviso";
+  println(q);
+  msql.query(q);
+  msql.next();
+  return (msql.getInt("n"));
+}
+
+// Obté informació de la taula archivo
+String[][] getInfoEvento() {
+  int numRows = getNumRowsTabla("evento");
+  String[][] data = new String[numRows][2];
+
+  int nr=0;
+  msql.query( "SELECT * FROM `evento`");
+  while (msql.next()) {
+    data[nr][0] = String.valueOf(msql.getDate("fecha"));
+    data[nr][1] = msql.getString("evento");
+    nr++;
+  }
+  return data;
+}
+
+String [] getInfoEventoDetalle (String fecha) {
+  String data[] = new String [3];
+
+  msql.query("SELECT * FROM `evento` WHERE fecha = '"+fecha+"'");
+  if (msql.next()) {
+    data[0] = msql.getString("evento");
+    data[1] = msql.getString("descripcion");
+    data[2] = formataFecha(String.valueOf(msql.getDate("fecha")));
+  } else {
+    data[0] = "No hay eventos";
+    data[1] = "No hay eventos para la fecha que se ha seleccionado. Intentelo de nuevo con una fecha resaltada.";
+    data[2] = formataFecha(fecha);
+  }
+  return data;
+}
+
+String [] getInfoAvisoDetalle (int idAviso) {
+  String data[] = new String [2];
+
+  msql.query("SELECT * FROM `aviso` WHERE idAviso = '"+idAviso+"'");
+  if (msql.next()) {
+    data[0] = msql.getString("titulo");
+    data[1] = msql.getString("descripcion");
+  } else {
+    data[0] = "Selecciona un aviso";
+    data[1] = "Selecciona un aviso para visualizar su contenido";
+  }
+  return data;
+}

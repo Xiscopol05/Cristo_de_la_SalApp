@@ -57,18 +57,17 @@ pushMatrix();
     strokeWeight(1);
     rect(x, y, w, h, 5);
     if (selected) {
-      fill(200, 100, 100);
+      fill(getColorAt(2));
       noStroke();
       ellipse(x + w/2, y+h/2, 50,50);
     }
     if (selected2) {
-      fill(10, 200, 100);
+      fill(getColorAt(3));
       noStroke();
       ellipse(x + w/2, y+h/2, 50,50);
       fill(200);
       textSize(10);
       textAlign(CENTER);
-      text(info, x + w/2, y+h/1.25);
     }
     fill(0);
     textSize(24);

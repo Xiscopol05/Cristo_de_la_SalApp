@@ -599,8 +599,6 @@ void dibujaPantallaAvisosDetalleEvento() {
   pushStyle();
   textFont(getFontAt(5));
   text("Fecha:", 600+menuWidth, 600+bannerHeight);
-  fill(255);
-  rect(680+menuWidth, 575+bannerHeight, 200, 45);
   popStyle();
 
   //display elementos GUI
@@ -609,7 +607,7 @@ void dibujaPantallaAvisosDetalleEvento() {
   bAceptarAvisosAlertas.display();
   tiDetalleEvento.display();
   tiTituloDetalleEvento.display();
-  //displaycpNuevoEvento();
+  tiFechaEventoDetalle.display();
 
   popStyle();
   popMatrix();

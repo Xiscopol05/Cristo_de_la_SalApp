@@ -3,13 +3,14 @@ import java.util.Calendar;
 class Calendario {
 
   // Textos representatius dels mesos
-  String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+  String[] months = {"Ene", "Feb", "Mar", "Abr", "May", "Jun",
+    "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"};
 
   // Informació del calendari
   int año, mes, dia;
   int numDaysMonth, numDaysPrevMonth;
   int dayOfWeek, firstDay;
+  String fechaSelected;
 
   // Data seleccionada
   boolean dateSelected = false;
@@ -242,6 +243,7 @@ class Calendario {
     if (dateSelected) {
 
       String dateText = this.selectedDay+"/"+this.selectedMonth+"/"+this.selectedYear;
+       fechaSelected = this.selectedYear+"-"+this.selectedMonth+"-"+this.selectedDay;
       fill(0);
       textSize(24);
       textAlign(RIGHT);

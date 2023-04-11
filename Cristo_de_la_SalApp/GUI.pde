@@ -81,8 +81,8 @@ void initButtons() {
   buttons[43] = new Button("Modificar", (2*menuWidth)+450, primerIconY+10, 100, 50);
   buttons[44] = new Button("Detalle", (2*menuWidth)+550, primerIconY+10, 100, 50);
   buttons[45] = new Button("Recuerdos de la hermandad", 325, 680, 850, buttonEnlaceH);
-  buttons[46] = new Button("Siguiente", (2*menuWidth)+780, primerIconY+10, 80, 50);
-  buttons[47] = new Button("Anterior", (2*menuWidth)+700, primerIconY+10, 80, 50);
+  buttons[47] = new Button("Siguiente", (2*menuWidth)+780, primerIconY+10, 80, 50);
+  buttons[46] = new Button("Anterior", (2*menuWidth)+700, primerIconY+10, 80, 50);
   buttons[48] = new Button("Aceptar", 641+menuWidth, 20+bannerHeight, 403, 40);
 
   bPrincipal = buttons[0];
@@ -286,7 +286,7 @@ void displaytfNuevoHermano() {
 //TextInfo
 TextInfo tiNombre, tiApellidos, tiDNI, tiCalle, tiFechaNacimiento, tiFechaAlta, tiNumero, tiPiso, tiLocalidad, tiProvincia, tiTelefono, tiCorreoElectronico;
 TextInfo tiBanco, tiTitular, tiDNITitular, tiIBAN, tiEntidad, tiOficina, tiDigitoControl, tiNumeroCuenta, tiFechaNacimientoAñadir;
-TextInfo tiTitulo, tiCantidad, tiFechaMovimiento, tiTipo, tiDetalleEvento, tiDetalleAviso, tiTituloDetalleEvento, tiTituloDetalleAviso;
+TextInfo tiTitulo, tiCantidad, tiFechaMovimiento, tiTipo, tiDetalleEvento, tiDetalleAviso, tiTituloDetalleEvento, tiTituloDetalleAviso, tiFechaEventoDetalle;
 TextInfo tiTituloArchivo, tiCategoriaArchivo, tiAñoDatacion;
 
 void initTextInfo() {
@@ -315,13 +315,14 @@ void initTextInfo() {
   tiCantidad = new TextInfo ("Cantidad", 780, 490, 465, 40);
   tiFechaMovimiento = new TextInfo ("Fecha de movimiento", 420, 413, 350, 40);
   tiTipo = new TextInfo ("Tipo", 780, 413, 465, 40);
-  tiTituloDetalleEvento = new TextInfo ("Título", 27+menuWidth, 190+bannerHeight, 1020, 45);
+  tiTituloDetalleEvento = new TextInfo ("Titulo", 27+menuWidth, 190+bannerHeight, 1020, 45);
   tiTituloDetalleAviso = new TextInfo("Título", 27+menuWidth, 190+bannerHeight, 1020, 45);
   tiDetalleEvento = new TextInfo ("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation", 27+menuWidth, 250+bannerHeight, 1020, 260);
   tiDetalleAviso = new TextInfo ("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation", 27+menuWidth, 250+bannerHeight, 1020, 260);
   tiTituloArchivo  = new TextInfo("Título", 27+menuWidth, 247+bannerHeight, 1020, 45);
   tiCategoriaArchivo  = new TextInfo("Título", 580+menuWidth, 310+bannerHeight, selectArchivoW, selectArchivoH);
   tiAñoDatacion = new TextInfo("Título", 380, 310+bannerHeight, 100, 45);
+  tiFechaEventoDetalle = new TextInfo ("Fecha",680+menuWidth, 565+bannerHeight, 200, 45);
 
   popMatrix();
 }
@@ -416,10 +417,10 @@ void displayButtonsMenu() {
 // Variable de Calendari
 Calendario cEventos;
 
-String[][] fechasClave = {{"2023-03-15", ""}, {"2023-03-28", ""}};
+//String[][] fechasClave = getInfoEvento();
 
 void initCalendar() {
-  cEventos = new Calendario(menuWidth+20+((1280-menuWidth)/2), primerIconY+iconHeight+20, ((1280-menuWidth)/2)-35, (iconHeight*3)-50, fechasClave);
+  cEventos = new Calendario(menuWidth+20+((1280-menuWidth)/2), primerIconY+iconHeight+20, ((1280-menuWidth)/2)-35, (iconHeight*3)-50, getInfoEvento());
 }
 
 void displayCalendarioEventos() {

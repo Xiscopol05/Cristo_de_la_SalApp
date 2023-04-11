@@ -110,27 +110,38 @@ void mousePressed() {
     String descripcion = String.valueOf(getText(taNuevoAviso));
     insertInfoAviso( titulo, descripcion);
     pcAvisos = new PagedCard(numCardsPage);
-  pcAvisos.setDimensions(menuWidth+20, primerIconY+(iconHeight-50), ((1280-menuWidth)/2)-10, iconHeight*4-iconHeight);
-  pcAvisos.setData(getInfoTablaAviso());
-  pcAvisos.setCards();
-  pcAvisosPrincipal = new PagedCard(8);
-  pcAvisosPrincipal.setDimensions(menuWidth+540, bannerHeight+30, 520, 550);
-  pcAvisosPrincipal.setData(getInfoTablaAviso());
-  pcAvisosPrincipal.setCards();
-  taNuevoAviso.text= "";
-  tfTituloAviso.text = "";
-      pantalla = PANTALLA.AVISOS;
+    pcAvisos.setDimensions(menuWidth+20, primerIconY+(iconHeight-50), ((1280-menuWidth)/2)-10, iconHeight*4-iconHeight);
+    pcAvisos.setData(getInfoTablaAviso());
+    pcAvisos.setCards();
+    pcAvisosPrincipal = new PagedCard(8);
+    pcAvisosPrincipal.setDimensions(menuWidth+540, bannerHeight+30, 520, 550);
+    pcAvisosPrincipal.setData(getInfoTablaAviso());
+    pcAvisosPrincipal.setCards();
+    taNuevoAviso.text= "";
+    tfTituloAviso.text = "";
+    pantalla = PANTALLA.AVISOS;
+  } else if (bAceptarAvisosAlertas.mouseOverButton() && bAceptarAvisosAlertas.enabled && (pantalla == PANTALLA.AVISOS_DETALLEAVISO || pantalla == PANTALLA.AVISOS_DETALLEEVENTO)) {
+    pantalla = PANTALLA.AVISOS;
   } else if (bAñadirAviso.mouseOverButton() && bAñadirAviso.enabled) {
     pantalla = PANTALLA.AVISOS_NUEVOAVISO;
   } else if (bModificarAviso.mouseOverButton() && bModificarAviso.enabled) {
     pantalla = PANTALLA.AVISOS_NUEVOAVISO;
-  } else if (bDetalleAviso.mouseOverButton() && bDetalleAviso.enabled) {
+  } else if (bDetalleAviso.mouseOverButton() && bDetalleAviso.enabled) {  
+    String[] info = getInfoAvisoDetalle (pcAvisos.selectedCard+1);
+    printArray(info);
+    tiTituloDetalleAviso.text = info[0];
+    tiDetalleAviso.text = info[1];
     pantalla = PANTALLA.AVISOS_DETALLEAVISO;
   } else if (bAñadirEvento.mouseOverButton() && bAñadirEvento.enabled) {
     pantalla = PANTALLA.AVISOS_NUEVOEVENTO;
   } else if (bModificarEvento.mouseOverButton() && bModificarEvento.enabled) {
     pantalla = PANTALLA.AVISOS_NUEVOEVENTO;
   } else if (bDetalleEvento.mouseOverButton() && bDetalleEvento.enabled) {
+    String [] info = getInfoEventoDetalle(cEventos.fechaSelected);
+    printArray(info);
+    tiTituloDetalleEvento.text = info[0];
+    tiDetalleEvento.text = info[1];
+    tiFechaEventoDetalle.text = info[2];
     pantalla = PANTALLA.AVISOS_DETALLEEVENTO;
   } else if (bMesAnteriorAviso.mouseOverButton() && bMesAnteriorAviso.enabled) {
     cEventos.prevMonth();
