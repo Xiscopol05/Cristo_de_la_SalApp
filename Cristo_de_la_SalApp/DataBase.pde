@@ -124,6 +124,7 @@ String[] getInfoTablaHermano(String idHermano) {
   msql.query( "SELECT * FROM hermano WHERE user_numhermano='"+idHermano+"'" );
   msql.next();
   data[0] = String.valueOf(msql.getInt("user_numhermano"));
+  titulo1 = data[0]+".pdf";
   data[1] = String.valueOf(msql.getInt("user_role_id"));
   data[2] = msql.getString("nombre");
   data[3] = msql.getString("apellidos");
@@ -181,7 +182,6 @@ void insertInfoTablaHermano(String nombre, String apellidos, String fechanacimie
   println(q3);
   msql.query(q3);
   msql.query(q2);
-  createFolder(numHermano+": "+sNombre);
 }
 
 

@@ -1,5 +1,5 @@
 //Nombre de los archivos PDF
-String titulo1="user.pdf";
+String titulo1="";
 String titulo2="CATALOGO.pdf";
 
 // carpeta donde se ubican los archivos

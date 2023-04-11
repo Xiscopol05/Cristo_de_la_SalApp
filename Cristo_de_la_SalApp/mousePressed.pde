@@ -78,8 +78,9 @@ void mousePressed() {
     tiDigitoControl.text = infoH[19];
     tiNumeroCuenta.text = infoH[20];
     tiCorreoElectronico.text = infoH[12];
-                                              //FALTA OBRIR ARXIU DE INSCRIPCION!!!!!!!!!!!!!!!!!!!!!
     pantalla = PANTALLA.CENSO_DETALLE;
+  } else if (bFicha.mouseOverButton() && bFicha.enabled && pantalla == PANTALLA.CENSO_DETALLE) {
+    launch(ruta+titulo1);
   } else if ( bAceptarCenso.mouseOverButton() && bAceptarCenso.enabled && pantalla == PANTALLA.CENSO_NUEVOHERMANO) {
     pantalla = PANTALLA.CENSO;
   } else if (itbPerfilPersonal.mouseOverButton() && itbPerfilPersonal.enabled) {
@@ -90,8 +91,6 @@ void mousePressed() {
     selectInput("Selecciona un fitxer ...", "fileSelected");
   } else if (bAñadirRecibo.mouseOverButton() && bAñadirRecibo.enabled && pantalla == PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO) {
     selectInput("Selecciona un fitxer ...", "fileSelected");
-  } else if (bFicha.mouseOverButton() && bFicha.enabled && pantalla == PANTALLA.CENSO_DETALLE) {
-    launch(ruta+titulo1);
   } else if (bRecuerdos.mouseOverButton() && bRecuerdos.enabled && pantalla == PANTALLA.ENLACES) {
     launch(ruta+titulo2);
   } else if (bDetalleConcepto.mouseOverButton() && bDetalleConcepto.enabled) {
@@ -136,14 +135,6 @@ void mousePressed() {
     stCenso.setColumnWidths(colWidthsCenso);
     stCenso.setColumnMaxChars(maxCharsCenso);
   }
-
-  bAñadirAviso = buttons [39];
-  bModificarAviso = buttons [40];
-  bDetalleAviso = buttons [41];
-  bAñadirEvento = buttons [42];
-  bModificarEvento = buttons [43];
-  bDetalleEvento = buttons [44];
-  bRecuerdos = buttons[45];
 
   userText.isPressed();
   passText.isPressed();
