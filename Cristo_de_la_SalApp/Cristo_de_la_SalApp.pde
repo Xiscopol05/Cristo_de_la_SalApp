@@ -12,7 +12,7 @@ enum PANTALLA {
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.CONTABILIDAD_DETALLEBALANCE;
+PANTALLA pantalla =PANTALLA.AVISOS;
 
 boolean logged= false;
 

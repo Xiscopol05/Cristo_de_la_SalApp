@@ -31,10 +31,10 @@ Button bAñadir, bModificar, bDetalle, bAceptarCenso, bFicha, bPrevCenso, bNextC
 Button bAceptarConcepto, bCalendario, bCalendarioAlta, bCalendarioMovimiento, bAñadirRecibo, bDetalleBalance;
 Button bPrevDetalle, bNextDetalle, bPrevArchivo, bNextArchivo, bAceptarArchivo, bCalendarioArchivo, bAceptarAvisosAlertas;
 Button bDetalleConcepto, bCalendarioEvento, bPrevAviso, bNextAviso, bAñadirAviso, bModificarAviso, bDetalleAviso;
-Button bAñadirEvento, bModificarEvento, bDetalleEvento, bRecuerdos, bMesAnteriorAviso, bMesPosteriorAviso;
+Button bAñadirEvento, bModificarEvento, bDetalleEvento, bRecuerdos, bMesAnteriorAviso, bMesPosteriorAviso, bAceptarCensoDetalle;
 
 void initButtons() {
-  buttons = new Button[48];
+  buttons = new Button[49];
   buttons[0] = new Button("Principal", 850, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
@@ -83,6 +83,7 @@ void initButtons() {
   buttons[45] = new Button("Recuerdos de la hermandad", 325, 680, 850, buttonEnlaceH);
   buttons[46] = new Button("Siguiente", (2*menuWidth)+780, primerIconY+10, 80, 50);
   buttons[47] = new Button("Anterior", (2*menuWidth)+700, primerIconY+10, 80, 50);
+  buttons[48] = new Button("Aceptar", 641+menuWidth, 20+bannerHeight, 403, 40);
 
   bPrincipal = buttons[0];
   bInicioSesion = buttons[1];
@@ -132,6 +133,7 @@ void initButtons() {
   bRecuerdos = buttons[45];
   bMesAnteriorAviso = buttons[46];
   bMesPosteriorAviso = buttons[47];
+  bAceptarCensoDetalle = buttons[48];
 }
 
 //Desactivar todos los botones
@@ -146,10 +148,7 @@ void disableButtons() {
   itbEnlaces.setEnabled(false);
   itbPerfilPersonal.setEnabled(false);
   itbInsertarArchivo .setEnabled(false);
-  itbInsertarArchivoAvisos .setEnabled(false);
-  itbInsertarArchivoEventos.setEnabled(false);
-  itbVerArchivoAvisos.setEnabled(false);
-  itbVerArchivoEventos.setEnabled(false);
+ itbVerArchivoArchivo.setEnabled(false);
   PopUpinicioSesion.bAceptar.setEnabled(false);
 }
 
@@ -288,6 +287,7 @@ void displaytfNuevoHermano() {
 TextInfo tiNombre, tiApellidos, tiDNI, tiCalle, tiFechaNacimiento, tiFechaAlta, tiNumero, tiPiso, tiLocalidad, tiProvincia, tiTelefono, tiCorreoElectronico;
 TextInfo tiBanco, tiTitular, tiDNITitular, tiIBAN, tiEntidad, tiOficina, tiDigitoControl, tiNumeroCuenta, tiFechaNacimientoAñadir;
 TextInfo tiTitulo, tiCantidad, tiFechaMovimiento, tiTipo, tiDetalleEvento, tiDetalleAviso, tiTituloDetalleEvento, tiTituloDetalleAviso;
+TextInfo tiTituloArchivo, tiCategoriaArchivo, tiAñoDatacion;
 
 void initTextInfo() {
   pushMatrix();
@@ -319,7 +319,9 @@ void initTextInfo() {
   tiTituloDetalleAviso = new TextInfo("Título", 27+menuWidth, 190+bannerHeight, 1020, 45);
   tiDetalleEvento = new TextInfo ("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation", 27+menuWidth, 250+bannerHeight, 1020, 260);
   tiDetalleAviso = new TextInfo ("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation", 27+menuWidth, 250+bannerHeight, 1020, 260);
-
+  tiTituloArchivo  = new TextInfo("Título", 27+menuWidth, 247+bannerHeight, 1020, 45);
+  tiCategoriaArchivo  = new TextInfo("Título", 580+menuWidth, 310+bannerHeight, selectArchivoW, selectArchivoH);
+  tiAñoDatacion = new TextInfo("Título", 380, 310+bannerHeight, 100, 45);
 
   popMatrix();
 }
@@ -352,10 +354,10 @@ void displayDetalleHermano() {
 
 ImgTextButton[] imgtextbuttons;
 ImgTextButton itbCenso, itbContabilidad, itbArchivo, itbAvisos, itbEnlaces, itbPerfilPersonal;
-ImgTextButton itbInsertarArchivo, itbInsertarArchivoAvisos, itbInsertarArchivoEventos, itbVerArchivoAvisos, itbVerArchivoEventos;
+ImgTextButton itbInsertarArchivo, itbVerArchivoArchivo;
 
 void initImgTextButton() {
-  imgtextbuttons = new ImgTextButton[11];
+  imgtextbuttons = new ImgTextButton[12];
   imgtextbuttons[0] = new ImgTextButton(getIconCenso(), "Censo", 0, primerIconY, iconWidth, iconHeight);
   imgtextbuttons[1] = new ImgTextButton(getIconContabilidad(), "Contabilidad", 0, segundoIconY, iconWidth, iconHeight);
   imgtextbuttons[2] = new ImgTextButton(getIconArchivo(), "Archivo", 0, tercerIconY, iconWidth, iconHeight);
@@ -367,6 +369,8 @@ void initImgTextButton() {
   imgtextbuttons[8] = new ImgTextButton(getIconFile(), "Insertar Archivo", 200+menuWidth, 550+bannerHeight, 160, 100);
   imgtextbuttons[9] = new ImgTextButton(getIconFile(), "Ver Archivo", 440+menuWidth, 550+bannerHeight, 160, 100);
   imgtextbuttons[10] = new ImgTextButton(getIconFile(), "Ver Archivo", 200+menuWidth, 550+bannerHeight, 160, 100);
+  imgtextbuttons[11] = new ImgTextButton(getIconFile(), "Ver Archivo", 730+menuWidth, 380+bannerHeight, 190, 100);
+
 
   itbCenso = imgtextbuttons[0];
   itbContabilidad = imgtextbuttons[1];
@@ -375,10 +379,7 @@ void initImgTextButton() {
   itbEnlaces = imgtextbuttons[4];
   itbPerfilPersonal = imgtextbuttons[5];
   itbInsertarArchivo = imgtextbuttons[6];
-  itbInsertarArchivoAvisos = imgtextbuttons[7];
-  itbInsertarArchivoEventos = imgtextbuttons[8];
-  itbVerArchivoAvisos = imgtextbuttons[9];
-  itbVerArchivoEventos = imgtextbuttons[10];
+  itbVerArchivoArchivo  = imgtextbuttons[11];
 }
 
 // Activar los botones del menú
@@ -415,7 +416,7 @@ void displayButtonsMenu() {
 // Variable de Calendari
 Calendario cEventos;
 
-String[][] fechasClave = {{"2023-03-15", "CUMPLE"}, {"2023-03-28", "FESTA"}};
+String[][] fechasClave = {{"2023-03-15", ""}, {"2023-03-28", ""}};
 
 void initCalendar() {
   cEventos = new Calendario(menuWidth+20+((1280-menuWidth)/2), primerIconY+iconHeight+20, ((1280-menuWidth)/2)-35, (iconHeight*3)-50, fechasClave);
@@ -836,11 +837,11 @@ String[][] infoCards = {
 void initPagedCard() {
   pcAvisos = new PagedCard(numCardsPage);
   pcAvisos.setDimensions(menuWidth+20, primerIconY+(iconHeight-50), ((1280-menuWidth)/2)-10, iconHeight*4-iconHeight);
-  pcAvisos.setData(infoCards);
+  pcAvisos.setData(getInfoTablaAviso());
   pcAvisos.setCards();
   pcAvisosPrincipal = new PagedCard(8);
   pcAvisosPrincipal.setDimensions(menuWidth+540, bannerHeight+30, 520, 550);
-  pcAvisosPrincipal.setData(infoCards);
+  pcAvisosPrincipal.setData(getInfoTablaAviso());
   pcAvisosPrincipal.setCards();
 }
 

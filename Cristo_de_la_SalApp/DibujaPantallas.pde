@@ -214,7 +214,7 @@ void dibujaPantallaCensoDetalle() {
   disableButtons();
   enableButtonsMenu();
   if (admin==true) {
-    bAceptarCenso.setEnabled(true);
+    bAceptarCensoDetalle.setEnabled(true);
   }
   bFicha.setEnabled(true);
 
@@ -226,7 +226,7 @@ void dibujaPantallaCensoDetalle() {
   displayButtonsMenu();
   detalleHermano();
   if (admin==true) {
-    bAceptarCenso.display();
+    bAceptarCensoDetalle.display();
   }
   bFicha.display();
   pushMatrix();
@@ -487,10 +487,10 @@ void dibujaPantallaArchivoDetalle() {
   displayButtonsMenu();
   titArchivo.display();
   bAceptarArchivo.display();
-  tfTituloArchivo.display();
-  itbInsertarArchivo.display();
-  sCategoriaArchivo.display();
-  tfAñoDatacion.display();
+  tiTituloArchivo.display();
+  itbVerArchivoArchivo.display();
+  tiCategoriaArchivo.display();
+  tiAñoDatacion.display();
   popStyle();
   popMatrix();
 }
@@ -504,7 +504,7 @@ void dibujaPantallaAvisosNuevoAviso() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
-  itbInsertarArchivoAvisos.setEnabled(true);
+  
   bAceptarAvisosAlertas.setEnabled(true);
 
 
@@ -517,7 +517,7 @@ void dibujaPantallaAvisosNuevoAviso() {
   bAceptarAvisosAlertas.display();
   tfTituloAviso.display();
   taNuevoAviso.display();
-  itbInsertarArchivoAvisos.display();
+  
   popStyle();
   popMatrix();
 }
@@ -531,7 +531,7 @@ void dibujaPantallaAvisosDetalleAviso() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
-  itbVerArchivoAvisos.setEnabled(true);
+  
   bAceptarAvisosAlertas.setEnabled(true);
 
 
@@ -544,7 +544,7 @@ void dibujaPantallaAvisosDetalleAviso() {
   bAceptarAvisosAlertas.display();
   tiTituloDetalleAviso.display();
   tiDetalleAviso.display();
-  itbVerArchivoAvisos.display();
+  
   popStyle();
   popMatrix();
 }
@@ -558,7 +558,7 @@ void dibujaPantallaAvisosNuevoEvento() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
-  itbInsertarArchivoEventos.setEnabled(true);
+ 
   bAceptarAvisosAlertas.setEnabled(true);
   bCalendarioEvento.setEnabled(true);
 
@@ -575,7 +575,7 @@ void dibujaPantallaAvisosNuevoEvento() {
   bAceptarAvisosAlertas.display();
   tfTituloEvento.display();
   taNuevoEvento.display();
-  itbInsertarArchivoEventos.display();
+  
   displaycpNuevoEvento();
   //tiDetalleEvento.display();
   popStyle();
@@ -591,7 +591,6 @@ void dibujaPantallaAvisosDetalleEvento() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
-  itbVerArchivoEventos.setEnabled(true);
   bAceptarAvisosAlertas.setEnabled(true);
   bCalendarioEvento.setEnabled(true);
 
@@ -610,7 +609,6 @@ void dibujaPantallaAvisosDetalleEvento() {
   bAceptarAvisosAlertas.display();
   tiDetalleEvento.display();
   tiTituloDetalleEvento.display();
-  itbVerArchivoEventos.display();
   //displaycpNuevoEvento();
 
   popStyle();

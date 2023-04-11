@@ -182,6 +182,8 @@ void insertInfoTablaHermano(String nombre, String apellidos, String fechanacimie
   println(q3);
   msql.query(q3);
   msql.query(q2);
+  String ficha= numHermano+".pdf";
+  copiar(rutaFitxer, rutaCopia, ficha);
 }
 
 
@@ -278,3 +280,43 @@ float getEstadoCuentas() {
   float CantTot = CantIng - CantGast;
   return CantTot;
 }
+
+String [] getInfoArchivoDetalle (String titulo) {
+  String data[] = new String [5];
+
+  msql.query("SELECT * FROM `archivo` WHERE titulo = '"+titulo+"'");
+  msql.next();
+  data[0] = msql.getString("titulo");
+  data[1] = String.valueOf(msql.getInt("datacion"));
+  data[2] = msql.getString("file");
+  data[3] = String.valueOf(msql.getInt("tipo_arch_idtipo_arch"));
+  msql.query("SELECT `tipo` FROM `tipo_arch` WHERE idtipo_arch = '"+data[3]+"'");
+  msql.next();
+  data [4] = msql.getString("tipo");
+
+  return data;
+}
+
+// Obté informació de la taula archivo
+String[][] getInfoTablaAviso() {
+
+  int numRows = getNumRowsTabla("aviso");
+  String[][] data = new String[numRows][2];
+
+  int nr=0;
+  msql.query( "SELECT * FROM `aviso`");
+  while (msql.next()) {
+    data[nr][0] = String.valueOf("Aviso "+msql.getInt("idaviso"));
+    data[nr][1] = msql.getString("descripcion");
+    nr++;
+  }
+  return data;
+}
+
+void insertInfoAviso(String titulo, String descripcion) {
+  String q = "INSERT INTO `aviso` (`titulo`, `descripcion`) VALUES ('"+titulo+"', '"+descripcion+"')";
+  println(q);
+  msql.query(q);
+}
+
+String 

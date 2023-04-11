@@ -72,6 +72,9 @@ class TextArea {
     printArray(lines);
   }
 
+  
+
+
   // Afegeix, lleva el text que es tecleja
   void keyPressed(char key, int keyCode) {
     if (selected) {
@@ -123,3 +126,7 @@ class TextArea {
     }
   }
 }
+
+String getText(TextArea textArea) {
+    return textArea.text;
+  }

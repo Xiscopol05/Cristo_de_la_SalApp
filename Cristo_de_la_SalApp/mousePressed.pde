@@ -88,7 +88,7 @@ void mousePressed() {
   } else if (bDetalleBalance.mouseOverButton() && bDetalleBalance.enabled) {
     pantalla = PANTALLA.CONTABILIDAD_DETALLEBALANCE;
   } else if (bFicha.mouseOverButton() && bFicha.enabled && pantalla == PANTALLA.CENSO_NUEVOHERMANO) {
-    selectInput("Selecciona un fitxer ...", "fileSelected");
+    selectInput("Selecciona un fitxer ...", "fitxaInscripcionSelected");
   } else if (bAñadirRecibo.mouseOverButton() && bAñadirRecibo.enabled && pantalla == PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO) {
     selectInput("Selecciona un fitxer ...", "fileSelected");
   } else if (bRecuerdos.mouseOverButton() && bRecuerdos.enabled && pantalla == PANTALLA.ENLACES) {
@@ -101,16 +101,25 @@ void mousePressed() {
     stArchivo.nextPage();
   } else if (bAñadir.mouseOverButton() && bAñadir.enabled && pantalla == PANTALLA.ARCHIVO) {
     pantalla = PANTALLA.ARCHIVO_NUEVO;
-  } else if (bDetalle.mouseOverButton() && bDetalle.enabled && pantalla == PANTALLA.ARCHIVO) {
-    pantalla = PANTALLA.ARCHIVO_DETALLE;
   } else if (itbInsertarArchivo.mouseOverButton() && itbInsertarArchivo.enabled && pantalla == PANTALLA.ARCHIVO_NUEVO) {
-    selectInput("Selecciona un fitxer ...", "fileSelected");
-  } else if (itbInsertarArchivoAvisos.mouseOverButton() && itbInsertarArchivoAvisos.enabled) {
     selectInput("Selecciona un fitxer ...", "fileSelected");
   } else if (bAceptarArchivo.mouseOverButton() && bAceptarArchivo.enabled && pantalla == PANTALLA.ARCHIVO_NUEVO) {
     pantalla = PANTALLA.ARCHIVO;
-  } else if (bAceptarAvisosAlertas.mouseOverButton() && bAceptarAvisosAlertas.enabled) {
-    pantalla = PANTALLA.AVISOS;
+  } else if (bAceptarAvisosAlertas.mouseOverButton() && bAceptarAvisosAlertas.enabled && pantalla == PANTALLA.AVISOS_NUEVOAVISO) {
+    String titulo = String.valueOf(tfTituloAviso.getValue());
+    String descripcion = String.valueOf(getText(taNuevoAviso));
+    insertInfoAviso( titulo, descripcion);
+    pcAvisos = new PagedCard(numCardsPage);
+  pcAvisos.setDimensions(menuWidth+20, primerIconY+(iconHeight-50), ((1280-menuWidth)/2)-10, iconHeight*4-iconHeight);
+  pcAvisos.setData(getInfoTablaAviso());
+  pcAvisos.setCards();
+  pcAvisosPrincipal = new PagedCard(8);
+  pcAvisosPrincipal.setDimensions(menuWidth+540, bannerHeight+30, 520, 550);
+  pcAvisosPrincipal.setData(getInfoTablaAviso());
+  pcAvisosPrincipal.setCards();
+  taNuevoAviso.text= "";
+  tfTituloAviso.text = "";
+      pantalla = PANTALLA.AVISOS;
   } else if (bAñadirAviso.mouseOverButton() && bAñadirAviso.enabled) {
     pantalla = PANTALLA.AVISOS_NUEVOAVISO;
   } else if (bModificarAviso.mouseOverButton() && bModificarAviso.enabled) {
@@ -127,6 +136,22 @@ void mousePressed() {
     cEventos.prevMonth();
   } else if (bMesPosteriorAviso.mouseOverButton() && bMesPosteriorAviso.enabled) {
     cEventos.nextMonth();
+  } else if (bDetalle.mouseOverButton() && bDetalle.enabled && pantalla == PANTALLA.ARCHIVO) {
+    String[] info = stArchivo.getSelectedInfo();
+    String [] infoH = getInfoArchivoDetalle(info[0]);
+    printArray(infoH);
+    tiTituloArchivo.text = infoH[0];
+    tiCategoriaArchivo.text = infoH[4];
+    tiAñoDatacion.text = infoH[1];
+    tituloAbrirArch = infoH[2];
+    pantalla = PANTALLA.ARCHIVO_DETALLE;
+  } else if (itbVerArchivoArchivo.mouseOverButton() && itbVerArchivoArchivo.enabled && pantalla == PANTALLA.ARCHIVO_DETALLE) {
+    println(tituloAbrirArch);
+    launch(ruta+tituloAbrirArch);
+  } else if (bAceptarCensoDetalle.mouseOverButton() && bAceptarCensoDetalle.enabled && admin==true) {
+    pantalla = PANTALLA.CENSO;
+  } else if (bAceptarCensoDetalle.mouseOverButton() && bAceptarCensoDetalle.enabled) {
+    pantalla = PANTALLA.PRINCIPAL;
   } else if (bModificar.mouseOverButton()&& bModificar.enabled) {
     String [][] info = getInfoTablaCensoBuscar(buscar.getValue());
     stCenso = new SelectTable(filasCenso, columnasCenso, 20+menuWidth, 285, 1280-menuWidth-40, 410);
@@ -343,6 +368,7 @@ void mousePressed() {
   } else if (pantalla == PANTALLA.AVISOS)
     pcAvisos.checkCardSelection();
 }
+
 
 // Modifica el cursor
 void updateCursor() {
