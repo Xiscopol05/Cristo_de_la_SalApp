@@ -119,3 +119,13 @@ boolean comprovaLogin() {
 boolean comprovaAdmin() {
   return isAdmin(userText.getValue());
 }
+
+void createFolder(String folderName) {
+  File folder = new File(sketchPath("") + "\\" + folderName);
+  if (!folder.exists()) {
+    folder.mkdir();
+    println("Carpeta creada: " + folder.getAbsolutePath());
+  } else {
+    println("La carpeta ya existe: " + folder.getAbsolutePath());
+  }
+}

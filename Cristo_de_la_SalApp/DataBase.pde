@@ -1,4 +1,4 @@
- 
+
 // Objecte de connexió a la BBDD
 MySQL msql;
 
@@ -181,24 +181,24 @@ void insertInfoTablaHermano(String nombre, String apellidos, String fechanacimie
   println(q3);
   msql.query(q3);
   msql.query(q2);
+  createFolder(numHermano+": "+sNombre);
 }
 
 
 String generatePassword(int length) {
   String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
-  String specialCharacters = "";
+
   String numbers = "1234567890";
-  String combinedChars = capitalCaseLetters + lowerCaseLetters + specialCharacters + numbers;
+  String combinedChars = capitalCaseLetters + lowerCaseLetters + numbers;
   Random random = new Random();
   char[] password = new char[length];
 
   password[0] = lowerCaseLetters.charAt(random.nextInt(lowerCaseLetters.length()));
   password[1] = capitalCaseLetters.charAt(random.nextInt(capitalCaseLetters.length()));
-  password[2] = specialCharacters.charAt(random.nextInt(specialCharacters.length()));
-  password[3] = numbers.charAt(random.nextInt(numbers.length()));
+  password[2] = numbers.charAt(random.nextInt(numbers.length()));
 
-  for (int i = 4; i< length; i++) {
+  for (int i = 3; i< length; i++) {
     password[i] = combinedChars.charAt(random.nextInt(combinedChars.length()));
   }
   return new String(password);
@@ -252,21 +252,21 @@ String[][] getInfoTablaMovimientos(String tipoMov, int numFilas) {
   return data;
 }
 
-float getTotalIngresos(){
+float getTotalIngresos() {
   String q ="SELECT SUM(m.cantidad) AS total FROM movimiento m, categoria_mov c, tipo_mov t WHERE m.tipo_mov_idtipo_mov=t.idtipo_mov AND t.categoria=c.idcategoria_mov AND c.idcategoria_mov='1'";
   msql.query(q);
   msql.next();
   return msql.getFloat("total");
 }
 
-float getTotalGastos(){
+float getTotalGastos() {
   String q ="SELECT SUM(m.cantidad) AS total FROM movimiento m, categoria_mov c, tipo_mov t WHERE m.tipo_mov_idtipo_mov=t.idtipo_mov AND t.categoria=c.idcategoria_mov AND c.idcategoria_mov='2'";
   msql.query(q);
   msql.next();
   return msql.getFloat("total");
 }
 
-float getEstadoCuentas(){
+float getEstadoCuentas() {
   String qCantIng = "SELECT SUM(m.cantidad) AS cantidad FROM movimiento m, tipo_mov t, categoria_mov c WHERE m.tipo_mov_idtipo_mov=t.idtipo_mov AND t.categoria=c.idcategoria_mov AND c.nombre='Ingresos' GROUP BY c.nombre;";
   msql.query(qCantIng);
   msql.next();
