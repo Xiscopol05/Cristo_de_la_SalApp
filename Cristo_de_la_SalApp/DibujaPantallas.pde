@@ -99,9 +99,11 @@ void dibujaPantallaContabilidad() {
   //dibujar elementos de la pantalla
   menu();
   pushStyle();
+  textAlign(CENTER);
   textFont(getFontAt(1));
   fill(0);
-  text("Estado de cuentas: " + estadoDeCuentas+ " €", 250, 450);
+   estadoDeCuentas=getEstadoCuentas();
+  text("Estado de cuentas: " + estadoDeCuentas+ " €", width/2+(menuWidth/2), bannerHeight+100);
   popStyle();
 
   //display elementos GUI
@@ -284,7 +286,7 @@ void dibujaPantallaContabilidadBalance() {
   bNextGastos.setEnabled(true);
   bAñadirConcepto.setEnabled(true);
   bDetalleBalance.setEnabled(true);
-
+  bDetalleBalanceGastos.setEnabled(true);
   //dibujar elementos de la pantalla
   menu();
 
@@ -299,6 +301,7 @@ void dibujaPantallaContabilidadBalance() {
   bPrevGastos.display();
   bNextGastos.display();
   bAñadirConcepto.display();
+  bDetalleBalanceGastos.display();
   popStyle();
   popMatrix();
 }
@@ -413,6 +416,7 @@ void dibujaPantallaContabilidadDetalleMovimiento() {
   disableButtons();
   enableButtonsMenu();
   bAceptarConcepto.setEnabled(true);
+  bVerRecibo.setEnabled(true);
 
   //dibujar elementos de la pantalla
   menu();
@@ -428,6 +432,7 @@ void dibujaPantallaContabilidadDetalleMovimiento() {
   tiCantidad.display();
   tiFechaMovimiento.display();
   tiTipo.display();
+  bVerRecibo.display();
   popStyle();
   popMatrix();
 }

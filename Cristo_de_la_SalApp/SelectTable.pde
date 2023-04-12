@@ -138,12 +138,14 @@ class SelectTable {
 
 
   String retallaText(String allText, int maxLength) {
+    if (allText == null) return "";
     String t = allText.substring(0, min(maxLength, allText.length()));
     if (!allText.equals(t)) {
-      t+="...";
+      t += "...";
     }
     return t;
   }
+
 
   boolean clickOnTableRow(int nr) {
     return mouseX>= x && mouseX<= x+this.w &&

@@ -1,5 +1,6 @@
 //Configuración de los elementos de la GUI
 
+
 // Creación de los elementos de la GUI
 void setGUI() {
   initButtons();
@@ -7,7 +8,6 @@ void setGUI() {
   initTextInfo();
   initImgTextButton();
   initCalendar();
-  initLinesDiagram();
   initBarsDiagram();
   initShowImage();
   initTitulo();
@@ -31,10 +31,10 @@ Button bAñadir, bModificar, bDetalle, bAceptarCenso, bFicha, bPrevCenso, bNextC
 Button bAceptarConcepto, bCalendario, bCalendarioAlta, bCalendarioMovimiento, bAñadirRecibo, bDetalleBalance;
 Button bPrevDetalle, bNextDetalle, bPrevArchivo, bNextArchivo, bAceptarArchivo, bCalendarioArchivo, bAceptarAvisosAlertas;
 Button bDetalleConcepto, bCalendarioEvento, bPrevAviso, bNextAviso, bAñadirAviso, bModificarAviso, bDetalleAviso;
-Button bAñadirEvento, bModificarEvento, bDetalleEvento, bRecuerdos, bMesAnteriorAviso, bMesPosteriorAviso, bAceptarCensoDetalle;
+Button bAñadirEvento, bModificarEvento, bDetalleEvento, bRecuerdos, bMesAnteriorAviso, bMesPosteriorAviso, bAceptarCensoDetalle, bDetalleBalanceGastos, bVerRecibo;
 
 void initButtons() {
-  buttons = new Button[49];
+  buttons = new Button[51];
   buttons[0] = new Button("Principal", 850, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
@@ -51,8 +51,8 @@ void initButtons() {
   buttons[13] = new Button("Ayuntamiento de Bargas", 835, bannerHeight+200+(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
   buttons[14] = new Button("Web Cofrade", 835, bannerHeight+200+2*(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
   buttons[15] = new Button("Otras hermandades", 835, bannerHeight+200+3*(20+buttonEnlaceH), buttonEnlaceW, buttonEnlaceH);
-  buttons[16] = new Button("Balance de ingresos y gastos", 825, 200, 400, 50);
-  buttons[17] = new Button("Presupuesto", 825, 275, 400, 50);
+  buttons[16] = new Button("Balance de ingresos y gastos", menuWidth+50, 250, 450, 100);
+  buttons[17] = new Button("Presupuesto", menuWidth+550, 250, 450, 100);
   buttons[18] = new Button("PREV", 1080, 680, 150, 30);
   buttons[19] = new Button("NEXT", 1080, 720, 150, 30);
   buttons[20] = new Button("Añadir concepto", 1080, 170, 150, 40);
@@ -84,6 +84,8 @@ void initButtons() {
   buttons[47] = new Button("Siguiente", (2*menuWidth)+780, primerIconY+10, 80, 50);
   buttons[46] = new Button("Anterior", (2*menuWidth)+700, primerIconY+10, 80, 50);
   buttons[48] = new Button("Aceptar", 641+menuWidth, 20+bannerHeight, 403, 40);
+  buttons[49] = new Button("Detalle", 1080, 470, 150, 40);
+  buttons[50] = new Button("Ver recibo", 780, 560, 465, 45);
 
   bPrincipal = buttons[0];
   bInicioSesion = buttons[1];
@@ -134,6 +136,8 @@ void initButtons() {
   bMesAnteriorAviso = buttons[46];
   bMesPosteriorAviso = buttons[47];
   bAceptarCensoDetalle = buttons[48];
+  bDetalleBalanceGastos = buttons[49];
+  bVerRecibo = buttons[50];
 }
 
 //Desactivar todos los botones
@@ -427,28 +431,6 @@ void displayCalendarioEventos() {
   cEventos.display();
 }
 
-//LinesDiagram
-
-LinesDiagram ldIngresos;
-
-// Dades del Diagrama (etiquetes)
-String[] textos  = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
-
-// Dades del Diagrama (valors)
-float[] values  = {400, 600, 100, 300, 55, 100, 90, 220, 186, 400, 600, 10 };
-
-// Color de la línia
-color colorLine = color(#401E3A);
-
-void initLinesDiagram() {
-  ldIngresos = new LinesDiagram(menuWidth+50, bannerHeight+50, (width/2)-100, (height/2)-100);
-
-  // Configuració de Dades (textos, valors, colors)
-  ldIngresos.setTexts(textos);
-  ldIngresos.setValues(values);
-  ldIngresos.setColors(colorLine);
-}
 
 //BarsDiagram
 
@@ -460,7 +442,7 @@ color[] colorsbd = {color (64, 30, 58), color (150, 13, 15),
   color(255, 0, 0), color(0, 255, 0)};
 
 void initBarsDiagram() {
-  gastos = new BarsDiagram(870, 520, 350, 200);
+  gastos = new BarsDiagram(width/2-175, 400, 550, 300);
 
   // Configuración de datis (textos, valores, colores)
   gastos.setTexts(textosbd);
@@ -840,7 +822,7 @@ void initPagedCard() {
   pcAvisos.setDimensions(menuWidth+20, primerIconY+(iconHeight-50), ((1280-menuWidth)/2)-10, iconHeight*4-iconHeight);
   pcAvisos.setData(getInfoTablaAviso());
   pcAvisos.setCards();
-  pcAvisosPrincipal = new PagedCard(8);
+  pcAvisosPrincipal = new PagedCard(5);
   pcAvisosPrincipal.setDimensions(menuWidth+540, bannerHeight+30, 520, 550);
   pcAvisosPrincipal.setData(getInfoTablaAviso());
   pcAvisosPrincipal.setCards();

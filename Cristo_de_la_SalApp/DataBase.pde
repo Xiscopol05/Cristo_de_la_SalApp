@@ -248,7 +248,7 @@ String[][] getInfoTablaMovimientos(String tipoMov, int numFilas) {
   while (msql.next()) {
     data[nr][0] = msql.getString("codigo");
     data[nr][1] = msql.getString("concepto");
-    data[nr][2] = String.valueOf(msql.getFloat("cantidad"));
+    data[nr][2] = String.valueOf(msql.getFloat("cantidad")+" €");
     nr++;
   }
   return data;
@@ -372,3 +372,49 @@ String [] getInfoAvisoDetalle (int idAviso) {
   }
   return data;
 }
+
+// Obté informació de los detalles de la tabla Balance
+String[][] getInfoBalanceDetalle(String titulo) {
+  int numRows = getNumRowsTabla("movimiento");
+  String[][] data = new String[numRows][3];
+  int nr=0;
+  msql.query( "SELECT m.* FROM movimiento m INNER JOIN tipo_mov t ON m.tipo_mov_idtipo_mov = t.idtipo_mov WHERE t.nombre= '"+titulo+"'");
+  while (msql.next()) {
+    data[nr][0] = " ";
+    data[nr][1] = msql.getString("titulo");
+    data[nr][2] = String.valueOf(msql.getFloat("cantidad")+" €");
+    nr++;
+  }
+  return data;
+}
+String[] getHeadersTablaDetalleMovimientos(String tipoMov) {
+  String q = "SELECT CONCAT(UPPER(SUBSTRING(c.nombre, 1, 1)) ,'.', t.idtipo_mov) AS codigo, t.nombre AS concepto, SUM(m.cantidad) AS cantidad FROM movimiento m, tipo_mov t, categoria_mov c WHERE m.tipo_mov_idtipo_mov=t.idtipo_mov AND t.categoria=c.idcategoria_mov AND t.nombre= '"+tipoMov+"' GROUP BY m.tipo_mov_idtipo_mov, t.categoria ORDER BY t.idtipo_mov ASC";
+  String[] data = new String[3];
+  msql.query(q);
+  if (msql.next()) {
+    data[0] = msql.getString("codigo");
+    data[1] = msql.getString("concepto");
+    data[2] = String.valueOf(msql.getFloat("cantidad")+" €");
+  } else {
+    data[0] = "Selecciona un concepto";
+    data[1] = "Selecciona un concepto para visualizar su contenido";
+    data[2] = " ";
+  }
+  return data;
+}
+
+/*String[] getMovimientosDetallados(String tituloMovimiento) {
+  String q = "SELECT * FROM `movimiento` WHERE titulo = "Donaciones 2021";";
+  String[] data = new String[3];
+  msql.query(q);
+  if (msql.next()) {
+    data[0] = msql.getString("codigo");
+    data[1] = msql.getString("concepto");
+    data[2] = String.valueOf(msql.getFloat("cantidad")+" €");
+  } else {
+    data[0] = "Selecciona un concepto";
+    data[1] = "Selecciona un concepto para visualizar su contenido";
+    data[2] = " ";
+  }
+  return data;
+}*/

@@ -85,8 +85,6 @@ void mousePressed() {
     pantalla = PANTALLA.CENSO;
   } else if (itbPerfilPersonal.mouseOverButton() && itbPerfilPersonal.enabled) {
     pantalla = PANTALLA.CENSO_DETALLE;
-  } else if (bDetalleBalance.mouseOverButton() && bDetalleBalance.enabled) {
-    pantalla = PANTALLA.CONTABILIDAD_DETALLEBALANCE;
   } else if (bFicha.mouseOverButton() && bFicha.enabled && pantalla == PANTALLA.CENSO_NUEVOHERMANO) {
     selectInput("Selecciona un fitxer ...", "fitxaInscripcionSelected");
   } else if (bAñadirRecibo.mouseOverButton() && bAñadirRecibo.enabled && pantalla == PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO) {
@@ -126,7 +124,7 @@ void mousePressed() {
     pantalla = PANTALLA.AVISOS_NUEVOAVISO;
   } else if (bModificarAviso.mouseOverButton() && bModificarAviso.enabled) {
     pantalla = PANTALLA.AVISOS_NUEVOAVISO;
-  } else if (bDetalleAviso.mouseOverButton() && bDetalleAviso.enabled) {  
+  } else if (bDetalleAviso.mouseOverButton() && bDetalleAviso.enabled) {
     String[] info = getInfoAvisoDetalle (pcAvisos.selectedCard+1);
     printArray(info);
     tiTituloDetalleAviso.text = info[0];
@@ -170,6 +168,41 @@ void mousePressed() {
     stCenso.setData(info);
     stCenso.setColumnWidths(colWidthsCenso);
     stCenso.setColumnMaxChars(maxCharsCenso);
+  } else if (bDetalleBalanceGastos.mouseOverButton()&& bDetalleBalanceGastos.enabled) {
+    String [] info = stGastos.getSelectedInfo();
+    String [][] infoDet = getInfoBalanceDetalle(info[1]);
+    String [] infoHeaders = getHeadersTablaDetalleMovimientos(info[1]);
+    printArray(infoHeaders);
+    printArray(infoDet[1]);
+
+    stDetalleItem = new SelectTable(filasDetalleItem, columnasDetalleItem, 45+menuWidth, 220+bannerHeight, 1000, 240);
+    stDetalleItem.setHeaders(infoHeaders);
+    stDetalleItem.setData(infoDet);
+    stDetalleItem.setColumnWidths(colWidthsDetalleItem);
+    stDetalleItem.setColumnMaxChars(maxCharsDetalleItem);
+    tDetalleItem = new Table(1, 3);
+    tDetalleItem.setHeaders(infoHeaders);
+    //tDetalleItem.setData(info);
+    tDetalleItem.setColumnWidths(colWidths);
+    pantalla = PANTALLA.CONTABILIDAD_DETALLEBALANCE;
+  }
+  else if (bDetalleBalance.mouseOverButton()&& bDetalleBalance.enabled) {
+    String [] info = stBalanceIngresos.getSelectedInfo();
+    String [][] infoDet = getInfoBalanceDetalle(info[1]);
+    String [] infoHeaders = getHeadersTablaDetalleMovimientos(info[1]);
+    printArray(infoHeaders);
+    printArray(infoDet[1]);
+
+    stDetalleItem = new SelectTable(filasDetalleItem, columnasDetalleItem, 45+menuWidth, 220+bannerHeight, 1000, 240);
+    stDetalleItem.setHeaders(infoHeaders);
+    stDetalleItem.setData(infoDet);
+    stDetalleItem.setColumnWidths(colWidthsDetalleItem);
+    stDetalleItem.setColumnMaxChars(maxCharsDetalleItem);
+    tDetalleItem = new Table(1, 3);
+    tDetalleItem.setHeaders(infoHeaders);
+    //tDetalleItem.setData(info);
+    tDetalleItem.setColumnWidths(colWidths);
+    pantalla = PANTALLA.CONTABILIDAD_DETALLEBALANCE;
   }
 
   userText.isPressed();
@@ -269,8 +302,6 @@ void mousePressed() {
     stArchivo.setColumnWidths(colWidthsArchivo);
     stArchivo.setColumnMaxChars(maxCharsArchivo);
   }
-
-
 
 
 

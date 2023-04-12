@@ -12,7 +12,7 @@ enum PANTALLA {
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.AVISOS;
+PANTALLA pantalla =PANTALLA.CONTABILIDAD;
 
 boolean logged= false;
 
@@ -20,9 +20,10 @@ String userNameAdmin = "admin";
 String userNameUser = "user";
 
 boolean admin= true;
+float estadoDeCuentas;
+SelectTable activeTable = null;
 
 
-float estadoDeCuentas=3.0;
 int lastKeyCodePressed;
 
 
