@@ -52,7 +52,15 @@ void mousePressed() {
     pantalla = PANTALLA.CENSO_NUEVOHERMANO;
   } else if (bAñadirConcepto.mouseOverButton() && bAñadirConcepto.enabled && admin == true) {
     pantalla = PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO;
+  } else if (bAñadirRecibo.mouseOverButton() && bAñadirRecibo.enabled && pantalla == PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO) {
+    selectInput("Selecciona un fitxer ...", "reciboMovimiento");
   } else if (bAceptarConcepto.mouseOverButton() && bAceptarConcepto.enabled) {
+    String titulo = String.valueOf(tfTitulo.getValue());
+    String fechamovimiento= formataFecha2(String.valueOf(dataCalendariMovimiento));
+    String cantidad = String.valueOf(tfCantidad.getValue());
+    String documento = titol;
+    String nombreTipoMov= stlTipoConcepto.selectedValue;
+    insertNuevoMovimiento( titulo, fechamovimiento, cantidad, documento, nombreTipoMov);
     pantalla = PANTALLA.CONTABILIDAD_BALANCE;
   } else if (bDetalle.mouseOverButton() && bDetalle.enabled && pantalla == PANTALLA.CENSO) {
     String[] info = stCenso.getSelectedInfo();
@@ -84,15 +92,44 @@ void mousePressed() {
   } else if ( bAceptarCenso.mouseOverButton() && bAceptarCenso.enabled && pantalla == PANTALLA.CENSO_NUEVOHERMANO) {
     pantalla = PANTALLA.CENSO;
   } else if (itbPerfilPersonal.mouseOverButton() && itbPerfilPersonal.enabled) {
+    String [] infoH = getInfoTablaHermano(userText.getValue());
+    printArray(infoH);
+    tiNombre.text= infoH[2];
+    tiApellidos.text = infoH[3];
+    tiDNI.text = infoH[5];
+    tiCalle.text = infoH[6];
+    tiFechaNacimiento.text = infoH[4];
+    tiFechaAlta.text = infoH[21];
+    tiNumero.text = infoH[7];
+    tiPiso.text = infoH[8];
+    tiLocalidad.text = infoH[9];
+    tiProvincia.text = infoH[10];
+    tiTelefono.text = infoH[11];
+    tiBanco.text = infoH[13];
+    tiTitular.text = infoH[14];
+    tiDNITitular.text = infoH[15];
+    tiIBAN.text = infoH[16];
+    tiEntidad.text = infoH[17];
+    tiOficina.text = infoH[18];
+    tiDigitoControl.text = infoH[19];
+    tiNumeroCuenta.text = infoH[20];
+    tiCorreoElectronico.text = infoH[12];
     pantalla = PANTALLA.CENSO_DETALLE;
   } else if (bFicha.mouseOverButton() && bFicha.enabled && pantalla == PANTALLA.CENSO_NUEVOHERMANO) {
     selectInput("Selecciona un fitxer ...", "fitxaInscripcionSelected");
-  } else if (bAñadirRecibo.mouseOverButton() && bAñadirRecibo.enabled && pantalla == PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO) {
-    selectInput("Selecciona un fitxer ...", "fileSelected");
   } else if (bRecuerdos.mouseOverButton() && bRecuerdos.enabled && pantalla == PANTALLA.ENLACES) {
     launch(ruta+titulo2);
-  } else if (bDetalleConcepto.mouseOverButton() && bDetalleConcepto.enabled) {
+  } else if (bDetalleConcepto.mouseOverButton() && bDetalleConcepto.enabled && stDetalleItem.selectedRow > -1 ) {
+    String [] info = stDetalleItem.getSelectedInfo();
+    String [] infoMovimiento = getMovimientosDetallados(info[1]);
+    printArray(infoMovimiento);
+    tiTitulo.text = infoMovimiento[0];
+    tiCantidad.text = infoMovimiento[2];
+    tiFechaMovimiento.text = infoMovimiento[1];
+    tiTipo.text = infoMovimiento[3];
     pantalla =  PANTALLA.CONTABILIDAD_DETALLEMOVIMIENTO;
+  } else if (bVerRecibo.mouseOverButton() && bVerRecibo.enabled) {
+    launch(ruta+recibo);
   } else if (bPrevArchivo.mouseOverButton() && bPrevArchivo.enabled) {
     stArchivo.prevPage();
   } else if (bNextArchivo.mouseOverButton() && bNextArchivo.enabled) {
@@ -168,13 +205,19 @@ void mousePressed() {
     stCenso.setData(info);
     stCenso.setColumnWidths(colWidthsCenso);
     stCenso.setColumnMaxChars(maxCharsCenso);
-  } else if (bDetalleBalanceGastos.mouseOverButton()&& bDetalleBalanceGastos.enabled) {
+  } else if (bBuscarArchivo.mouseOverButton()&& bBuscarArchivo.enabled) {
+    String [][] info = getInfoArchivoBuscar(buscarArchivo.getValue());
+    stArchivo = new SelectTable(filasArchivo, columnasArchivo, 20+menuWidth, 285, 1280-menuWidth-40, 410);
+    stArchivo.setHeaders(headersArchivo);
+    stArchivo.setData(info);
+    stArchivo.setColumnWidths(colWidthsArchivo);
+    stArchivo.setColumnMaxChars(maxCharsArchivo);
+  } else if (bDetalleBalanceGastos.mouseOverButton()&& bDetalleBalanceGastos.enabled && stGastos.selectedRow > -1) {
     String [] info = stGastos.getSelectedInfo();
     String [][] infoDet = getInfoBalanceDetalle(info[1]);
     String [] infoHeaders = getHeadersTablaDetalleMovimientos(info[1]);
     printArray(infoHeaders);
     printArray(infoDet[1]);
-
     stDetalleItem = new SelectTable(filasDetalleItem, columnasDetalleItem, 45+menuWidth, 220+bannerHeight, 1000, 240);
     stDetalleItem.setHeaders(infoHeaders);
     stDetalleItem.setData(infoDet);
@@ -185,8 +228,7 @@ void mousePressed() {
     //tDetalleItem.setData(info);
     tDetalleItem.setColumnWidths(colWidths);
     pantalla = PANTALLA.CONTABILIDAD_DETALLEBALANCE;
-  }
-  else if (bDetalleBalance.mouseOverButton()&& bDetalleBalance.enabled) {
+  } else if (bDetalleBalance.mouseOverButton()&& bDetalleBalance.enabled && stBalanceIngresos.selectedRow > -1 ) {
     String [] info = stBalanceIngresos.getSelectedInfo();
     String [][] infoDet = getInfoBalanceDetalle(info[1]);
     String [] infoHeaders = getHeadersTablaDetalleMovimientos(info[1]);
@@ -204,53 +246,6 @@ void mousePressed() {
     tDetalleItem.setColumnWidths(colWidths);
     pantalla = PANTALLA.CONTABILIDAD_DETALLEBALANCE;
   }
-
-  userText.isPressed();
-  passText.isPressed();
-  buscar.isPressed();
-  tfNombre.isPressed();
-  tfApellidos.isPressed();
-  tfDNI.isPressed();
-  tfCalle.isPressed();
-  tfNumero.isPressed();
-  tfPiso.isPressed();
-  tfLocalidad.isPressed();
-  tfProvincia.isPressed();
-  tfTelefono.isPressed();
-  tfCorreoElectronico.isPressed();
-  tfBanco.isPressed();
-  tfTitular.isPressed();
-  tfDNITitular.isPressed();
-  tfIBAN.isPressed();
-  tfEntidad.isPressed();
-  tfOficina.isPressed();
-  tfDigitoControl.isPressed();
-  tfNumeroCuenta.isPressed();
-  tfTitulo.isPressed();
-  tfCantidad.isPressed();
-  tfTituloArchivo.isPressed();
-  tfTituloAviso.isPressed();
-  tfTituloEvento.isPressed();
-  tfAñoDatacion.isPressed();
-  taNuevoAviso.isPressed();
-  taNuevoEvento.isPressed();
-  cEventos.checkButtons();
-
-  if (sCategoriaArchivo.mouseOverSelect() && sCategoriaArchivo.enabled) {
-    if (!sCategoriaArchivo.collapsed) {
-      sCategoriaArchivo.update();      // Actualitzar valor
-    }
-    sCategoriaArchivo.toggle();        // Plegar o desplegar
-  }
-  stCenso.checkSelections();
-  stGastos.checkSelections();
-  stGastosPresupuesto.checkSelections();
-  stBalanceIngresos.checkSelections();
-  stDetalleItem.checkSelections();
-  stArchivo.checkSelections();
-
-
-
 
   if (bAceptarCenso.mouseOverButton() && bAceptarCenso.enabled) {
     // Agafar els valors dels camps del formulari
@@ -301,7 +296,61 @@ void mousePressed() {
     stArchivo.setData(getInfoTablaArchivo());
     stArchivo.setColumnWidths(colWidthsArchivo);
     stArchivo.setColumnMaxChars(maxCharsArchivo);
+    pantalla = PANTALLA.ARCHIVO;
+  } else if (bAceptarArchivo.mouseOverButton() && bAceptarArchivo.enabled && pantalla == PANTALLA.ARCHIVO_DETALLE) {
+    pantalla = PANTALLA.ARCHIVO;
   }
+
+  userText.isPressed();
+  passText.isPressed();
+  buscar.isPressed();
+  tfNombre.isPressed();
+  tfApellidos.isPressed();
+  tfDNI.isPressed();
+  tfCalle.isPressed();
+  tfNumero.isPressed();
+  tfPiso.isPressed();
+  tfLocalidad.isPressed();
+  tfProvincia.isPressed();
+  tfTelefono.isPressed();
+  tfCorreoElectronico.isPressed();
+  tfBanco.isPressed();
+  tfTitular.isPressed();
+  tfDNITitular.isPressed();
+  tfIBAN.isPressed();
+  tfEntidad.isPressed();
+  tfOficina.isPressed();
+  tfDigitoControl.isPressed();
+  tfNumeroCuenta.isPressed();
+  tfTitulo.isPressed();
+  tfCantidad.isPressed();
+  tfTituloArchivo.isPressed();
+  tfTituloAviso.isPressed();
+  tfTituloEvento.isPressed();
+  tfAñoDatacion.isPressed();
+  taNuevoAviso.isPressed();
+  taNuevoEvento.isPressed();
+  cEventos.checkButtons();
+  buscarArchivo.isPressed();
+
+  if (sCategoriaArchivo.mouseOverSelect() && sCategoriaArchivo.enabled) {
+    if (!sCategoriaArchivo.collapsed) {
+      sCategoriaArchivo.update();      // Actualitzar valor
+    }
+    sCategoriaArchivo.toggle();        // Plegar o desplegar
+  }
+  stCenso.checkSelections();
+  stGastos.checkSelections();
+  stGastosPresupuesto.checkSelections();
+  stBalanceIngresos.checkSelections();
+  stDetalleItem.checkSelections();
+  stArchivo.checkSelections();
+
+
+
+
+
+
 
 
 
@@ -395,9 +444,7 @@ void mousePressed() {
 
   stlTipoConcepto.mouseOn();
 
-  if (pantalla == PANTALLA.PRINCIPAL) {
-    pcAvisosPrincipal.checkCardSelection();
-  }
+
 
   if (PopUpinicioSesion.bAceptar.mouseOverButton() && PopUpinicioSesion.bAceptar.enabled) {
     pantalla = PANTALLA.PRINCIPAL;

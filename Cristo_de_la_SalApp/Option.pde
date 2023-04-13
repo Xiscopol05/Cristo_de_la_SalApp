@@ -1,5 +1,3 @@
-// Classe Option
-
 class Option {
   
  // Propietats d'un option:
@@ -19,7 +17,7 @@ class Option {
    this.h = h;
    this.enabled = true;
    fillColor = color(255);
-   fillColorOver = color(155, 155, 155);
+   fillColorOver = color(getColorAt(3));
    fillColorDisabled = color(150);
    strokeColor = color(0);
  }
@@ -34,22 +32,34 @@ class Option {
  void display(){
    pushStyle();
    if(!enabled){
-     fill(fillColorDisabled);  // Color desabilitat
+     fill(fillColorDisabled);  // Color deshabilitado
    }
    else if(mouseOverButton()){
-     fill(fillColorOver);      // Color quan ratolí a sobre
+     fill(fillColorOver);      // Color cuando el ratón está encima
    }
    else{
-     fill(fillColor);          // Color actiu però ratolí fora
+     fill(fillColor);          // Color activo pero el ratón está fuera
    }
    noStroke();
-   rect(this.x, this.y, this.w, this.h);    // Rectangle de l'option
    
-   // Text (color, alineació i mida)
-   fill(0); textAlign(CENTER); textSize(34);
-   text(textBoto, this.x + this.w/2, this.y + this.h/2 + 10);
+   // Dibujar borde alrededor de la opción
+   stroke(strokeColor);
+   strokeWeight(2);
+   rect(x, y, w, h, 5);
+   
+   // Texto (color, alineación y tamaño)
+   fill(0); 
+   textAlign(CENTER, CENTER); 
+   textSize(20);
+   String truncatedText = textBoto;
+   while (textWidth(truncatedText) > w - 10) {
+     truncatedText = truncatedText.substring(0, truncatedText.length() - 1);
+   }
+   text(truncatedText, x + w/2, y + h/2);
+   
    popStyle();
  }
+
  
  // Indica si el cursor està sobre l'option
  boolean mouseOverButton(){

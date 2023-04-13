@@ -31,6 +31,7 @@ void keyPressed() {
     //CONTABILIDAD Añadir Concepto
   } else if (pantalla == PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO) {
     tfTitulo.keyPressed(key, (int)keyCode);
+    tfCantidad.keyPressed(key, (int)keyCode);
   }
   //Archivo Nuevo
   else if (pantalla == PANTALLA.ARCHIVO_NUEVO) {
@@ -46,6 +47,10 @@ void keyPressed() {
   else if (pantalla == PANTALLA.AVISOS_NUEVOEVENTO) {
     tfTituloEvento.keyPressed(key, (int)keyCode);
     taNuevoEvento.keyPressed(key, (int)keyCode);
+  } 
+  //ARCHIVO
+  else if (pantalla == PANTALLA.ARCHIVO) {
+    buscarArchivo.keyPressed(key, (int)keyCode);
   }
   comprovaLogin();
   lastKeyCodePressed= (int)keyCode;

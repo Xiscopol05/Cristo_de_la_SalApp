@@ -31,10 +31,10 @@ Button bAñadir, bModificar, bDetalle, bAceptarCenso, bFicha, bPrevCenso, bNextC
 Button bAceptarConcepto, bCalendario, bCalendarioAlta, bCalendarioMovimiento, bAñadirRecibo, bDetalleBalance;
 Button bPrevDetalle, bNextDetalle, bPrevArchivo, bNextArchivo, bAceptarArchivo, bCalendarioArchivo, bAceptarAvisosAlertas;
 Button bDetalleConcepto, bCalendarioEvento, bPrevAviso, bNextAviso, bAñadirAviso, bModificarAviso, bDetalleAviso;
-Button bAñadirEvento, bModificarEvento, bDetalleEvento, bRecuerdos, bMesAnteriorAviso, bMesPosteriorAviso, bAceptarCensoDetalle, bDetalleBalanceGastos, bVerRecibo;
+Button bAñadirEvento, bModificarEvento, bDetalleEvento, bRecuerdos, bMesAnteriorAviso, bMesPosteriorAviso, bAceptarCensoDetalle, bDetalleBalanceGastos, bVerRecibo, bBuscarArchivo;
 
 void initButtons() {
-  buttons = new Button[51];
+  buttons = new Button[52];
   buttons[0] = new Button("Principal", 850, (bannerHeight/2)-13.5, 100, 25);
   buttons[1] = new Button("Iniciar sesión", 320+(marcoWidth/2)-75, 600, 150, 30);
   buttons[2] = new Button("Añadir", menuWidth+20, primerIconY+20, 200, 50);
@@ -86,6 +86,7 @@ void initButtons() {
   buttons[48] = new Button("Aceptar", 641+menuWidth, 20+bannerHeight, 403, 40);
   buttons[49] = new Button("Detalle", 1080, 470, 150, 40);
   buttons[50] = new Button("Ver recibo", 780, 560, 465, 45);
+  buttons[51] = new Button("Buscar", (3*menuWidth)+20, primerIconY+20, 200, 50);
 
   bPrincipal = buttons[0];
   bInicioSesion = buttons[1];
@@ -138,6 +139,7 @@ void initButtons() {
   bAceptarCensoDetalle = buttons[48];
   bDetalleBalanceGastos = buttons[49];
   bVerRecibo = buttons[50];
+  bBuscarArchivo = buttons[51];
 }
 
 //Desactivar todos los botones
@@ -152,14 +154,21 @@ void disableButtons() {
   itbEnlaces.setEnabled(false);
   itbPerfilPersonal.setEnabled(false);
   itbInsertarArchivo .setEnabled(false);
- itbVerArchivoArchivo.setEnabled(false);
+  itbVerArchivoArchivo.setEnabled(false);
   PopUpinicioSesion.bAceptar.setEnabled(false);
 }
 
 void enableButtonsTabla() {
-  bAñadir.setEnabled(true);
-  bModificar.setEnabled(true);
+  if (admin == true) {
+    bAñadir.setEnabled(true);
+  }
   bDetalle.setEnabled(true);
+  if (pantalla == PANTALLA.CENSO) {
+    bModificar.setEnabled(true);
+  }
+  if (pantalla == PANTALLA.ARCHIVO) {
+    bBuscarArchivo.setEnabled(true);
+  }
 }
 
 void enableButtonsPagedTable() {
@@ -174,7 +183,12 @@ void enableButtonsContabilidad() {
 
 void displayButtonsTabla() {
   bAñadir.display();
-  bModificar.display();
+  if (pantalla == PANTALLA.CENSO) {
+    bModificar.display();
+  }
+  if (pantalla == PANTALLA.ARCHIVO) {
+    bBuscarArchivo.display();
+  }
   bDetalle.display();
 }
 
@@ -225,7 +239,7 @@ void displayButtonsEnlaces() {
 
 // Declaració de les variables
 TextField userText, passText;
-TextField buscar;
+TextField buscar, buscarArchivo;
 TextField tfNombre, tfApellidos, tfDNI, tfCalle, tfNumero, tfPiso, tfLocalidad, tfProvincia, tfTelefono, tfCorreoElectronico;
 TextField tfBanco, tfTitular, tfDNITitular, tfIBAN, tfEntidad, tfOficina, tfDigitoControl, tfNumeroCuenta;
 TextField tfTitulo, tfCantidad;
@@ -259,6 +273,7 @@ void initTextField() {
   tfTituloAviso = new TextField("Título", 27+menuWidth, 190+bannerHeight, 1020, 45);
   tfTituloEvento = new TextField("Título", 27+menuWidth, 190+bannerHeight, 1020, 45);
   tfAñoDatacion  = new TextField("Año", 400, 310+bannerHeight, 100, 45);
+  buscarArchivo = new TextField("", 850, primerIconY+25, 410, 35);
 }
 
 void displayInicioSesiontf() {
@@ -326,7 +341,7 @@ void initTextInfo() {
   tiTituloArchivo  = new TextInfo("Título", 27+menuWidth, 247+bannerHeight, 1020, 45);
   tiCategoriaArchivo  = new TextInfo("Título", 580+menuWidth, 310+bannerHeight, selectArchivoW, selectArchivoH);
   tiAñoDatacion = new TextInfo("Título", 380, 310+bannerHeight, 100, 45);
-  tiFechaEventoDetalle = new TextInfo ("Fecha",680+menuWidth, 565+bannerHeight, 200, 45);
+  tiFechaEventoDetalle = new TextInfo ("Fecha", 680+menuWidth, 565+bannerHeight, 200, 45);
 
   popMatrix();
 }
@@ -506,12 +521,10 @@ void initSelect() {
 SelectTextList stlTipoConcepto;
 
 String selectedCountry;
-String[][] selectValuesConcepto = {{"0", "I.1"}, {"1", "I.2"}, {"2", "I.3"}, {"3", "G.1"}, {"4", "G.2"}, {"5", "G.3"},
-  {"6", "G.4"}, {"7", "G.5"}, {"8", "G.6"}, {"9", "G.7"}, {"10", "G.8"}, {"11", "G.9"}, {"12", "G.10"},
-  {"13", "G.11"}, {"14", "G.12"}, {"15", "G.13"}, {"16", "G.14"}, {"17", "G.15"}, {"18", "G.16"}, {"19", "G.17"}, {"20", "G.18"} };
+//String[][] selectValuesConcepto = getTipoMovimiento();
 
 void initSelectTextList() {
-  stlTipoConcepto = new SelectTextList(selectValuesConcepto, 780, 420, selectConceptoW-50, selectConceptoH);
+  stlTipoConcepto = new SelectTextList(getTipoMovimiento(), 780, 420, selectConceptoW-50, selectConceptoH);
 }
 
 //SelectTable
@@ -643,6 +656,8 @@ String[][] infoDetalleItem = {
 
 int[] maxCharsBalanceIngresos = {10, 35, 15};
 int[] maxCharsDetalleItem = {10, 50, 20};
+String [] infoMovimiento;
+
 
 void initSelectTable() {
   stBalanceIngresos = new SelectTable(filasBalanceIngresos, columnasBalanceIngresos, 250, 210, 800, 240);
@@ -759,7 +774,8 @@ void displaycpFechaMovimiento() {
   fill(0);
   textAlign(LEFT);
   textSize(24);
-  text(dataCalendariMovimiento, 535, 410+30); //SE PINTA EL MATEIX QUE A dataCalendari!!
+  text(dataCalendariMovimiento, 535, 410+30);
+  cpFechaMovimiento.display();
   popStyle();
 }
 
