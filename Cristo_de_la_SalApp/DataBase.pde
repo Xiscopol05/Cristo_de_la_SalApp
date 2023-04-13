@@ -24,7 +24,7 @@ void connexionBBDD() {
 }
 
 boolean isValidated(String usuario, String password) {
-  msql.query( "SELECT count(*) AS n FROM `user` WHERE `numhermano` = %s AND `password` LIKE '%s'", usuario, password );
+  msql.query( "SELECT count(*) AS n FROM `user` WHERE `numhermano` = '"+usuario+"' AND `password` LIKE '"+password+"'");
   msql.next();
   int numRows = msql.getInt("n");
   if (numRows == 1) {
@@ -35,7 +35,7 @@ boolean isValidated(String usuario, String password) {
 }
 
 boolean isAdmin(String usuario) {
-  msql.query("SELECT count(*) AS n FROM `user` WHERE `role_id` = 1 AND `numhermano` = %s", usuario );
+  msql.query("SELECT count(*) AS n FROM `user` WHERE `role_id` = 1 AND `numhermano` = '"+usuario+"'");
   msql.next();
   int role = msql.getInt("n");
   if (role == 1) {
@@ -180,8 +180,9 @@ void insertInfoTablaHermano(String nombre, String apellidos, String fechanacimie
   String q3 = "INSERT INTO hermano (user_numhermano, user_role_id, nombre, apellidos, fechanacimiento, dni, calle, numerodireccion, piso, localidad, provincia, telefono, correoelectronico, banco, titular, dnititular, iban, entidad, oficina, digitocontrol, numerocuenta, fechaalta) VALUES ('"+numHermano+"','2', '"+sNombre+"','"+sApellidos+"','"+fechanacimiento+"','"+dni+"','"+calle+"','"+numerodireccion+"','"+piso+"','"+localidad+"','"+provincia+"','"+telefono+"','"+correoelectronico+"','"+banco+"','"+titular+"','"+dnititular+"','"+iban+"','"+entidad+"','"+oficina+"','"+digitocontrol+"','"+numerocuenta+"','"+fechaalta+"');";
   println(q2);
   println(q3);
-  msql.query(q3);
   msql.query(q2);
+  msql.next();
+  msql.query(q3);
   String ficha= numHermano+".pdf";
   copiar(rutaFitxer, rutaCopia, ficha);
 }
@@ -403,18 +404,86 @@ String[] getHeadersTablaDetalleMovimientos(String tipoMov) {
   return data;
 }
 
-/*String[] getMovimientosDetallados(String tituloMovimiento) {
-  String q = "SELECT * FROM `movimiento` WHERE titulo = "Donaciones 2021";";
-  String[] data = new String[3];
+String[] getMovimientosDetallados(String tituloMovimiento) {
+  String q = "SELECT m.titulo, m.fechamovimiento, m.cantidad, t.nombre, m.documento FROM movimiento m JOIN tipo_mov t ON m.tipo_mov_idtipo_mov = t.idtipo_mov WHERE m.titulo = '"+tituloMovimiento+"'";
+  String[] data = new String[5];
   msql.query(q);
   if (msql.next()) {
-    data[0] = msql.getString("codigo");
-    data[1] = msql.getString("concepto");
+    data[0] = msql.getString("titulo");
+    data[1] = formataFecha(String.valueOf(msql.getDate("fechamovimiento")));
     data[2] = String.valueOf(msql.getFloat("cantidad")+" €");
+    data[3] = msql.getString("t.nombre");
+    recibo = msql.getString("documento");
   } else {
-    data[0] = "Selecciona un concepto";
-    data[1] = "Selecciona un concepto para visualizar su contenido";
-    data[2] = " ";
+    data[0] = "Selecciona un concepto para visualizar su contenido";
+    data[1] = "Selecciona un concepto";
+    data[2] = "Selecciona un concepto";
+    data[3] = "Selecciona un concepto";
+    recibo = "";
   }
   return data;
-}*/
+}
+
+String [][] getTipoMovimiento() {
+  int numRows = getNumRowsTabla("tipo_mov");
+  String[][] data = new String[numRows][2];
+  int nr=0;
+  msql.query("SELECT `idtipo_mov`, `nombre` FROM `tipo_mov`");
+  while (msql.next()) {
+    data[nr][0] = String.valueOf(msql.getInt("idtipo_mov"));
+    data[nr][1] = msql.getString("nombre");
+    nr++;
+  }
+  return data;
+}
+
+void insertNuevoMovimiento(String titulo, String fechamovimiento, String cantidad, String documento, String nombreTipoMov) {
+  msql.query("SELECT `idtipo_mov` FROM `tipo_mov` WHERE `nombre` = '"+nombreTipoMov+"'");
+  if (msql.next()) { // avanzar al primer registro en el resultado
+    int tipo_mov_idtipo_mov = msql.getInt("idtipo_mov");
+    String q = "INSERT INTO `movimiento`(`titulo`, `fechamovimiento`, `cantidad`, `documento`, `tipo_mov_idtipo_mov`) VALUES ('"+titulo+"','"+fechamovimiento+"','"+cantidad+"','"+documento+"','"+tipo_mov_idtipo_mov+"')";
+    println(q);
+    msql.query(q);
+    copiar(rutaFitxer, rutaCopia, documento);
+  } else {
+    println("No se encontró el tipo de movimiento: "+nombreTipoMov);
+  }
+}
+
+String[][] getInfoArchivoBuscar(String buscar) {
+
+  String q2 = "SELECT COUNT(*) AS n FROM archivo WHERE titulo LIKE '%" + buscar + "%'";
+  int numRows = getNumRowsQuery(q2);
+  println("NR:" + numRows);
+
+  if (numRows > 0) {
+    String[][] data = new String[numRows][3];
+
+    String q = "SELECT archivo.titulo, archivo.datacion, tipo_arch.tipo " +
+               "FROM archivo " +
+               "JOIN tipo_arch ON archivo.tipo_arch_idtipo_arch = tipo_arch.idtipo_arch " +
+               "WHERE archivo.titulo LIKE '%" + buscar + "%'";
+
+    int nr = 0;
+    msql.query(q);
+    while (msql.next()) {
+      data[nr][0] = msql.getString("titulo");
+      data[nr][1] = String.valueOf(msql.getInt("datacion"));
+      data[nr][2] = msql.getString("tipo");
+      nr++;
+    }
+
+    return data;
+  } else {
+    String[][] array = new String[numRows][3];
+
+    // Rellenar el array con strings vacíos
+    for (int i = 0; i < 5; i++) {
+      for (int j = 0; j < 5; j++) {
+        array[i][j] = "";
+      }
+    }
+
+    return array;
+  }
+}

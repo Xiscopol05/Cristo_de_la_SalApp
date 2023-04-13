@@ -47,7 +47,7 @@ void dibujaPantallaPrincipal() {
   menu();
   tituloCarruselFotos();
   pcAvisosPrincipal.display();
-  //fila2();
+
 
   //display elementos GUI
   displayButtonsMenu();
@@ -102,7 +102,7 @@ void dibujaPantallaContabilidad() {
   textAlign(CENTER);
   textFont(getFontAt(1));
   fill(0);
-   estadoDeCuentas=getEstadoCuentas();
+  estadoDeCuentas=getEstadoCuentas();
   text("Estado de cuentas: " + estadoDeCuentas+ " €", width/2+(menuWidth/2), bannerHeight+100);
   popStyle();
 
@@ -134,6 +134,7 @@ void dibujaPantallaArchivo() {
 
   //display elementos GUI
   displayButtonsMenu();
+  buscarArchivo.display();
   displayButtonsTabla();
   displayButtonsPagedTableArchivo();
   popStyle();
@@ -151,11 +152,13 @@ void dibujaPantallaAvisos() {
   enableButtonsMenu();
   bPrevAviso.setEnabled(true);
   bNextAviso.setEnabled(true);
-  bAñadirAviso.setEnabled(true) ;
-  bModificarAviso.setEnabled(true);
+  if (admin == true) {
+    bAñadirAviso.setEnabled(true) ;
+    bModificarAviso.setEnabled(true);
+    bAñadirEvento.setEnabled(true);
+    bModificarEvento.setEnabled(true);
+  }
   bDetalleAviso.setEnabled(true);
-  bAñadirEvento.setEnabled(true);
-  bModificarEvento.setEnabled(true);
   bDetalleEvento.setEnabled(true);
   bMesAnteriorAviso.setEnabled(true);
   bMesPosteriorAviso.setEnabled(true);
@@ -284,9 +287,11 @@ void dibujaPantallaContabilidadBalance() {
   enableButtonsMenu();
   bPrevGastos.setEnabled(true);
   bNextGastos.setEnabled(true);
-  bAñadirConcepto.setEnabled(true);
-  bDetalleBalance.setEnabled(true);
-  bDetalleBalanceGastos.setEnabled(true);
+  if (admin == true) {
+    bAñadirConcepto.setEnabled(true);
+    bDetalleBalance.setEnabled(true);
+    bDetalleBalanceGastos.setEnabled(true);
+  }
   //dibujar elementos de la pantalla
   menu();
 
@@ -295,13 +300,17 @@ void dibujaPantallaContabilidadBalance() {
   displayButtonsMenu();
   titIngresos.display();
   titGastos.display();
-  bDetalleBalance.display();
   stBalanceIngresos.display();
+  if (admin == true) {
+    bDetalleBalance.display();
+  }
   stGastos.display();
   bPrevGastos.display();
   bNextGastos.display();
-  bAñadirConcepto.display();
-  bDetalleBalanceGastos.display();
+  if (admin == true) {
+    bDetalleBalanceGastos.display();
+    bAñadirConcepto.display();
+  }
   popStyle();
   popMatrix();
 }
@@ -332,7 +341,6 @@ void dibujaPantallaContabilidadPresupuesto() {
   stGastosPresupuesto.display();
   bPrevGastos.display();
   bNextGastos.display();
-  bAñadirConcepto.display();
   popStyle();
   popMatrix();
 }
@@ -375,6 +383,7 @@ void dibujaPantallaContabilidadAñadirConcepto() {
   textFont(getFontAt(7));
   stlTipoConcepto.display();
   popStyle();
+  bCalendarioMovimiento.display();
   displaycpFechaMovimiento();
   popMatrix();
 }
@@ -417,6 +426,7 @@ void dibujaPantallaContabilidadDetalleMovimiento() {
   enableButtonsMenu();
   bAceptarConcepto.setEnabled(true);
   bVerRecibo.setEnabled(true);
+
 
   //dibujar elementos de la pantalla
   menu();
@@ -482,6 +492,7 @@ void dibujaPantallaArchivoDetalle() {
   disableButtons();
   enableButtonsMenu();
   bAceptarArchivo.setEnabled(true);
+  itbVerArchivoArchivo.setEnabled(true);
 
   //dibujar elementos de la pantalla
   menu();
@@ -509,7 +520,7 @@ void dibujaPantallaAvisosNuevoAviso() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
-  
+
   bAceptarAvisosAlertas.setEnabled(true);
 
 
@@ -522,7 +533,7 @@ void dibujaPantallaAvisosNuevoAviso() {
   bAceptarAvisosAlertas.display();
   tfTituloAviso.display();
   taNuevoAviso.display();
-  
+
   popStyle();
   popMatrix();
 }
@@ -536,7 +547,7 @@ void dibujaPantallaAvisosDetalleAviso() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
-  
+
   bAceptarAvisosAlertas.setEnabled(true);
 
 
@@ -549,7 +560,7 @@ void dibujaPantallaAvisosDetalleAviso() {
   bAceptarAvisosAlertas.display();
   tiTituloDetalleAviso.display();
   tiDetalleAviso.display();
-  
+
   popStyle();
   popMatrix();
 }
@@ -563,7 +574,7 @@ void dibujaPantallaAvisosNuevoEvento() {
   //habilitar y deshabilitar botones
   disableButtons();
   enableButtonsMenu();
- 
+
   bAceptarAvisosAlertas.setEnabled(true);
   bCalendarioEvento.setEnabled(true);
 
@@ -580,7 +591,7 @@ void dibujaPantallaAvisosNuevoEvento() {
   bAceptarAvisosAlertas.display();
   tfTituloEvento.display();
   taNuevoEvento.display();
-  
+
   displaycpNuevoEvento();
   //tiDetalleEvento.display();
   popStyle();
