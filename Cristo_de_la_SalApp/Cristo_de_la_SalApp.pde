@@ -12,7 +12,7 @@ enum PANTALLA {
 };
 
 ///Pantalla actual
-PANTALLA pantalla =PANTALLA.PRINCIPAL;
+PANTALLA pantalla =PANTALLA.INICIO;
 
 boolean logged= false;
 

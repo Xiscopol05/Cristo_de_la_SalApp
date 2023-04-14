@@ -30,8 +30,10 @@ class TextInfo {
 
     textFont(getFontAt(5)); // Obtiene la fuente de texto correspondiente al índice y lo asigna al objeto
     fill(0);
+    if (text == null){
+    } else{
     text(this.text, x + 5, y + 10, w, h); // Dibuja el texto dentro del rectángulo
-
+    }
     popStyle(); // Recupera el estilo guardado
     popMatrix(); // Recupera la matriz guardada
   }
