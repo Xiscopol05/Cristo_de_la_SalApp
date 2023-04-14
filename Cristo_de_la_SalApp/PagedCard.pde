@@ -2,10 +2,10 @@
 class PagedCard {
 
 
-  String[][] cardsData;    // Dades de les Cards
+  String[][] cardsData;    // Datos de las Cards
   Card[] cards;            // Cards
   int numCards;            // Número total de Cards
-  int numCardsPage;        // Número de Cards en 1 Pàgina
+  int numCardsPage;        // Número de Cards en 1 Pagina
 
   int numPage;
   int numTotalPages;
@@ -22,9 +22,9 @@ class PagedCard {
   // Setters
 
   void setDimensions(float x, float y, float w, float h) {
-    this.x = x; 
+    this.x = x;
     this.y = y;
-    this.w = w; 
+    this.w = w;
     this.h = h;
   }
 
@@ -38,7 +38,7 @@ class PagedCard {
     cards = new Card[this.cardsData.length];
 
     for (int np=0; np<=numTotalPages; np++) {
-      
+
       int firstCardPage = numCardsPage*np;
       int lastCardPage  = numCardsPage*(np+1) - 1;
       float hCard = h / (float) numCardsPage;
@@ -67,11 +67,11 @@ class PagedCard {
     }
   }
 
-  // Dibuixa taula
+  // Dibuja tabla
   void display() {
     pushStyle();
 
-    // Dibuixa Cards corresponent a la Pàgina
+    // Dibuja Cards correspondientes a la Pàgina
     int firstCardPage = numCardsPage*numPage;
     int lastCardPage  = numCardsPage*(numPage+1) - 1;
     for (int i = firstCardPage; i <= lastCardPage; i++) {
@@ -81,9 +81,9 @@ class PagedCard {
     }
     popStyle();
   }
-  
-  void checkCardSelection(){
-    
+
+  void checkCardSelection() {
+
     boolean selected = false;
     int firstCardPage = numCardsPage*numPage;
     int lastCardPage  = numCardsPage*(numPage+1) - 1;
@@ -95,13 +95,13 @@ class PagedCard {
         break;
       }
     }
-    if(!selected){
+    if (!selected) {
       selectedCard = -1;
     }
   }
-  
-  boolean checkMouseOver(){
-    
+
+  boolean checkMouseOver() {
+
     int firstCardPage = numCardsPage*numPage;
     int lastCardPage  = numCardsPage*(numPage+1) - 1;
     for (int i = firstCardPage; i <= lastCardPage; i++) {
@@ -111,11 +111,12 @@ class PagedCard {
     }
     return false;
   }
-  
-  void printSelectedCard(){
-    if(selectedCard !=-1){
+
+  void printSelectedCard() {
+    if (selectedCard !=-1) {
       Card cSelected = cards[selectedCard];
-      fill(0); textSize(18);
+      fill(0);
+      textSize(18);
       text("Seleccionada: ", 900, 300);
       textSize(24);
       text(cSelected.title, 900, 340);

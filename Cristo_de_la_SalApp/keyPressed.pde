@@ -47,7 +47,7 @@ void keyPressed() {
   else if (pantalla == PANTALLA.AVISOS_NUEVOEVENTO) {
     tfTituloEvento.keyPressed(key, (int)keyCode);
     taNuevoEvento.keyPressed(key, (int)keyCode);
-  } 
+  }
   //ARCHIVO
   else if (pantalla == PANTALLA.ARCHIVO) {
     buscarArchivo.keyPressed(key, (int)keyCode);

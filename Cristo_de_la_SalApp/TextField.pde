@@ -1,8 +1,8 @@
-// Component Camp de Text
+// Componente Campo de Texto
 
 class TextField {
 
-  // Propietats del camp de text
+  // Propiedades del campo de texto
   int x, y, h, w;
 
   // Colors
@@ -12,7 +12,7 @@ class TextField {
   color borderColor = color(30, 30, 30);
   int borderWeight = 1;
 
-  // Text del camp
+  // Texto del campo
   String text = "";
   String textDefault = "";
   int textLength = 0;
@@ -44,7 +44,7 @@ class TextField {
   }
 
 
-  // Dibuixa el Camp de Text
+  // Dibuja el Camp de Text
   void display() {
 
     if (selected) {
@@ -99,11 +99,11 @@ class TextField {
       textLength--;
     }
   }
-  
+
   // Lleva tot el text
-   void removeAllText(){
-     this.text = "";
-   }
+  void removeAllText() {
+    this.text = "";
+  }
 
   // Indica si el ratolí està sobre el camp de text
   boolean mouseOverTextField() {

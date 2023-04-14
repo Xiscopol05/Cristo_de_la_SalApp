@@ -1,19 +1,19 @@
-// Component Camp de Text
+// Componente Campo de Texto
 
 class TextArea {
 
-  // Propietats del camp de text
+  // Propiedades del campo de texto
   int x, y, h, w;
   int numCols, numRows;
 
-  // Colors
+  // Colores
   color bgColor = color(getColorAt(5));
   color fgColor =color(0, 0, 0);
   color selectedColor = color(getColorAt(4));
   color borderColor = color(30, 30, 30);
   int borderWeight = 1;
 
-  // Text del camp
+  // Texto del campo
   String text = "";
   String[] lines;
   int textSize = 24;
@@ -32,7 +32,7 @@ class TextArea {
     this.lines = new String[nr];
   }
 
-  // Dibuixa el Camp de Text
+  // Dibuja el Campo de Texto
   void display() {
     pushStyle();
     if (selected) {
@@ -72,10 +72,10 @@ class TextArea {
     printArray(lines);
   }
 
-  
 
 
-  // Afegeix, lleva el text que es tecleja
+
+  // Añade y elimina el texto que se escribe
   void keyPressed(char key, int keyCode) {
     if (selected) {
       if (keyCode == (int)BACKSPACE) {
@@ -89,7 +89,7 @@ class TextArea {
     }
   }
 
-  // Afegeix la lletra c al final del text
+  // Añade la letra c al final del texto
   void addText(char c) {
     if (this.text.length() < this.numCols*this.numRows) {
       this.text += c;
@@ -98,7 +98,7 @@ class TextArea {
     updateLines();
   }
 
-  // Lleva la darrera lletra del text
+  // Quita la última letra del texto
   void removeText() {
     if (text.length()> 0) {
       text = text.substring(0, text.length()-1);
@@ -106,7 +106,7 @@ class TextArea {
     updateLines();
   }
 
-  // Indica si el ratolí està sobre el camp de text
+  // Indica si el ratón está sobre el campo de texto
   boolean mouseOverTextField() {
     if (mouseX >= this.x && mouseX <= this.x + this.w) {
       if (mouseY >= this.y && mouseY <= this.y + this.h) {
@@ -116,8 +116,8 @@ class TextArea {
     return false;
   }
 
-  // Selecciona el camp de text si pitjam a sobre
-  // Deselecciona el camp de text si pitjam a fora
+  // Selecciona el campo de texto si se pulsa encima
+  // Deselecciona el campo de texto si se pulsa fuera
   void isPressed() {
     if (mouseOverTextField()) {
       selected = true;
@@ -128,5 +128,5 @@ class TextArea {
 }
 
 String getText(TextArea textArea) {
-    return textArea.text;
-  }
+  return textArea.text;
+}

@@ -192,7 +192,7 @@ void displayButtonsTabla() {
   bDetalle.display();
 }
 
-// Dibuixa els botons
+// Dibuja els botons
 void displayButtonsPagedTableCenso() {
   bNextCenso.display();
   bPrevCenso.display();
@@ -785,7 +785,7 @@ Table tDetalleItem;
 // Número de files (capçalera inclosa) i columnes de la taula
 int filas = 1, columnas = 3;
 
-// Títols de les columnes
+// Títulos de les columnes
 String[] headers = {"G.1", "GASTOS SERVICIOS Y MANTENIMIENTO ERMITA", "-1332,05€"};
 
 // Amplades de les columnes

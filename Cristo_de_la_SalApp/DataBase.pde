@@ -1,24 +1,24 @@
 
-// Objecte de connexió a la BBDD
+// Objeto de conexión a la BBDD
 MySQL msql;
 
-// Paràmetres de la connexió
+// Parámetros de la conexión
 String user     = "admin2";
 String pass     = "12345";
 String database = "cristo";
 
 
-// Connexió
+// Conexión
 void connexionBBDD() {
 
   msql = new MySQL( this, "localhost:8889", database, user, pass );
 
-  // Si la connexió s'ha establert
+  // Si la conexión se ha establecido
   if (msql.connect()) {
-    // La connexió s'ha establert correctament
+    // La conexión se ha establecido correctamente
     println("Connexió establerta :)");
   } else {
-    // La connexió ha fallat!!!
+    // La conexión ha fallado!!!
     println("Error de Connexió :(");
   }
 }
@@ -45,7 +45,7 @@ boolean isAdmin(String usuario) {
   }
 }
 
-// Obté el número de files de la taula
+// Obtiene el número de filas de la tabla
 int getNumRowsTabla(String nombreTabla) {
   msql.query( "SELECT COUNT(*) AS n FROM %s", nombreTabla );
   msql.next();
@@ -53,7 +53,7 @@ int getNumRowsTabla(String nombreTabla) {
   return numRows;
 }
 
-// Obté el número de files de la query
+// Obtiene el número de filas de la query
 int getNumRowsQuery(String q) {
   msql.query( q);
   msql.next();
@@ -61,7 +61,7 @@ int getNumRowsQuery(String q) {
   return numRows;
 }
 
-// Obté informació de la taula Unitat
+// Obtiene la información de la tabla hermano
 String[][] getInfoTablaCenso() {
 
   int numRows = getNumRowsTabla("hermano");
@@ -80,7 +80,7 @@ String[][] getInfoTablaCenso() {
   return data;
 }
 
-// Obté informació de la taula Unitat
+// Obtiene la información del censo filtrada
 String[][] getInfoTablaCensoBuscar(String buscar) {
 
   String q2 = "SELECT COUNT(*) AS n FROM hermano WHERE apellidos LIKE '%"+buscar+"%'";
@@ -116,7 +116,7 @@ String[][] getInfoTablaCensoBuscar(String buscar) {
   }
 }
 
-// Obté informació de la taula Hermano
+// Obtiene la información de la tabla hermano para un hermano determinado
 String[] getInfoTablaHermano(String idHermano) {
 
   String[] data = new String[22];
@@ -149,7 +149,7 @@ String[] getInfoTablaHermano(String idHermano) {
   return data;
 }
 
-
+//Modifica el formato de la fecha
 String formataFecha2(String fechaEntrada) {
 
   String dia = fechaEntrada.split("/")[0];
@@ -159,6 +159,7 @@ String formataFecha2(String fechaEntrada) {
   return ano+"-"+mes+"-"+dia;
 }
 
+//Modifica el formato de la fecha
 String formataFecha(String fechaEntrada) {
 
   String ano = fechaEntrada.split("-")[0];
@@ -168,7 +169,7 @@ String formataFecha(String fechaEntrada) {
   return dia+"/"+mes+"/"+ano;
 }
 
-
+//Inserta información relativa a los hermanos (user y hermano)
 void insertInfoTablaHermano(String nombre, String apellidos, String fechanacimiento, String dni, String calle, String numerodireccion, String piso, String localidad, String provincia, String telefono, String correoelectronico, String banco, String titular, String dnititular, String iban, String entidad, String oficina, String digitocontrol, String numerocuenta, String fechaalta) {
   String numHermano = String.valueOf(getNumeroUltimoHermano()+1);
   // Insertar el nuevo registro en la tabla 'user'
@@ -184,10 +185,10 @@ void insertInfoTablaHermano(String nombre, String apellidos, String fechanacimie
   msql.next();
   msql.query(q3);
   String ficha= numHermano+".pdf";
-  copiar(rutaFitxer, rutaCopia, ficha);
+  copiar(rutaArchivo, rutaCopia, ficha);
 }
 
-
+//genera una contraseña aleatoria
 String generatePassword(int length) {
   String capitalCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   String lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
@@ -207,6 +208,7 @@ String generatePassword(int length) {
   return new String(password);
 }
 
+//Indica el número de hermano más alto existente
 int getNumeroUltimoHermano() {
   String q = "SELECT MAX( user_numhermano  ) AS n FROM hermano";
   println(q);
@@ -217,7 +219,7 @@ int getNumeroUltimoHermano() {
 
 
 
-// Obté informació de la taula archivo
+// Obtiene la información de la tabla archivo
 String[][] getInfoTablaArchivo() {
 
   int numRows = getNumRowsTabla("archivo");
@@ -234,12 +236,14 @@ String[][] getInfoTablaArchivo() {
   return data;
 }
 
+//Inserta información del archivo en la BBDD
 void insertInfoTablaArchivo(String titulo, String datacion, String file, String tipo) {
   String q4 = "INSERT INTO `archivo` (`id`, `titulo`, `datacion`, `file`, `tipo_arch_idtipo_arch`) VALUES (NULL, '"+titulo+"', '"+datacion+"', '"+file+"', '"+tipo+"');";
   println(q4);
   msql.query(q4);
 }
 
+//Obtiene la información de los movimientos y la adapta para poder insertarla en la tabla de los movimientos
 String[][] getInfoTablaMovimientos(String tipoMov, int numFilas) {
   String q = "SELECT CONCAT(UPPER(SUBSTRING(c.nombre, 1, 1)) ,'.', t.idtipo_mov) AS codigo, t.nombre AS concepto, SUM(m.cantidad) AS cantidad FROM movimiento m, tipo_mov t, categoria_mov c WHERE m.tipo_mov_idtipo_mov=t.idtipo_mov AND t.categoria=c.idcategoria_mov AND c.nombre='"+tipoMov+"' GROUP BY m.tipo_mov_idtipo_mov, t.categoria ORDER BY t.idtipo_mov ASC;";
   String[][] data = new String[numFilas][3];
@@ -255,6 +259,7 @@ String[][] getInfoTablaMovimientos(String tipoMov, int numFilas) {
   return data;
 }
 
+//Cuenta el total de ingresos
 float getTotalIngresos() {
   String q ="SELECT SUM(m.cantidad) AS total FROM movimiento m, categoria_mov c, tipo_mov t WHERE m.tipo_mov_idtipo_mov=t.idtipo_mov AND t.categoria=c.idcategoria_mov AND c.idcategoria_mov='1'";
   msql.query(q);
@@ -262,6 +267,7 @@ float getTotalIngresos() {
   return msql.getFloat("total");
 }
 
+//Obtiene el total de gastos
 float getTotalGastos() {
   String q ="SELECT SUM(m.cantidad) AS total FROM movimiento m, categoria_mov c, tipo_mov t WHERE m.tipo_mov_idtipo_mov=t.idtipo_mov AND t.categoria=c.idcategoria_mov AND c.idcategoria_mov='2'";
   msql.query(q);
@@ -269,6 +275,7 @@ float getTotalGastos() {
   return msql.getFloat("total");
 }
 
+//Calcula el estado de cuentas actual
 float getEstadoCuentas() {
   String qCantIng = "SELECT SUM(m.cantidad) AS cantidad FROM movimiento m, tipo_mov t, categoria_mov c WHERE m.tipo_mov_idtipo_mov=t.idtipo_mov AND t.categoria=c.idcategoria_mov AND c.nombre='Ingresos' GROUP BY c.nombre;";
   msql.query(qCantIng);
@@ -282,6 +289,7 @@ float getEstadoCuentas() {
   return CantTot;
 }
 
+//Obtiene la información de un elemento determinado de la tabla archivo
 String [] getInfoArchivoDetalle (String titulo) {
   String data[] = new String [5];
 
@@ -298,7 +306,7 @@ String [] getInfoArchivoDetalle (String titulo) {
   return data;
 }
 
-// Obté informació de la taula archivo
+// Obtiene la información de la tabla aviso
 String[][] getInfoTablaAviso() {
 
   int numRows = getNumRowsTabla("aviso");
@@ -314,6 +322,7 @@ String[][] getInfoTablaAviso() {
   return data;
 }
 
+//Inserta información en la tabla aviso
 void insertInfoAviso(String titulo, String descripcion) {
   String numAviso = String.valueOf(getNumeroUltimoAviso()+1);
   String q = "INSERT INTO `aviso`  (`idaviso`, `titulo`, `descripcion`) VALUES ('"+numAviso+"', '"+titulo+"', '"+descripcion+"')";
@@ -321,6 +330,7 @@ void insertInfoAviso(String titulo, String descripcion) {
   msql.query(q);
 }
 
+//Obtiene el id del último aviso
 int getNumeroUltimoAviso() {
   String q = "SELECT MAX(idaviso) AS n FROM aviso";
   println(q);
@@ -329,7 +339,7 @@ int getNumeroUltimoAviso() {
   return (msql.getInt("n"));
 }
 
-// Obté informació de la taula archivo
+//Obtiene información de la tabla evento
 String[][] getInfoEvento() {
   int numRows = getNumRowsTabla("evento");
   String[][] data = new String[numRows][2];
@@ -344,6 +354,7 @@ String[][] getInfoEvento() {
   return data;
 }
 
+//Obtiene la información de un elemento determinado de la tabla evento
 String [] getInfoEventoDetalle (String fecha) {
   String data[] = new String [3];
 
@@ -360,6 +371,7 @@ String [] getInfoEventoDetalle (String fecha) {
   return data;
 }
 
+//Obtiene la información de un elemento determinado de la tabla aviso
 String [] getInfoAvisoDetalle (int idAviso) {
   String data[] = new String [2];
 
@@ -374,7 +386,7 @@ String [] getInfoAvisoDetalle (int idAviso) {
   return data;
 }
 
-// Obté informació de los detalles de la tabla Balance
+//Obtiene la información del balance detallado por tipo de movimiento
 String[][] getInfoBalanceDetalle(String titulo) {
   int numRows = getNumRowsTabla("movimiento");
   String[][] data = new String[numRows][3];
@@ -388,6 +400,8 @@ String[][] getInfoBalanceDetalle(String titulo) {
   }
   return data;
 }
+
+//Obtiene los headers de la tabla de detalle de los movimientos
 String[] getHeadersTablaDetalleMovimientos(String tipoMov) {
   String q = "SELECT CONCAT(UPPER(SUBSTRING(c.nombre, 1, 1)) ,'.', t.idtipo_mov) AS codigo, t.nombre AS concepto, SUM(m.cantidad) AS cantidad FROM movimiento m, tipo_mov t, categoria_mov c WHERE m.tipo_mov_idtipo_mov=t.idtipo_mov AND t.categoria=c.idcategoria_mov AND t.nombre= '"+tipoMov+"' GROUP BY m.tipo_mov_idtipo_mov, t.categoria ORDER BY t.idtipo_mov ASC";
   String[] data = new String[3];
@@ -404,6 +418,7 @@ String[] getHeadersTablaDetalleMovimientos(String tipoMov) {
   return data;
 }
 
+//Obtiene un movimiento determinado
 String[] getMovimientosDetallados(String tituloMovimiento) {
   String q = "SELECT m.titulo, m.fechamovimiento, m.cantidad, t.nombre, m.documento FROM movimiento m JOIN tipo_mov t ON m.tipo_mov_idtipo_mov = t.idtipo_mov WHERE m.titulo = '"+tituloMovimiento+"'";
   String[] data = new String[5];
@@ -424,6 +439,7 @@ String[] getMovimientosDetallados(String tituloMovimiento) {
   return data;
 }
 
+//Obtiene los tipos de movimiento
 String [][] getTipoMovimiento() {
   int numRows = getNumRowsTabla("tipo_mov");
   String[][] data = new String[numRows][2];
@@ -437,6 +453,7 @@ String [][] getTipoMovimiento() {
   return data;
 }
 
+//Inserta en la tabla nuevos movimientos
 void insertNuevoMovimiento(String titulo, String fechamovimiento, String cantidad, String documento, String nombreTipoMov) {
   msql.query("SELECT `idtipo_mov` FROM `tipo_mov` WHERE `nombre` = '"+nombreTipoMov+"'");
   if (msql.next()) { // avanzar al primer registro en el resultado
@@ -444,12 +461,13 @@ void insertNuevoMovimiento(String titulo, String fechamovimiento, String cantida
     String q = "INSERT INTO `movimiento`(`titulo`, `fechamovimiento`, `cantidad`, `documento`, `tipo_mov_idtipo_mov`) VALUES ('"+titulo+"','"+fechamovimiento+"','"+cantidad+"','"+documento+"','"+tipo_mov_idtipo_mov+"')";
     println(q);
     msql.query(q);
-    copiar(rutaFitxer, rutaCopia, documento);
+    copiar(rutaArchivo, rutaCopia, documento);
   } else {
     println("No se encontró el tipo de movimiento: "+nombreTipoMov);
   }
 }
 
+//Obtiene datos filtrados por búsqueda de la tabla archivo
 String[][] getInfoArchivoBuscar(String buscar) {
 
   String q2 = "SELECT COUNT(*) AS n FROM archivo WHERE titulo LIKE '%" + buscar + "%'";
@@ -460,9 +478,9 @@ String[][] getInfoArchivoBuscar(String buscar) {
     String[][] data = new String[numRows][3];
 
     String q = "SELECT archivo.titulo, archivo.datacion, tipo_arch.tipo " +
-               "FROM archivo " +
-               "JOIN tipo_arch ON archivo.tipo_arch_idtipo_arch = tipo_arch.idtipo_arch " +
-               "WHERE archivo.titulo LIKE '%" + buscar + "%'";
+      "FROM archivo " +
+      "JOIN tipo_arch ON archivo.tipo_arch_idtipo_arch = tipo_arch.idtipo_arch " +
+      "WHERE archivo.titulo LIKE '%" + buscar + "%'";
 
     int nr = 0;
     msql.query(q);

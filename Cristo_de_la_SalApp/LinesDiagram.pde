@@ -1,10 +1,10 @@
 
 class LinesDiagram {
 
-  // Dimensions del diagrama de Barres
+  // Dimensiones del diagrama de barras
   float x, y, w, h;
 
-  // Informació del diagrama (textos, valors i colors)
+  // Información del diagrama (textos, valores i colores)
   String[] texts;
   float[] values;
   color colorLines;
@@ -39,7 +39,7 @@ class LinesDiagram {
     this.colorLines = c;
   }
 
-  // Dibuixa el Diagrama de Sectors
+  // Dibuja el Diagrama de Sectores
 
   void display() {
     pushStyle();
@@ -54,26 +54,25 @@ class LinesDiagram {
 
     for (int i=0; i<this.values.length-1; i++) {
 
-      // Posició Mes i
+      // Posición Mes i
       float barValue1 = this.y + this.h -map(this.values[i], 0, maxValue, 0, h-50);
       float xBar1 = this.x + widthBar*i + widthBar/2;
 
-      // Posició Mes i+1
+      // Posición Mes i+1
       float barValue2 = this.y + this.h - map(this.values[i+1], 0, maxValue, 0, h-50);
       float xBar2 = this.x + widthBar*(i+1) + widthBar/2;
 
-      // Linia de mesos i a i+1
+      // Linea de meses i a i+1
       stroke(colorLines);
       strokeWeight(2);
       line(xBar1, barValue1, xBar2, barValue2);
 
-      // Quadradet del mes i
+      // Quadrado del mes i
       noStroke();
       fill(colorLines);
       rectMode(CENTER);
       rect(xBar1, barValue1, 10, 10);
 
-      //
       float textY = this.y + this.h + 50;
       textFont(getFontAt(4));
       fill(0);

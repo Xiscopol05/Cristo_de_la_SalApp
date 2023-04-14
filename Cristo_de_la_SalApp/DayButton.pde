@@ -1,12 +1,12 @@
 class DayButton {
 
-  // Dimensions del botó
+  // Dimensiones del botó
   float x, y, w, h;
 
-  // Data representativa
+  // Fecha representativa
   int dia, mes, año;
 
-  // Estats del botó
+  // Estados del botón
   boolean selected, selected2, enabled;
 
   String info;
@@ -44,9 +44,9 @@ class DayButton {
   }
 
 
-  // Dibuixa el botó
+  // Dibuja el botón
   void display() {
-pushMatrix();
+    pushMatrix();
     pushStyle();
     if (enabled) {
       fill(255);
@@ -59,12 +59,12 @@ pushMatrix();
     if (selected) {
       fill(getColorAt(2));
       noStroke();
-      ellipse(x + w/2, y+h/2, 50,50);
+      ellipse(x + w/2, y+h/2, 50, 50);
     }
     if (selected2) {
       fill(getColorAt(3));
       noStroke();
-      ellipse(x + w/2, y+h/2, 50,50);
+      ellipse(x + w/2, y+h/2, 50, 50);
       fill(200);
       textSize(10);
       textAlign(CENTER);
@@ -74,11 +74,11 @@ pushMatrix();
     textAlign(CENTER);
     text(dia, x + w/2, y + h/2 + 10);
 
-popMatrix();
+    popMatrix();
     popStyle();
   }
 
-  // Ratolí sobre el botó
+  // Ratón sobre los botones
   boolean mouseOver() {
     return mouseX>=this.x && mouseX<=this.x+this.w &&
       mouseY>=this.y && mouseY<=this.y+this.h;

@@ -1,60 +1,115 @@
 void mousePressed() {
+  
   if (bNextCenso.mouseOverButton() && bNextCenso.enabled) {
     stCenso.nextPage();
-  } else if (bPrevCenso.mouseOverButton() && bPrevCenso.enabled) {
+  } 
+  
+  else if (bPrevCenso.mouseOverButton() && bPrevCenso.enabled) {
     stCenso.prevPage();
-  } else if (bNextGastos.mouseOverButton() && bNextGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_BALANCE) {
+  } 
+  
+  else if (bNextGastos.mouseOverButton() && bNextGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_BALANCE) {
     stGastos.nextPage();
-  } else if (bPrevGastos.mouseOverButton() && bPrevGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_BALANCE) {
+  } 
+  
+  else if (bPrevGastos.mouseOverButton() && bPrevGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_BALANCE) {
     stGastos.prevPage();
-  } else if (bNextGastos.mouseOverButton() && bNextGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_PRESUPUESTO) {
+  } 
+  
+  else if (bNextGastos.mouseOverButton() && bNextGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_PRESUPUESTO) {
     stGastosPresupuesto.nextPage();
-  } else if (bPrevGastos.mouseOverButton() && bPrevGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_PRESUPUESTO) {
+  } 
+  
+  else if (bPrevGastos.mouseOverButton() && bPrevGastos.enabled && pantalla == PANTALLA.CONTABILIDAD_PRESUPUESTO) {
     stGastosPresupuesto.prevPage();
-  } else if (bPrevDetalle.mouseOverButton() && bPrevDetalle.enabled) {
+  } 
+  
+  else if (bPrevDetalle.mouseOverButton() && bPrevDetalle.enabled) {
     stDetalleItem.prevPage();
-  } else if (bNextDetalle.mouseOverButton() && bNextDetalle.enabled) {
+  } 
+  
+  else if (bNextDetalle.mouseOverButton() && bNextDetalle.enabled) {
     stDetalleItem.nextPage();
-  } else if (itbCenso.mouseOverButton() && itbCenso.enabled) {
+  } 
+  
+  else if (itbCenso.mouseOverButton() && itbCenso.enabled) {
     pantalla = PANTALLA.CENSO;
-  } else if (itbContabilidad.mouseOverButton() && itbContabilidad.enabled) {
+  } 
+  
+  else if (itbContabilidad.mouseOverButton() && itbContabilidad.enabled) {
     estadoDeCuentas = getEstadoCuentas();
     pantalla = PANTALLA.CONTABILIDAD;
-  } else if (itbArchivo.mouseOverButton() && itbArchivo.enabled) {
+  } 
+  
+  else if (itbArchivo.mouseOverButton() && itbArchivo.enabled) {
     pantalla = PANTALLA.ARCHIVO;
-  } else if (itbAvisos.mouseOverButton() && itbAvisos.enabled) {
+  } 
+  
+  else if (itbAvisos.mouseOverButton() && itbAvisos.enabled) {
     pantalla = PANTALLA.AVISOS;
-  } else if (itbEnlaces.mouseOverButton() && itbEnlaces.enabled) {
+  } 
+  
+  else if (itbEnlaces.mouseOverButton() && itbEnlaces.enabled) {
     pantalla = PANTALLA.ENLACES;
-  } else if (bPrincipal.mouseOverButton() && bPrincipal.enabled) {
+  } 
+  
+  else if (bPrincipal.mouseOverButton() && bPrincipal.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
-  } else if (bBalance.mouseOverButton() && bBalance.enabled) {
+  } 
+  
+  else if (bBalance.mouseOverButton() && bBalance.enabled) {
     pantalla = PANTALLA.CONTABILIDAD_BALANCE;
-  } else if (bPresupuesto.mouseOverButton() && bPresupuesto.enabled) {
+  } 
+  
+  else if (bPresupuesto.mouseOverButton() && bPresupuesto.enabled) {
     pantalla = PANTALLA.CONTABILIDAD_PRESUPUESTO;
-  } else if (bFacebook.mouseOverButton() && bFacebook.enabled) {
+  } 
+  
+  else if (bFacebook.mouseOverButton() && bFacebook.enabled) {
     openWebPage("https://www.facebook.com/stmocristodelasalabargas/");
-  } else if (bTwitter.mouseOverButton() && bTwitter.enabled) {
+  } 
+  
+  else if (bTwitter.mouseOverButton() && bTwitter.enabled) {
     openWebPage("https://twitter.com/cristo_sala");
-  } else if (bInstagram.mouseOverButton() && bInstagram.enabled) {
+  } 
+  
+  else if (bInstagram.mouseOverButton() && bInstagram.enabled) {
     openWebPage("https://www.instagram.com/hermandadcristodelasala/?hl=es");
-  } else if (bYoutube.mouseOverButton() && bYoutube.enabled) {
+  } 
+  
+  else if (bYoutube.mouseOverButton() && bYoutube.enabled) {
     openWebPage("https://www.youtube.com/channel/UCri0gUrGJPZ23ZlmgmGa9Yg");
-  } else if (bArzobispado.mouseOverButton() && bArzobispado.enabled) {
+  } 
+  
+  else if (bArzobispado.mouseOverButton() && bArzobispado.enabled) {
     openWebPage("https://www.architoledo.org/");
-  } else if (bAyuntamiento.mouseOverButton() && bAyuntamiento.enabled) {
+  } 
+  
+  else if (bAyuntamiento.mouseOverButton() && bAyuntamiento.enabled) {
     openWebPage("https://www.bargas.es/");
-  } else if (bWebCofrade.mouseOverButton() && bWebCofrade.enabled) {
+  } 
+  
+  else if (bWebCofrade.mouseOverButton() && bWebCofrade.enabled) {
     openWebPage("http://www.semanasantatoledo.com/");
-  } else if (bOtrasHermandades.mouseOverButton() && bOtrasHermandades.enabled) {
+  } 
+  
+  else if (bOtrasHermandades.mouseOverButton() && bOtrasHermandades.enabled) {
     openWebPage("https://www.humildadtoledo.com/enlaces-de-interes");
-  } else if (bAñadir.mouseOverButton() && bAñadir.enabled && pantalla == PANTALLA.CENSO) {
+  } 
+  
+  else if (bAñadir.mouseOverButton() && bAñadir.enabled && pantalla == PANTALLA.CENSO) {
     pantalla = PANTALLA.CENSO_NUEVOHERMANO;
-  } else if (bAñadirConcepto.mouseOverButton() && bAñadirConcepto.enabled && admin == true) {
+  } 
+  
+  else if (bAñadirConcepto.mouseOverButton() && bAñadirConcepto.enabled && admin == true) {
     pantalla = PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO;
-  } else if (bAñadirRecibo.mouseOverButton() && bAñadirRecibo.enabled && pantalla == PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO) {
-    selectInput("Selecciona un fitxer ...", "reciboMovimiento");
-  } else if (bAceptarConcepto.mouseOverButton() && bAceptarConcepto.enabled) {
+  } 
+  
+  else if (bAñadirRecibo.mouseOverButton() && bAñadirRecibo.enabled && pantalla == PANTALLA.CONTABILIDAD_AÑADIRCONCEPTO) {
+    selectInput("Selecciona un archivo ...", "reciboMovimiento");
+  } 
+  
+  else if (bAceptarConcepto.mouseOverButton() && bAceptarConcepto.enabled) {
     String titulo = String.valueOf(tfTitulo.getValue());
     String fechamovimiento= formataFecha2(String.valueOf(dataCalendariMovimiento));
     String cantidad = String.valueOf(tfCantidad.getValue());
@@ -62,7 +117,9 @@ void mousePressed() {
     String nombreTipoMov= stlTipoConcepto.selectedValue;
     insertNuevoMovimiento( titulo, fechamovimiento, cantidad, documento, nombreTipoMov);
     pantalla = PANTALLA.CONTABILIDAD_BALANCE;
-  } else if (bDetalle.mouseOverButton() && bDetalle.enabled && pantalla == PANTALLA.CENSO) {
+  } 
+  
+  else if (bDetalle.mouseOverButton() && bDetalle.enabled && pantalla == PANTALLA.CENSO) {
     String[] info = stCenso.getSelectedInfo();
     String [] infoH = getInfoTablaHermano(info[0]);
     printArray(infoH);
@@ -87,11 +144,17 @@ void mousePressed() {
     tiNumeroCuenta.text = infoH[20];
     tiCorreoElectronico.text = infoH[12];
     pantalla = PANTALLA.CENSO_DETALLE;
-  } else if (bFicha.mouseOverButton() && bFicha.enabled && pantalla == PANTALLA.CENSO_DETALLE) {
+  } 
+  
+  else if (bFicha.mouseOverButton() && bFicha.enabled && pantalla == PANTALLA.CENSO_DETALLE) {
     launch(ruta+titulo1);
-  } else if ( bAceptarCenso.mouseOverButton() && bAceptarCenso.enabled && pantalla == PANTALLA.CENSO_NUEVOHERMANO) {
+  } 
+  
+  else if ( bAceptarCenso.mouseOverButton() && bAceptarCenso.enabled && pantalla == PANTALLA.CENSO_NUEVOHERMANO) {
     pantalla = PANTALLA.CENSO;
-  } else if (itbPerfilPersonal.mouseOverButton() && itbPerfilPersonal.enabled) {
+  } 
+  
+  else if (itbPerfilPersonal.mouseOverButton() && itbPerfilPersonal.enabled) {
     String [] infoH = getInfoTablaHermano(userText.getValue());
     printArray(infoH);
     tiNombre.text= infoH[2];
@@ -115,11 +178,17 @@ void mousePressed() {
     tiNumeroCuenta.text = infoH[20];
     tiCorreoElectronico.text = infoH[12];
     pantalla = PANTALLA.CENSO_DETALLE;
-  } else if (bFicha.mouseOverButton() && bFicha.enabled && pantalla == PANTALLA.CENSO_NUEVOHERMANO) {
-    selectInput("Selecciona un fitxer ...", "fitxaInscripcionSelected");
-  } else if (bRecuerdos.mouseOverButton() && bRecuerdos.enabled && pantalla == PANTALLA.ENLACES) {
+  } 
+  
+  else if (bFicha.mouseOverButton() && bFicha.enabled && pantalla == PANTALLA.CENSO_NUEVOHERMANO) {
+    selectInput("Selecciona un archivo ...", "fitxaInscripcionSelected");
+  } 
+  
+  else if (bRecuerdos.mouseOverButton() && bRecuerdos.enabled && pantalla == PANTALLA.ENLACES) {
     launch(ruta+titulo2);
-  } else if (bDetalleConcepto.mouseOverButton() && bDetalleConcepto.enabled && stDetalleItem.selectedRow > -1 ) {
+  } 
+  
+  else if (bDetalleConcepto.mouseOverButton() && bDetalleConcepto.enabled && stDetalleItem.selectedRow > -1 ) {
     String [] info = stDetalleItem.getSelectedInfo();
     String [] infoMovimiento = getMovimientosDetallados(info[1]);
     printArray(infoMovimiento);
@@ -128,19 +197,33 @@ void mousePressed() {
     tiFechaMovimiento.text = infoMovimiento[1];
     tiTipo.text = infoMovimiento[3];
     pantalla =  PANTALLA.CONTABILIDAD_DETALLEMOVIMIENTO;
-  } else if (bVerRecibo.mouseOverButton() && bVerRecibo.enabled) {
+  } 
+  
+  else if (bVerRecibo.mouseOverButton() && bVerRecibo.enabled) {
     launch(ruta+recibo);
-  } else if (bPrevArchivo.mouseOverButton() && bPrevArchivo.enabled) {
+  } 
+  
+  else if (bPrevArchivo.mouseOverButton() && bPrevArchivo.enabled) {
     stArchivo.prevPage();
-  } else if (bNextArchivo.mouseOverButton() && bNextArchivo.enabled) {
+  } 
+  
+  else if (bNextArchivo.mouseOverButton() && bNextArchivo.enabled) {
     stArchivo.nextPage();
-  } else if (bAñadir.mouseOverButton() && bAñadir.enabled && pantalla == PANTALLA.ARCHIVO) {
+  } 
+  
+  else if (bAñadir.mouseOverButton() && bAñadir.enabled && pantalla == PANTALLA.ARCHIVO) {
     pantalla = PANTALLA.ARCHIVO_NUEVO;
-  } else if (itbInsertarArchivo.mouseOverButton() && itbInsertarArchivo.enabled && pantalla == PANTALLA.ARCHIVO_NUEVO) {
-    selectInput("Selecciona un fitxer ...", "fileSelected");
-  } else if (bAceptarArchivo.mouseOverButton() && bAceptarArchivo.enabled && pantalla == PANTALLA.ARCHIVO_NUEVO) {
+  } 
+  
+  else if (itbInsertarArchivo.mouseOverButton() && itbInsertarArchivo.enabled && pantalla == PANTALLA.ARCHIVO_NUEVO) {
+    selectInput("Selecciona un archivo ...", "fileSelected");
+  } 
+  
+  else if (bAceptarArchivo.mouseOverButton() && bAceptarArchivo.enabled && pantalla == PANTALLA.ARCHIVO_NUEVO) {
     pantalla = PANTALLA.ARCHIVO;
-  } else if (bAceptarAvisosAlertas.mouseOverButton() && bAceptarAvisosAlertas.enabled && pantalla == PANTALLA.AVISOS_NUEVOAVISO) {
+  } 
+  
+  else if (bAceptarAvisosAlertas.mouseOverButton() && bAceptarAvisosAlertas.enabled && pantalla == PANTALLA.AVISOS_NUEVOAVISO) {
     String titulo = String.valueOf(tfTituloAviso.getValue());
     String descripcion = String.valueOf(getText(taNuevoAviso));
     insertInfoAviso( titulo, descripcion);
@@ -155,34 +238,54 @@ void mousePressed() {
     taNuevoAviso.text= "";
     tfTituloAviso.text = "";
     pantalla = PANTALLA.AVISOS;
-  } else if (bAceptarAvisosAlertas.mouseOverButton() && bAceptarAvisosAlertas.enabled && (pantalla == PANTALLA.AVISOS_DETALLEAVISO || pantalla == PANTALLA.AVISOS_DETALLEEVENTO)) {
+  } 
+  
+  else if (bAceptarAvisosAlertas.mouseOverButton() && bAceptarAvisosAlertas.enabled && (pantalla == PANTALLA.AVISOS_DETALLEAVISO || pantalla == PANTALLA.AVISOS_DETALLEEVENTO)) {
     pantalla = PANTALLA.AVISOS;
-  } else if (bAñadirAviso.mouseOverButton() && bAñadirAviso.enabled) {
+  } 
+  
+  else if (bAñadirAviso.mouseOverButton() && bAñadirAviso.enabled) {
     pantalla = PANTALLA.AVISOS_NUEVOAVISO;
-  } else if (bModificarAviso.mouseOverButton() && bModificarAviso.enabled) {
+  } 
+  
+  else if (bModificarAviso.mouseOverButton() && bModificarAviso.enabled) {
     pantalla = PANTALLA.AVISOS_NUEVOAVISO;
-  } else if (bDetalleAviso.mouseOverButton() && bDetalleAviso.enabled) {
+  } 
+  
+  else if (bDetalleAviso.mouseOverButton() && bDetalleAviso.enabled) {
     String[] info = getInfoAvisoDetalle (pcAvisos.selectedCard+1);
     printArray(info);
     tiTituloDetalleAviso.text = info[0];
     tiDetalleAviso.text = info[1];
     pantalla = PANTALLA.AVISOS_DETALLEAVISO;
-  } else if (bAñadirEvento.mouseOverButton() && bAñadirEvento.enabled) {
+  } 
+  
+  else if (bAñadirEvento.mouseOverButton() && bAñadirEvento.enabled) {
     pantalla = PANTALLA.AVISOS_NUEVOEVENTO;
-  } else if (bModificarEvento.mouseOverButton() && bModificarEvento.enabled) {
+  } 
+  
+  else if (bModificarEvento.mouseOverButton() && bModificarEvento.enabled) {
     pantalla = PANTALLA.AVISOS_NUEVOEVENTO;
-  } else if (bDetalleEvento.mouseOverButton() && bDetalleEvento.enabled) {
+  } 
+  
+  else if (bDetalleEvento.mouseOverButton() && bDetalleEvento.enabled) {
     String [] info = getInfoEventoDetalle(cEventos.fechaSelected);
     printArray(info);
     tiTituloDetalleEvento.text = info[0];
     tiDetalleEvento.text = info[1];
     tiFechaEventoDetalle.text = info[2];
     pantalla = PANTALLA.AVISOS_DETALLEEVENTO;
-  } else if (bMesAnteriorAviso.mouseOverButton() && bMesAnteriorAviso.enabled) {
+  } 
+  
+  else if (bMesAnteriorAviso.mouseOverButton() && bMesAnteriorAviso.enabled) {
     cEventos.prevMonth();
-  } else if (bMesPosteriorAviso.mouseOverButton() && bMesPosteriorAviso.enabled) {
+  } 
+  
+  else if (bMesPosteriorAviso.mouseOverButton() && bMesPosteriorAviso.enabled) {
     cEventos.nextMonth();
-  } else if (bDetalle.mouseOverButton() && bDetalle.enabled && pantalla == PANTALLA.ARCHIVO) {
+  } 
+  
+  else if (bDetalle.mouseOverButton() && bDetalle.enabled && pantalla == PANTALLA.ARCHIVO) {
     String[] info = stArchivo.getSelectedInfo();
     String [] infoH = getInfoArchivoDetalle(info[0]);
     printArray(infoH);
@@ -191,21 +294,31 @@ void mousePressed() {
     tiAñoDatacion.text = infoH[1];
     tituloAbrirArch = infoH[2];
     pantalla = PANTALLA.ARCHIVO_DETALLE;
-  } else if (itbVerArchivoArchivo.mouseOverButton() && itbVerArchivoArchivo.enabled && pantalla == PANTALLA.ARCHIVO_DETALLE) {
+  } 
+  
+  else if (itbVerArchivoArchivo.mouseOverButton() && itbVerArchivoArchivo.enabled && pantalla == PANTALLA.ARCHIVO_DETALLE) {
     println(tituloAbrirArch);
     launch(ruta+tituloAbrirArch);
-  } else if (bAceptarCensoDetalle.mouseOverButton() && bAceptarCensoDetalle.enabled && admin==true) {
+  } 
+  
+  else if (bAceptarCensoDetalle.mouseOverButton() && bAceptarCensoDetalle.enabled && admin==true) {
     pantalla = PANTALLA.CENSO;
-  } else if (bAceptarCensoDetalle.mouseOverButton() && bAceptarCensoDetalle.enabled) {
+  } 
+  
+  else if (bAceptarCensoDetalle.mouseOverButton() && bAceptarCensoDetalle.enabled) {
     pantalla = PANTALLA.PRINCIPAL;
-  } else if (bModificar.mouseOverButton()&& bModificar.enabled) {
+  } 
+  
+  else if (bModificar.mouseOverButton()&& bModificar.enabled) {
     String [][] info = getInfoTablaCensoBuscar(buscar.getValue());
     stCenso = new SelectTable(filasCenso, columnasCenso, 20+menuWidth, 285, 1280-menuWidth-40, 410);
     stCenso.setHeaders(headersCenso);
     stCenso.setData(info);
     stCenso.setColumnWidths(colWidthsCenso);
     stCenso.setColumnMaxChars(maxCharsCenso);
-  } else if (bBuscarArchivo.mouseOverButton()&& bBuscarArchivo.enabled) {
+  } 
+  
+  else if (bBuscarArchivo.mouseOverButton()&& bBuscarArchivo.enabled) {
     String [][] info = getInfoArchivoBuscar(buscarArchivo.getValue());
     stArchivo = new SelectTable(filasArchivo, columnasArchivo, 20+menuWidth, 285, 1280-menuWidth-40, 410);
     stArchivo.setHeaders(headersArchivo);
@@ -228,7 +341,9 @@ void mousePressed() {
     //tDetalleItem.setData(info);
     tDetalleItem.setColumnWidths(colWidths);
     pantalla = PANTALLA.CONTABILIDAD_DETALLEBALANCE;
-  } else if (bDetalleBalance.mouseOverButton()&& bDetalleBalance.enabled && stBalanceIngresos.selectedRow > -1 ) {
+  } 
+  
+  else if (bDetalleBalance.mouseOverButton()&& bDetalleBalance.enabled && stBalanceIngresos.selectedRow > -1 ) {
     String [] info = stBalanceIngresos.getSelectedInfo();
     String [][] infoDet = getInfoBalanceDetalle(info[1]);
     String [] infoHeaders = getHeadersTablaDetalleMovimientos(info[1]);
@@ -355,7 +470,7 @@ void mousePressed() {
 
 
 
-  // Si pitja el botó, canvia la visibilitat del calendari.
+  //Si se pulsa el botón, se cambia la visibilidad del calendario
   if (bCalendarioAlta.mouseOverButton()&& bCalendarioAlta.enabled) {
     cpFechaAlta.visible = !cpFechaAlta.visible;
   }
@@ -378,7 +493,7 @@ void mousePressed() {
 
   cpFechaMovimiento.checkButtons();
 
-  // Si pitja el botó, canvia la visibilitat del calendari.
+  //Si se pulsa el botón, se cambia la visibilidad del calendario
   if (bCalendarioMovimiento.mouseOverButton()&& bCalendarioMovimiento.enabled) {
     cpFechaMovimiento.visible = !cpFechaMovimiento.visible;
   }
@@ -397,7 +512,7 @@ void mousePressed() {
   }
   cpFechaNacimiento.checkButtons();
 
-  // Si pitja el botó, canvia la visibilitat del calendari.
+  //Si se pulsa el botón, se cambia la visibilidad del calendario
   if (bCalendario.mouseOverButton()&& bCalendario.enabled) {
     cpFechaNacimiento.visible = !cpFechaNacimiento.visible;
   }
@@ -418,7 +533,7 @@ void mousePressed() {
 
   cpNuevoEvento.checkButtons();
 
-  // Si pitja el botó, canvia la visibilitat del calendari.
+  //Si se pulsa el botón, se cambia la visibilidad del calendario
   if (bCalendarioEvento.mouseOverButton()&& bCalendarioEvento.enabled) {
     cpNuevoEvento.visible = !cpNuevoEvento.visible;
   }
@@ -481,7 +596,7 @@ void updateCursor() {
   }
 }
 
-// Reset del Formulari
+// Reset del Formulario
 void resetFormularioCenso() {
   tfNombre.removeAllText();
   tfApellidos.removeAllText();
@@ -503,7 +618,7 @@ void resetFormularioCenso() {
   tfNumeroCuenta.removeAllText();
 }
 
-// Reset del Formulari
+// Reset del Formulario
 void resetFormularioArchivo() {
   tfTituloArchivo.removeAllText();
   dataCalendarioArchivo = "";

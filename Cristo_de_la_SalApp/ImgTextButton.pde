@@ -2,8 +2,8 @@
 
 class ImgTextButton {
 
-  // Propietats d'un botó:
-  float x, y, w, h;  // Posició i dimensions
+  // Propiedades de un botó:
+  float x, y, w, h;  // Posición y dimensiones
 
   PImage img;
 
@@ -11,11 +11,11 @@ class ImgTextButton {
   color fillColor, strokeColor;
   color fillColorOver;
 
-  boolean enabled;   // Abilitat / desabilitat
+  boolean enabled;   // Habilitado / deshabilitado
 
   String textBoton;
 
-  // Mètode Constructor
+  // Método Constructor
   ImgTextButton(PImage imgs, String textBoton, float x, float y, float w, float h) {
     this.img = imgs;
     this.x = x;
@@ -35,7 +35,7 @@ class ImgTextButton {
     this.enabled = b;
   }
 
-  // Dibuixa el botó
+  // Dibuja el botón
   void display() {
 
     pushStyle();
@@ -58,8 +58,8 @@ class ImgTextButton {
     popStyle();
   }
 
-  // Indica si el cursor està sobre el botó
-  // Indica si el cursor està sobre el botó
+  // Indica si el cursor está sobre el botón
+  // Indica si el cursor está sobre el botón
   boolean mouseOverButton() {
     return (mouseX >= this.x) &&
       (mouseX<=this.x + this.w) &&

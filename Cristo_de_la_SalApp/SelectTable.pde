@@ -1,12 +1,12 @@
 
 class SelectTable {
 
-  String[] tableHeaders;   // Títols de les columnes
-  String[][] tableData;    // Dades de la taula
-  float[] columnWidths;    // Amplades de les columnes
-  int[] maxCaracters;    // Maxim de lletres de les columnes
+  String[] tableHeaders;   // Títulos de les columnas
+  String[][] tableData;    // Datos de la tabla
+  float[] columnWidths;    // Ancho de las columnas
+  int[] maxCaracters;    // Máximo de lletras de las columnas
 
-  int numCols, numRows;  // Número de files i columnes
+  int numCols, numRows;  // Número de filas y columnas
 
   int numPage;
   int numTotalPages;
@@ -67,7 +67,7 @@ class SelectTable {
     }
   }
 
-  // Dibuixa taula
+  // Dibuja taula
   void display() {
 
     pushStyle();
@@ -82,7 +82,7 @@ class SelectTable {
     strokeWeight(3);
     rect(x, y, w, rowHeight);
 
-    // Dibuixa files
+    // Dibuja files
     stroke(0);
     for (int r = 1; r <numRows; r++) {
       if (r==1) {
@@ -93,14 +93,14 @@ class SelectTable {
       line(x, y + r*rowHeight, x + w, y + r*rowHeight);
     }
 
-    // Dibuixa Columnes
+    // Dibuja Columnas
     float xCol = x;
     for (int c = 0; c<numCols; c++) {
       xCol += w*columnWidths[c]/100.0;
       line(xCol, y, xCol, y + h);
     }
 
-    // Dibuixa textos
+    // Dibuja textos
     fill(0);
     textSize(24);
     for (int r = 0; r < numRows; r++) {
@@ -129,7 +129,7 @@ class SelectTable {
       }
     }
 
-    // Informació de la Pàgina
+    // Información de la Página
     fill(0);
     //text("Pag: "+(this.numPage+1)+" / "+(this.numTotalPages+1), x, y + h + 50);
 

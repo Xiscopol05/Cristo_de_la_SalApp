@@ -2,27 +2,27 @@ import java.util.Calendar;
 
 class Calendario {
 
-  // Textos representatius dels mesos
+  // Textos representativos de los meses
   String[] months = {"Ene", "Feb", "Mar", "Abr", "May", "Jun",
     "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"};
 
-  // Informació del calendari
+  // Informacion del calendario
   int año, mes, dia;
   int numDaysMonth, numDaysPrevMonth;
   int dayOfWeek, firstDay;
   String fechaSelected;
 
-  // Data seleccionada
+  // Fecha seleccionada
   boolean dateSelected = false;
   int selectedDay=0, selectedMonth=0, selectedYear=0;
 
-  // Calendari actual, i del mes anterior
+  // Calendario actual, y del mes anterior
   Calendar cal, cPrev;
 
-  // Botons del calendari
+  // Botones del calendario
   DayButton[] buttons;
 
-  // Dimensions del calendari
+  // Dimensiones del calendario
   int x, y, w, h;
 
   // Special dates & info
@@ -87,7 +87,7 @@ class Calendario {
     this.selectedYear = y;
   }
 
-  // Assigna dies especials a mostrar en el calendari
+  // Asigna dias especiales a mostrar en el calendario
   void setSpecialDates(String[][] info) {
     this.specialDates = info;
     createCalendar(x, y, w, h);
@@ -111,7 +111,7 @@ class Calendario {
     return false;
   }
 
-  // Va un mes enrera en el Calendari
+  // Va un mes atrás en el calendario
   void prevMonth() {
 
     this.buttons = new DayButton[37];
@@ -194,7 +194,7 @@ class Calendario {
     }
   }
 
-  // Va un mes endavant en el calendari
+  // Va un mes adelante en el calendario
   void nextMonth() {
 
     this.buttons = new DayButton[37];
@@ -227,7 +227,7 @@ class Calendario {
 
 
 
-  // Dibuixa el Calendari
+  // Dibuja el Calendario
   void display() {
     pushMatrix();
     fill(0);
@@ -243,7 +243,7 @@ class Calendario {
     if (dateSelected) {
 
       String dateText = this.selectedDay+"/"+this.selectedMonth+"/"+this.selectedYear;
-       fechaSelected = this.selectedYear+"-"+this.selectedMonth+"-"+this.selectedDay;
+      fechaSelected = this.selectedYear+"-"+this.selectedMonth+"-"+this.selectedDay;
       fill(0);
       textSize(24);
       textAlign(RIGHT);
@@ -253,7 +253,7 @@ class Calendario {
   }
 
 
-  // Comprova si pitjam sobre els botons del Calendari
+  // Comprueba si se pulsa sobre los botones del calendario
   void checkButtons() {
 
     for (DayButton b : buttons) {
